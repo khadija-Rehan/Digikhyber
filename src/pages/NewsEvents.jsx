@@ -14,7 +14,7 @@ const NewsEvents = () => {
         </p>
         <div className="row justify-content-center pt-5">
 
-          <div className="col-3">
+          <div className="col-lg-3 col-md-6 px-4">
             <div
               className='course p-0'
             >
@@ -29,7 +29,7 @@ const NewsEvents = () => {
                 </div>
                 <h6 className=' mb-3 font-18   text-start'> Course Enrollments of SSDP are OPEN (Only 50,000 Seats) - Sindh Skills Development Program (SSDP)</h6>
                 <p className='fs-6  text-start'>We are thrilled to announce that admissions for the SSDP (Sindh Skills Development Program) are now open! SSDP offers a wide range of completely free.. <span className='font-12 text-success  px-2 p-1 rounded-2 mb-3' style={{ background: "rgb(25 135 84 / 24%)", width: "fit-content" }}>
-                  
+
                   Read more
                 </span></p>
                 <hr />

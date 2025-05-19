@@ -23,12 +23,13 @@ import NewsEvents from "./pages/NewsEvents";
 import '@fortawesome/fontawesome-free/css/all.min.css';
 import Certificate from "./pages/Certificate";
 import ContactUs from "./pages/ContactUs";
+import Howitswork from "./pages/Howitswork";
 
 function App() {
   const location = useLocation();
 
   // Define routes where header and footer should be hidden
-  const hideHeaderFooterRoutes = ["/login", "/register", "/apply-now" ,"/news","/certificate","/contact-us"];
+  const hideHeaderFooterRoutes = ["/login", "/register", "/apply-now" ,"/news","/certificate","/contact-us","howitswork"];
   const shouldHideHeaderFooter = hideHeaderFooterRoutes.includes(
     location.pathname
   );
@@ -45,6 +46,7 @@ function App() {
           <Route path="/news" element={<NewsEvents />} />
           <Route path="/certificate" element={<Certificate />} />
           <Route path="/contact-us" element={<ContactUs />} />
+          <Route path="/howitswork" element={<Howitswork />} />
           {/* <Route path="/scholarship-card" element={<ScholarshipCard />} />
         <Route path="/free-solar-panel" element={<FreeSolarPanel />} />
         <Route path="/free-laptops" element={<FreeLaptops />} />

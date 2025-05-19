@@ -28,7 +28,7 @@ const ApplyNow = () => {
 
                                 <Button variant="success" className="btn-green register-btn">Candidate Login</Button>
                                 </Link>
-                                <Link to="/login">
+                                <Link to="/howitswork">
 
                                 <Button variant="success" className="btn-green register-btn">How It Works</Button>
                                 </Link>
