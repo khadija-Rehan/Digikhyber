@@ -4,7 +4,7 @@ import { Navbar, Nav, NavDropdown, Button, Offcanvas, Container } from 'react-bo
 import Logo from "../assets/logo.png";
 
 const Header = () => {
-   const [showOffcanvas, setShowOffcanvas] = useState(false);
+  const [showOffcanvas, setShowOffcanvas] = useState(false);
 
   const handleClose = () => setShowOffcanvas(false);
   const handleShow = () => setShowOffcanvas(true);
@@ -13,21 +13,21 @@ const Header = () => {
       <Navbar bg="light" expand="xl"  >
         <Container className="d-flex justify-content-between align-items-center">
 
-           
+
           <div className="d-flex align-items-center">
-          
+
             <Navbar.Toggle
               aria-controls="offcanvasNavbar-expand-xl"
               className="me-2"
               onClick={handleShow}
             />
- 
+
             <Navbar.Brand as={Link} to="/" className="logos m-0">
               <img src={Logo} alt="logo" />
             </Navbar.Brand>
           </div>
 
-           <div className="d-flex align-items-center">
+          <div className="d-flex align-items-center">
             <Button
               variant="success"
               as={Link}
@@ -43,7 +43,7 @@ const Header = () => {
             id="offcanvasNavbar-expand-xl"
             aria-labelledby="offcanvasNavbarLabel-expand-xl"
             placement="start"
-             show={showOffcanvas}
+            show={showOffcanvas}
             onHide={handleClose}
           >
             <Offcanvas.Header closeButton>
@@ -57,12 +57,18 @@ const Header = () => {
                 <NavLink to="/courses" className="nav-link" onClick={handleClose}>Courses</NavLink>
                 <NavLink to="/news" className="nav-link" onClick={handleClose}>News & Events</NavLink>
                 <NavLink to="/certificate" className="nav-link" onClick={handleClose}>Certificate</NavLink>
-                <NavLink to="/contact-us" className="nav-link" onClick={handleClose}>Contact Us</NavLink>
-                <NavLink to="/howitswork" className="nav-link" onClick={handleClose}>How Its Works</NavLink>
 
-                {/* <NavDropdown title="About Us" id="about-us-dropdown">
-                  <NavDropdown.Item as={NavLink} to="/about-us">About Us</NavDropdown.Item>
-                </NavDropdown> */}
+                <NavLink to="/scholarship-card" className="nav-link" onClick={handleClose}>Scholarship Card</NavLink>
+
+                {/* <NavLink to="/howitswork" className="nav-link" onClick={handleClose}>How Its Works</NavLink> */}
+
+                <NavDropdown title="About Us" id="about-us-dropdown">
+                  <NavDropdown.Item as={NavLink} to="/about-us" onClick={handleClose}>About Us</NavDropdown.Item>
+                  <NavDropdown.Item as={NavLink} to="/free-laptops" onClick={handleClose}>Free Laptops</NavDropdown.Item>
+                  <NavDropdown.Item as={NavLink} to="/free-solarpanels" onClick={handleClose}>Free Solar Panels</NavDropdown.Item>
+                  <NavDropdown.Item as={NavLink} to="/howitswork" onClick={handleClose}>How Its Works</NavDropdown.Item>
+                  <NavDropdown.Item as={NavLink} to="/contact-us" onClick={handleClose}>Contact Us</NavDropdown.Item>
+                </NavDropdown>
               </Nav>
               <div className="auth-buttons">
                 <Button as={Link} to="/login" className="btn-black bg-none login-btn p-0">

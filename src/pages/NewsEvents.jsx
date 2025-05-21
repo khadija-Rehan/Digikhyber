@@ -1,9 +1,11 @@
 import React from 'react'
 import News from "../assets/news.png"
+import ParticleBackground from '../components/ParticleBackground'
 const NewsEvents = () => {
   return (
     <>
-      <div className='breadcrums'>
+      <div className='breadcrums position-relative '>
+        <ParticleBackground/>
         <h2>News & Events</h2>
       </div>
       <div className='news pt-5 pb-5 text-center'>

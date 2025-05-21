@@ -5,9 +5,9 @@ import { Navigation } from "swiper/modules";
 import "swiper/css";
 import "swiper/css/navigation";
 import "swiper/css/pagination";
-import ML from "../assets/ML.jpg";
-import UI from "../assets/UI.jpg";
-import DM from "../assets/DM.jpg";
+import ML from "../assets/slider1.png";
+import UI from "../assets/slider1.png";
+import DM from "../assets/slider1.png";
 const Hero = () => {
     return (
         <section className="hero">
@@ -15,10 +15,7 @@ const Hero = () => {
                 spaceBetween={5}
                 slidesPerView={1}
                 loop={true}
-                autoplay={{
-                    delay: 2500,
-                    disableOnInteraction: false,
-                }}
+                autoplay={true}
                 pagination={{ clickable: true }}
                 navigation={false}
             >

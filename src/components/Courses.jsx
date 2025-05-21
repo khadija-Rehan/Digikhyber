@@ -9,6 +9,7 @@ import FS from "../assets/f-s-js.png";
 import AD from "../assets/android.jpg";
 import WP from "../assets/wordpress.jpg";
 import StarRating from './StarRating';
+import { Link } from 'react-router-dom';
 
 const Courses = () => {
     const [cardsPerRow, setCardsPerRow] = useState(3);
@@ -63,7 +64,10 @@ const Courses = () => {
                     </p>
                 </div>
                 <div className='col-lg-6 col-md-12'>
+                    <Link to="/courses">
+
                     <button className='btn-green view-all'>View All Courses</button>
+                    </Link>
                 </div>
             </div>
             <div className='courses-wrapper'>

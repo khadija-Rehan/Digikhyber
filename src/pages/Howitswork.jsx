@@ -1,9 +1,12 @@
 import React from "react";
+import ParticleBackground from "../components/ParticleBackground";
 
 const HowItsWork = () => {
     return (
         <div style={{ overflow: "hidden" }}>
             <div className="breadcrums">
+                    <ParticleBackground/>
+
                 <h2>How It Works: SSDP Admission Process</h2>
             </div>
             <div className="container">

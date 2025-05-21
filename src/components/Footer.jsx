@@ -1,9 +1,15 @@
 import React from 'react'
 import Logo from "../assets/logo-white.png";
 import { FaFacebookF, FaTwitter, FaInstagram, FaLinkedinIn, FaWhatsapp, FaMapMarkerAlt, FaPhoneAlt, FaEnvelope } from 'react-icons/fa';
+import ParticleBackground from './ParticleBackground';
 const Footer = () => {
     return (
-        <div className='footer white' >
+        <div className=' position-relative bottom-0'>
+            
+     
+                    {/* <ParticleBackground/> */}
+        <div className='footer white'  >
+
                 < div className='container'>
                 <div className='row'>
 
@@ -60,6 +66,7 @@ const Footer = () => {
                     </div>
                 </div>
             </div>
+        </div>
         </div>
     )
 }
