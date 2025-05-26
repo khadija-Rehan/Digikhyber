@@ -21,7 +21,7 @@ import FreeLaptops from "./pages/FreeLaptops";
 import FreeSolarPanel from "./pages/FreeSolarPanel";
 import Admissiontest from "./pages/Admissiontest";
 import AdmissionResult from "./pages/AdmissionResult";
- 
+import { AuthProvider } from "./context/AuthContext";
 
 function App() {
   const location = useLocation();
@@ -40,7 +40,7 @@ function App() {
     location.pathname
   );
   return (
-    <>
+    <AuthProvider>
       <AOSWrapper>
         <Header />
         <Routes>
@@ -64,7 +64,7 @@ function App() {
         </Routes>
         {!shouldHideHeaderFooter && <Footer />}
       </AOSWrapper>
-    </>
+    </AuthProvider>
   );
 }
 
