@@ -1,6 +1,6 @@
 import React, { useState } from "react";
 import Logo from "../assets/logo.png";
-import { Link, useNavigate } from "react-router-dom";
+import { Link, useNavigate, useLocation } from "react-router-dom";
 import { logIn } from "../api/auth";
 import { useAuth } from "../context/AuthContext";
 
@@ -11,6 +11,7 @@ const Login = () => {
   });
   const [error, setError] = useState("");
   const navigate = useNavigate();
+  const location = useLocation();
   const { login } = useAuth();
 
   const handleChange = (e) => {
@@ -26,9 +27,10 @@ const Login = () => {
     setError("");
     try {
       const { data } = await logIn(formData);
-      
-      login({ user: data.user, token: data.token }); 
-      navigate("/"); 
+      login({ user: data.user, token: data.token });
+
+      const from = location.state?.from?.pathname || "/admission-test";
+      navigate(from, { replace: true });
     } catch (error) {
       setError(
         error.response?.data?.message || "Login failed. Please try again."

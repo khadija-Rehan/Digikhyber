@@ -74,7 +74,7 @@ const Header = () => {
               <div className="auth-buttons">
                 {user ? (
                   <>
-                    <span className="me-3">Welcome, {user.fullName}</span>
+                    <span className="me-3">Welcome, {user.user.fullName}</span>
                     <Button onClick={handleLogout} className="btn-black bg-none login-btn p-0">
                       <i className="fas fa-sign-out-alt me-1"></i>LOGOUT
                     </Button>

@@ -22,6 +22,7 @@ import FreeSolarPanel from "./pages/FreeSolarPanel";
 import Admissiontest from "./pages/Admissiontest";
 import AdmissionResult from "./pages/AdmissionResult";
 import { AuthProvider } from "./context/AuthContext";
+import ProtectedRoute from "./components/ProtectedRoute";
 
 function App() {
   const location = useLocation();
@@ -57,8 +58,22 @@ function App() {
           <Route path="/about-us" element={<AboutUs />} />
           <Route path="/free-laptops" element={<FreeLaptops />} />
           <Route path="/free-solarpanels" element={<FreeSolarPanel />} />
-          <Route path="/admission-test" element={<Admissiontest />} />
-          <Route path="/admission-result" element={<AdmissionResult />} />
+          <Route
+            path="/admission-test"
+            element={
+              <ProtectedRoute>
+                <Admissiontest />
+              </ProtectedRoute>
+            }
+          />
+          <Route
+            path="/admission-result"
+            element={
+              <ProtectedRoute>
+                <AdmissionResult />
+              </ProtectedRoute>
+            }
+          />
           {/*
         <Route path="/faqs" element={<FAQs />} /> */}
         </Routes>
