@@ -5,9 +5,9 @@ import { Navigation } from "swiper/modules";
 import "swiper/css";
 import "swiper/css/navigation";
 import "swiper/css/pagination";
-import ML from "../assets/slider1.png";
-import UI from "../assets/slider1.png";
-import DM from "../assets/slider1.png";
+import ML from "../assets/bannerHunarmand.webp";
+import UI from "../assets/bannerHunarmand.webp";
+import DM from "../assets/bannerHunarmand.webp";
 const Hero = () => {
     return (
         <section className="hero">

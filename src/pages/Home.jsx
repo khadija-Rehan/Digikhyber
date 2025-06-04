@@ -7,6 +7,7 @@ import Courses from "../components/Courses";
 import Instructors from "../components/Instructors";
 import ApplicationSteps from "../components/ApplicationSteps";
 import Testimonials from "../components/Testimonials";
+import Opportunities from "../components/Opportunities";
 
 const Home = () => {
     return (
@@ -17,6 +18,7 @@ const Home = () => {
             <CoursesCategory />
             <Courses />
             <Instructors />
+            <Opportunities/>
             <ApplicationSteps />
             <Testimonials />
 

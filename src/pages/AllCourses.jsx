@@ -4,15 +4,16 @@ import "aos/dist/aos.css";
 import CountUp from "react-countup";
 import { useInView } from "react-intersection-observer";
 
-import ML from "../assets/ML.jpg";
-import UI from "../assets/UI.jpg";
-import DM from "../assets/DM.jpg";
-import FS from "../assets/f-s-js.png";
-import AD from "../assets/android.jpg";
-import WP from "../assets/wordpress.jpg";
+import ML from "../assets/Hunarmand Punjab Website Banner 4-min.jpg";
+import UI from "../assets/Hunarmand Punjab Website Banner 4-min.jpg";
+import DM from "../assets/Hunarmand Punjab Website Banner 4-min.jpg";
+import FS from "../assets/Hunarmand Punjab Website Banner 4-min.jpg";
+import AD from "../assets/Hunarmand Punjab Website Banner 4-min.jpg";
+import WP from "../assets/Hunarmand Punjab Website Banner 4-min.jpg";
 import StarRating from "../components/StarRating";
 import Particles from "../components/ParticleBackground";
 import ParticleBackground from "../components/ParticleBackground";
+import { Link } from "react-router-dom";
 
 const AllCourses = () => {
     const [cardsPerRow, setCardsPerRow] = useState(3);
@@ -121,12 +122,14 @@ const AllCourses = () => {
                                     />
                                     <div className="course-card-details">
                                         <p className="font-20">{course.title}</p>
-                                        <p className="font-12 green">By Digital Punjab</p>
+                                        <p className="font-12 green">By Hunarmand Punjab</p>
                                         <p className="font-14 green ratings">
                                             <StarRating />
                                             <span className="rate"> 4.9</span>
                                         </p>
+                                        <Link to={"/course-detail"}>
                                         <button className="btn-green-sq">View Details</button>
+                                        </Link>
                                     </div>
                                 </div>
                             );

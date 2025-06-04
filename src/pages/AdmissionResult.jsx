@@ -214,11 +214,11 @@ const AdmissionResult = () => {
                                 <p>
                                     <b> Sindh Skills Development Program</b> is a Government
                                     supported program & is <b> interlinked with all banks</b>{" "}
-                                    across Pakistan, enabling you to pay your SSDP voucher
+                                    across Pakistan, enabling you to pay your Hunarmand voucher
                                     conveniently through
                                     <b> mobile applications , internet banking , or ATMs </b>.
                                     Each bank follows a slightly different process for paying the
-                                    SSDP application processing fee using the generated
+                                    Hunarmand application processing fee using the generated
                                     PSID/Consumer Number provided below. Follow these simple steps
                                     to ensure your payment is processed smoothly:
                                 </p>
@@ -247,7 +247,7 @@ const AdmissionResult = () => {
                                         Paste the PSID/Consumer Number.
                                     </li>
                                     <li>
-                                        <b> Confirm and Pay:</b> Your SSDP voucher details will be
+                                        <b> Confirm and Pay:</b> Your Hunarmand voucher details will be
                                         automatically fetched. Confirm the details and proceed to
                                         pay the fee.
                                     </li>
@@ -255,12 +255,12 @@ const AdmissionResult = () => {
                                         <b> Application Submission:</b> Once your payment is
                                         processed, your application will be sent to our team for
                                         review. You will receive an instant notification from the
-                                        SSDP system.
+                                        Hunarmand system.
                                     </li>
                                     <ul>
                                         <li>
                                             <b> If Approved:</b> You will receive your Learning Portal
-                                            credentials and can start your journey with SSDP.
+                                            credentials and can start your journey with Hunarmand.
                                         </li>
                                         <li>
                                             <b> If Not Approved:</b> Your admission charges will be
@@ -278,7 +278,7 @@ const AdmissionResult = () => {
                                     application to the next step.
                                 </p>
                                 <p>
-                                    All courses offered under the SSDP program are entirely free,
+                                    All courses offered under the Hunarmand program are entirely free,
                                     with no additional charges for course materials or enrollment.
                                 </p>
                                 <button className="btn-green btn-success btn rounded-2">
@@ -311,13 +311,13 @@ const AdmissionResult = () => {
                                     </div>{" "}
                                 </div>
                                 <div className="alert alert-success mt-4 border">
-                                    <b> Note: </b>After paying your SSDP application processing
+                                    <b> Note: </b>After paying your Hunarmand application processing
                                     fee, no further action is required. Please allow up to 30
                                     minutes for processing. Within this period, you should receive
                                     a confirmation email. If you do not receive the confirmation
                                     within 30 minutes , click on the below Check Status button to
                                     resolve the issue. If the confirmation is still not available,
-                                    contact our support team at admissions@ssdp.pk for any kind of
+                                    contact our support team at admissions@Hunarmand.pk for any kind of
                                     assistance.
                                 </div>
                             </Accordion.Body>
@@ -327,7 +327,7 @@ const AdmissionResult = () => {
                             <Accordion.Body>
                                 <p className="fw-bold">Instructions:</p>
                                 <p>
-                                    SSDP also provides the option to deposit your application
+                                    Hunarmand also provides the option to deposit your application
                                     processing fee conveniently via Bank Challan. This method is
                                     simple and accessible for all applicants across Pakistan.
                                     Follow the steps below to deposit your application processing
@@ -362,7 +362,7 @@ const AdmissionResult = () => {
                                         <strong>Notification of Payment:</strong> Once your
                                         application processing fee is deposited, you will receive an
                                         instant notification confirming the application processing
-                                        fee from SSDP Initiative.
+                                        fee from Hunarmand Initiative.
                                     </li>
                                     <li>
                                         <strong>Application Status:</strong>
@@ -380,14 +380,14 @@ const AdmissionResult = () => {
                                 </button>
 
                                 <div className="alert alert-success mt-4 border">
-                                    <b> Note: </b>After paying your SSDP application processing
+                                    <b> Note: </b>After paying your Hunarmand application processing
                                     fee, you don’t need to do anything further. Please allow up to
                                     30 minutes for processing. Within this period, you should
                                     receive a confirmation email. If you do not receive the
                                     confirmation within 30 minutes , click on the below Check
                                     Status button to resolve the issue. If the confirmation is
                                     still not available, contact our support team at
-                                    admissions@ssdp.pk for any kind of assistance.
+                                    admissions@Hunarmand.pk for any kind of assistance.
                                 </div>
                             </Accordion.Body>
                         </Accordion.Item>

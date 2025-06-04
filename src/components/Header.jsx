@@ -1,6 +1,13 @@
 import React, { useState } from "react";
 import { Link, NavLink, useNavigate } from "react-router-dom";
-import { Navbar, Nav, NavDropdown, Button, Offcanvas, Container } from 'react-bootstrap';
+import {
+  Navbar,
+  Nav,
+  NavDropdown,
+  Button,
+  Offcanvas,
+  Container,
+} from "react-bootstrap";
 import Logo from "../assets/logo.png";
 import { useAuth } from "../context/AuthContext";
 
@@ -19,8 +26,8 @@ const Header = () => {
 
   return (
     <header className="header">
-      <Navbar bg="light" expand="xl">
-        <Container className="d-flex justify-content-between align-items-center">
+      <Navbar bg="light" expand="xl" >
+        <Container fluid className="d-flex justify-content-between align-items-center px-2 px-lg-5">
           <div className="d-flex align-items-center">
             <Navbar.Toggle
               aria-controls="offcanvasNavbar-expand-xl"
@@ -62,26 +69,67 @@ const Header = () => {
                 </Nav.Link>
                 <Nav.Link as={NavLink} to="/courses" onClick={handleClose}>
                   Courses
+                </Nav.Link>{" "}
+                <Nav.Link as={NavLink} to="/about-Us" onClick={handleClose}>
+                  About Us
                 </Nav.Link>
-                <NavDropdown title="About Us" id="about-us-dropdown">
-                  <NavDropdown.Item as={NavLink} to="/about-us" onClick={handleClose}>About Us</NavDropdown.Item>
-                  <NavDropdown.Item as={NavLink} to="/free-laptops" onClick={handleClose}>Free Laptops</NavDropdown.Item>
-                  <NavDropdown.Item as={NavLink} to="/free-solarpanels" onClick={handleClose}>Free Solar Panels</NavDropdown.Item>
-                  <NavDropdown.Item as={NavLink} to="/howitswork" onClick={handleClose}>How Its Works</NavDropdown.Item>
-                  <NavDropdown.Item as={NavLink} to="/contact-us" onClick={handleClose}>Contact Us</NavDropdown.Item>
+                <Nav.Link as={NavLink} to="/howitswork" onClick={handleClose}>
+                  How Its Work
+                </Nav.Link>
+                <Nav.Link as={NavLink} to="/free-laptops" onClick={handleClose}>
+                  Laptop Scheme
+                </Nav.Link>  <Nav.Link as={NavLink} to="/free-solarpanels" onClick={handleClose}>
+                  Solar Scheme
+                </Nav.Link><Nav.Link as={NavLink} to="/scholarship-card" onClick={handleClose}>
+                  Scholarship Card
+                </Nav.Link>
+                <NavDropdown title="Help Desk"  >
+                  <NavDropdown.Item
+                    as={NavLink}
+                    to="/apply-now"
+                    onClick={handleClose}
+                  >
+                    How to Apply
+                  </NavDropdown.Item> <NavDropdown.Item
+                    as={NavLink}
+                    to="/faqs"
+                    onClick={handleClose}
+                  >
+                    FAQS
+                  </NavDropdown.Item><NavDropdown.Item
+                    as={NavLink}
+                    to="/contact-us"
+                    onClick={handleClose}
+                  >
+                    Contact Us
+                  </NavDropdown.Item><NavDropdown.Item
+                    as={NavLink}
+                    to="/news"
+                    onClick={handleClose}
+                  >
+                    Events & News
+                  </NavDropdown.Item>
+                   
                 </NavDropdown>
               </Nav>
               <div className="auth-buttons">
                 {user ? (
                   <>
                     <span className="me-3">Welcome, {user.user.fullName}</span>
-                    <Button onClick={handleLogout} className="btn-black bg-none login-btn p-0">
+                    <Button
+                      onClick={handleLogout}
+                      className="btn-black bg-none login-btn p-0"
+                    >
                       <i className="fas fa-sign-out-alt me-1"></i>LOGOUT
                     </Button>
                   </>
                 ) : (
                   <>
-                    <Button as={Link} to="/login" className="btn-black bg-none login-btn p-0">
+                    <Button
+                      as={Link}
+                      to="/login"
+                      className="btn-black bg-none login-btn p-0"
+                    >
                       <i className="fas fa-sign-in-alt me-1"></i>CANDIDATE LOGIN
                     </Button>
                     <Button

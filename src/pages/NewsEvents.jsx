@@ -11,7 +11,7 @@ const NewsEvents = () => {
       <div className='news pt-5 pb-5 text-center'>
         <h2 className='mb-3'>Latest News & Events
         </h2>
-        <p>Stay up-to-date with all the latest developments at SSDP. From new course launches to special <br /> events, find out what’s happening and how you can get involved in shaping the future of Sindh <br /> skilled workforce. Keep an eye on this space for exciting announcements and opportunities!
+        <p>Stay up-to-date with all the latest developments at Hunarmand. From new course launches to special <br /> events, find out what’s happening and how you can get involved in shaping the future of Sindh <br /> skilled workforce. Keep an eye on this space for exciting announcements and opportunities!
 
         </p>
         <div className="row justify-content-center pt-5">
@@ -29,8 +29,8 @@ const NewsEvents = () => {
                   </div>
                   Announcement
                 </div>
-                <h6 className=' mb-3 font-18   text-start'> Course Enrollments of SSDP are OPEN (Only 50,000 Seats) - Sindh Skills Development Program (SSDP)</h6>
-                <p className='fs-6  text-start'>We are thrilled to announce that admissions for the SSDP (Sindh Skills Development Program) are now open! SSDP offers a wide range of completely free.. <span className='font-12 text-success  px-2 p-1 rounded-2 mb-3' style={{ background: "rgb(25 135 84 / 24%)", width: "fit-content" }}>
+                <h6 className=' mb-3 font-18   text-start'> Course Enrollments of Hunarmand are OPEN (Only 50,000 Seats) - Sindh Skills Development Program (Hunarmand)</h6>
+                <p className='fs-6  text-start'>We are thrilled to announce that admissions for the Hunarmand (Sindh Skills Development Program) are now open! Hunarmand offers a wide range of completely free.. <span className='font-12 text-success  px-2 p-1 rounded-2 mb-3' style={{ background: "rgb(25 135 84 / 24%)", width: "fit-content" }}>
 
                   Read more
                 </span></p>

@@ -21,7 +21,7 @@ const ContactUs = () => {
                                 <h2 className="text-black">Any Question? We would love to help you
                                 </h2>
                                 <button className='btn-green bg-transparent border-white text-white register-btn btn btn-success w-100  mt-3 rounded-2'> <i className="fas fa-phone me-1"></i>  Helpline: 0304-xxx xxxx | Whatsapp: +92 326 xxxxxxx</button>
-                                <button className='btn-green register-btn btn btn-success w-100  mt-3 rounded-2'> <i className="fas fa-envelope me-1"></i> admissions@ssdp.pk</button>
+                                <button className='btn-green register-btn btn btn-success w-100  mt-3 rounded-2'> <i className="fas fa-envelope me-1"></i> admissions@Hunarmand.pk</button>
 
                             </div>
                             <div className="col-lg-6">

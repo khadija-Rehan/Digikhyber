@@ -84,10 +84,13 @@ const Courses = () => {
                             <img className='w-100' src={course.image} alt={course.title} />
                             <div className='course-card-details'>
                                 <p className='font-20'>{course.title}</p>
-                                <p className='font-12 green'>By Digital Punjab</p>
+                                <p className='font-12 green'>By Hunarmand Punjab</p>
                                 <p className='font-14 green ratings'><StarRating />
                                     <span className='rate'> 4.9</span></p>
+                                                                            <Link to={"/course-detail"}>
+                                    
                                 <button className='btn-green-sq'>View Details</button>
+                                </Link>
                             </div>
                         </div>
                     );

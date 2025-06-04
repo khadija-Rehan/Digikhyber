@@ -7,6 +7,7 @@ import FS from "../assets/team.webp";
 import GS from "../assets/grow.png";
 import Team from "../assets/team.png";
 import ParticleBackground from "../components/ParticleBackground";
+import { Link } from "react-router-dom";
 
 const AboutUs = () => {
     const [cardsPerRow, setCardsPerRow] = useState(3);
@@ -174,9 +175,11 @@ const AboutUs = () => {
                             this initiative, supported by the Government of Pakistan, to
                             build a skilled generation.
                         </p>
+                        <Link to={"/become-instructors"}>
                         <button className="btn-green register-btn desktop btn btn-success">
-                            Become a Tutor
+                            Become a Instructor
                         </button>
+                        </Link>
                     </div>
                     <div className="col-lg-3">
                         <div className="teams-card">
