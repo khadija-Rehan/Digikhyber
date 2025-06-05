@@ -5,7 +5,7 @@ const DigitalPunjab = () => {
         <>
             <div className='digital-punjab container'>
                 <div className='digital'>
-                    <p className='white font-14 d-p'>Digital Punjab</p>
+                    <p className='white font-14 d-p'>Hunarmand Punjab</p>
                     <h2 className='white font-32'>Minister of Education, Punjab</h2>
                     <p className='white font-16 d-content'>Rana Sikandar Hayat, Provincial Minister of School Education for Punjab, emphasized the importance of enhancing educational infrastructure and digital literacy across the province. He noted that while Punjab has made significant strides in improving educational outcomes, there remains a pressing need to integrate technology into the curriculum to prepare students for the modern workforce.</p>
                 </div>

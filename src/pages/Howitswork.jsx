@@ -7,7 +7,7 @@ const HowItsWork = () => {
             <div className="breadcrums">
                     <ParticleBackground/>
 
-                <h2>How It Works: SSDP Admission Process</h2>
+                <h2>How It Works: Hunarmand Admission Process</h2>
             </div>
             <div className="container">
                 <div className="row justify-content-center pt-5 pb-5">
@@ -37,7 +37,7 @@ const HowItsWork = () => {
                             ></iframe>
                         </div>
                         <h3 className="text-center pt-4">
-                            How To Apply - SSDP Video Tutorial
+                            How To Apply - Hunarmand Video Tutorial
                         </h3>
                         <p className="text-center">
                             Learn how to easily apply using our step-by-step video guide.
@@ -63,7 +63,7 @@ const HowItsWork = () => {
                                 <div class="col-lg-7">
                                     <h5>Step 1: Go to the Apply Section</h5>
                                     <p>
-                                        To apply for SSDP courses, navigate to the Apply section on
+                                        To apply for Hunarmand courses, navigate to the Apply section on
                                         our website.
                                     </p>
                                 </div>
@@ -125,7 +125,7 @@ const HowItsWork = () => {
                                 <div class="col-lg-7">
                                     <h5>Step 3: Go to the Apply Section</h5>
                                     <p>
-                                        To apply for SSDP courses, navigate to the Apply section on
+                                        To apply for Hunarmand courses, navigate to the Apply section on
                                         our website.
                                     </p>
                                 </div>
@@ -187,7 +187,7 @@ const HowItsWork = () => {
                                 <div class="col-lg-7">
                                     <h5>Step 5: Go to the Apply Section</h5>
                                     <p>
-                                        To apply for SSDP courses, navigate to the Apply section on
+                                        To apply for Hunarmand courses, navigate to the Apply section on
                                         our website.
                                     </p>
                                 </div>

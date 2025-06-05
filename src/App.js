@@ -21,7 +21,13 @@ import FreeLaptops from "./pages/FreeLaptops";
 import FreeSolarPanel from "./pages/FreeSolarPanel";
 import Admissiontest from "./pages/Admissiontest";
 import AdmissionResult from "./pages/AdmissionResult";
- 
+import { AuthProvider } from "./context/AuthContext";
+import ProtectedRoute from "./components/ProtectedRoute";
+import Notificationbar from "./components/Notificationbar";
+import BeacomeInstructors from "./pages/BeacomeInstructors";
+import FAQs from "./pages/FAQs";
+import TermsandCondition from "./pages/TermsandCondition";
+import ViewCourse from "./pages/ViewCourse";
 
 function App() {
   const location = useLocation();
@@ -40,8 +46,9 @@ function App() {
     location.pathname
   );
   return (
-    <>
+    <AuthProvider>
       <AOSWrapper>
+        <Notificationbar/>
         <Header />
         <Routes>
           <Route path="/" element={<Home />} />
@@ -50,6 +57,7 @@ function App() {
           <Route path="/courses" element={<AllCourses />} />
           <Route path="/apply-now" element={<ApplyNow />} />
           <Route path="/news" element={<NewsEvents />} />
+          <Route path="/faqs" element={<FAQs />} />
           <Route path="/certificate" element={<Certificate />} />
           <Route path="/contact-us" element={<ContactUs />} />
           <Route path="/howitswork" element={<Howitswork />} />
@@ -57,14 +65,31 @@ function App() {
           <Route path="/about-us" element={<AboutUs />} />
           <Route path="/free-laptops" element={<FreeLaptops />} />
           <Route path="/free-solarpanels" element={<FreeSolarPanel />} />
-          <Route path="/admission-test" element={<Admissiontest />} />
-          <Route path="/admission-result" element={<AdmissionResult />} />
+          <Route path="/become-instructors" element={<BeacomeInstructors />} />
+          <Route path="/terms&policy" element={<TermsandCondition />} />
+          <Route path="/course-detail" element={<ViewCourse />} />
+          <Route
+            path="/admission-test"
+            element={
+              <ProtectedRoute>
+                <Admissiontest />
+              </ProtectedRoute>
+            }
+          />
+          <Route
+            path="/admission-result"
+            element={
+              <ProtectedRoute>
+                <AdmissionResult />
+              </ProtectedRoute>
+            }
+          />
           {/*
         <Route path="/faqs" element={<FAQs />} /> */}
         </Routes>
         {!shouldHideHeaderFooter && <Footer />}
       </AOSWrapper>
-    </>
+    </AuthProvider>
   );
 }
 

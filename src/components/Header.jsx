@@ -1,27 +1,39 @@
 import React, { useState } from "react";
-import { Link, NavLink } from "react-router-dom";
-import { Navbar, Nav, NavDropdown, Button, Offcanvas, Container } from 'react-bootstrap';
+import { Link, NavLink, useNavigate } from "react-router-dom";
+import {
+  Navbar,
+  Nav,
+  NavDropdown,
+  Button,
+  Offcanvas,
+  Container,
+} from "react-bootstrap";
 import Logo from "../assets/logo.png";
+import { useAuth } from "../context/AuthContext";
 
 const Header = () => {
   const [showOffcanvas, setShowOffcanvas] = useState(false);
+  const { user, logout } = useAuth();
+  const navigate = useNavigate();
 
   const handleClose = () => setShowOffcanvas(false);
   const handleShow = () => setShowOffcanvas(true);
+
+  const handleLogout = () => {
+    logout();
+    navigate("/login");
+  };
+
   return (
     <header className="header">
-      <Navbar bg="light" expand="xl"  >
-        <Container className="d-flex justify-content-between align-items-center">
-
-
+      <Navbar bg="light" expand="xl" >
+        <Container fluid className="d-flex justify-content-between align-items-center px-2 px-lg-5">
           <div className="d-flex align-items-center">
-
             <Navbar.Toggle
               aria-controls="offcanvasNavbar-expand-xl"
               className="me-2"
               onClick={handleShow}
             />
-
             <Navbar.Brand as={Link} to="/" className="logos m-0">
               <img src={Logo} alt="logo" />
             </Navbar.Brand>
@@ -38,54 +50,101 @@ const Header = () => {
             </Button>
           </div>
 
-          {/* Offcanvas */}
           <Navbar.Offcanvas
             id="offcanvasNavbar-expand-xl"
             aria-labelledby="offcanvasNavbarLabel-expand-xl"
-            placement="start"
+            placement="end"
             show={showOffcanvas}
             onHide={handleClose}
           >
             <Offcanvas.Header closeButton>
               <Offcanvas.Title id="offcanvasNavbarLabel-expand-xl">
-                <img src={Logo} alt="logo" style={{ height: "30px" }} />
+                Menu
               </Offcanvas.Title>
             </Offcanvas.Header>
-            <Offcanvas.Body className="align-items-center">
-              <Nav className="mx-auto">
-                <NavLink to="/" className="nav-link" onClick={handleClose}>Home</NavLink>
-                <NavLink to="/courses" className="nav-link" onClick={handleClose}>Courses</NavLink>
-                <NavLink to="/news" className="nav-link" onClick={handleClose}>News & Events</NavLink>
-                <NavLink to="/certificate" className="nav-link" onClick={handleClose}>Certificate</NavLink>
-
-                <NavLink to="/scholarship-card" className="nav-link" onClick={handleClose}>Scholarship Card</NavLink>
-
-                {/* <NavLink to="/howitswork" className="nav-link" onClick={handleClose}>How Its Works</NavLink> */}
-
-                <NavDropdown title="About Us" id="about-us-dropdown">
-                  <NavDropdown.Item as={NavLink} to="/about-us" onClick={handleClose}>About Us</NavDropdown.Item>
-                  <NavDropdown.Item as={NavLink} to="/free-laptops" onClick={handleClose}>Free Laptops</NavDropdown.Item>
-                  <NavDropdown.Item as={NavLink} to="/free-solarpanels" onClick={handleClose}>Free Solar Panels</NavDropdown.Item>
-                  <NavDropdown.Item as={NavLink} to="/howitswork" onClick={handleClose}>How Its Works</NavDropdown.Item>
-                  <NavDropdown.Item as={NavLink} to="/contact-us" onClick={handleClose}>Contact Us</NavDropdown.Item>
+            <Offcanvas.Body>
+              <Nav className="justify-content-end flex-grow-1 pe-3">
+                <Nav.Link as={NavLink} to="/" onClick={handleClose}>
+                  Home
+                </Nav.Link>
+                <Nav.Link as={NavLink} to="/courses" onClick={handleClose}>
+                  Courses
+                </Nav.Link>{" "}
+                <Nav.Link as={NavLink} to="/about-Us" onClick={handleClose}>
+                  About Us
+                </Nav.Link>
+                <Nav.Link as={NavLink} to="/howitswork" onClick={handleClose}>
+                  How Its Work
+                </Nav.Link>
+                <Nav.Link as={NavLink} to="/free-laptops" onClick={handleClose}>
+                  Laptop Scheme
+                </Nav.Link>  <Nav.Link as={NavLink} to="/free-solarpanels" onClick={handleClose}>
+                  Solar Scheme
+                </Nav.Link><Nav.Link as={NavLink} to="/scholarship-card" onClick={handleClose}>
+                  Scholarship Card
+                </Nav.Link>
+                <NavDropdown title="Help Desk"  >
+                  <NavDropdown.Item
+                    as={NavLink}
+                    to="/apply-now"
+                    onClick={handleClose}
+                  >
+                    How to Apply
+                  </NavDropdown.Item> <NavDropdown.Item
+                    as={NavLink}
+                    to="/faqs"
+                    onClick={handleClose}
+                  >
+                    FAQS
+                  </NavDropdown.Item><NavDropdown.Item
+                    as={NavLink}
+                    to="/contact-us"
+                    onClick={handleClose}
+                  >
+                    Contact Us
+                  </NavDropdown.Item><NavDropdown.Item
+                    as={NavLink}
+                    to="/news"
+                    onClick={handleClose}
+                  >
+                    Events & News
+                  </NavDropdown.Item>
+                   
                 </NavDropdown>
               </Nav>
               <div className="auth-buttons">
-                <Button as={Link} to="/login" className="btn-black bg-none login-btn p-0">
-                  <i className="fas fa-sign-in-alt me-1"></i>CANDIDATE LOGIN
-                </Button>
-                <Button
-                  variant="success"
-                  as={Link}
-                  to="/apply-now"
-                  className="btn-green register-btn desktop"
-                >
-                  APPLY NOW
-                </Button>
+                {user ? (
+                  <>
+                    <span className="me-3">Welcome, {user.user.fullName}</span>
+                    <Button
+                      onClick={handleLogout}
+                      className="btn-black bg-none login-btn p-0"
+                    >
+                      <i className="fas fa-sign-out-alt me-1"></i>LOGOUT
+                    </Button>
+                  </>
+                ) : (
+                  <>
+                    <Button
+                      as={Link}
+                      to="/login"
+                      className="btn-black bg-none login-btn p-0"
+                    >
+                      <i className="fas fa-sign-in-alt me-1"></i>CANDIDATE LOGIN
+                    </Button>
+                    <Button
+                      variant="success"
+                      as={Link}
+                      to="/apply-now"
+                      className="btn-green register-btn desktop"
+                    >
+                      APPLY NOW
+                    </Button>
+                  </>
+                )}
               </div>
             </Offcanvas.Body>
           </Navbar.Offcanvas>
-
         </Container>
       </Navbar>
     </header>
