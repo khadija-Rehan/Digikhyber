@@ -908,16 +908,15 @@ a:hover {
 
 .steps-cards {
     display: flex;
-    flex-wrap: wrap;
-    justify-content: center;
+
     gap: 10px;
-    width: 96%;
+    width: 100%;
     margin: 30px 0px;
 }
 
 .step-card {
-    border: 2px dashed #079560;
-    padding: 5px 25px 25px 25px;
+    /* border: 2px dashed #079560; */
+    padding: 25px;
     border-radius: 10px;
     background-color: #ffffff00;
     color: #747474;
@@ -928,7 +927,7 @@ a:hover {
 }
 
 .step-card:hover {
-    border: 2px dashed #1a1e1d;
+    /* border: 2px dashed #1a1e1d; */
 }
 
 .step-card:hover .step-icon img {
@@ -1286,7 +1285,7 @@ p {
     width: 80%;
     margin: 0 auto;
     color: #fff;
- 
+
     gap: 10px;
     padding: 10px;
     font-size: 15px !important;
@@ -1363,7 +1362,7 @@ p {
 
 .process-point-right:before {
     content: "";
-    height: 226px;
+    height: 395px;
     width: 11px;
     background: #079560;
     display: inline-grid;
@@ -1416,7 +1415,7 @@ p {
 
 .process-point-left:before {
     content: "";
-    height: 240px;
+    height: 252px;
     width: 11px;
     background: #079560;
     display: inline-grid;
@@ -1635,7 +1634,7 @@ ul li {
 
 @media (max-width: 1399px) {
     .nav-link {
-        font-size: 12px;
+        font-size: 10px;
     }
 
     .auth-buttons .btn {
@@ -1653,15 +1652,32 @@ ul li {
         display: none;
     }
 
+    .steps-cards {
+        display: flex;
+        flex-wrap: wrap;
+    }
+
     .mobile {
         display: block;
     }
 
 }
 
+.dropdown-item.active,
+.dropdown-item:active {
+    color: var(--bs-dropdown-link-active-color);
+    text-decoration: none;
+    background-color: #079560 !important;
+}
+
 @media (max-width: 992px) {
     .course {
         flex: 1 1 calc(50% - 20px);
+    }
+
+    .navbar-nav {
+        align-items: start;
+        padding-left: 13px;
     }
 
     .step-card {

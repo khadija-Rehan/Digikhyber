@@ -1,60 +1,105 @@
 import React from "react";
-import Clip from "../assets/mortarboard-svgrepo-com.svg"
+import Clip from "../assets/mortarboard-svgrepo-com.svg";
+
 const Notificationbar = () => {
     return (
-        <div class="marquee-section style-header">
-            <div class="mycustom-marque  header-marque theme-blue-bg">
-                <div class="scrolling-wrap">
-                    <div class="comm">
+        <div className="marquee-section style-header">
+            <div className="mycustom-marque header-marque theme-blue-bg">
+                <div className="scrolling-wrap">
+                    <div className="comm">
                         <div></div>
-                        <div class="cmn-textslide ">
-                            <img style={{width:"25px"}} src={Clip} alt={Clip} /> Scholarship Opportunities{" "}
+                        <div className="cmn-textslide">
+                            <img className="white-icon" width="30" height="30" src="https://img.icons8.com/windows/32/admission.png" alt="admission" />
+                            Admissions Are Closing Soon
                         </div>
-                        <div class="cmn-textslide ">
-                            <img style={{width:"25px"}} src={Clip} alt={Clip} /> Internship Opportunities
+                        <div className="cmn-textslide">
+                            <img className="white-icon" width="30" height="30" src="https://img.icons8.com/ios/50/parliament.png" alt="parliament" />
+                            Endorsed By Government
                         </div>
-                        <div class="cmn-textslide ">
-                           <img style={{width:"25px"}} src={Clip} alt={Clip} /> 25+ Quality Courses
+                        <div className="cmn-textslide">
+                            <img className="white-icon" width="30" height="30" src="https://img.icons8.com/ios-glyphs/30/laptop.png" alt="laptop" />
+                            Laptop Opportunities
                         </div>
-                        <div class="cmn-textslide ">
-                            <img style={{width:"25px"}} src={Clip} alt={Clip} /> Experience Instructors
+                        <div className="cmn-textslide">
+                            <img className="white-icon" width="30" height="30" src="https://img.icons8.com/windows/32/solar-panel.png" alt="solar-panel" />
+                            Solar Panel Opportunities
                         </div>
-                        <div class="cmn-textslide ">
-                        <img style={{width:"25px"}} src={Clip} alt={Clip} /> Admissions are closing soon
+                        <div className="cmn-textslide">
+                            <img className="white-icon" width="30" height="30" src="https://img.icons8.com/ios-glyphs/30/scholarship.png" alt="scholarship" />
+                            Scholarship Card Opportunities
                         </div>
-                        <div class="cmn-textslide ">
-                            <img style={{width:"25px"}} src={Clip} alt={Clip} />Endorsed By Government
+                        <div className="cmn-textslide">
+                            <img className="white-icon" width="30" height="30" src="https://img.icons8.com/ios/50/add-dollar.png" alt="add-dollar" />
+                            Taleem Finance Opportunities
                         </div>
-                        <div class="cmn-textslide ">
-                           <img style={{width:"25px"}} src={Clip} alt={Clip} /> Online &amp; Onsite Trainings
+                        <div className="cmn-textslide">
+                            <img className="white-icon" width="30" height="30" src="https://img.icons8.com/external-filled-color-icons-papa-vector/78/external-Study-Abroad-expats-filled-color-icons-papa-vector.png" alt="external-Study-Abroad-expats-filled-color-icons-papa-vector" />
+                            Taleem Abroad Opportunities
+                        </div>
+                        <div className="cmn-textslide">
+                            <img className="white-icon" width="30" height="30" src="https://img.icons8.com/ios-glyphs/30/internship.png" alt="internship" />
+                            National & Global Internship Opportunities
+                        </div>
+                        <div className="cmn-textslide">
+                            <img className="white-icon" width="30" height="30" src="https://img.icons8.com/external-others-phat-plus/64/external-courses-online-courses-outline-others-phat-plus-30.png" alt="external-courses-online-courses-outline-others-phat-plus-30" />
+                            25+ Hands on Practical Courses
                         </div>
                     </div>
-                <div class="comm">
-                  
-                        <div class="cmn-textslide ">
-                            <img style={{width:"25px"}} src={Clip} alt={Clip} /> Scholarship Opportunities{" "}
+                    <div className="comm">
+                        {/* Duplicate content with white icons */}
+                        <div></div>
+                        <div className="cmn-textslide">
+                            <img className="white-icon" width="30" height="30" src="https://img.icons8.com/windows/32/admission.png" alt="admission" />
+                            Admissions Are Closing Soon
                         </div>
-                        <div class="cmn-textslide ">
-                            <img style={{width:"25px"}} src={Clip} alt={Clip} /> Internship Opportunities
+                        <div className="cmn-textslide">
+                            <img className="white-icon" width="30" height="30" src="https://img.icons8.com/ios/50/parliament.png" alt="parliament" />
+                            Endorsed By Government
                         </div>
-                        <div class="cmn-textslide ">
-                           <img style={{width:"25px"}} src={Clip} alt={Clip} /> 25+ Quality Courses
+                        <div className="cmn-textslide">
+                            <img className="white-icon" width="30" height="30" src="https://img.icons8.com/ios-glyphs/30/laptop.png" alt="laptop" />
+                            Laptop Opportunities
                         </div>
-                        <div class="cmn-textslide ">
-                            <img style={{width:"25px"}} src={Clip} alt={Clip} /> Experience Instructors
+                        <div className="cmn-textslide">
+                            <img className="white-icon" width="30" height="30" src="https://img.icons8.com/windows/32/solar-panel.png" alt="solar-panel" />
+                            Solar Panel Opportunities
                         </div>
-                        <div class="cmn-textslide ">
-                        <img style={{width:"25px"}} src={Clip} alt={Clip} /> Admissions are closing soon
+                        <div className="cmn-textslide">
+                            <img className="white-icon" width="30" height="30" src="https://img.icons8.com/ios-glyphs/30/scholarship.png" alt="scholarship" />
+                            Scholarship Card Opportunities
                         </div>
-                        <div class="cmn-textslide ">
-                            <img style={{width:"25px"}} src={Clip} alt={Clip} />Endorsed By Government
+                        <div className="cmn-textslide">
+                            <img className="white-icon" width="30" height="30" src="https://img.icons8.com/ios/50/add-dollar.png" alt="add-dollar" />
+                            Taleem Finance Opportunities
                         </div>
-                        <div class="cmn-textslide ">
-                           <img style={{width:"25px"}} src={Clip} alt={Clip} /> Online &amp; Onsite Trainings
+                        <div className="cmn-textslide">
+                            <img className="white-icon" width="30" height="30" src="https://img.icons8.com/external-filled-color-icons-papa-vector/78/external-Study-Abroad-expats-filled-color-icons-papa-vector.png" alt="external-Study-Abroad-expats-filled-color-icons-papa-vector" />
+                            Taleem Abroad Opportunities
+                        </div>
+                        <div className="cmn-textslide">
+                            <img className="white-icon" width="30" height="30" src="https://img.icons8.com/ios-glyphs/30/internship.png" alt="internship" />
+                            National & Global Internship Opportunities
+                        </div>
+                        <div className="cmn-textslide">
+                            <img className="white-icon" width="30" height="30" src="https://img.icons8.com/external-others-phat-plus/64/external-courses-online-courses-outline-others-phat-plus-30.png" alt="external-courses-online-courses-outline-others-phat-plus-30" />
+                            25+ Hands on Practical Courses
                         </div>
                     </div>
                 </div>
             </div>
+            
+            {/* Add CSS for white icons */}
+            <style jsx>{`
+                .white-icon {
+                    filter: brightness(0) invert(1);
+                    vertical-align: middle;
+                    margin-right: 8px;
+                }
+                .cmn-textslide {
+                    display: flex;
+                    align-items: center;
+                }
+            `}</style>
         </div>
     );
 };
