@@ -170,7 +170,7 @@ const AboutUs = () => {
                 <div className="container">
 
                 <div className="row align-items-center pt-5 pb-5">
-                    <div className="col-lg-3">
+                    <div className="col-lg-3  mb-3">
                         <h2>Our Instructors</h2>
                         <p>
                             Learn from dedicated industry experts. Our instructors lead
@@ -178,26 +178,26 @@ const AboutUs = () => {
                             build a skilled generation.
                         </p>
                         <Link to={"/become-instructors"}>
-                        <button className="btn-green register-btn desktop btn btn-success">
+                        <button className="btn-green register-btn  btn btn-success">
                             Become a Instructor
                         </button>
                         </Link>
                     </div>
-                    <div className="col-lg-3">
+                    <div className="col-lg-3 mb-3">
+                        <div className="teams-card ">
+                            <img className="mb-3" src={Team} alt={Team} />
+                            <h5>Lauren Martinez</h5>
+                            <span>Python Tutor</span>
+                            <p>Aliquip eiusmod in voluptate do quis ipsum dolor</p>
+                        </div>
+                    </div> <div className="col-lg-3 mb-3">
                         <div className="teams-card">
                             <img className="mb-3" src={Team} alt={Team} />
                             <h5>Lauren Martinez</h5>
                             <span>Python Tutor</span>
                             <p>Aliquip eiusmod in voluptate do quis ipsum dolor</p>
                         </div>
-                    </div> <div className="col-lg-3">
-                        <div className="teams-card">
-                            <img className="mb-3" src={Team} alt={Team} />
-                            <h5>Lauren Martinez</h5>
-                            <span>Python Tutor</span>
-                            <p>Aliquip eiusmod in voluptate do quis ipsum dolor</p>
-                        </div>
-                    </div> <div className="col-lg-3">
+                    </div> <div className="col-lg-3 mb-3">
                         <div className="teams-card">
                             <img className="mb-3" src={Team} alt={Team} />
                             <h5>Lauren Martinez</h5>

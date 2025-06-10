@@ -5,7 +5,7 @@ const Opportunities = () => {
     return (
         <div className="container pb-5 pt-5">
             <div className="row pb-5">
-                <div className="col-lg-3">
+                <div className="col-lg-3 mb-3">
                     <div class="offer-2-squar2 s">
                         <div class="p1">
                             <i class="fas fa-location-arrow i"></i>
@@ -20,7 +20,7 @@ const Opportunities = () => {
                         </div>
                     </div>
                 </div>
-                <div className="col-lg-3">
+                <div className="col-lg-3 mb-3">
                     <div class="offer-2-squar2 s">
                         <div class="p1">
                             <i class="fas fa-laptop text-white fw-bolder fs-1 mb-2"></i>
@@ -35,7 +35,7 @@ const Opportunities = () => {
                         </div>
                     </div>
                 </div>
-                <div className="col-lg-3">
+                <div className="col-lg-3 mb-3">
                     {" "}
                     <div class="offer-2-squar2 s">
                         <div class="p1">
@@ -51,7 +51,7 @@ const Opportunities = () => {
                         </div>
                     </div>
                 </div>{" "}
-                <div className="col-lg-3">
+                <div className="col-lg-3 mb-3">
                     {" "}
                     <div class="offer-2-squar2 s">
                         <div class="p1">

@@ -1697,11 +1697,15 @@ ul li {
         font-size: 28px !important;
         font-weight: 600;
     }
-
+ .nav-link {
+        font-size: 14px;
+    }
     .d-content {
         width: 100%;
     }
-
+ .btn-black {
+        font-size: 14px !important;
+    }
     .build h1 {
         font-size: 27px !important;
         font-weight: 600;

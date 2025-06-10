@@ -1,9 +1,11 @@
 import React from "react";
 import ParticleBackground from "../components/ParticleBackground";
+import OverlayTrigger from "react-bootstrap/OverlayTrigger";
+import Tooltip from "react-bootstrap/Tooltip";
 
 const HowItsWork = () => {
   return (
-    <div style={{ overflow: "hidden", marginBottom:"50px" }}>
+    <div style={{ overflow: "hidden", marginBottom: "50px" }}>
       <div className="breadcrums">
         <ParticleBackground />
 
@@ -246,12 +248,21 @@ const HowItsWork = () => {
                 </div>
                 <div class="col-lg-7">
                   <h5>Step 7: Application Processing & Confirm Your Seat </h5>
-                  <p>
-                    If you pass the admission test, you will be prompted to pay
-                    a minor application processing....
-                     {/* Fee to submit your
-                    application and confirm your seat in the current batch. */}
-                  </p>
+                  <OverlayTrigger
+                    placement="top"
+                    overlay={
+                      <Tooltip id="tooltip-top-admission-fee">
+                        If you pass the admission test, you will be prompted to
+                        pay a minor application processing fee to submit your
+                        application and confirm your seat in the current batch.
+                      </Tooltip>
+                    }
+                  >
+                    <p>
+                      If you pass the admission test, you will be prompted to
+                      pay a minor ...
+                    </p>
+                  </OverlayTrigger>
                 </div>
               </div>
               <div class="process-line-l"></div>
@@ -308,14 +319,22 @@ const HowItsWork = () => {
                 </div>
                 <div class="col-lg-7">
                   <h5>Step 9: LMS Access </h5>
-                  <p>
-                    Final verification by our team will ensure all details and
-                    documents are correct.... 
-                    {/* Upon approval..... */}
-                     {/* you'll gain LMS
-                    access; if not, your application processing charges will be
-                    refunded back to your account. */}
-                  </p>
+                  <OverlayTrigger
+                    placement="top"
+                    overlay={
+                      <Tooltip id="tooltip-top-admission-fee">
+                        Final verification by our team will ensure all details
+                        and documents are correct Upon approval you'll gain LMS
+                        access; if not, your application processing charges will
+                        be refunded back to your account.{" "}
+                      </Tooltip>
+                    }
+                  >
+                    <p>
+                      Final verification by our team will ensure all details and
+                      documents are correct....{" "}
+                    </p>
+                  </OverlayTrigger>
                 </div>
               </div>
               <div class="process-line-l"></div>
