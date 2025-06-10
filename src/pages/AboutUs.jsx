@@ -8,6 +8,8 @@ import GS from "../assets/grow.png";
 import Team from "../assets/team.png";
 import ParticleBackground from "../components/ParticleBackground";
 import { Link } from "react-router-dom";
+import ApplicationSteps from "../components/ApplicationSteps";
+import OurPartners from "../components/Ourpartners";
 
 const AboutUs = () => {
     const [cardsPerRow, setCardsPerRow] = useState(3);
@@ -223,6 +225,9 @@ const AboutUs = () => {
                     ))}
                 </div>
             </div>
+            <OurPartners />
+
+            
         </>
     );
 };

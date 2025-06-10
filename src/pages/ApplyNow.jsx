@@ -21,7 +21,7 @@ const ApplyNow = () => {
                                 src={Logo}
                                 alt="logo"
                             />
-                            <h2 className="mb-4">Welcome to the XYZ Admission Portal!</h2>
+                            <h2 className="mb-4">Welcome to the Hunarmand Punjab Admission Portal!</h2>
                             <p>
                                 Register yourself as a new applicant. After successful
                                 registration, check your email for the login credentials we sent
