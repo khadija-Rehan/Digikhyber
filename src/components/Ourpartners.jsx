@@ -57,19 +57,21 @@ const OurPartners = () => {
     ];
 
     return (
-        <div className='container pt-5 pb-5'>
+        <div className='container  ' >
+            <div style={{padding:"50px 0px"}}>
+
             <h2 style={{ textAlign: 'center', marginBottom: '30px' }}>Our Supporting Partners</h2>
             <Slider {...settings}>
         {partners.map((partner, index) => (
-          <div key={index} style={{
-            textAlign: 'center',
-            padding: '10px',
-            display: 'flex',       // Use flexbox for centering
-            flexDirection: 'column', // Stack image and text vertically
-            alignItems: 'center',    // Center horizontally
-            justifyContent: 'center',// Center vertically
+            <div key={index} style={{
+                textAlign: 'center',
+                padding: '10px',
+                display: 'flex',       // Use flexbox for centering
+                flexDirection: 'column', // Stack image and text vertically
+                alignItems: 'center',    // Center horizontally
+                justifyContent: 'center',// Center vertically
             height: '150px',        // Fixed height for each slide container
-          }}>
+        }}>
             <img
               src={partner.logo}
               alt={partner.name}
@@ -79,13 +81,14 @@ const OurPartners = () => {
                 width: 'auto',         // Allow width to adjust based on aspect ratio
                 objectFit: 'contain',  // Crucial: Fits image within bounds, maintains aspect ratio
                 margin: '0 auto',      // Center the image horizontally
-              }}
+            }}
             />
             {/* Optional: Add partner name below the logo */}
             <p className='text-center fw-medium' style={{ fontSize: '0.9rem', marginTop: '10px', color: '#666' }}>{partner.name}</p>
           </div>
         ))}
       </Slider>
+        </div>
         </div>
     );
 };

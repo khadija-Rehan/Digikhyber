@@ -143,6 +143,7 @@ const Header = () => {
                   <>
                     <Button
                       as={Link}
+                    onClick={handleClose}
                       to="/login"
                       className="btn-black bg-none login-btn p-0"
                     >
