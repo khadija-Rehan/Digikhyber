@@ -82,7 +82,7 @@ const OurPartners = () => {
               }}
             />
             {/* Optional: Add partner name below the logo */}
-            {/* <p style={{ fontSize: '0.9rem', marginTop: '10px', color: '#666' }}>{partner.name}</p> */}
+            <p className='text-center fw-medium' style={{ fontSize: '0.9rem', marginTop: '10px', color: '#666' }}>{partner.name}</p>
           </div>
         ))}
       </Slider>
