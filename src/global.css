@@ -431,7 +431,7 @@ a:hover {
 }
 
 .s {
-    height: 600px;
+    height: 400px;
     background-color: #079560;
 
     border: solid 3px rgb(167, 167, 167);
@@ -1619,17 +1619,27 @@ ul li {
 }
 
 .accordion-button:not(.collapsed) {
-    color: #3c4852 !important;
-
+    color: white !important;
+    border-top-left-radius: 15px !important;
+    border-top-right-radius: 15px !important;
+    border-bottom-left-radius: 0px !important;
+    border-bottom-right-radius: 0px !important;
     font-weight: 700 !important;
-    background-color: transparent !important;
+    background-color: #079560 !important;
     box-shadow: inset 0 calc(-1 * var(--bs-accordion-border-width)) 0 var(--bs-accordion-border-color);
 }
 
 .accordion-button {
     font-weight: 700 !important;
-    border-radius: 0px !important;
+    border-radius: 15px !important;
     font-family: "Poppins";
+}
+
+.accordion-item {
+    border-radius: 15px !important;
+margin-bottom: 12px;
+border: none !important;
+box-shadow: 0 10px 50px 0 rgba(26, 46, 85, .1);
 }
 
 @media (max-width: 1399px) {
@@ -1697,15 +1707,19 @@ ul li {
         font-size: 28px !important;
         font-weight: 600;
     }
- .nav-link {
+
+    .nav-link {
         font-size: 14px;
     }
+
     .d-content {
         width: 100%;
     }
- .btn-black {
+
+    .btn-black {
         font-size: 14px !important;
     }
+
     .build h1 {
         font-size: 27px !important;
         font-weight: 600;

@@ -7,6 +7,7 @@ import FS from "../assets/scholar.webp";
 import GS from "../assets/card-s.webp";
 import Team from "../assets/team.png";
 import ParticleBackground from "../components/ParticleBackground";
+import { Link } from "react-router-dom";
 
 const ScholarshipCard = () => {
     const [cardsPerRow, setCardsPerRow] = useState(3);
@@ -65,7 +66,7 @@ const ScholarshipCard = () => {
     return (
         <>
             <div className="banner">
-                    <ParticleBackground/>
+                <ParticleBackground />
 
                 <div className="banner-content">
                     <div className="container">
@@ -88,10 +89,10 @@ const ScholarshipCard = () => {
             </div>
             <div className="container">
                 <div className="row pt-5 pb-5 align-items-center">
-                    <div className="col-lg-6">
-                        <img className="w-100" src={GS} alt="" />
+                    <div className="col-lg-6"  data-aos="fade-right">
+                        <img className="w-100" src="/scholarship card.jpg" alt="" />
                     </div>
-                    <div className="col-lg-6">
+                    <div className="col-lg-6"  data-aos="fade-left">
                         <h2 className="fw-semibold">Unlock Your Future with Our Scholarship Cards</h2>
                         <p>
                             We believe every passionate learner deserves a chance to grow —
@@ -113,6 +114,20 @@ const ScholarshipCard = () => {
                             become part of the next generation of skilled digital
                             professionals.
                         </p>
+                        <div className="d-flex align-items-center gap-3 flex-wrap flex-md-nowrap">
+
+                        <a
+                            href="/Scholarship Card Eligibility Criteria.doc"
+                            download="Scholarship Card Eligibility Criteria.doc"
+                            >
+
+                            <button className="btn-green register-btn  btn btn-success " style={{ fontFamily: "Poppins" }}><i class="fa-solid fa-arrow-down"></i> Download Eligibility criteria  </button>
+                        </a>
+                        <Link to={"/apply-scholarshipcard"}>
+                            <button className="btn-green register-btn  btn btn-success " style={{ fontFamily: "Poppins" }}> Apply Now  </button>
+
+                        </Link>
+                            </div>
                     </div>
                 </div>
             </div>

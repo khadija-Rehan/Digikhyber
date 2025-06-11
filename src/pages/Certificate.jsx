@@ -18,7 +18,7 @@ const Certificate = () => {
                             <div className='mb-3'>
                                 <label className='mb-2' htmlFor=""> <i className='fas fa-book'></i>  Course Track<span className='text-danger'>*</span></label>
                                 <select className='form-select p-3' name="" id="">
-                                    <option value="" disabled selected>Choose your field</option>
+                                    <option value="" disabled selected>Choose your Course</option>
                                     <option>Advanced Amazon Virtual Assistant</option>
                                     <option>Full Stack Digital Marketing & AI</option>
                                     <option>Advanced Shopify & Daraz</option>

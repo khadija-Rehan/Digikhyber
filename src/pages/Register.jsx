@@ -443,7 +443,7 @@ const Register = () => {
               value={formData.firstCourse}
               onChange={handleChange}
             >
-              <option value="" disabled selected>Choose your field</option>
+              <option value="" disabled selected>Choose your Course</option>
               <option>Advanced Amazon Virtual Assistant</option>
               <option>Full Stack Digital Marketing & AI</option>
               <option>Advanced Shopify & Daraz</option>
@@ -492,7 +492,7 @@ const Register = () => {
               value={formData.secondCourse}
               onChange={handleChange}
             >
-              <option value="" disabled selected>Choose your field</option>
+              <option value="" disabled selected>Choose your Course</option>
               <option>Advanced Amazon Virtual Assistant</option>
               <option>Full Stack Digital Marketing & AI</option>
               <option>Advanced Shopify & Daraz</option>
