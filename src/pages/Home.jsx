@@ -8,11 +8,13 @@ import Instructors from "../components/Instructors";
 import ApplicationSteps from "../components/ApplicationSteps";
 import Testimonials from "../components/Testimonials";
 import Opportunities from "../components/Opportunities";
+import Ourpartner from "../components/Ourpartners";
 
 const Home = () => {
     return (
         <>
             <Hero />
+            <Ourpartner/>
             <Awairness />
             <DigitalPunjab />
             <CoursesCategory />

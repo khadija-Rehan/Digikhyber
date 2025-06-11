@@ -28,6 +28,7 @@ import BeacomeInstructors from "./pages/BeacomeInstructors";
 import FAQs from "./pages/FAQs";
 import TermsandCondition from "./pages/TermsandCondition";
 import ViewCourse from "./pages/ViewCourse";
+import ApplyScholarShipCard from "./pages/ApplyScholarShipCard";
 
 function App() {
   const location = useLocation();
@@ -68,6 +69,7 @@ function App() {
           <Route path="/become-instructors" element={<BeacomeInstructors />} />
           <Route path="/terms&policy" element={<TermsandCondition />} />
           <Route path="/course-detail" element={<ViewCourse />} />
+          <Route path="/apply-scholarshipcard" element={<ApplyScholarShipCard />} />
           <Route
             path="/admission-test"
             element={

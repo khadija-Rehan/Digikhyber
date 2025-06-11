@@ -65,7 +65,7 @@ const FreeLaptops = () => {
     return (
         <>
             <div className="banner">
-                    <ParticleBackground/>
+                <ParticleBackground />
 
                 <div className="banner-content">
                     <div className="container">
@@ -81,6 +81,7 @@ const FreeLaptops = () => {
                                 <img src={FS} alt="Course" className="w-100 banner-image" />
                                 <div className="cube"> </div>
                             </div>
+
                         </div>
                     </div>
                 </div>
@@ -117,6 +118,36 @@ const FreeLaptops = () => {
                             first step toward your digital future. Apply today for your Free
                             Student Laptop and join the next generation of innovators.
                         </p>
+                    </div>
+                    <h2 className="text-center mb-4 mt-5">How to Avail the Laptop Scheme</h2>
+                    <div className="col-lg-6">
+                        <section className="container laptop-scheme-section py-5">
+                            <ol className="laptop-scheme-steps mb-4" style={{ fontFamily: "poppins" }}>
+                                <li>
+                                    Register for any Hunarmand Punjab course  to become eligible for
+                                    the Scholarship Card. <br />
+                               
+                                </li>
+                                <li>
+                                     Gain benefits under the Scholarship Card: Laptop Scheme, Solar Scheme,
+                                    Taleem Finance, Taleem Abroad, and access to Advanced IT Courses.
+                                </li>
+                                <li>
+                                  Submit your laptop application  via the portal and receive a confirmation.
+                                </li>
+                                <li>
+                                 Appear for the Final Evaluation Test  and complete the final assessment. Shortlisted
+                                    candidates will qualify for the Laptop Scheme or other benefits under the Hunarmand Scholarship Card.
+                                </li>
+                               
+                            </ol>
+ <p className=" font-16 mt-2">
+                                    Register today and take the first step toward a successful digital career with Hunarmand Punjab!
+                                </p>
+                        </section>
+                    </div>
+                    <div className="col-lg-6">
+                        <img className="w-100" src="https://pftpedu.org/assets/img/map.png" alt="" />
                     </div>
                 </div>
             </div>

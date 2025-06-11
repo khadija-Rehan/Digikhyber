@@ -101,7 +101,7 @@ const BeacomeInstructors = () => {
                             name="field"
                             required
                         >
-                            <option value="" disabled selected>Choose your field</option>
+                            <option value="" disabled selected>Choose your Course</option>
                             <option>Digital Marketing</option>
                             <option>Graphic Designing</option>
                             <option>Video Editing</option>

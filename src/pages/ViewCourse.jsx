@@ -34,9 +34,9 @@ const ViewCourse = () => {
                   className="bg-white text-black d-flex  gap-4 p-2 px-4 w-fitcontent rounded-5 "
                   style={{ width: "fit-content" }}
                 >
-                  <div>Classes: Physical</div>
+                  <div>Classes: Recorded</div>
                   <div>Duration: 3 Months</div>
-                  <div>Level: Beginners</div>
+                  <div>Level: Beginners to Intermediate</div>
                 </div>
               </div>
             </div>
