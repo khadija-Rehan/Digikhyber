@@ -9,12 +9,12 @@ import ApplicationSteps from "../components/ApplicationSteps";
 import Testimonials from "../components/Testimonials";
 import Opportunities from "../components/Opportunities";
 import Ourpartner from "../components/Ourpartners";
+import StatCounter from "../components/StatsCounter";
 
 const Home = () => {
     return (
         <>
             <Hero />
-            <Ourpartner/>
             <Awairness />
             <DigitalPunjab />
             <CoursesCategory />
@@ -23,7 +23,8 @@ const Home = () => {
             <Opportunities/>
             <ApplicationSteps />
             <Testimonials />
-
+<StatCounter/>
+            <Ourpartner/>
         </>
     );
 };

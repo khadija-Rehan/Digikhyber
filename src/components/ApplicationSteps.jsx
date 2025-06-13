@@ -20,35 +20,35 @@ const ApplicationSteps = () => {
 
                         <div className="steps-cards">
                             <div className="step-card text-center">
-                                {/* <p className="num">01</p> */}
+                                <p className="num">01</p>
                                 <i class="fa-solid fa-user-plus green fs-2 mb-4"></i>
                                 
                                 <p className="font-16 mb-1 fw-bold green">Create Account</p>
                                 <p className="font-14 fw-medium">Register your free Hunarmand Punjab account in seconds</p>
                             </div>
                             <div className="step-card text-center">
-                                {/* <p className="num">02</p> */}
+                                <p className="num">02</p>
                                 <i class="fa-regular fa-envelope green fs-2 mb-4"></i>
 
                                 <p className="font-16 mb-1 fw-bold green">Verify Email</p>
                                 <p className="font-14 fw-medium">Confirm your email to activate your account</p>
                             </div>
                             <div className="step-card text-center">
-                                {/* <p className="num">03</p>/ */}
+                                <p className="num">03</p>
                                 <i class="fa-regular fa-file green fs-2 mb-4"></i>
 
                                 <p className="font-16 mb-1 fw-bold green">Submit Application</p>
                                 <p className="font-14  fw-medium">Complete amd submit your application form</p>
                             </div>
                             <div className="step-card text-center">
-                                {/* <p className="num">04</p> */}
+                                <p className="num">04</p>
                                 <i class="fa-regular fa-pen-to-square  fs-2 mb-4 green"></i>
 
                                 <p className="font-16 mb-1 fw-bold green ">Attempt Entry Test</p>
                                 <p className="font-14  fw-medium">take the online assessment test </p>
                             </div>
                             <div className="step-card text-center">
-                                {/* <p className="num">05</p> */}
+                                <p className="num">05</p>
                                 <i class="fa-regular fa-circle-check green fs-2 mb-4"></i>
 
                                 <p className="font-16 mb-1 fw-bold green">Confirm Admission</p>

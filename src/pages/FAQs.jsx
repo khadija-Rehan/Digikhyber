@@ -513,7 +513,7 @@ const FAQs = () => {
                                             www.hunarmandpunjab.pk
                                         </a>
                                     </li>
-                                    <li><b>Helpline:</b> 03-111-133-053</li>
+                                    <li><b>Helpline:</b> 03-111-133-053 </li>
                                 </ul>
                             </div>
                         </Accordion.Body>

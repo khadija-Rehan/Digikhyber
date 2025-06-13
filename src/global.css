@@ -915,7 +915,7 @@ a:hover {
 }
 
 .step-card {
-    /* border: 2px dashed #079560; */
+    border: 2px dashed #079560;
     padding: 25px;
     border-radius: 10px;
     background-color: #ffffff00;
@@ -927,7 +927,7 @@ a:hover {
 }
 
 .step-card:hover {
-    /* border: 2px dashed #1a1e1d; */
+    border: 2px dashed #1a1e1d;
 }
 
 .step-card:hover .step-icon img {

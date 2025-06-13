@@ -37,7 +37,7 @@ const ApplyScholarShipCard = () => {
                     <img style={{ width: "200px" }} src={Logo} alt="Logo" />
                 </div>
                 <h1 className="fs-5 fw-bold text-black text-center pt-4">
-                    Hunarmand Scholarship Card Form
+                     Scholarship Card Form
                 </h1>
 
                 <div className="mb-3">

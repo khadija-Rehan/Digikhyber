@@ -29,6 +29,8 @@ import FAQs from "./pages/FAQs";
 import TermsandCondition from "./pages/TermsandCondition";
 import ViewCourse from "./pages/ViewCourse";
 import ApplyScholarShipCard from "./pages/ApplyScholarShipCard";
+import PrivacyPolicy from "./pages/PrivacyPolicy";
+import TaleemFinance from "./pages/TaleemFinance";
 
 function App() {
   const location = useLocation();
@@ -70,6 +72,8 @@ function App() {
           <Route path="/terms&policy" element={<TermsandCondition />} />
           <Route path="/course-detail" element={<ViewCourse />} />
           <Route path="/apply-scholarshipcard" element={<ApplyScholarShipCard />} />
+          <Route path="/privacy-policy" element={<PrivacyPolicy />} />
+          <Route path="/taleem-finance" element={<TaleemFinance />} />
           <Route
             path="/admission-test"
             element={

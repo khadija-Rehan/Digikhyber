@@ -53,7 +53,7 @@ const TermsandCondition = () => {
       <h5 className="mt-4 text-black">14. Contact Information</h5>
       <ul>
         <li>Email: support@hunarmandpunjab.pk</li>
-        <li>UAN: 03-111-133-073</li>
+        <li>UAN: 03-111-133-053 </li>
         <li>Address: E-Library, Lahore</li>
       </ul>
 
@@ -102,7 +102,7 @@ const TermsandCondition = () => {
       <h5 className="mt-4 text-black">11. Contact Us</h5>
       <ul>
         <li>Email: support@hunarmandpunjab.pk</li>
-        <li>UAN: 03-111-133-073</li>
+        <li>UAN: 03-111-133-053 </li>
         <li>Address: E-Library, Lahore</li>
       </ul>
 

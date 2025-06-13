@@ -124,12 +124,11 @@ const Footer = () => {
                                         </a>
                                     </p>{" "}
                                     <p className="links">
-                                        <a
-                                            href="/Privacy Policy Hunarmand Program.docx"
-                                            download="Privacy Policy Hunarmand Program.docx"
+                                        <Link to={"/privacy-policy"}
+                                            
                                         >
                                             Privacy Policy
-                                        </a>
+                                        </Link>
                                     </p>
                                    
                                     <br />
@@ -143,7 +142,7 @@ const Footer = () => {
                                     </p>
                                     <p className="links">
                                         <a href="#">
-                                            <FaPhoneAlt /> &nbsp; &nbsp; 03-111-133-073
+                                            <FaPhoneAlt /> &nbsp; &nbsp; 03-111-133-053 
                                         </a>
                                     </p>
                                     <p className="links">
