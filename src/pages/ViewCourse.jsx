@@ -1,6 +1,8 @@
 import React from "react";
 import ParticleBackground from "../components/ParticleBackground";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
+import { useAuth } from "../context/AuthContext";
+import { toast } from 'react-toastify';
 import image from "../assets/ML.jpg";
 import {
   FaCheckCircle,
@@ -21,6 +23,19 @@ import { CiCreditCard1 } from "react-icons/ci";
 import { IoCardOutline } from "react-icons/io5";
 
 const ViewCourse = () => {
+  const navigate = useNavigate();
+  const { isAuthenticated } = useAuth();
+
+  const handleRegisterClick = (e) => {
+    e.preventDefault();
+    if (isAuthenticated()) {
+      navigate('/admission-test');
+    } else {
+      toast.info("Please login first to register for the course");
+      navigate('/login');
+    }
+  };
+
   return (
     <>
       <div className="banner">
@@ -58,7 +73,7 @@ const ViewCourse = () => {
               <h3>About Course</h3>
               <p>
                 This course is perfect for beginners who want to learn how to
-                create professional websites using WordPress, the world’s most
+                create professional websites using WordPress, the world's most
                 popular content management system. It covers everything from
                 installation to creating dynamic, fully functional websites. By
                 the end of the course, students will have the skills to build,
@@ -89,11 +104,12 @@ const ViewCourse = () => {
               <div className="course">
                 <img className="w-100" src={image} alt="" />
                 <div className="course-card-details">
-                  <Link to={"/register"}>
-                    <button className="btn-green register-btn mb-3 mt-2  btn btn-success w-100">
-                      Register Course
-                    </button>
-                  </Link>
+                  <button 
+                    onClick={handleRegisterClick}
+                    className="btn-green register-btn mb-3 mt-2 btn btn-success w-100"
+                  >
+                    Register Course
+                  </button>
                   <p className="font-20 ps-2">Benefits Obtained :</p>
                   <div className="ps-2">
                     <div className="benefits-list mt-3">

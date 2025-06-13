@@ -1,8 +1,15 @@
 import React, { useState } from "react";
 import Logo from "../assets/logo.png";
 import { signUp } from "../api/auth";
+import { toast } from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css';
+import { useNavigate } from "react-router";
 
 const Register = () => {
+  let navigate = useNavigate();
+
+
+
   const [formData, setFormData] = useState({
     fullName: "",
     fatherName: "",
@@ -18,10 +25,10 @@ const Register = () => {
     yearOfCompletion: "",
     firstCourse: "",
     secondCourse: "",
-    internetAccess: "",
+    internetAccess: false,
     city: "",
     permanentAddress: "",
-    employmentStatus: "",
+    employmentStatus: false,
     password: "",
     agreement: false,
   });
@@ -129,6 +136,8 @@ const Register = () => {
       processedValue = type === "checkbox" ? checked : value;
     }
 
+    // console.log({ name, value, type, checked });
+
     setFormData((prev) => ({
       ...prev,
       [name]: processedValue,
@@ -140,24 +149,36 @@ const Register = () => {
     if (validateForm()) {
       const formDataToSubmit = new FormData();
 
-      // Append each form field individually
+      // Append all form fields
       Object.entries(formData).forEach(([key, value]) => {
-        formDataToSubmit.append(key, value);
+        if (value !== null && value !== undefined) {
+          formDataToSubmit.append(key, value);
+        }
       });
 
+      // Create and append courses array
+      const courses = [
+        formData.firstCourse,
+        formData.secondCourse
+      ].filter(Boolean);
+      
+      formDataToSubmit.append("courses", JSON.stringify(courses));
+
       // Append documents
-      if (documents.degreeDocument) {
-        formDataToSubmit.append("degreeDocument", documents.degreeDocument);
-      }
-      if (documents.cnicDocument) {
-        formDataToSubmit.append("cnicDocument", documents.cnicDocument);
-      }
+      Object.entries(documents).forEach(([key, file]) => {
+        if (file) {
+          formDataToSubmit.append(key, file);
+        }
+      });
 
       try {
         const { data } = await signUp(formDataToSubmit);
         console.log("Registration successful:", data);
+        toast.success("Registration successful! Please check your email for verification.");
+        navigate('/admission-test');
       } catch (error) {
         console.error("Registration failed:", error);
+        toast.error(error.response?.data?.message || "Registration failed. Please try again.");
       }
     }
   };
@@ -201,22 +222,28 @@ const Register = () => {
             </div>
           </div>
         </div>
-        
+
         <form onSubmit={handleSubmit}>
           <div className="text-center">
             <img style={{ width: "200px" }} src={Logo} alt="" />
           </div>
           <h1 className="fs-5 fw-bold text-black text-center pt-4">
-             Admission Form
+            Admission Form
           </h1>
-          <p className="text-center">To Become eligible for scholarship card (free laptop, Solar scheme, Taleem Finance, Taleem Abroad, Advance Courses) you must be enrolled in one ore more programs under Hunarmand Punjab.</p>
+          <p className="text-center">
+            To Become eligible for scholarship card (free laptop, Solar scheme,
+            Taleem Finance, Taleem Abroad, Advance Courses) you must be enrolled
+            in one ore more programs under Hunarmand Punjab.
+          </p>
           {/* Full Name */}
           <div className="mb-3">
             <label className="mb-2" htmlFor="fullName">
               Full Name <span className="text-danger">*</span>
             </label>
             <input
-              className={`form-control p-3 ${errors.fullName ? "is-invalid" : ""}`}
+              className={`form-control p-3 ${
+                errors.fullName ? "is-invalid" : ""
+              }`}
               type="text"
               name="fullName"
               value={formData.fullName}
@@ -234,7 +261,9 @@ const Register = () => {
               Father's Name <span className="text-danger">*</span>
             </label>
             <input
-              className={`form-control p-3 ${errors.fatherName ? "is-invalid" : ""}`}
+              className={`form-control p-3 ${
+                errors.fatherName ? "is-invalid" : ""
+              }`}
               type="text"
               name="fatherName"
               value={formData.fatherName}
@@ -259,7 +288,9 @@ const Register = () => {
               onChange={handleChange}
               placeholder="Enter your 13 digits CNIC or B-Form number without hyphenation"
             />
-            {errors.cnic && <div className="invalid-feedback">{errors.cnic}</div>}
+            {errors.cnic && (
+              <div className="invalid-feedback">{errors.cnic}</div>
+            )}
           </div>
 
           {/* Email Address */}
@@ -286,7 +317,9 @@ const Register = () => {
               Mobile Number <span className="text-danger">*</span>
             </label>
             <input
-              className={`form-control p-3 ${errors.mobile ? "is-invalid" : ""}`}
+              className={`form-control p-3 ${
+                errors.mobile ? "is-invalid" : ""
+              }`}
               type="text"
               name="mobile"
               value={formData.mobile}
@@ -304,7 +337,9 @@ const Register = () => {
               Date of Birth <span className="text-danger">*</span>
             </label>
             <input
-              className={`form-control p-3 ${errors.dateOfBirth ? "is-invalid" : ""}`}
+              className={`form-control p-3 ${
+                errors.dateOfBirth ? "is-invalid" : ""
+              }`}
               type="date"
               name="dateOfBirth"
               value={formData.dateOfBirth}
@@ -321,7 +356,9 @@ const Register = () => {
               Marital Status <span className="text-danger">*</span>
             </label>
             <select
-              className={`form-select p-3 ${errors.maritalStatus ? "is-invalid" : ""}`}
+              className={`form-select p-3 ${
+                errors.maritalStatus ? "is-invalid" : ""
+              }`}
               name="maritalStatus"
               value={formData.maritalStatus}
               onChange={handleChange}
@@ -359,15 +396,20 @@ const Register = () => {
           {/* Highest Qualification Attained */}
           <div className="mb-3">
             <label className="mb-2" htmlFor="qualification">
-              Highest Qualification Attained <span className="text-danger">*</span>
+              Highest Qualification Attained{" "}
+              <span className="text-danger">*</span>
             </label>
             <select
-              className={`form-select p-3 ${errors.qualification ? "is-invalid" : ""}`}
+              className={`form-select p-3 ${
+                errors.qualification ? "is-invalid" : ""
+              }`}
               name="qualification"
               value={formData.qualification}
               onChange={handleChange}
             >
-              <option value="">Select your highest educational qualification</option>
+              <option value="">
+                Select your highest educational qualification
+              </option>
               <option value="matric">Matric</option>
               <option value="intermediate">Intermediate</option>
               <option value="bachelor">Bachelor's</option>
@@ -383,7 +425,9 @@ const Register = () => {
               Institute/University Name <span className="text-danger">*</span>
             </label>
             <input
-              className={`form-control p-3 ${errors.institute ? "is-invalid" : ""}`}
+              className={`form-control p-3 ${
+                errors.institute ? "is-invalid" : ""
+              }`}
               type="text"
               name="institute"
               value={formData.institute}
@@ -401,7 +445,9 @@ const Register = () => {
               Field of Study <span className="text-danger">*</span>
             </label>
             <input
-              className={`form-control p-3 ${errors.fieldOfStudy ? "is-invalid" : ""}`}
+              className={`form-control p-3 ${
+                errors.fieldOfStudy ? "is-invalid" : ""
+              }`}
               type="text"
               name="fieldOfStudy"
               value={formData.fieldOfStudy}
@@ -419,7 +465,9 @@ const Register = () => {
               Year of Completion <span className="text-danger">*</span>
             </label>
             <input
-              className={`form-control p-3 ${errors.yearOfCompletion ? "is-invalid" : ""}`}
+              className={`form-control p-3 ${
+                errors.yearOfCompletion ? "is-invalid" : ""
+              }`}
               type="text"
               name="yearOfCompletion"
               value={formData.yearOfCompletion}
@@ -438,12 +486,16 @@ const Register = () => {
               would not be able to edit)
             </label>
             <select
-              className={`form-select p-3 ${errors.firstCourse ? "is-invalid" : ""}`}
+              className={`form-select p-3 ${
+                errors.firstCourse ? "is-invalid" : ""
+              }`}
               name="firstCourse"
               value={formData.firstCourse}
               onChange={handleChange}
             >
-              <option value="" disabled selected>Choose your Course</option>
+              <option value="" disabled selected>
+                Choose your Course
+              </option>
               <option>Advanced Amazon Virtual Assistant</option>
               <option>Full Stack Digital Marketing & AI</option>
               <option>Advanced Shopify & Daraz</option>
@@ -482,17 +534,21 @@ const Register = () => {
             <label className="mb-2" htmlFor="secondCourse">
               Second Course
               <br />
-              (Student can enroll in a maximum of three programs at the same time.
-              If you don't want to join the second program, kindly leave this
-              field empty.)
+              (Student can enroll in a maximum of three programs at the same
+              time. If you don't want to join the second program, kindly leave
+              this field empty.)
             </label>
             <select
-              className={`form-select p-3 ${errors.secondCourse ? "is-invalid" : ""}`}
+              className={`form-select p-3 ${
+                errors.secondCourse ? "is-invalid" : ""
+              }`}
               name="secondCourse"
               value={formData.secondCourse}
               onChange={handleChange}
             >
-              <option value="" disabled selected>Choose your Course</option>
+              <option value="" disabled selected>
+                Choose your Course
+              </option>
               <option>Advanced Amazon Virtual Assistant</option>
               <option>Full Stack Digital Marketing & AI</option>
               <option>Advanced Shopify & Daraz</option>
@@ -532,9 +588,11 @@ const Register = () => {
               Do you have access to a reliable internet connection?*
             </label>
             <select
-              className={`form-select p-3 ${errors.internetAccess ? "is-invalid" : ""}`}
+              className={`form-select p-3 ${
+                errors.internetAccess ? "is-invalid" : ""
+              }`}
               name="internetAccess"
-              value={formData.internetAccess}
+              value={formData.internetAccess ? "yes" : "no"}
               onChange={handleChange}
             >
               <option value="">Select</option>
@@ -559,7 +617,9 @@ const Register = () => {
               onChange={handleChange}
               placeholder="Enter your city of residence."
             />
-            {errors.city && <div className="invalid-feedback">{errors.city}</div>}
+            {errors.city && (
+              <div className="invalid-feedback">{errors.city}</div>
+            )}
           </div>
 
           {/* Address */}
@@ -568,7 +628,9 @@ const Register = () => {
               Address <span className="text-danger">*</span>
             </label>
             <input
-              className={`form-control p-3 ${errors.permanentAddress ? "is-invalid" : ""}`}
+              className={`form-control p-3 ${
+                errors.permanentAddress ? "is-invalid" : ""
+              }`}
               type="text"
               name="permanentAddress"
               value={formData.permanentAddress}
@@ -586,9 +648,11 @@ const Register = () => {
               Are you currently employed?*
             </label>
             <select
-              className={`form-select p-3 ${errors.employmentStatus ? "is-invalid" : ""}`}
+              className={`form-select p-3 ${
+                errors.employmentStatus ? "is-invalid" : ""
+              }`}
               name="employmentStatus"
-              value={formData.employmentStatus}
+              value={formData.employmentStatus ? "yes" : "no"}
               onChange={handleChange}
             >
               <option value="">Select</option>
@@ -625,7 +689,9 @@ const Register = () => {
                 onChange={(e) => handleFileChange(e, "degreeDocument")}
               />
               {documents.degreeDocument && (
-                <p className="text-success">Selected: {documents.degreeDocument.name}</p>
+                <p className="text-success">
+                  Selected: {documents.degreeDocument.name}
+                </p>
               )}
             </div>
             {errors.degreeDocument && (
@@ -636,7 +702,8 @@ const Register = () => {
           {/* Upload CNIC (Front & Back Side) */}
           <div className="mb-3">
             <label className="mb-2" htmlFor="cnicDocument">
-              Upload CNIC (Front & Back Side) <span className="text-danger">*</span>
+              Upload CNIC (Front & Back Side){" "}
+              <span className="text-danger">*</span>
             </label>
             <div
               className="drop_box"
@@ -658,7 +725,9 @@ const Register = () => {
                 onChange={(e) => handleFileChange(e, "cnicDocument")}
               />
               {documents.cnicDocument && (
-                <p className="text-success">Selected: {documents.cnicDocument.name}</p>
+                <p className="text-success">
+                  Selected: {documents.cnicDocument.name}
+                </p>
               )}
             </div>
             {errors.cnicDocument && (
@@ -667,12 +736,14 @@ const Register = () => {
           </div>
 
           {/* Password */}
-          {/* <div className="mb-3">
+          <div className="mb-3">
             <label className="mb-2" htmlFor="password">
               Password <span className="text-danger">*</span>
             </label>
             <input
-              className={`form-control p-3 ${errors.password ? "is-invalid" : ""}`}
+              className={`form-control p-3 ${
+                errors.password ? "is-invalid" : ""
+              }`}
               type="password"
               name="password"
               value={formData.password}
@@ -682,13 +753,15 @@ const Register = () => {
             {errors.password && (
               <div className="invalid-feedback">{errors.password}</div>
             )}
-          </div> */}
+          </div>
 
           {/* Agreement */}
           <div className="mb-3">
             <div className="form-check">
               <input
-                className={`form-check-input ${errors.agreement ? "is-invalid" : ""}`}
+                className={`form-check-input ${
+                  errors.agreement ? "is-invalid" : ""
+                }`}
                 type="checkbox"
                 name="agreement"
                 checked={formData.agreement}
@@ -696,9 +769,9 @@ const Register = () => {
                 id="agreement"
               />
               <label className="form-check-label" htmlFor="agreement">
-                I declare that all the information provided is correct to the best
-                of my knowledge, and I agree to the terms and conditions of the
-                Hunarmand program. <span className="text-danger">*</span>
+                I declare that all the information provided is correct to the
+                best of my knowledge, and I agree to the terms and conditions of
+                the Hunarmand program. <span className="text-danger">*</span>
               </label>
               {errors.agreement && (
                 <div className="invalid-feedback">{errors.agreement}</div>
