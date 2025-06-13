@@ -73,12 +73,7 @@ const Header = () => {
                 <Nav.Link as={NavLink} to="/courses" onClick={handleClose}>
                   Courses
                 </Nav.Link>{" "}
-                <Nav.Link as={NavLink} to="/about-Us" onClick={handleClose}>
-                  About Us
-                </Nav.Link>
-                {/* <Nav.Link as={NavLink} to="/howitswork" onClick={handleClose}>
-                  How to Apply
-                </Nav.Link> */}
+                
                 <Nav.Link as={NavLink} to="/free-laptops" onClick={handleClose}>
                   Laptop Scheme
                 </Nav.Link>{" "}
@@ -95,6 +90,12 @@ const Header = () => {
                   onClick={handleClose}
                 >
                   Scholarship Card
+                </Nav.Link>
+                <Nav.Link as={NavLink} to="/certificate" onClick={handleClose}>
+                  Certificate
+                </Nav.Link>
+                <Nav.Link as={NavLink} to="/about-Us" onClick={handleClose}>
+                  About Us
                 </Nav.Link>
                 <NavDropdown title="Help Desk">
                   <NavDropdown.Item

@@ -3,15 +3,23 @@ import ParticleBackground from "../components/ParticleBackground";
 import { Link } from "react-router-dom";
 import image from "../assets/ML.jpg";
 import {
+  FaCheckCircle,
+  FaCoins,
+  FaConnectdevelop,
   FaEnvelope,
   FaFacebookF,
+  FaGlobe,
   FaInstagram,
+  FaLaptop,
   FaLinkedinIn,
   FaMapMarkerAlt,
   FaPhoneAlt,
   FaTwitter,
   FaWhatsapp,
 } from "react-icons/fa";
+import { CiCreditCard1 } from "react-icons/ci";
+import { IoCardOutline } from "react-icons/io5";
+
 const ViewCourse = () => {
   return (
     <>
@@ -36,7 +44,7 @@ const ViewCourse = () => {
                 >
                   <div>Classes: Recorded</div>
                   <div>Duration: 3 Months</div>
-                  <div>Level: Beginners to Intermediate</div>
+                  <div>Level: Intermediate</div>
                 </div>
               </div>
             </div>
@@ -87,20 +95,74 @@ const ViewCourse = () => {
                     </button>
                   </Link>
                   <p className="font-20 ps-2">Benefits Obtained :</p>
-                  <div className="ps-4">
-                    <p>
-                      <i className="jki jki-file-text-line"></i>
-                      Training Evaluation Tests
-                    </p>
-                    <p>
-                      <i className="jki jki-id-card"></i> Completion
-                      Certification
-                    </p>
+                  <div className="ps-2">
+                    <div className="benefits-list mt-3">
+                      <div className="d-flex align-items-center justify-content-between">
+                        <p>
+                          <FaCheckCircle
+                            className="icon"
+                            style={{ color: "#079560", marginRight: "5px" }}
+                          />{" "}
+                          Completion Certificate:{" "}
+                        </p>
+                        <p className="fw-semibold">Yes</p>
+                      </div>
+                      <div className="d-flex align-items-center justify-content-between">
+                        <p>
+                          <FaLaptop
+                            className="icon"
+                            style={{ color: "#079560", marginRight: "5px" }}
+                          />{" "}
+                          Training Evaluation: 
+                        </p>
+                        <p className="fw-semibold">Yes</p>
+                      </div>
+                      <div className="d-flex align-items-center justify-content-between">
+                        <p>
+                          <FaGlobe
+                            className="icon"
+                            style={{ color: "#079560", marginRight: "5px" }}
+                          />{" "}
+                          Language: 
+                        </p>
+                        <p className="fw-semibold">Urdu / English</p>
+                      </div>
+                      <div className="d-flex align-items-center justify-content-between">
+                        <p>
+                          <FaConnectdevelop
+                            className="icon"
+                            style={{ color: "#079560", marginRight: "5px" }}
+                          />{" "}
+                          Who can Join: 
+                        </p>
+                        <p className="fw-semibold">Everyone</p>
+                      </div>
+                      <div className="d-flex align-items-center justify-content-between">
+                        <p>
+                          <FaCoins
+                            className="icon"
+                            style={{ color: "#079560", marginRight: "5px" }}
+                          />{" "}
+                          Fee:
+                        </p>
+                        <p className="fw-semibold"> Free of Cost</p>
+                      </div>
+                      <div className="d-flex align-items-center justify-content-between">
+                        <p>
+                          <IoCardOutline
+                            className="icon"
+                            style={{ color: "#079560", marginRight: "5px" }}
+                          />{" "}
+                          Scholarship Card Opportunity: 
+                        </p>
+                        <p className="fw-semibold">Yes</p>
+                      </div>
+                    </div>
                   </div>
-                  
-                  <p className="font-20 ps-2">Share:</p>
 
-                  <div className="social">
+                  {/* <p className="font-20 ps-2">Share:</p> */}
+
+                  {/* <div className="social">
                     <button className="social-button" style={{border:"1px solid #079560" }}>
                       <a href="#">
                         <FaFacebookF />
@@ -126,7 +188,7 @@ const ViewCourse = () => {
                         <FaWhatsapp />
                       </a>
                     </button>
-                  </div>
+                  </div> */}
                 </div>
               </div>
             </div>

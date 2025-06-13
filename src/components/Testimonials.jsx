@@ -7,7 +7,7 @@ const Testimonials = () => {
 
                 <div className='row pt-5 pb-5'>
                     <div className='col-lg-6 col-md-12  mb-3 mb-lg-0 '>
-                        <img src={ML} alt="empowering" className='w-100' />
+                        <img src="/Abstract-Profile-Photo-Instagram-Post.webp" alt="empowering" className='w-100' />
                     </div>
                     <div className='col-lg-6 col-md-12  '>
                         <h2 className='font-32'>Punjab Government Empowering the Digital Economy</h2>
