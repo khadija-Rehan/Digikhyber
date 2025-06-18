@@ -1,5 +1,8 @@
 import AOS from "aos";
 import "aos/dist/aos.css";
+import React from 'react';
+import { ToastContainer } from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css';
 
 import { Routes, Route, useLocation } from "react-router-dom";
 import Home from "./pages/Home";
@@ -49,53 +52,67 @@ function App() {
     location.pathname
   );
   return (
-    <AuthProvider>
-      <AOSWrapper>
-        <Notificationbar/>
-        <Header />
-        <Routes>
-          <Route path="/" element={<Home />} />
-          <Route path="/register" element={<Register />} />
-          <Route path="/login" element={<Login />} />
-          <Route path="/courses" element={<AllCourses />} />
-          <Route path="/apply-now" element={<ApplyNow />} />
-          <Route path="/news" element={<NewsEvents />} />
-          <Route path="/faqs" element={<FAQs />} />
-          <Route path="/certificate" element={<Certificate />} />
-          <Route path="/contact-us" element={<ContactUs />} />
-          <Route path="/howitswork" element={<Howitswork />} />
-          <Route path="/scholarship-card" element={<ScholarshipCard />} />
-          <Route path="/about-us" element={<AboutUs />} />
-          <Route path="/free-laptops" element={<FreeLaptops />} />
-          <Route path="/free-solarpanels" element={<FreeSolarPanel />} />
-          <Route path="/become-instructors" element={<BeacomeInstructors />} />
-          <Route path="/terms&policy" element={<TermsandCondition />} />
-          <Route path="/course-detail" element={<ViewCourse />} />
-          <Route path="/apply-scholarshipcard" element={<ApplyScholarShipCard />} />
-          <Route path="/privacy-policy" element={<PrivacyPolicy />} />
-          <Route path="/taleem-finance" element={<TaleemFinance />} />
-          <Route
-            path="/admission-test"
-            element={
-              <ProtectedRoute>
-                <Admissiontest />
-              </ProtectedRoute>
-            }
-          />
-          <Route
-            path="/admission-result"
-            element={
-              <ProtectedRoute>
-                <AdmissionResult />
-              </ProtectedRoute>
-            }
-          />
-          {/*
-        <Route path="/faqs" element={<FAQs />} /> */}
-        </Routes>
-        {!shouldHideHeaderFooter && <Footer />}
-      </AOSWrapper>
-    </AuthProvider>
+    <>
+      <ToastContainer
+        position="top-right"
+        autoClose={5000}
+        hideProgressBar={false}
+        newestOnTop
+        closeOnClick
+        rtl={false}
+        pauseOnFocusLoss
+        draggable
+        pauseOnHover
+        theme="light"
+      />
+      <AuthProvider>
+        <AOSWrapper>
+          <Notificationbar/>
+          <Header />
+          <Routes>
+            <Route path="/" element={<Home />} />
+            <Route path="/register" element={<Register />} />
+            <Route path="/login" element={<Login />} />
+            <Route path="/courses" element={<AllCourses />} />
+            <Route path="/apply-now" element={<ApplyNow />} />
+            <Route path="/news" element={<NewsEvents />} />
+            <Route path="/faqs" element={<FAQs />} />
+            <Route path="/certificate" element={<Certificate />} />
+            <Route path="/contact-us" element={<ContactUs />} />
+            <Route path="/howitswork" element={<Howitswork />} />
+            <Route path="/scholarship-card" element={<ScholarshipCard />} />
+            <Route path="/about-us" element={<AboutUs />} />
+            <Route path="/free-laptops" element={<FreeLaptops />} />
+            <Route path="/free-solarpanels" element={<FreeSolarPanel />} />
+            <Route path="/become-instructors" element={<BeacomeInstructors />} />
+            <Route path="/terms&policy" element={<TermsandCondition />} />
+            <Route path="/course-detail" element={<ViewCourse />} />
+            <Route path="/apply-scholarshipcard" element={<ApplyScholarShipCard />} />
+            <Route path="/privacy-policy" element={<PrivacyPolicy />} />
+            <Route path="/taleem-finance" element={<TaleemFinance />} />
+            <Route
+              path="/admission-test"
+              element={
+                <ProtectedRoute>
+                  <Admissiontest />
+                </ProtectedRoute>
+              }
+            />
+            <Route
+              path="/admission-result"
+              element={
+                <ProtectedRoute>
+                  <AdmissionResult />
+                </ProtectedRoute>
+              }
+            />
+            {/*
+          <Route path="/faqs" element={<FAQs />} /> */}
+          </Routes>
+          {!shouldHideHeaderFooter && <Footer />}
+        </AOSWrapper>
+      </AuthProvider>
+    </>
   );
 }
 
