@@ -3,7 +3,7 @@ import React from 'react'
 const DigitalPunjab = () => {
     return (
         <>
-            <div className='digital-punjab container'>
+            <div className='digital-punjab container mt-5'>
                 <div className='digital'>
                     <p className='white font-14 d-p'>Hunarmand Punjab</p>
                     <h2 className='white font-32'>Minister of Education, Punjab</h2>

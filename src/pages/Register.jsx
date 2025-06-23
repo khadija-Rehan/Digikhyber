@@ -482,8 +482,7 @@ const Register = () => {
           {/* First Course */}
           <div className="mb-3">
             <label className="mb-2" htmlFor="firstCourse">
-              First Course * (Choose your course carefully! Once submitted, you
-              would not be able to edit)
+              First Course <span className="text-danger">*</span>
             </label>
             <select
               className={`form-select p-3 ${
@@ -533,10 +532,8 @@ const Register = () => {
           <div className="mb-3">
             <label className="mb-2" htmlFor="secondCourse">
               Second Course
-              <br />
-              (Student can enroll in a maximum of three programs at the same
-              time. If you don't want to join the second program, kindly leave
-              this field empty.)
+              
+               
             </label>
             <select
               className={`form-select p-3 ${
@@ -667,7 +664,7 @@ const Register = () => {
           {/* Upload Last Degree Document */}
           <div className="mb-3">
             <label className="mb-2" htmlFor="degreeDocument">
-              Upload Last Degree Document <span className="text-danger">*</span>
+              Upload CNIC (Front Side) <span className="text-danger">*</span>
             </label>
             <div
               className="drop_box"
@@ -702,7 +699,7 @@ const Register = () => {
           {/* Upload CNIC (Front & Back Side) */}
           <div className="mb-3">
             <label className="mb-2" htmlFor="cnicDocument">
-              Upload CNIC (Front & Back Side){" "}
+              Upload CNIC (Back Side){" "}
               <span className="text-danger">*</span>
             </label>
             <div

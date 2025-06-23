@@ -8,20 +8,20 @@ import { generatePdf } from "../api/user";
 const AdmissionResult = () => {
   const handleGeneratePdf = async () => {
     try {
-      const {data} = await generatePdf();
+      const { data } = await generatePdf();
 
       const fileName = data.data.fileName;
 
       if (!fileName) {
-        console.error('No file path returned');
+        console.error("No file path returned");
         return;
       }
-    
+
       // Create full URL
       const fileUrl = `http://localhost:3001/uploads/${fileName}`;
-    
-    //   window.open(fileUrl, '_blank');
-      const a = document.createElement('a');
+
+      //   window.open(fileUrl, '_blank');
+      const a = document.createElement("a");
       a.href = fileUrl;
       a.download = fileName;
       a.click();
@@ -49,20 +49,27 @@ const AdmissionResult = () => {
               <i class="fas fa-check-circle" style={{ color: "green" }}></i>{" "}
               Congratulations on passing the admission test!
             </strong>{" "}
-            To confirm your seat and proceed with your course enrollment, please
-            pay the minor application processing fee. Once the application
-            processing fee is paid, your application will automatically be
-            submitted for review. Please note: All courses are 100% free, but
+            We’re excited to inform you that you’ve successfully cleared the
+            admission test — a big step toward your academic and professional
+            journey. To confirm your seat & proceed with your course enrollment.
+            All the courses under the Hunarmand scholarship card are 100%, but
             the application processing fee is necessary to complete your
-            application. If your admission is not approved, your application
-            processing fee will be refunded. نوٹ: چونکہ یہ ایک حکومت کی طرف سے
-            سپورٹ کیا گیا پروگرام ہے، یہ کورسز بالکل مفت ہیں، چاہے آپ ایک کورس
-            میں داخلہ لیں یا زیادہ سے زیادہ 3 کورسز میں۔ لیکن اپنی درخواست کو
-            پروسیس کروانے کے لیے، ایک معمولی
-            <strong>
-              application processing charges ادا کرنا ضروری ہے، جو 4500
-            </strong>{" "}
-            PKR ہیں۔
+            application. Your processing fee will be reimbursed if you achieve
+            above 85% Marks in the final evaluation test under the policy of
+            Hunarmand Punjab. <br />
+            You’re just one step away from receiving your Scholarship Card!
+            <div className="mt-4">
+              <p className="fw-semibold ">
+                ⚡ Benefits of the Scholarship Card:
+              </p>
+              <ul className="  mt-2">
+                <li> Advanced IT Training with real-world skills</li>
+                <li> Laptop, Solar & Education Finance Support</li>
+                <li> Hands-On Learning with Global Curriculum</li>
+                <li>Eco-Friendly, Sustainable Energy Solution</li>
+                <li> Career Guidance & Freelancing Support</li>
+              </ul>
+            </div>
           </div>
         </div>
         <div className="row">

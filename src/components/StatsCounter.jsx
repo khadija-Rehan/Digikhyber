@@ -39,10 +39,10 @@ const StatCounter = ( ) => {
     }, [cardsPerRow]);
 
     const statsData = [
-        { end: 1000000, label: "Million Students", suffix: "" },
-        { end: 30, label: "Certified Experts", suffix: "+" },
-        { end: 200000, label: "Scholarships", suffix: "" },
-        { end: 25, label: "Courses", suffix: "+" },
+        { end: 500000, label: "Students", suffix: "" },
+        { end: 30, label: "National & International Trainers Experts", suffix: "+" },
+        { end: 50000, label: "Scholarship Cards", suffix: "" },
+        { end: 25, label: "Job Oriented Courses", suffix: "+" },
     ];
 
     const StatCounter = ({ end, label, suffix }) => {
@@ -61,7 +61,7 @@ const StatCounter = ( ) => {
 
   return (
       <div className="platform white">
-                <h1 className="font-40">Why choose our platform</h1>
+                <h1 className="font-40">Why choose Hunarmand Punjab</h1>
                 <div className="stats row">
                     {statsData.map((stat, index) => (
                         <StatCounter

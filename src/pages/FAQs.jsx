@@ -18,7 +18,7 @@ const FAQs = () => {
                                 </p>
                             </div>
                             <div className="col-lg-4 col-md-12">
-                                <img src={View} alt="View" className="w-100 banner-image" />
+                                <img src="/images/FAQ's.jpg" alt="View" className="w-100 banner-image" />
                                 <div className="cube"> </div>
                             </div>
                         </div>

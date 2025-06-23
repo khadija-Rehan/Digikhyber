@@ -18,10 +18,24 @@ const ContactUs = () => {
                     <div className="container">
                         <div className="row">
                             <div className="col-lg-6">
-                                <h2 className="text-black">Any Question? We would love to help you
+                                <h2 className="text-black">Need Assistance? Our Team is Just a Message Away!
                                 </h2>
-                                <button className='btn-green bg-transparent border-white text-white register-btn btn btn-success w-100  mt-3 rounded-2'> <i className="fas fa-phone me-1"></i>  Helpline: 0304-xxx xxxx | Whatsapp: +92 326 xxxxxxx</button>
-                                <button className='btn-green register-btn btn btn-success w-100  mt-3 rounded-2'> <i className="fas fa-envelope me-1"></i> admissions@Hunarmand.pk</button>
+                                <a
+                                    href="tel:03111133053"
+                                    className="btn-green bg-transparent border-white text-white register-btn btn btn-success w-100 mt-3 rounded-2"
+                                >
+                                    <i className="fas fa-phone me-1"></i>
+                                    Helpline: 03-111-133-053 | Whatsapp: 03-111-133-053
+                                </a>
+
+                                <a
+                                    href="mailto:admissions@hunarmandpunjab.pk"
+                                    className="btn-green register-btn btn btn-success w-100 mt-3 rounded-2"
+                                >
+                                    <i className="fas fa-envelope me-1"></i>
+                                    admissions@hunarmandpunjab.pk
+                                </a>
+
 
                             </div>
                             <div className="col-lg-6">
@@ -92,7 +106,7 @@ const ContactUs = () => {
                                     </div>
                                     <div className="col-lg-12">
 
-                                        <button className='btn-green register-btn btn btn-success   mt-3 rounded-2'>Login</button>
+                                        <button className='btn-green register-btn btn btn-success   mt-3 rounded-2'>Submit</button>
                                     </div>
 
                                 </div>

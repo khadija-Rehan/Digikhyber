@@ -38,7 +38,7 @@ const ApplicationSteps = () => {
                                 <i class="fa-regular fa-file green fs-2 mb-4"></i>
 
                                 <p className="font-16 mb-1 fw-bold green">Submit Application</p>
-                                <p className="font-14  fw-medium">Complete amd submit your application form</p>
+                                <p className="font-14  fw-medium">Complete and submit your application form</p>
                             </div>
                             <div className="step-card text-center">
                                 <p className="num">04</p>

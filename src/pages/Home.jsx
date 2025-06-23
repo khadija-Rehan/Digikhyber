@@ -15,16 +15,16 @@ const Home = () => {
     return (
         <>
             <Hero />
-            <Awairness />
             <DigitalPunjab />
+            <Opportunities />
+            <Awairness />
             <CoursesCategory />
             <Courses />
             <Instructors />
-            <Opportunities/>
             <ApplicationSteps />
             <Testimonials />
-<StatCounter/>
-            <Ourpartner/>
+            <StatCounter />
+            <Ourpartner />
         </>
     );
 };

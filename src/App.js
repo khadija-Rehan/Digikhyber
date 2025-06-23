@@ -34,6 +34,7 @@ import ViewCourse from "./pages/ViewCourse";
 import ApplyScholarShipCard from "./pages/ApplyScholarShipCard";
 import PrivacyPolicy from "./pages/PrivacyPolicy";
 import TaleemFinance from "./pages/TaleemFinance";
+import ScrollToTop from "./components/ScrollToTop";
 
 function App() {
   const location = useLocation();
@@ -67,7 +68,8 @@ function App() {
       />
       <AuthProvider>
         <AOSWrapper>
-          <Notificationbar/>
+          <ScrollToTop />
+          <Notificationbar />
           <Header />
           <Routes>
             <Route path="/" element={<Home />} />

@@ -14,7 +14,7 @@ import StarRating from "../components/StarRating";
 import Particles from "../components/ParticleBackground";
 import ParticleBackground from "../components/ParticleBackground";
 import { Link } from "react-router-dom";
-
+import StatCounter from "../components/StatsCounter";
 const AllCourses = () => {
     const [cardsPerRow, setCardsPerRow] = useState(3);
 
@@ -57,44 +57,26 @@ const AllCourses = () => {
         { image: DM, title: "Full Stack Digital Marketing" },
     ];
 
-    const statsData = [
-        { end: 1000000, label: "Million Students", suffix: "" },
-        { end: 30, label: "Certified Experts", suffix: "+" },
-        { end: 200000, label: "Scholarships", suffix: "" },
-        { end: 25, label: "Courses", suffix: "+" },
-    ];
-
-    const StatCounter = ({ end, label, suffix }) => {
-        const { ref, inView } = useInView({ triggerOnce: true });
-        return (
-            <div className="stat col-lg-3 col-md-12" ref={ref}>
-                <p className="font-48 m-0">
-                    {inView && (
-                        <CountUp end={end} duration={2} separator="," suffix={suffix} />
-                    )}
-                </p>
-                <p className="font-16 weight-400">{label}</p>
-            </div>
-        );
-    };
-
+   
+ 
     return (
         <>
             <div className="banner">
-                    <ParticleBackground/>
+                <ParticleBackground />
                 <div className="banner-content  ">
                     <div className="container">
                         <div className="row">
                             <div className="col-lg-8 col-md-12">
                                 <h1 className="font-48">Courses</h1>
                                 <p className="font-18 light-grey l-h-1 weight-400">
-                                    Discover a wide range of skill-building programs designed to
-                                    boost your career prospects. Find the perfect course to help
-                                    you shine!
+                                    Hunarmand Punjab courses are not just different — they are
+                                    revolutionary. Designed with hands-on practice, live projects,
+                                    and international standards, we prepare you to lead in today’s
+                                    global digital economy.
                                 </p>
                             </div>
                             <div className="col-lg-4 col-md-12">
-                                <img src={FS} alt="Course" className="w-100 banner-image" />
+                                <img src="/images/Advanced IT Courses -2.jpg" alt="Course" className="w-100 banner-image" />
                                 <div className="cube"> </div>
                             </div>
                         </div>
@@ -128,7 +110,7 @@ const AllCourses = () => {
                                             <span className="rate"> 4.9</span>
                                         </p>
                                         <Link to={"/course-detail"}>
-                                        <button className="btn-green-sq">View Details</button>
+                                            <button className="btn-green-sq">View Details</button>
                                         </Link>
                                     </div>
                                 </div>
@@ -138,19 +120,8 @@ const AllCourses = () => {
                 </div>
             </div>
 
-            <div className="platform white">
-                <h1 className="font-40">Why choose our platform</h1>
-                <div className="stats row">
-                    {statsData.map((stat, index) => (
-                        <StatCounter
-                            key={index}
-                            end={stat.end}
-                            label={stat.label}
-                            suffix={stat.suffix}
-                        />
-                    ))}
-                </div>
-            </div>
+            
+            <StatCounter/>
         </>
     );
 };
