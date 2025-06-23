@@ -6,6 +6,7 @@ export const signUp = async (signupdata) => {
   const data = await invoke({
     url: `/auth/signup`,
     method: "POST",
+    headers: { 'Content-Type': 'multipart/form-data' },
     data: signupdata,
   });
   return data;
