@@ -62,7 +62,7 @@ const TaleemFinance = () => {
                             </div>
                             <div className="col-lg-4 col-md-12">
                                 <img
-                                    src="/images/Taleem Finance Page Image (1).jpeg"
+                                    src="/images/Hunarmand Punjab banner19-min.jpg"
                                     alt="Course"
                                     className="w-100 banner-image"
                                 />

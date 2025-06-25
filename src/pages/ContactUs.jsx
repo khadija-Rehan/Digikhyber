@@ -18,7 +18,7 @@ const ContactUs = () => {
                     <div className="container">
                         <div className="row">
                             <div className="col-lg-6">
-                                <h2 className="text-black">Need Assistance? Our Team is Just a Message Away!
+                                <h2 className="text-white">Need Assistance? Our Team is Just a Message Away!
                                 </h2>
                                 <a
                                     href="tel:03111133053"

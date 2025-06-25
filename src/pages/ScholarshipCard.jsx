@@ -110,7 +110,7 @@ const ScholarshipCard = () => {
                             Apply today and take the first step toward a skilled, self-reliant
                             future.
                         </p>
-                        <div className="d-flex align-items-center gap-3 flex-wrap flex-md-nowrap">
+                        <div className="d-flex align-items-center gap-3 flex-wrap flex-md-nowrap d-none d-lg-block">
                             <Link to={"/apply-scholarshipcard"}>
                                 <button
                                     className="btn-green register-btn  btn btn-success "
@@ -128,6 +128,17 @@ const ScholarshipCard = () => {
                             src="/scholarship card.jpg"
                             alt=""
                         />
+                          <div className="d-flex align-items-center gap-3 flex-wrap flex-md-nowrap mt-4 d-block d-lg-none">
+                            <Link to={"/apply-scholarshipcard"}>
+                                <button
+                                    className="btn-green register-btn  btn btn-success "
+                                    style={{ fontFamily: "Poppins" }}
+                                >
+                                    {" "}
+                                    Apply Now{" "}
+                                </button>
+                            </Link>
+                        </div>
                     </div>
                 </div>
             </div>

@@ -117,8 +117,7 @@ const Footer = () => {
                                     </Link>
                                     <p className="links">
                                         <a
-                                            href="/Hunarmand Program Refund Policy.docx"
-                                            download="Hunarmand Program Refund Policy.docx"
+                                            
                                         >
                                             Refund
                                         </a>

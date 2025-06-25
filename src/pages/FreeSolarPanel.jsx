@@ -109,10 +109,10 @@ const FreeSolarPanel = () => {
                             Don’t let power cuts hold you back. With the Solar Scheme, your
                             future stays fully charged — no matter where you live.
                         </p>
-                        <div className="mt-4 d-grid d-md-block">
+                        <div className="mt-4  ">
                             <Link
                                 to="/apply-scholarshipcard"
-                                className="btn-green"
+                                className="btn-green register-btn btn btn-success"
                             >
                                 Apply Now
                             </Link>
