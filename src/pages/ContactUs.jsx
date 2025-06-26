@@ -4,14 +4,15 @@ const ContactUs = () => {
     return (
         <>
 
-            <iframe
-                src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d462118.02491053584!2d67.15546194999999!3d25.193202399999997!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x3eb33e06651d4bbf%3A0x9cf92f44555a0c23!2sKarachi%2C%20Karachi%20City%2C%20Sindh!5e0!3m2!1sen!2s!4v1738407873267!5m2!1sen!2s"
-                class="w-100"
-                height="450"
-                style={{ border: 0 }}
-                allowfullscreen=""
-                loading="lazy"
-            ></iframe>
+          <iframe
+  src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d13600.770207340945!2d74.32716715000001!3d31.5203698!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x39190483e6f6f6e5%3A0x5f2e76481666e2a9!2sLahore%2C%20Punjab!5e0!3m2!1sen!2s!4v1719390726463!5m2!1sen!2s"
+  className="w-100"
+  height="450"
+  style={{ border: 0 }}
+  allowFullScreen=""
+  loading="lazy"
+  referrerPolicy="no-referrer-when-downgrade"
+/>
 
             <div>
                 <div className="contact  ">
