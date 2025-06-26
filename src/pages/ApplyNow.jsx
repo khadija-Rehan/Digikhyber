@@ -12,7 +12,7 @@ const ApplyNow = () => {
             <div className="container">
                 <div className="row pt-5 pb-5">
                     <div className="col-lg-12">
-                        <div className="applynow" style={{position:"relative",zIndex:"1"}}>
+                        <div className="applynow" style={{ position: "relative", zIndex: "1" }}>
                             <img
                                 className="  mb-4"
                                 style={{
@@ -23,11 +23,8 @@ const ApplyNow = () => {
                             />
                             <h2 className="mb-4">Welcome to the Hunarmand Punjab Admission Portal!</h2>
                             <p>
-                                Register yourself as a new applicant. After successful
-                                registration, check your email for the login credentials we sent
-                                you. <br /> Enter your email and password to log in to the
-                                Candidate Portal. You will then have access <br /> to continue
-                                your application process.
+                                Start by registering as a new applicant. Once registered. Use your email and password to log in to the Candidate Portal <br /> and continue your application journey.
+
                             </p>
                             <div className="auth-buttons d-flex align-items-center justify-content-center">
                                 <Link to="/register">

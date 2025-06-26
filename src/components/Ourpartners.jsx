@@ -44,7 +44,7 @@ const OurPartners = () => {
     const partners = [
         { name: "Bank of Punjab", logo: "https://youthparliament.pk/wp-content/uploads/2022/07/bop111.png" },
         { name: "Lenovo", logo: "https://crystalpng.com/wp-content/uploads/2025/05/lenovo-logo.png" },
-        { name: "Electric Bike", logo: "https://img.freepik.com/premium-vector/hipster-retro-electric-bike-logo-design-inspiration_560919-256.jpg?semt=ais_hybrid&w=740" },
+        { name: "Electric Bike", logo: "/images/Icon-1.png" },
         { name: "Gov. of Punjab", logo: "https://seeklogo.com/images/G/government-of-punjab-logo-DD4D1CC9C4-seeklogo.com.png" },
         { name: "Taleem Finance", logo: "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSL0TQwO2v6lvKYL3d7qvmHD6yKA8gUn14-Uw&s" },
         { name: "Taleeb Abroad", logo: "https://www.shutterstock.com/image-vector/study-abroad-vector-logo-design-600nw-1711891945.jpg" },
@@ -54,6 +54,7 @@ const OurPartners = () => {
         { name: "Meta", logo: "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTMtdzKPDmF4BYfI0WCuTY416jnhZiJeAK-rg&s" },
         { name: "Fiverr", logo: "https://logowik.com/content/uploads/images/fiverr-new3326.jpg" },
         { name: "Microsoft", logo: "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQ0LnDYBaUFCBj2hvQqKZkCwjCZZFXalvd3OA&s" },
+        // { name: "Microsoft", logo: "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQ0LnDYBaUFCBj2hvQqKZkCwjCZZFXalvd3OA&s" }
     ];
 
     return (

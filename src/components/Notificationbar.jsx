@@ -34,7 +34,7 @@ const Notificationbar = () => {
                         </div>
                         <div className="cmn-textslide">
                             <img className="white-icon" width="30" height="30" src="https://img.icons8.com/external-filled-color-icons-papa-vector/78/external-Study-Abroad-expats-filled-color-icons-papa-vector.png" alt="external-Study-Abroad-expats-filled-color-icons-papa-vector" />
-                            Taleem Abroad Opportunities
+                            Study Abroad Opportunities
                         </div>
                         <div className="cmn-textslide">
                             <img className="white-icon" width="30" height="30" src="https://img.icons8.com/ios-glyphs/30/internship.png" alt="internship" />

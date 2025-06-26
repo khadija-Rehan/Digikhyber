@@ -20,7 +20,7 @@ const Instructors = () => {
                         <div className='row'>
                             <div className='col-lg-6 col-md-12'>
                                 <p className='img-round'><img src={icon3} alt="" /></p>
-                                <p className='font-20'>Profissional Instructors</p>
+                                <p className='font-20'>Professional Instructors</p>
                                 <p className='font-14 weight-400'>Learn from dedicated industry experts and grow you digital skills
 
                                 </p>
@@ -28,7 +28,7 @@ const Instructors = () => {
                             </div>
                             <div className='col-lg-6 col-md-12'>
                                 <p className='img-round'><img src={icon4} alt="" /></p>
-                                <p className='font-20'>25+ courses</p>
+                                <p className='font-20'>25+ Courses</p>
                                 <p className='font-14 weight-400'>You'll find a-lot of different courses to help you learn new skills!
 
                                 </p>

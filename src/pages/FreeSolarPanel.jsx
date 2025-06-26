@@ -7,6 +7,8 @@ import FS from "../assets/Solar-Panel.webp";
 import GS from "../assets/Solar-Penal.webp";
 import Team from "../assets/team.png";
 import ParticleBackground from "../components/ParticleBackground";
+import StatCounter from "../components/StatsCounter";
+import { Link } from "react-router-dom";
 
 const FreeSolarPanel = () => {
     const [cardsPerRow, setCardsPerRow] = useState(3);
@@ -41,45 +43,27 @@ const FreeSolarPanel = () => {
         AOS.refresh();
     }, [cardsPerRow]);
 
-    const statsData = [
-        { end: 1000000, label: "Million Students", suffix: "" },
-        { end: 30, label: "Certified Experts", suffix: "+" },
-        { end: 200000, label: "Scholarships", suffix: "" },
-        { end: 25, label: "Courses", suffix: "+" },
-    ];
-
-    const StatCounter = ({ end, label, suffix }) => {
-        const { ref, inView } = useInView({ triggerOnce: true });
-        return (
-            <div className="stat col-lg-3 col-md-12" ref={ref}>
-                <p className="font-48 m-0">
-                    {inView && (
-                        <CountUp end={end} duration={2} separator="," suffix={suffix} />
-                    )}
-                </p>
-                <p className="font-16 weight-400">{label}</p>
-            </div>
-        );
-    };
-
     return (
         <>
             <div className="banner">
-                    <ParticleBackground/>
+                <ParticleBackground />
 
                 <div className="banner-content">
                     <div className="container">
                         <div className="row">
                             <div className="col-lg-8 col-md-12">
-                                <h1 className="font-48">Free Solar Panels for Students</h1>
+                                <h1 className="font-48">Hunarmand Solar Scheme</h1>
                                 <p className="font-18 light-grey l-h-1 weight-400">
-                                    Apply now for free solar panels scheme by the Punjab
-                                    Government. Your skills, your success — all you need is a
-                                    start.
+                                    In a world where digital learning is the future, uninterrupted
+                                    power is a necessity, not a luxury. Hunarmand Punjab Solar
+                                    Scheme, Hunarmand Punjab provides solar energy systems to
+                                    eligible students who meet our criteria as per policy of
+                                    Hunarmand Punjab — so your learning never stops, no matter the
+                                    power cuts.
                                 </p>
                             </div>
                             <div className="col-lg-4 col-md-12">
-                                <img src={FS} alt="Course" className="w-100 banner-image" />
+                                <img src="/images/Solar Scheme.jpg" alt="Course" className="w-100 banner-image" />
                                 <div className="cube"> </div>
                             </div>
                         </div>
@@ -87,51 +71,57 @@ const FreeSolarPanel = () => {
                 </div>
             </div>
             <div className="container pt-5">
-                <div className="row pt-5 pb-5 align-items-center">
+                <div className="row pt-5 pb-5  ">
                     <div className="col-lg-6">
-                        <img className="w-100" src={GS} alt="" />
+                        <img className="w-100" src="/images/Solar Scheme Page Image (2).jpeg" alt="" />
                     </div>
                     <div className="col-lg-6">
                         <h2 className="fw-semibold">
-                            Brighten Your Tomorrow with Free Solar Panels for Students
+                            Powering Your Dreams — Even When the Lights Go Out!
                         </h2>
                         <p>
-                            We believe that every passionate student deserves the right
-                            environment to learn, grow, and thrive — regardless of financial
-                            challenges or power limitations. That’s why we’ve launched the
-                            Free Solar Panels for Students initiative — a mission to empower
-                            young minds through reliable, sustainable energy.
-                        </p> <p>
-                            This program is designed to remove energy barriers that disrupt learning by providing eligible students with free solar panel systems for their homes or study spaces. By harnessing the power of the sun, we’re helping you stay connected to your education — uninterrupted, eco-friendly, and cost-effective.
-
-
+                            In a world where digital learning is the future, uninterrupted
+                            power is a necessity, not a luxury. Hunarmand Punjab Solar Scheme,
+                            Hunarmand Punjab provides solar energy systems to eligible
+                            students who meet our criteria as per policy of Hunarmand Punjab —
+                            so your learning never stops, no matter the power cuts.
                         </p>
-                        <p>With access to consistent electricity, you can focus on your studies, attend online classes, and develop the skills needed to shape the future — from science and engineering to digital innovation and beyond. We’re committed to supporting your journey every step of the way, while also encouraging green living and energy independence.
-
+                        <p>
+                            This initiative removes a major barrier for students across
+                            underserved areas, ensuring reliable electricity to support online
+                            classes, skill development, and a brighter academic future —
+                            literally and figuratively.
                         </p>
-                        <p>This initiative is more than just about solar panels — it’s about empowering the next generation, bridging educational gaps, and building a brighter, more sustainable future for all. Many students have already taken this step toward cleaner energy and uninterrupted learning — now it’s your turn.
-
+                        <div className="mt-4">
+                            <p className="fw-semibold ">
+                                ⚡ Key Benefits of the Solar Scheme:
+                            </p>
+                            <ul className="  mt-2">
+                                <li> Free Solar panels </li>
+                                <li> Uninterrupted Power for Devices & Learning</li>
+                                <li> No More Load-Shedding Interruptions</li>
+                                <li>Eco-Friendly, Sustainable Energy Solution</li>
+                                <li> Perfect for Online Learning, Freelancing & IT Training</li>
+                            </ul>
+                        </div>
+                        <p className="fw-bold">Light Up Your Learning — Apply Now!</p>
+                        <p>
+                            Don’t let power cuts hold you back. With the Solar Scheme, your
+                            future stays fully charged — no matter where you live.
                         </p>
-                        <p className="fw-bold">Apply today for your free solar panel system and take charge of your tomorrow — with light, learning, and limitless potential.
-
-                        </p>
+                        <div className="mt-4  ">
+                            <Link
+                                to="/apply-scholarshipcard"
+                                className="btn-green register-btn btn btn-success"
+                            >
+                                Apply Now
+                            </Link>
+                        </div>
                     </div>
                 </div>
             </div>
 
-            <div className="platform white">
-                <h1 className="font-40">Why choose our platform</h1>
-                <div className="stats row">
-                    {statsData.map((stat, index) => (
-                        <StatCounter
-                            key={index}
-                            end={stat.end}
-                            label={stat.label}
-                            suffix={stat.suffix}
-                        />
-                    ))}
-                </div>
-            </div>
+            <StatCounter />
         </>
     );
 };

@@ -10,6 +10,7 @@ import ParticleBackground from "../components/ParticleBackground";
 import { Link } from "react-router-dom";
 import ApplicationSteps from "../components/ApplicationSteps";
 import OurPartners from "../components/Ourpartners";
+import StatCounter from "../components/StatsCounter";
 
 const AboutUs = () => {
     const [cardsPerRow, setCardsPerRow] = useState(3);
@@ -44,31 +45,10 @@ const AboutUs = () => {
         AOS.refresh();
     }, [cardsPerRow]);
 
-    const statsData = [
-        { end: 1000000, label: "Million Students", suffix: "" },
-        { end: 30, label: "Certified Experts", suffix: "+" },
-        { end: 200000, label: "Scholarships", suffix: "" },
-        { end: 25, label: "Courses", suffix: "+" },
-    ];
-
-    const StatCounter = ({ end, label, suffix }) => {
-        const { ref, inView } = useInView({ triggerOnce: true });
-        return (
-            <div className="stat col-lg-3 col-md-12" ref={ref}>
-                <p className="font-48 m-0">
-                    {inView && (
-                        <CountUp end={end} duration={2} separator="," suffix={suffix} />
-                    )}
-                </p>
-                <p className="font-16 weight-400">{label}</p>
-            </div>
-        );
-    };
-
     return (
         <>
             <div className="banner">
-                    <ParticleBackground/>
+                <ParticleBackground />
 
                 <div className="banner-content">
                     <div className="container">
@@ -76,13 +56,13 @@ const AboutUs = () => {
                             <div className="col-lg-8 col-md-12">
                                 <h1 className="font-48">About Us</h1>
                                 <p className="font-18 light-grey l-h-1 weight-400">
-                                    Ready to gain valuable digital skills? Rozgar Punjab is
+                                    Ready to gain valuable digital skills? Hunarmand Punjab is
                                     dedicated to empowering the youth with the training needed to
                                     succeed in today’s job market.
                                 </p>
                             </div>
                             <div className="col-lg-4 col-md-12">
-                                <img src={FS} alt="Course" className="w-100 banner-image" />
+                                <img src="/images/About Us.jpg" alt="Course" className="w-100 banner-image" />
                                 <div className="cube"> </div>
                             </div>
                         </div>
@@ -100,21 +80,17 @@ const AboutUs = () => {
                             <div className="col-lg-6">
                                 <div className="d-p white m-0 mb-3">Who We Are</div>
                                 <h2 className="mb-3">
-                                    Grow Your Skills and Career with Rozgar Punjab
+                                    Grow Your Skills and Career with Hunarmand Punjab
                                 </h2>
                                 <p>
-                                    Welcome to Rozgar Punjab! We're here to help the young people
-                                    of Punjab get the digital skills they need to find good jobs.
-                                    Our goal is to train 1.5 million students and help them become
-                                    professional earners. We want to lower unemployment and make
-                                    Punjab's economy stronger by teaching skills that are in
-                                    demand.
+                                   Welcome to Hunarmand Punjab! We're here to help the young people of Punjab get the digital skills they need to find good jobs. Our goal is to train 500,000 students and help them become professional earners. We want to lower unemployment and make Punjab's economy stronger by teaching skills that are in demand.
+
                                 </p>
                                 <div className="pb-4 pt-4">
                                     <h5>Our Mission</h5>
                                     <p>
-                                        To provide training to 1.5 million students and make them
-                                        professional earners.
+                                        To provide training to 500,000 students and make them professional earners.
+
                                     </p>
                                 </div>
                                 <div className="row">
@@ -135,8 +111,7 @@ const AboutUs = () => {
                                         </button>
                                         <h5>Professional Instructors</h5>
                                         <p>
-                                            Learn from dedicated industry experts and grow you digital
-                                            skills
+                                           Learn from dedicated industry experts and grow you digital skills
                                         </p>
                                     </div>
                                     <div className="col-lg-6">
@@ -153,81 +128,65 @@ const AboutUs = () => {
                                                 ></path>
                                             </svg>
                                         </button>
-                                        <h5>10+ courses</h5>
+                                        <h5>25+ courses</h5>
                                         <p>
-                                            You'll find a-lot of different courses to help you learn
-                                            new skills!
+                                           You'll find a-lot of different courses to help you learn new skills!
+
                                         </p>
                                     </div>
                                 </div>
                             </div>
                         </div>
-
                     </div>
                 </div>
-                <div style={{ background: "#F7F7F7" }}>
-
-                <div className="container">
-
-                <div className="row align-items-center pt-5 pb-5">
-                    <div className="col-lg-3  mb-3">
-                        <h2>Our Instructors</h2>
-                        <p>
-                            Learn from dedicated industry experts. Our instructors lead
-                            this initiative, supported by the Government of Pakistan, to
-                            build a skilled generation.
-                        </p>
-                        <Link to={"/become-instructors"}>
-                        <button className="btn-green register-btn  btn btn-success">
-                            Become a Instructor
-                        </button>
-                        </Link>
+                {/* <div style={{ background: "#F7F7F7" }}>
+                    <div className="container">
+                        <div className="row align-items-center pt-5 pb-5">
+                            <div className="col-lg-3  mb-3">
+                                <h2>Our Instructors</h2>
+                                <p>
+                                    Learn from dedicated industry experts. Our instructors lead
+                                    this initiative, supported by the Government of Pakistan, to
+                                    build a skilled generation.
+                                </p>
+                                <Link to={"/become-instructors"}>
+                                    <button className="btn-green register-btn  btn btn-success">
+                                        Become a Instructor
+                                    </button>
+                                </Link>
+                            </div>
+                            <div className="col-lg-3 mb-3">
+                                <div className="teams-card ">
+                                    <img className="mb-3" src={Team} alt={Team} />
+                                    <h5>Lauren Martinez</h5>
+                                    <span>Python Tutor</span>
+                                    <p>Aliquip eiusmod in voluptate do quis ipsum dolor</p>
+                                </div>
+                            </div>{" "}
+                            <div className="col-lg-3 mb-3">
+                                <div className="teams-card">
+                                    <img className="mb-3" src={Team} alt={Team} />
+                                    <h5>Lauren Martinez</h5>
+                                    <span>Python Tutor</span>
+                                    <p>Aliquip eiusmod in voluptate do quis ipsum dolor</p>
+                                </div>
+                            </div>{" "}
+                            <div className="col-lg-3 mb-3">
+                                <div className="teams-card">
+                                    <img className="mb-3" src={Team} alt={Team} />
+                                    <h5>Lauren Martinez</h5>
+                                    <span>Python Tutor</span>
+                                    <p>Aliquip eiusmod in voluptate do quis ipsum dolor</p>
+                                </div>
+                            </div>
+                        </div>
                     </div>
-                    <div className="col-lg-3 mb-3">
-                        <div className="teams-card ">
-                            <img className="mb-3" src={Team} alt={Team} />
-                            <h5>Lauren Martinez</h5>
-                            <span>Python Tutor</span>
-                            <p>Aliquip eiusmod in voluptate do quis ipsum dolor</p>
-                        </div>
-                    </div> <div className="col-lg-3 mb-3">
-                        <div className="teams-card">
-                            <img className="mb-3" src={Team} alt={Team} />
-                            <h5>Lauren Martinez</h5>
-                            <span>Python Tutor</span>
-                            <p>Aliquip eiusmod in voluptate do quis ipsum dolor</p>
-                        </div>
-                    </div> <div className="col-lg-3 mb-3">
-                        <div className="teams-card">
-                            <img className="mb-3" src={Team} alt={Team} />
-                            <h5>Lauren Martinez</h5>
-                            <span>Python Tutor</span>
-                            <p>Aliquip eiusmod in voluptate do quis ipsum dolor</p>
-                        </div>
-                    </div>
-                    
-                </div>
-                </div>
-                </div>
-
+                </div> */}
             </div>
 
-            <div className="platform white">
-                <h1 className="font-40">Why choose our platform</h1>
-                <div className="stats row">
-                    {statsData.map((stat, index) => (
-                        <StatCounter
-                            key={index}
-                            end={stat.end}
-                            label={stat.label}
-                            suffix={stat.suffix}
-                        />
-                    ))}
-                </div>
-            </div>
+            <StatCounter />
+
             <OurPartners />
-
-            
         </>
     );
 };

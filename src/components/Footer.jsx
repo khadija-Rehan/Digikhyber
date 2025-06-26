@@ -10,7 +10,7 @@ import {
     FaPhoneAlt,
     FaEnvelope,
 } from "react-icons/fa";
-import ParticleBackground from "./ParticleBackground";
+ 
 import { Link } from "react-router-dom";
 const Footer = () => {
     return (
@@ -34,21 +34,21 @@ const Footer = () => {
                                         <FaFacebookF />
                                     </a>
                                 </button>
-                                <button className="social-button">
+                                {/* <button className="social-button">
                                     <a href="#">
                                         <FaTwitter />
                                     </a>
-                                </button>
+                                </button> */}
                                 <button className="social-button">
                                     <a href="#">
                                         <FaInstagram />
                                     </a>
                                 </button>
-                                <button className="social-button">
+                                {/* <button className="social-button">
                                     <a href="#">
                                         <FaLinkedinIn />
                                     </a>
-                                </button>
+                                </button> */}
                                 <button className="social-button">
                                     <a href="#">
                                         <FaWhatsapp />
@@ -117,8 +117,7 @@ const Footer = () => {
                                     </Link>
                                     <p className="links">
                                         <a
-                                            href="/Hunarmand Program Refund Policy.docx"
-                                            download="Hunarmand Program Refund Policy.docx"
+                                            
                                         >
                                             Refund
                                         </a>

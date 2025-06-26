@@ -17,25 +17,25 @@ const Register = () => {
     email: "",
     mobile: "",
     dateOfBirth: "",
-    maritalStatus: "",
+    // maritalStatus: "",
     gender: "",
     qualification: "",
-    institute: "",
-    fieldOfStudy: "",
-    yearOfCompletion: "",
+    // institute: "",
+    // fieldOfStudy: "",
+    // yearOfCompletion: "",
     firstCourse: "",
     secondCourse: "",
-    internetAccess: false,
+    // internetAccess: false,
     city: "",
     permanentAddress: "",
-    employmentStatus: false,
+    // employmentStatus: false,
     password: "",
     agreement: false,
   });
 
   const [documents, setDocuments] = useState({
-    degreeDocument: null,
-    cnicDocument: null,
+    cnicFront: null,
+    cnicBack: null,
   });
 
   const [errors, setErrors] = useState({});
@@ -68,29 +68,15 @@ const Register = () => {
     if (!formData.dateOfBirth) {
       newErrors.dateOfBirth = "Date of birth is required";
     }
-    if (!formData.maritalStatus) {
-      newErrors.maritalStatus = "Marital status is required";
-    }
     if (!formData.gender) {
       newErrors.gender = "Gender is required";
     }
     if (!formData.qualification) {
       newErrors.qualification = "Qualification is required";
     }
-    if (!formData.institute.trim()) {
-      newErrors.institute = "Institute/University name is required";
-    }
-    if (!formData.fieldOfStudy.trim()) {
-      newErrors.fieldOfStudy = "Field of study is required";
-    }
-    if (!formData.yearOfCompletion.trim()) {
-      newErrors.yearOfCompletion = "Year of completion is required";
-    }
+
     if (!formData.firstCourse) {
       newErrors.firstCourse = "First course selection is required";
-    }
-    if (!formData.internetAccess) {
-      newErrors.internetAccess = "Internet access information is required";
     }
     if (!formData.city.trim()) {
       newErrors.city = "City is required";
@@ -98,17 +84,14 @@ const Register = () => {
     if (!formData.permanentAddress.trim()) {
       newErrors.permanentAddress = "Address is required";
     }
-    if (!formData.employmentStatus) {
-      newErrors.employmentStatus = "Employment status is required";
-    }
     if (!formData.password) {
       newErrors.password = "Password is required";
     }
-    if (!documents.degreeDocument) {
-      newErrors.degreeDocument = "Degree document is required";
+    if (!documents.cnicFront) {
+      newErrors.cnicFront = "CNIC Front is required";
     }
-    if (!documents.cnicDocument) {
-      newErrors.cnicDocument = "CNIC document is required";
+    if (!documents.cnicBack) {
+      newErrors.cnicBack = "CNIC Backt is required";
     }
     if (!formData.agreement) {
       newErrors.agreement = "You must agree to the terms and conditions";
@@ -129,14 +112,6 @@ const Register = () => {
   const handleChange = (e) => {
     const { name, value, type, checked } = e.target;
     let processedValue = value;
-
-    if (name === "internetAccess" || name === "employmentStatus") {
-      processedValue = value === "yes" ? true : false;
-    } else {
-      processedValue = type === "checkbox" ? checked : value;
-    }
-
-    // console.log({ name, value, type, checked });
 
     setFormData((prev) => ({
       ...prev,
@@ -351,7 +326,7 @@ const Register = () => {
           </div>
 
           {/* Marital Status */}
-          <div className="mb-3">
+          {/* <div className="mb-3">
             <label className="mb-2" htmlFor="maritalStatus">
               Marital Status <span className="text-danger">*</span>
             </label>
@@ -370,7 +345,7 @@ const Register = () => {
             {errors.maritalStatus && (
               <div className="invalid-feedback">{errors.maritalStatus}</div>
             )}
-          </div>
+          </div> */}
 
           {/* Gender */}
           <div className="mb-3">
@@ -420,7 +395,7 @@ const Register = () => {
           </div>
 
           {/* Institute/University Name */}
-          <div className="mb-3">
+          {/* <div className="mb-3">
             <label className="mb-2" htmlFor="institute">
               Institute/University Name <span className="text-danger">*</span>
             </label>
@@ -437,10 +412,10 @@ const Register = () => {
             {errors.institute && (
               <div className="invalid-feedback">{errors.institute}</div>
             )}
-          </div>
+          </div> */}
 
           {/* Field of Study */}
-          <div className="mb-3">
+          {/* <div className="mb-3">
             <label className="mb-2" htmlFor="fieldOfStudy">
               Field of Study <span className="text-danger">*</span>
             </label>
@@ -457,10 +432,10 @@ const Register = () => {
             {errors.fieldOfStudy && (
               <div className="invalid-feedback">{errors.fieldOfStudy}</div>
             )}
-          </div>
+          </div> */}
 
           {/* Year of Completion */}
-          <div className="mb-3">
+          {/* <div className="mb-3">
             <label className="mb-2" htmlFor="yearOfCompletion">
               Year of Completion <span className="text-danger">*</span>
             </label>
@@ -477,13 +452,12 @@ const Register = () => {
             {errors.yearOfCompletion && (
               <div className="invalid-feedback">{errors.yearOfCompletion}</div>
             )}
-          </div>
+          </div> */}
 
           {/* First Course */}
           <div className="mb-3">
             <label className="mb-2" htmlFor="firstCourse">
-              First Course * (Choose your course carefully! Once submitted, you
-              would not be able to edit)
+              First Course <span className="text-danger">*</span>
             </label>
             <select
               className={`form-select p-3 ${
@@ -533,10 +507,8 @@ const Register = () => {
           <div className="mb-3">
             <label className="mb-2" htmlFor="secondCourse">
               Second Course
-              <br />
-              (Student can enroll in a maximum of three programs at the same
-              time. If you don't want to join the second program, kindly leave
-              this field empty.)
+              
+               
             </label>
             <select
               className={`form-select p-3 ${
@@ -583,7 +555,7 @@ const Register = () => {
           </div>
 
           {/* Internet Access */}
-          <div className="mb-3">
+          {/* <div className="mb-3">
             <label className="mb-2" htmlFor="internetAccess">
               Do you have access to a reliable internet connection?*
             </label>
@@ -602,7 +574,7 @@ const Register = () => {
             {errors.internetAccess && (
               <div className="invalid-feedback">{errors.internetAccess}</div>
             )}
-          </div>
+          </div> */}
 
           {/* City */}
           <div className="mb-3">
@@ -643,7 +615,7 @@ const Register = () => {
           </div>
 
           {/* Employment Status */}
-          <div className="mb-3">
+          {/* <div className="mb-3">
             <label className="mb-2" htmlFor="employmentStatus">
               Are you currently employed?*
             </label>
@@ -662,16 +634,16 @@ const Register = () => {
             {errors.employmentStatus && (
               <div className="invalid-feedback">{errors.employmentStatus}</div>
             )}
-          </div>
+          </div> */}
 
           {/* Upload Last Degree Document */}
           <div className="mb-3">
             <label className="mb-2" htmlFor="degreeDocument">
-              Upload Last Degree Document <span className="text-danger">*</span>
+              Upload CNIC (Front Side) <span className="text-danger">*</span>
             </label>
             <div
               className="drop_box"
-              onClick={() => document.getElementById("degreeFileID").click()}
+              onClick={() => document.getElementById("cnicFront").click()}
               style={{ cursor: "pointer" }}
             >
               <i className="fas fa-cloud-upload-alt fa-3x mb-3 text-muted"></i>
@@ -684,30 +656,30 @@ const Register = () => {
               <input
                 type="file"
                 hidden
-                id="degreeFileID"
+                id="cnicFront"
                 accept=".jpg,.jpeg,.png,.pdf"
-                onChange={(e) => handleFileChange(e, "degreeDocument")}
+                onChange={(e) => handleFileChange(e, "cnicFront")}
               />
-              {documents.degreeDocument && (
+              {documents.cnicFront && (
                 <p className="text-success">
-                  Selected: {documents.degreeDocument.name}
+                  Selected: {documents.cnicFront.name}
                 </p>
               )}
             </div>
-            {errors.degreeDocument && (
-              <div className="text-danger">{errors.degreeDocument}</div>
+            {errors.cnicFront && (
+              <div className="text-danger">{errors.cnicFront}</div>
             )}
           </div>
 
           {/* Upload CNIC (Front & Back Side) */}
           <div className="mb-3">
             <label className="mb-2" htmlFor="cnicDocument">
-              Upload CNIC (Front & Back Side){" "}
+              Upload CNIC (Back Side){" "}
               <span className="text-danger">*</span>
             </label>
             <div
               className="drop_box"
-              onClick={() => document.getElementById("cnicFileID").click()}
+              onClick={() => document.getElementById("cnicBack").click()}
               style={{ cursor: "pointer" }}
             >
               <i className="fas fa-cloud-upload-alt fa-3x mb-3 text-muted"></i>
@@ -720,18 +692,18 @@ const Register = () => {
               <input
                 type="file"
                 hidden
-                id="cnicFileID"
+                id="cnicBack"
                 accept=".jpg,.jpeg,.png,.pdf"
-                onChange={(e) => handleFileChange(e, "cnicDocument")}
+                onChange={(e) => handleFileChange(e, "cnicBack")}
               />
-              {documents.cnicDocument && (
+              {documents.cnicBack && (
                 <p className="text-success">
-                  Selected: {documents.cnicDocument.name}
+                  Selected: {documents.cnicBack.name}
                 </p>
               )}
             </div>
             {errors.cnicDocument && (
-              <div className="text-danger">{errors.cnicDocument}</div>
+              <div className="text-danger">{errors.cnicBack}</div>
             )}
           </div>
 
