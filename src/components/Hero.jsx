@@ -1,21 +1,25 @@
 import React from "react";
 import { Swiper, SwiperSlide } from "swiper/react";
-import { Navigation } from "swiper/modules";
+import { Navigation, Autoplay } from "swiper/modules";
 
 import "swiper/css";
 import "swiper/css/navigation";
 import "swiper/css/pagination";
-import UI from "../assets/bannerHunarmand.webp";
-import DM from "../assets/bannerHunarmand.webp";
+import "swiper/css/autoplay"; // optional but sometimes needed for strict setups
+
 const Hero = () => {
     return (
         <section className="hero">
             <Swiper
+                modules={[Navigation, Autoplay]}
                 spaceBetween={5}
                 slidesPerView={1}
                 loop={true}
-                autoplay={true}
-                pagination={{ clickable: true }}
+                autoplay={{
+                    delay: 3000,  
+                    disableOnInteraction: false,  
+                }}
+                pagination={{ clickable: false }}
                 navigation={false}
             >
                 <SwiperSlide>
@@ -25,7 +29,10 @@ const Hero = () => {
                     />
                 </SwiperSlide>
                 <SwiperSlide>
-                    <img src="/images/Scholarship Card Slider 2.jpg" alt="Hero 2" />
+                    <img
+                        src="/images/Scholarship Card Slider 2.jpg"
+                        alt="Hero 2"
+                    />
                 </SwiperSlide>
                 <SwiperSlide>
                     <img
@@ -36,13 +43,13 @@ const Hero = () => {
                 <SwiperSlide>
                     <img
                         src="/images/Hunarmand Punjab Freelancing Banner 4.jpg"
-                        alt="Hero 3"
+                        alt="Hero 4"
                     />
-                </SwiperSlide>{" "}
+                </SwiperSlide>
                 <SwiperSlide>
                     <img
                         src="/images/Hunarmand Punjab ESkills Slider 5.jpg"
-                        alt="Hero 3"
+                        alt="Hero 5"
                     />
                 </SwiperSlide>
             </Swiper>

@@ -80,6 +80,7 @@ const FreeLaptops = () => {
                             src="/images/Laptop Scheme Page Image (3).jpeg"
                             alt=""
                         />
+                       
                     </div>
                     <div className="col-lg-6">
                         <h2 className="fw-semibold">
@@ -116,11 +117,11 @@ const FreeLaptops = () => {
                                 </ul>
                             </div>
                             <p>Apply today, get a chance to <b> avail your laptop</b>, and unlock a world of digital opportunities.</p>
-                            <div className="mt-4 d-grid d-md-block">
+                            <div className="mt-4    ">
                                 <Link
                                     to="/apply-scholarshipcard"
 
-                                    className="btn-green"
+                                    className="btn-green register-btn btn btn-success"
                                 >
                                     Apply Now
                                 </Link>

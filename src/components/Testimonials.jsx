@@ -19,19 +19,20 @@ const Testimonials = () => {
                             empowerment
                         </h2>
                         <p className="font-15 l-h-1">
-                            By providing access to specialized skills and certifications, an
-                            e-learning platform. Hunarmand Punjab can empower low-income
-                            individuals to find employment or start entrepreneurial ventures,
-                            helping lift families out of poverty. Employment-wise, Pakistan
-                            boasts a pool of over 600,000 English-speaking IT and Business
-                            Process Outsourcing (BPO) professionals, with more than 20,000 IT
-                            graduates entering the workforce each year. Additionally, the
-                            establishment of initiatives like the e-Rozgar centers has
-                            empowered over 1,300 startups, generating more than 126,000 jobs
-                            and attracting investments totaling Rs15.43 billion ($74 million).
-                            These developments underscore the government's commitment to
-                            fostering a robust IT ecosystem, generating employment, and
-                            enhancing Pakistan's position in the global digital economy.
+                            Hunarmand Punjab’s e-learning platform empowers low-income
+                            individuals by providing free access to digital skills and
+                            certifications, enabling employment and entrepreneurship. With
+                            600,000+ IT professionals and 20,000 graduates entering the field
+                            annually, Pakistan has potential, but still faces a major skills
+                            gap. Initiatives like e-Rozgar have created over 126,000 jobs and
+                            supported 1,300+ startups, showcasing the government's commitment
+                            to digital growth. E-learning reduces education costs, expands
+                            access, and directly addresses industry skill shortages. While
+                            Pakistan’s IT workforce is 500,000–700,000, the demand exceeds 2.5
+                            million. Boosting skills through online platforms strengthens
+                            local industries, reduces reliance on foreign expertise, and can
+                            help grow Pakistan’s $3.5B IT sector closer to regional giants
+                            like India and China.
                         </p>
                         <p className="font-15 l-h-1">
                             <b> Cost-Effective Education: </b> Online courses reduce the
@@ -74,7 +75,6 @@ const Testimonials = () => {
                             compared to Pakistan's ($3.5 billion).
                         </p>
                         <p>
-
                             <b>Supporting Local Industry Growth:</b> E-learning can support
                             the growth of local industries by providing industry-specific
                             training, promoting self-sufficiency, and reducing reliance on
