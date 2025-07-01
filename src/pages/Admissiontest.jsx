@@ -48,7 +48,7 @@ const Admissiontest = () => {
 
     return (
         <div className="breadcrums">
-            <h2>Admission Test - {selectedTest.testType}</h2>
+            <h2>Admission Test</h2>
             <div className="container">
                 <div style={{ border: "1px solid #fff" }} className="p-3 mt-4">
                     <p className="white mb-0">
