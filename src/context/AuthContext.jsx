@@ -27,14 +27,12 @@ export const AuthProvider = ({ children }) => {
   };
 
   useEffect(() => {
-    // Check if user data exists in localStorage
     const storedUser = localStorage.getItem("user");
     if (storedUser) {
       const userData = JSON.parse(storedUser);
       if (userData.token && verifyToken(userData.token)) {
         setUser(userData);
       } else {
-        // Token is invalid or expired
         localStorage.removeItem("user");
       }
     }
