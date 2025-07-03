@@ -12,8 +12,6 @@ const AdmissionResult = () => {
   const { userCourses, availableCourses, setUserCourses, getTotalPrice } =
     useCourses();
 
-  console.log(availableCourses);
-
   const { user } = useAuth();
   const [showModal, setShowModal] = useState(false);
   const [editCourses, setEditCourses] = useState([...userCourses]);
@@ -65,7 +63,7 @@ const AdmissionResult = () => {
         toast.error("Please add some coruses!");
         return;
       }
-      const { data } = await generatePdf(totalPrice);
+      const { data } = await generatePdf(totalPrice, userCourses);
       const fileName = data.data.fileName;
       if (!fileName) {
         console.error("No file path returned");
@@ -99,8 +97,8 @@ const AdmissionResult = () => {
     borderRadius: "12px",
     boxShadow: "0 8px 32px 0 rgba(0,70,19,0.18)",
     border: "2px solid #079560",
-    minWidth: 420, 
-    maxWidth: 600, 
+    minWidth: 420,
+    maxWidth: 600,
     width: "100%",
     fontFamily: "Poppins, sans-serif",
     color: "#222",
