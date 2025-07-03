@@ -69,7 +69,8 @@ const AdmissionResult = () => {
         console.error("No file path returned");
         return;
       }
-      const fileUrl = `http://localhost:3001/uploads/${fileName}`;
+      // const fileUrl = `http://localhost:3001/uploads/${fileName}`;
+      const fileUrl = `https://backend.hunarmandpunjab.pk/uploads/${fileName}`;
       const a = document.createElement("a");
       a.href = fileUrl;
       a.download = fileName;
