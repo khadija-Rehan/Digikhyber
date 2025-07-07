@@ -232,7 +232,8 @@ const AdmissionResult = () => {
         </center>
         <div className="row  pb-5">
           <h2 className="text-center">
-            Congratulations, You Passed the Admission Test!
+            Congratulations! You’ve Successfully Passed the Admission Test
+
           </h2>
           <div
             class="alert alert-success mt-4"
@@ -241,33 +242,29 @@ const AdmissionResult = () => {
           >
             <strong>
               <i class="fas fa-check-circle" style={{ color: "green" }}></i>{" "}
-              Congratulations on passing the admission test!
+                          Congratulations! You’ve Successfully Passed the Admission Test
+
             </strong>{" "}
-            We're excited to inform you that you've successfully cleared the
-            admission test — a big step toward your academic and professional
-            journey. To confirm your seat & proceed with your course enrollment.
-            All the courses under the Hunarmand scholarship card are 100%, but
-            the application processing fee is necessary to complete your
-            application. Your processing fee will be reimbursed if you achieve
-            above 85% Marks in the final evaluation test under the policy of
-            Hunarmand Punjab. <br />
-            You're just one step away from receiving your Scholarship Card!
+            We are thrilled to inform you that you have successfully cleared the Hunarmand Punjab Admission Test. Now you are eligible for a Scholarship Card. To confirm your seat & proceed with your enrolled course. All the courses under the Hunarmand scholarship card are 100% free, but the application processing fee is necessary to complete your application. Your processing fee will be reimbursed if you achieve above 85% Marks in the final evaluation test under the policy of Hunarmand Punjab. <br />
+            You’re just one step away from receiving your Scholarship Card!
             <div className="mt-4">
               <p className="fw-semibold ">
                 ⚡ Benefits of the Scholarship Card:
               </p>
               <ul className="  mt-2">
-                <li> Advanced IT Training with real-world skills</li>
-                <li> Laptop, Solar & Education Finance Support</li>
-                <li> Hands-On Learning with Global Curriculum</li>
-                <li>Eco-Friendly, Sustainable Energy Solution</li>
-                <li> Career Guidance & Freelancing Support</li>
+                <li> Access to Advanced IT Courses</li>
+                <li>  Laptop Scheme</li>
+                <li> Solar Scheme</li>
+                <li>Access to Taleem Finance</li>
+                <li>  Access to Study Abroad Free Consultancy</li>
+                <li>  Hands-On Learning with Global Curriculum</li>
+                <li>  Career Guidance & Freelancing Support</li>
               </ul>
             </div>
           </div>
         </div>
         <div className="row">
-          <div className="col-lg-12">
+          {/* <div className="col-lg-12">
             <div className="shadow-box d-flex align-items-center justify-content-between gap-2 flex-wrap flex-md-nowrap mb-3  p-3">
               <div>
                 <h3>Final Step: Video Guide</h3>
@@ -282,7 +279,7 @@ const AdmissionResult = () => {
                 <i className="fas fa-video"></i> Watch Video
               </button>
             </div>
-          </div>
+          </div> */}
         </div>
 
         <div

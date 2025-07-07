@@ -19,7 +19,10 @@ body {
     width: 100%;
     color: #3c4852;
 }
-
+.swiper-button-prev, .swiper-button-next{
+    color: #079560 !important;
+    /* width: 20px !important; */
+}
 .hover-shadow-lg:hover {
     box-shadow: 0 1rem 3rem #0795615b !important;
     cursor: pointer;
