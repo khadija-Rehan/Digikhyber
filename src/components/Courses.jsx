@@ -90,7 +90,7 @@ const Courses = () => {
                                     <StarRating />
                                     <span className="rate"> 4.9</span>
                                 </p>
-                                <Link to={"/course-detail"}>
+                                <Link to={`/course-detail?course=${encodeURIComponent(course.title)}`}>
                                     <button className="btn-green-sq">View Details</button>
                                 </Link>
                             </div>

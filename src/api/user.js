@@ -8,3 +8,11 @@ export const generatePdf = async (amount, userCourses) => {
   });
   return data;
 };
+export const applyForScholarship = async (formData) => {
+  const data = await invoke({
+    url: `/scholarship/apply`,
+    method: "POST",
+    data: formData,
+  });
+  return data;
+};

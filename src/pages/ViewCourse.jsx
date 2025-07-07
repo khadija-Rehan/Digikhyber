@@ -1,7 +1,8 @@
-import React from "react";
+import React, { useState, useEffect } from "react";
 import ParticleBackground from "../components/ParticleBackground";
-import { Link, useNavigate } from "react-router-dom";
+import { Link, useNavigate, useSearchParams } from "react-router-dom";
 import { useAuth } from "../context/AuthContext";
+import { useCourses } from "../context/CoursesContext";
 import { toast } from 'react-toastify';
 import image from "../assets/ML.jpg";
 import {
@@ -24,16 +25,70 @@ import { IoCardOutline } from "react-icons/io5";
 
 const ViewCourse = () => {
   const navigate = useNavigate();
+  const [searchParams] = useSearchParams();
   const { isAuthenticated } = useAuth();
+  const { userCourses, addCourse } = useCourses();
+  
+  // Get course name from URL parameter, default to WordPress if not provided
+  const courseNameFromURL = searchParams.get('course');
+  const courseName = courseNameFromURL || "WordPress Website Development";
 
   const handleRegisterClick = (e) => {
     e.preventDefault();
     if (isAuthenticated()) {
+      // Check if user already has 3 courses
+      if (userCourses.length >= 3) {
+        toast.warning("You can only enroll in up to 3 courses. Please remove a course from your selection first.");
+        return;
+      }
+      
+      // Check if course is already selected
+      if (userCourses.includes(courseName)) {
+        toast.info("This course is already in your selection!");
+        return;
+      }
+      
+      // Add course to user's selection
+      addCourse(courseName);
+      toast.success(`${courseName} has been added to your course selection!`);
+      
+      // Navigate to admission test
       navigate('/admission-test');
     } else {
       toast.info("Please login first to register for the course");
       navigate('/login');
     }
+  };
+
+  // Determine button text and state
+  const getButtonText = () => {
+    if (!isAuthenticated()) {
+      return "Login to Register";
+    }
+    if (userCourses.includes(courseName)) {
+      return "Already Added ✓";
+    }
+    if (userCourses.length >= 3) {
+      return "Max Courses Reached";
+    }
+    return "Register Course";
+  };
+
+  const getButtonClass = () => {
+    if (!isAuthenticated()) {
+      return "btn-green register-btn mb-3 mt-2 btn btn-warning w-100";
+    }
+    if (userCourses.includes(courseName)) {
+      return "btn-green register-btn mb-3 mt-2 btn btn-success w-100";
+    }
+    if (userCourses.length >= 3) {
+      return "btn-green register-btn mb-3 mt-2 btn btn-secondary w-100";
+    }
+    return "btn-green register-btn mb-3 mt-2 btn btn-success w-100";
+  };
+
+  const isButtonDisabled = () => {
+    return !isAuthenticated() || userCourses.includes(courseName) || userCourses.length >= 3;
   };
 
   return (
@@ -46,7 +101,7 @@ const ViewCourse = () => {
               <div className="col-lg-8 col-md-12">
                 <h5>Software Development</h5>
                 <h1 className="font-48">
-                  The Complete WordPress Development Course 2025
+                  {courseName}
                 </h1>
                 <p className="font-18 light-grey l-h-1 weight-400">
                   Discover a wide range of skill-building programs designed to
@@ -106,9 +161,10 @@ const ViewCourse = () => {
                 <div className="course-card-details">
                   <button 
                     onClick={handleRegisterClick}
-                    className="btn-green register-btn mb-3 mt-2 btn btn-success w-100"
+                    className={getButtonClass()}
+                    disabled={isButtonDisabled()}
                   >
-                    Register Course
+                    {getButtonText()}
                   </button>
                   <p className="font-20 ps-2">Benefits Obtained :</p>
                   <div className="ps-2">

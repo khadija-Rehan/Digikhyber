@@ -4,11 +4,10 @@ import { signUp } from "../api/auth";
 import { toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
 import { useNavigate } from "react-router";
+import { AVAILABLE_COURSES } from "../utils/courses";
 
 const Register = () => {
   let navigate = useNavigate();
-
-
 
   const [formData, setFormData] = useState({
     fullName: "",
@@ -138,6 +137,9 @@ const Register = () => {
       ].filter(Boolean);
       
       formDataToSubmit.append("courses", JSON.stringify(courses));
+
+      // Save courses to localStorage
+      localStorage.setItem('selectedCourses', JSON.stringify(courses));
 
       // Append documents
       Object.entries(documents).forEach(([key, file]) => {
@@ -470,33 +472,11 @@ const Register = () => {
               <option value="" disabled selected>
                 Choose your Course
               </option>
-              <option>Advanced Amazon Virtual Assistant</option>
-              <option>Full Stack Digital Marketing & AI</option>
-              <option>Advanced Shopify & Daraz</option>
-              <option>Full Stack Graphic Designing & AI</option>
-              <option>Advanced UIUX Designing with AI for Web & APP</option>
-              <option>WordPress Website Development</option>
-              <option>Full Stack Web Development with React & Node JS</option>
-              <option>MERN Stack Web Development</option>
-              <option>Advanced PHP Laravel Web Development</option>
-              <option>Python Programming for Everyone</option>
-              <option>Web Development with Python Django</option>
-              <option>Search Engine Optimization - SEO</option>
-              <option>Advanced Google Ads</option>
-              <option>National Cyber Security</option>
-              <option>Penetration Testing Web Hacking</option>
-              <option>Video Editing & Animation</option>
-              <option>Artificial Intelligence</option>
-              <option>Machine Learning & Data Science</option>
-              <option>Forex Trading</option>
-              <option>BlockChain Development</option>
-              <option>Cross platform Flutter App Development</option>
-              <option>CGI Ads</option>
-              <option>Architectural Visualization with Blender 3D</option>
-              <option>Digital Embroidery</option>
-              <option>Textile Designing</option>
-              <option>Ielts</option>
-              <option>Freelancing Program</option>
+              {AVAILABLE_COURSES.map((course) => (
+                <option key={course.name} value={course.name}>
+                  {course.name}
+                </option>
+              ))}
             </select>
             {errors.firstCourse && (
               <div className="invalid-feedback">{errors.firstCourse}</div>
@@ -521,33 +501,11 @@ const Register = () => {
               <option value="" disabled selected>
                 Choose your Course
               </option>
-              <option>Advanced Amazon Virtual Assistant</option>
-              <option>Full Stack Digital Marketing & AI</option>
-              <option>Advanced Shopify & Daraz</option>
-              <option>Full Stack Graphic Designing & AI</option>
-              <option>Advanced UIUX Designing with AI for Web & APP</option>
-              <option>WordPress Website Development</option>
-              <option>Full Stack Web Development with React & Node JS</option>
-              <option>MERN Stack Web Development</option>
-              <option>Advanced PHP Laravel Web Development</option>
-              <option>Python Programming for Everyone</option>
-              <option>Web Development with Python Django</option>
-              <option>Search Engine Optimization - SEO</option>
-              <option>Advanced Google Ads</option>
-              <option>National Cyber Security</option>
-              <option>Penetration Testing Web Hacking</option>
-              <option>Video Editing & Animation</option>
-              <option>Artificial Intelligence</option>
-              <option>Machine Learning & Data Science</option>
-              <option>Forex Trading</option>
-              <option>BlockChain Development</option>
-              <option>Cross platform Flutter App Development</option>
-              <option>CGI Ads</option>
-              <option>Architectural Visualization with Blender 3D</option>
-              <option>Digital Embroidery</option>
-              <option>Textile Designing</option>
-              <option>Ielts</option>
-              <option>Freelancing Program</option>
+              {AVAILABLE_COURSES.map((course) => (
+                <option key={course.name} value={course.name}>
+                  {course.name}
+                </option>
+              ))}
             </select>
             {errors.secondCourse && (
               <div className="invalid-feedback">{errors.secondCourse}</div>

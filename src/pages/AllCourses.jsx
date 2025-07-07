@@ -71,7 +71,7 @@ const AllCourses = () => {
                                 <p className="font-18 light-grey l-h-1 weight-400">
                                     Hunarmand Punjab courses are not just different — they are
                                     revolutionary. Designed with hands-on practice, live projects,
-                                    and international standards, we prepare you to lead in today’s
+                                    and international standards, we prepare you to lead in today's
                                     global digital economy.
                                 </p>
                             </div>
@@ -109,7 +109,7 @@ const AllCourses = () => {
                                             <StarRating />
                                             <span className="rate"> 4.9</span>
                                         </p>
-                                        <Link to={"/course-detail"}>
+                                        <Link to={`/course-detail?course=${encodeURIComponent(course.title)}`}>
                                             <button className="btn-green-sq">View Details</button>
                                         </Link>
                                     </div>

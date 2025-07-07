@@ -133,6 +133,7 @@ const Header = () => {
                 {user ? (
                   <>
                     <span className="me-3">Welcome, {user.user.fullName}</span>
+                    <span className="me-3">Roll No: {user.user.rollNumber}</span>
                     <Button
                       onClick={handleLogout}
                       className="btn-black bg-none login-btn p-0"

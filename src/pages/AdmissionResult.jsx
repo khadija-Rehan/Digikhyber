@@ -1,7 +1,5 @@
 import React, { useState, useEffect } from "react";
 import { Accordion } from "react-bootstrap";
-import Bank1 from "../assets/bank1.webp";
-import Bank2 from "../assets/bank2.webp";
 import GIF from "../assets/approved.gif";
 import { generatePdf } from "../api/user";
 import { useCourses } from "../context/CoursesContext";
@@ -19,9 +17,30 @@ const AdmissionResult = () => {
   const [totalPrice, setTotalPrice] = useState(0);
 
   useEffect(() => {
+    const selectedCoursesFromStorage = localStorage.getItem("selectedCourses");
+    if (selectedCoursesFromStorage) {
+      try {
+        const courses = JSON.parse(selectedCoursesFromStorage);
+        if (Array.isArray(courses) && courses.length > 0) {
+          const existingCourses = new Set(userCourses);
+          const newCourses = courses.filter(
+            (course) => !existingCourses.has(course)
+          );
+          if (newCourses.length > 0) {
+            setUserCourses([...userCourses, ...newCourses]);
+          }
+        }
+      } catch (error) {
+        console.error(
+          "Error parsing selectedCourses from localStorage:",
+          error
+        );
+      }
+    }
+
     let price = getTotalPrice();
     setTotalPrice(price);
-  }, [userCourses]);
+  }, [userCourses, setUserCourses]);
 
   const handleEditClick = () => {
     setEditCourses([...userCourses]);
@@ -75,6 +94,7 @@ const AdmissionResult = () => {
       a.href = fileUrl;
       a.download = fileName;
       a.click();
+    localStorage.clear();
     } catch (error) {
       console.error("Error generating PDF:", error);
     }
