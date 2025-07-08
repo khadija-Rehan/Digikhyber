@@ -94,7 +94,7 @@ const AdmissionResult = () => {
       a.href = fileUrl;
       a.download = fileName;
       a.click();
-    localStorage.clear();
+      localStorage.removeItem("selectedCourses");
     } catch (error) {
       console.error("Error generating PDF:", error);
     }
