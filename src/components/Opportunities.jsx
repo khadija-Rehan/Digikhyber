@@ -1,11 +1,14 @@
 import React from "react";
 import { Link } from "react-router-dom";
+import TextReveal from "./TextReveal";
 
 const Opportunities = () => {
     return (
         <div className="container pb-5 pt-5">
             <div className="row pb-5">
-                <h2 className="text-center mb-4 font-32">Scholarship Card Benefits</h2>
+                <h2 className="text-center font-32">
+                    <TextReveal text="Scholarship Card Benefits" />
+                </h2>
                 <p className="text-center mb-3">Unlock free access to premium Scholarship Card, Laptop Scheme, Solar Scheme and Taleem Finance under the scholarship card.</p>
                 <div className="col-lg-3 mb-3">
                     <div class="offer-2-squar2 s hover-shadow-lg hover-translate-y-n3"  data-aos="fade-up">

@@ -2,6 +2,7 @@ import React from 'react'
 import DM from "../assets/DM.jpg";
 import icon from "../assets/ico-4.png";
 import { Link } from 'react-router-dom';
+import TextReveal from './TextReveal';
 const Awairness = () => {
     return (
         <>
@@ -15,7 +16,9 @@ const Awairness = () => {
                                 </button>
                                  Earn 1000$ to 5000 $ <br />Through Freelancing
                             </h2>
-                            <h1>Build Your Future with Hunarmand Punjab</h1>
+                            <h1>
+                                <TextReveal text="Build Your Future with Hunarmand Punjab" />
+                            </h1>
                             <p className='font-18'>Hunarmand Punjab provides the Digital Skills Training and Support Program aims to empower youth by providing free digital skills education, creating online employment opportunities for a brighter future.</p>
                             <div className='d-flex gap-4 buttons'>
                                 <Link to='/courses'>

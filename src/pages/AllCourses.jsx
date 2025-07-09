@@ -4,12 +4,12 @@ import "aos/dist/aos.css";
 import CountUp from "react-countup";
 import { useInView } from "react-intersection-observer";
 
-import ML from "../assets/Hunarmand Punjab Website Banner 4-min.jpg";
-import UI from "../assets/Hunarmand Punjab Website Banner 4-min.jpg";
-import DM from "../assets/Hunarmand Punjab Website Banner 4-min.jpg";
-import FS from "../assets/Hunarmand Punjab Website Banner 4-min.jpg";
+import ML from "../assets/Machine Learning & Data Science.jpg";
+import UI from "../assets/Advanced UIUX Designing.jpg";
+import DM from "../assets/Digital Marketing & AI.jpg";
+import FS from "../assets/Full Stack Web Developement with React & Node JS.jpg";
 import AD from "../assets/Hunarmand Punjab Website Banner 4-min.jpg";
-import WP from "../assets/Hunarmand Punjab Website Banner 4-min.jpg";
+import WP from "../assets/WordPress Web Development.jpg";
 import StarRating from "../components/StarRating";
 import Particles from "../components/ParticleBackground";
 import ParticleBackground from "../components/ParticleBackground";

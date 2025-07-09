@@ -6,6 +6,15 @@ import { useCourses } from "../context/CoursesContext";
 import { useAuth } from "../context/AuthContext";
 import { toast } from "react-toastify";
 
+const getOrCreateFormNumber = () => {
+  let formNumber = localStorage.getItem("formNumber");
+  if (!formNumber) {
+    formNumber = Math.floor(10000 + Math.random() * 90000).toString();
+    localStorage.setItem("formNumber", formNumber);
+  }
+  return formNumber;
+};
+
 const AdmissionResult = () => {
   const { userCourses, availableCourses, setUserCourses, getTotalPrice } =
     useCourses();
@@ -15,6 +24,29 @@ const AdmissionResult = () => {
   const [editCourses, setEditCourses] = useState([...userCourses]);
   const [error, setError] = useState("");
   const [totalPrice, setTotalPrice] = useState(0);
+
+  const [formNumber, setFormNumber] = useState(() => getOrCreateFormNumber());
+
+  const testScore =
+    user?.user?.data?.user?.testScore !== undefined &&
+    user?.user?.data?.user?.testScore !== null
+      ? Number(user.user.data.user.testScore)
+      : null;
+
+  const totalMcqs = 20;
+  const correctAnswers =
+    testScore !== null && !isNaN(testScore)
+      ? Math.round((testScore / 100) * totalMcqs)
+      : "-";
+  const incorrectAnswers =
+    testScore !== null && !isNaN(testScore)
+      ? totalMcqs - Math.round((testScore / 100) * totalMcqs)
+      : "-";
+  const marksObtained = correctAnswers;
+  const percentage =
+    testScore !== null && !isNaN(testScore) ? `${testScore}%` : "-";
+
+  const isPassed = testScore !== null && !isNaN(testScore) && testScore >= 50;
 
   useEffect(() => {
     const selectedCoursesFromStorage = localStorage.getItem("selectedCourses");
@@ -87,6 +119,7 @@ const AdmissionResult = () => {
       if (!fileName) {
         console.error("No file path returned");
         return;
+        return;
       }
       // const fileUrl = `http://localhost:3001/uploads/${fileName}`;
       const fileUrl = `https://backend.hunarmandpunjab.pk/uploads/${fileName}`;
@@ -99,6 +132,22 @@ const AdmissionResult = () => {
       console.error("Error generating PDF:", error);
     }
   };
+
+  const hasChallan = user?.user?.data?.challans?.total !== 0;
+
+  // --- New: Get first challan and its paid status ---
+  const firstChallan =
+    user?.user?.data?.user?.challans?.challans &&
+    Array.isArray(user.user.data.user.challans.challans) &&
+    user.user.data.user.challans.challans.length > 0
+      ? user.user.data.user.challans.challans[0]
+      : null;
+
+  // Only show challan status if there is a challan object
+  let challanStatus = null;
+  if (firstChallan && typeof firstChallan.paid !== "undefined") {
+    challanStatus = firstChallan.paid ? "Paid" : "Pending";
+  }
 
   const modalOverlayStyle = {
     position: "fixed",
@@ -236,14 +285,13 @@ const AdmissionResult = () => {
 
           </h2>
           <div
-            class="alert alert-success mt-4"
+            className="alert alert-success mt-4"
             style={{ color: "green", fontFamily: "Poppins" }}
             role="alert"
           >
             <strong>
-              <i class="fas fa-check-circle" style={{ color: "green" }}></i>{" "}
-                          Congratulations! You’ve Successfully Passed the Admission Test
-
+              <i className="fas fa-check-circle" style={{ color: "green" }}></i>{" "}
+              Congratulations! You’ve Successfully Passed the Admission Test
             </strong>{" "}
             We are thrilled to inform you that you have successfully cleared the Hunarmand Punjab Admission Test. Now you are eligible for a Scholarship Card. To confirm your seat & proceed with your enrolled course. All the courses under the Hunarmand scholarship card are 100% free, but the application processing fee is necessary to complete your application. Your processing fee will be reimbursed if you achieve above 85% Marks in the final evaluation test under the policy of Hunarmand Punjab. <br />
             You’re just one step away from receiving your Scholarship Card!
@@ -319,21 +367,23 @@ const AdmissionResult = () => {
                 <td data-th="Details">{user?.user?.fullName || ""}</td>
               </tr>
               <tr>
-                <td data-th="Field">Admission Test ID</td>
-                <td data-th="Details">48079</td>
+                <td data-th="Field">Test ID</td>
+                <td data-th="Details">{formNumber}</td>
               </tr>
               <tr>
                 <td data-th="Field">Total MCQs</td>
                 <td data-th="Details">25</td>
               </tr>
-              <tr>
+              {/* <tr>
                 <td data-th="Field">Correct Answers</td>
+
                 <td data-th="Details">18</td>
-              </tr>
-              <tr>
+              </tr> */}
+              {/* <tr>
                 <td data-th="Field">Incorrect Answers</td>
                 <td data-th="Details">7</td>
-              </tr>
+              </tr> */}
+
               <tr>
                 <td data-th="Field">Total Marks</td>
                 <td data-th="Details">25</td>
@@ -347,7 +397,8 @@ const AdmissionResult = () => {
                 <td data-th="Details">72%</td>
               </tr>
               <tr>
-                <td data-th="Field">Pass/Fail Status</td>
+                {/* <td data-th="Field">Pass/Fail Status</td> */}
+                <td data-th="Field">Result Status</td>
                 <td data-th="Details">
                   <span
                     className="btn-green p-1 px-2"
@@ -368,13 +419,12 @@ const AdmissionResult = () => {
           <p>
             To edit your courses, click 'Edit.' To skip a course, select 'None'
             in the optional courses. To add a course, choose from the available
-            options. You can enroll in up to 3 courses at once. All courses are
-            completely free, but a one-time application processing fee of PKR{" "}
-            {totalPrice} is required, regardless of the number of courses you
-            select.
+            options. You can enroll in up to 2 courses at once. All courses are
+            completely free, but a one-time application processing fee of PKR
+            2800 is required, regardless of the number of courses you select.
           </p>
-          <div class="table-responsive">
-            <table class="table table-hover table-bordered">
+          <div className="table-responsive">
+            <table className="table table-hover table-bordered">
               <thead>
                 <tr>
                   <th style={{ backgroundColor: "#dee2e6" }} scope="col">
@@ -419,7 +469,7 @@ const AdmissionResult = () => {
           <h4 className="fw-bold mb-0">
             Last Date to pay Application Processing Fee:
           </h4>
-          <p className="mb-0">
+          <p className="mb-0" style={{ marginRight: 12 }}>
             {(() => {
               // Calculate date 4 days from now
               const today = new Date();
@@ -432,6 +482,25 @@ const AdmissionResult = () => {
               return today.toLocaleDateString("en-US", options);
             })()}
           </p>
+          {/* Challan Status */}
+          {challanStatus && (
+            <span
+              className={`badge px-3 py-2 ms-2 fw-bold ${
+                challanStatus === "Paid"
+                  ? "bg-success text-white"
+                  : "bg-warning text-dark"
+              }`}
+              style={{
+                fontSize: "1rem",
+                borderRadius: "6px",
+                letterSpacing: "0.5px",
+                minWidth: 80,
+                textAlign: "center",
+              }}
+            >
+              {challanStatus}
+            </span>
+          )}
         </div>
       </div>
       <div style={{ backgroundColor: "#DDA30B", padding: "50px 0 80px" }}>
@@ -444,11 +513,200 @@ const AdmissionResult = () => {
               application fee through the given payment methods.
             </p>
           </div>
-          <Accordion defaultActiveKey="0">
+          <div className="row">
+            <div className="col-md-12">
+              <div className="text-center p-2 payment-header">
+                Payment Options
+              </div>
+            </div>
+          </div>
+          <div className="row payment-options">
+            <div className="col-md-12">
+              <div className="bg-white p-3 payment-options-container">
+                <div
+                  className="row nav nav-pills mb-3"
+                  id="pills-tab"
+                  role="tablist"
+                >
+                  <div
+                    className="nav-item col-md-6 mb-3 mb-lg-0"
+                    role="present ation"
+                  >
+                    <button
+                      className="nav-link active w-100 h-100 p-3"
+                      id="pills-home-tab"
+                      data-bs-toggle="pill"
+                      data-bs-target="#pills-home"
+                      type="button"
+                      role="tab"
+                      aria-controls="pills-home"
+                      aria-selected="true"
+                    >
+                      <div className="d-flex align-items-start gap-2">
+                        <div className="icon">
+                          <i className="fa-solid fa-wallet"></i>
+                        </div>
+                        <div className="ms-3 text-start">
+                          <h4>Consumer Number / PSID</h4>
+                          <p>
+                            Pay using Online Mobile Banking or mobile wallet
+                            using 1 Biller
+                          </p>
+                        </div>
+                      </div>
+                    </button>
+                  </div>
+                  <div className="nav-item col-md-6" role="presentation">
+                    <button
+                      className="nav-link w-100 h-100 p-3"
+                      id="pills-profile-tab"
+                      data-bs-toggle="pill"
+                      data-bs-target="#pills-profile"
+                      type="button"
+                      role="tab"
+                      aria-controls="pills-profile"
+                      aria-selected="false"
+                    >
+                      <div className="d-flex align-items-start gap-2">
+                        <div className="icon">
+                          <i className="fa-solid fa-building-columns"></i>
+                        </div>
+                        <div className="ms-3 text-start">
+                          <h4>Bank Challan</h4>
+                          <p>
+                            Pay at any bank using Kamyaab Freelancer Program
+                            bank challan
+                          </p>
+                        </div>
+                      </div>
+                    </button>
+                  </div>
+                </div>
+                <div className="row">
+                  <div className="col-md-12">
+                    <div
+                      className="tab-content bg-white p-3 rounded-2 shadow-sm"
+                      id="pills-tabContent"
+                    >
+                      <div
+                        className="tab-pane fade show active"
+                        id="pills-home"
+                        role="tabpanel"
+                        aria-labelledby="pills-home-tab"
+                        tabindex="0"
+                      >
+                        <h5>
+                          Follow these steps to complete your payment using
+                          PSID:
+                        </h5>
+                        <ol>
+                          <li>
+                            <span className="fw-bold">
+                              Click on "Generate PSID"
+                            </span>{" "}
+                            to generate your unique PSID number.
+                          </li>
+                          <li>
+                            <span className="fw-bold">
+                              Once the PSID is generated, copy the PSID
+                            </span>{" "}
+                            by clicking the copy icon.
+                          </li>
+                          <li>
+                            <span className="fw-bold">
+                              Click on any bank option
+                            </span>{" "}
+                            below to view detailed instructions on how to pay
+                            your registration charges.
+                          </li>
+                        </ol>
+                        <button className="btn-green btn-success btn rounded-2">
+                          Generate PSID
+                        </button>
+                      </div>
+                      <div
+                        className="tab-pane fade"
+                        id="pills-profile"
+                        role="tabpanel"
+                        aria-labelledby="pills-profile-tab"
+                        tabindex="0"
+                      >
+                        <h5>Follow these steps to complete your payment:</h5>
+                        <h5>For Bank Challan Payment:</h5>
+                        <ol>
+                          <li>
+                            <span className="fw-bold">
+                              Click on "Generate Challan"
+                            </span>{" "}
+                            to generate your unique Bank Challan.
+                          </li>
+                          <li>
+                            <span className="fw-bold">
+                              Download the generated challan
+                            </span>{" "}
+                            by clicking the download button.
+                          </li>
+                          <li>
+                            <span className="fw-bold">
+                              Pay the challan at any nearest bank branch
+                            </span>{" "}
+                            to complete your payment and confirm your
+                            enrollment.
+                          </li>
+                        </ol>
+                        <button
+                          className="btn-green btn-success btn rounded-2"
+                          onClick={() => handleGeneratePdf()}
+                          disabled={hasChallan}
+                        >
+                          <i className="fas fa-download"></i>{" "}
+                          {hasChallan
+                            ? "Challan Already Submitted"
+                            : "Generate Challan"}
+                        </button>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+          <Accordion defaultActiveKey="0" className="d-none">
             {/* ...omitted for brevity... */}
             <Accordion.Item eventKey="0">
-              <Accordion.Header>Get Bank Challan</Accordion.Header>
+              {/* <Accordion.Header>Get Bank Challan</Accordion.Header> */}
+              <Accordion.Header>Payment Options</Accordion.Header>
               <Accordion.Body>
+                <div className="row mb-3">
+                  <div className="col-md-6">
+                    <div className="d-flex align-items-start gap-2 p-4 rounded-2 border h-100">
+                      <div>
+                        <i className="fa-solid fa-wallet"></i>
+                      </div>
+                      <div className="ms-3">
+                        <h4>Consumer Number / PSID</h4>
+                        <p>
+                          Pay using Online Mobile Banking or mobile wallet using
+                          1 Biller
+                        </p>
+                      </div>
+                    </div>
+                  </div>
+                  <div className="col-md-6">
+                    <div className="d-flex align-items-start gap-2 p-4 rounded-2 border h-100">
+                      <div>
+                        <i className="fa-solid fa-building-columns"></i>
+                      </div>
+                      <div className="ms-3">
+                        <h4>Bank Challan</h4>
+                        <p>
+                          Pay at any bank using Kamyaab Freelancer Program bank
+                          challan
+                        </p>
+                      </div>
+                    </div>
+                  </div>
+                </div>
                 <p className="fw-bold">Instructions:</p>
                 <p>
                   Hunarmand also provides the option to deposit your application

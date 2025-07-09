@@ -20,7 +20,7 @@ const Hero = () => {
                     disableOnInteraction: false,  
                 }}
                 pagination={{ clickable: false }}
-                navigation={true}
+                navigation={false}
             >
                 <SwiperSlide>
                     <img
