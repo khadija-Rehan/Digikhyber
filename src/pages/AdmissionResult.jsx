@@ -1,26 +1,160 @@
-import React from "react";
+import React, { useState, useEffect } from "react";
 import { Accordion } from "react-bootstrap";
 import Bank1 from "../assets/bank1.webp";
 import Bank2 from "../assets/bank2.webp";
 import GIF from "../assets/approved.gif";
 import { generatePdf } from "../api/user";
+import { getUserProfile } from "../api/user";
+import { useCourses } from "../context/CoursesContext";
+import { useAuth } from "../context/AuthContext";
+import { toast } from "react-toastify";
+
+const getOrCreateFormNumber = () => {
+  let formNumber = localStorage.getItem("formNumber");
+  if (!formNumber) {
+    formNumber = Math.floor(10000 + Math.random() * 90000).toString();
+    localStorage.setItem("formNumber", formNumber);
+  }
+  return formNumber;
+};
 
 const AdmissionResult = () => {
+  const { userCourses, availableCourses, setUserCourses, getTotalPrice } =
+    useCourses();
+
+  const { user, login } = useAuth();
+  const [showModal, setShowModal] = useState(false);
+  const [editCourses, setEditCourses] = useState([...userCourses]);
+  const [error, setError] = useState("");
+  const [totalPrice, setTotalPrice] = useState(0);
+
+  const [formNumber, setFormNumber] = useState(() => getOrCreateFormNumber());
+
+  const testScore =
+    user?.user?.data?.user?.testScore !== undefined &&
+    user?.user?.data?.user?.testScore !== null
+      ? Number(user.user.data.user.testScore)
+      : null;
+
+  const totalMcqs = 20;
+  const correctAnswers =
+    testScore !== null && !isNaN(testScore)
+      ? Math.round((testScore / 100) * totalMcqs)
+      : "-";
+  const incorrectAnswers =
+    testScore !== null && !isNaN(testScore)
+      ? totalMcqs - Math.round((testScore / 100) * totalMcqs)
+      : "-";
+  const marksObtained = correctAnswers;
+  const percentage =
+    testScore !== null && !isNaN(testScore)
+      ? `${testScore}%`
+      : "-";
+
+  const isPassed = testScore !== null && !isNaN(testScore) && testScore >= 50;
+
+  useEffect(() => {
+    const fetchUserProfile = async () => {
+      try {
+        const profileResponse = await getUserProfile();
+        const profileData = profileResponse.data;
+
+        const updatedUserData = {
+          user: {
+            ...user.user,
+            ...profileData,
+          },
+          token: user.token,
+        };
+
+        login(updatedUserData);
+
+        console.log("User profile updated:", updatedUserData);
+      } catch (error) {
+        console.error("Error fetching user profile:", error);
+      }
+    };
+
+    if (user && user.token) {
+      fetchUserProfile();
+    }
+  }, []);
+
+  useEffect(() => {
+    const selectedCoursesFromStorage = user.user.courses;
+    if (selectedCoursesFromStorage) {
+      try {
+        const courses = JSON.parse(selectedCoursesFromStorage);
+        if (Array.isArray(courses) && courses.length > 0) {
+          const existingCourses = new Set(userCourses);
+          const newCourses = courses.filter(
+            (course) => !existingCourses.has(course)
+          );
+          if (newCourses.length > 0) {
+            setUserCourses([...userCourses, ...newCourses]);
+          }
+        }
+      } catch (error) {
+        console.error(
+          "Error parsing selectedCourses from localStorage:",
+          error
+        );
+      }
+    }
+
+    let price = getTotalPrice();
+    setTotalPrice(price);
+  }, [userCourses, setUserCourses]);
+
+  const handleEditClick = () => {
+    setEditCourses([...userCourses]);
+    setShowModal(true);
+    setError("");
+  };
+
+  const handleCourseChange = (index, selectedName) => {
+    const updated = [...editCourses];
+    updated[index] = selectedName;
+    setEditCourses(updated);
+  };
+
+  const handleAddCourse = () => {
+    if (editCourses.length < 2) {
+      setEditCourses([...editCourses, ""]);
+    }
+  };
+
+  const handleDeleteCourse = (index) => {
+    const updated = [...editCourses];
+    updated.splice(index, 1);
+    setEditCourses(updated);
+  };
+
+  const handleSave = () => {
+    const filtered = editCourses.filter(Boolean);
+    const unique = Array.from(new Set(filtered));
+    if (unique.length > 2) {
+      setError("You can enroll in up to 2 courses only.");
+      return;
+    }
+    setUserCourses(unique);
+    setShowModal(false);
+  };
+
   const handleGeneratePdf = async () => {
     try {
-      const { data } = await generatePdf();
-
-      const fileName = data.data.fileName;
-
-      if (!fileName) {
-        console.error("No file path returned");
+      if (totalPrice === 0) {
+        toast.error("Please add some courses!");
         return;
       }
-
-      // Create full URL
-      const fileUrl = `http://localhost:3001/uploads/${fileName}`;
-
-      //   window.open(fileUrl, '_blank');
+      const { data } = await generatePdf(totalPrice, userCourses);
+      const fileName = data.data.fileName;
+      if (!fileName) {
+        console.error("No file path returned");
+        return; 
+      }
+      // const fileUrl = `http://localhost:3001/uploads/${fileName}`;
+      const fileUrl = `https://backend.hunarmandpunjab.pk/uploads/${fileName}`;
       const a = document.createElement("a");
       a.href = fileUrl;
       a.download = fileName;
@@ -28,6 +162,148 @@ const AdmissionResult = () => {
     } catch (error) {
       console.error("Error generating PDF:", error);
     }
+  };
+
+  // Check if user has a challan
+  const hasChallan = user?.user?.data?.challans?.total !== 0;
+
+  // --- New: Get first challan and its paid status ---
+  const firstChallan =
+    user?.user?.data?.user?.challans?.challans &&
+    Array.isArray(user.user.data.user.challans.challans) &&
+    user.user.data.user.challans.challans.length > 0
+      ? user.user.data.user.challans.challans[0]
+      : null;
+
+  // Only show challan status if there is a challan object
+  let challanStatus = null;
+  if (firstChallan && typeof firstChallan.paid !== "undefined") {
+    challanStatus = firstChallan.paid ? "Paid" : "Pending";
+  }
+  // --------------------------------------------------
+
+  const modalOverlayStyle = {
+    position: "fixed",
+    top: 0,
+    left: 0,
+    right: 0,
+    bottom: 0,
+    background: "rgba(0, 70, 19, 0.25)",
+    zIndex: 1050,
+    display: "flex",
+    alignItems: "center",
+    justifyContent: "center",
+  };
+
+  const modalContentStyle = {
+    background: "#fff",
+    borderRadius: "12px",
+    boxShadow: "0 8px 32px 0 rgba(0,70,19,0.18)",
+    border: "2px solid #079560",
+    minWidth: 420,
+    maxWidth: 600,
+    width: "100%",
+    fontFamily: "Poppins, sans-serif",
+    color: "#222",
+  };
+
+  const modalHeaderStyle = {
+    background: "#079560",
+    color: "#fff",
+    borderTopLeftRadius: "10px",
+    borderTopRightRadius: "10px",
+    padding: "18px 24px",
+    borderBottom: "1px solid #e9ecef",
+    display: "flex",
+    alignItems: "center",
+    justifyContent: "space-between",
+  };
+
+  const modalTitleStyle = {
+    fontWeight: 700,
+    fontSize: "1.2rem",
+    margin: 0,
+    letterSpacing: "0.5px",
+  };
+
+  const closeBtnStyle = {
+    background: "none",
+    border: "none",
+    color: "#fff",
+    fontSize: "1.5rem",
+    lineHeight: 1,
+    cursor: "pointer",
+    padding: 0,
+  };
+
+  const modalBodyStyle = {
+    padding: "22px 24px 10px 24px",
+    background: "#f8f9fa",
+  };
+
+  const selectStyle = {
+    border: "1.5px solid #079560",
+    borderRadius: "6px",
+    fontFamily: "Poppins, sans-serif",
+    fontSize: "1rem",
+    color: "#004613",
+    background: "#fff",
+  };
+
+  const deleteBtnStyle = {
+    background: "#D32F2F",
+    color: "#fff",
+    border: "none",
+    borderRadius: "4px",
+    fontSize: "0.95rem",
+    padding: "6px 14px",
+    fontWeight: 500,
+    transition: "background 0.2s",
+    marginLeft: 6,
+  };
+
+  const addBtnStyle = {
+    background: "#DDA30B",
+    color: "#fff",
+    border: "none",
+    borderRadius: "4px",
+    fontSize: "1rem",
+    padding: "7px 18px",
+    fontWeight: 600,
+    marginTop: 10,
+    marginBottom: 5,
+    transition: "background 0.2s",
+  };
+
+  const modalFooterStyle = {
+    background: "#f8f9fa",
+    borderBottomLeftRadius: "10px",
+    borderBottomRightRadius: "10px",
+    borderTop: "1px solid #e9ecef",
+    padding: "16px 24px",
+    display: "flex",
+    justifyContent: "flex-end",
+    gap: "10px",
+  };
+
+  const cancelBtnStyle = {
+    background: "#e0e0e0",
+    color: "#004613",
+    border: "none",
+    borderRadius: "4px",
+    fontWeight: 600,
+    padding: "7px 18px",
+    fontSize: "1rem",
+  };
+
+  const saveBtnStyle = {
+    background: "#079560",
+    color: "#fff",
+    border: "none",
+    borderRadius: "4px",
+    fontWeight: 600,
+    padding: "7px 18px",
+    fontSize: "1rem",
   };
 
   return (
@@ -38,7 +314,7 @@ const AdmissionResult = () => {
         </center>
         <div className="row  pb-5">
           <h2 className="text-center">
-            Congratulations, You Passed the Admission Test!
+            Congratulations! You’ve Successfully Passed the Admission Test
           </h2>
           <div
             class="alert alert-success mt-4"
@@ -47,33 +323,35 @@ const AdmissionResult = () => {
           >
             <strong>
               <i class="fas fa-check-circle" style={{ color: "green" }}></i>{" "}
-              Congratulations on passing the admission test!
+              Congratulations! You’ve Successfully Passed the Admission Test
             </strong>{" "}
-            We’re excited to inform you that you’ve successfully cleared the
-            admission test — a big step toward your academic and professional
-            journey. To confirm your seat & proceed with your course enrollment.
-            All the courses under the Hunarmand scholarship card are 100%, but
-            the application processing fee is necessary to complete your
-            application. Your processing fee will be reimbursed if you achieve
-            above 85% Marks in the final evaluation test under the policy of
-            Hunarmand Punjab. <br />
+            We are thrilled to inform you that you have successfully cleared the
+            Hunarmand Punjab Admission Test. Now you are eligible for a
+            Scholarship Card. To confirm your seat & proceed with your enrolled
+            course. All the courses under the Hunarmand scholarship card are
+            100% free, but the application processing fee is necessary to
+            complete your application. Your processing fee will be reimbursed if
+            you achieve above 85% Marks in the final evaluation test under the
+            policy of Hunarmand Punjab. <br />
             You’re just one step away from receiving your Scholarship Card!
             <div className="mt-4">
               <p className="fw-semibold ">
                 ⚡ Benefits of the Scholarship Card:
               </p>
               <ul className="  mt-2">
-                <li> Advanced IT Training with real-world skills</li>
-                <li> Laptop, Solar & Education Finance Support</li>
+                <li> Access to Advanced IT Courses</li>
+                <li> Laptop Scheme</li>
+                <li> Solar Scheme</li>
+                <li>Access to Taleem Finance</li>
+                <li> Access to Study Abroad Free Consultancy</li>
                 <li> Hands-On Learning with Global Curriculum</li>
-                <li>Eco-Friendly, Sustainable Energy Solution</li>
                 <li> Career Guidance & Freelancing Support</li>
               </ul>
             </div>
           </div>
         </div>
         <div className="row">
-          <div className="col-lg-12">
+          {/* <div className="col-lg-12">
             <div className="shadow-box d-flex align-items-center justify-content-between gap-2 flex-wrap flex-md-nowrap mb-3  p-3">
               <div>
                 <h3>Final Step: Video Guide</h3>
@@ -88,7 +366,7 @@ const AdmissionResult = () => {
                 <i className="fas fa-video"></i> Watch Video
               </button>
             </div>
-          </div>
+          </div> */}
         </div>
 
         <div
@@ -125,35 +403,35 @@ const AdmissionResult = () => {
               </tr>
               <tr>
                 <td data-th="Field">Student Name</td>
-                <td data-th="Details">Majid Rajpoot</td>
+                <td data-th="Details">{user?.user?.fullName || ""}</td>
               </tr>
               <tr>
                 <td data-th="Field">Admission Test ID</td>
-                <td data-th="Details">48079</td>
+                <td data-th="Details">{formNumber}</td>
               </tr>
               <tr>
                 <td data-th="Field">Total MCQs</td>
-                <td data-th="Details">25</td>
+                <td data-th="Details">{totalMcqs}</td>
               </tr>
               <tr>
                 <td data-th="Field">Correct Answers</td>
-                <td data-th="Details">18</td>
+                <td data-th="Details">{correctAnswers}</td>
               </tr>
               <tr>
                 <td data-th="Field">Incorrect Answers</td>
-                <td data-th="Details">7</td>
+                <td data-th="Details">{incorrectAnswers}</td>
               </tr>
               <tr>
                 <td data-th="Field">Total Marks</td>
-                <td data-th="Details">25</td>
+                <td data-th="Details">{totalMcqs}</td>
               </tr>
               <tr>
                 <td data-th="Field">Marks Obtained</td>
-                <td data-th="Details">18</td>
+                <td data-th="Details">{marksObtained}</td>
               </tr>
               <tr>
                 <td data-th="Field">Percentage</td>
-                <td data-th="Details">72%</td>
+                <td data-th="Details">{percentage}</td>
               </tr>
               <tr>
                 <td data-th="Field">Pass/Fail Status</td>
@@ -162,7 +440,7 @@ const AdmissionResult = () => {
                     className="btn-green p-1 px-2"
                     style={{ fontSize: "12px" }}
                   >
-                    Pass
+                    {isPassed ? "Pass" : "Fail"}
                   </span>
                 </td>
               </tr>
@@ -177,9 +455,10 @@ const AdmissionResult = () => {
           <p>
             To edit your courses, click 'Edit.' To skip a course, select 'None'
             in the optional courses. To add a course, choose from the available
-            options. You can enroll in up to 3 courses at once. All courses are
+            options. You can enroll in up to 2 courses at once. All courses are
             completely free, but a one-time application processing fee of PKR
-            4500 is required, regardless of the number of courses you select.
+            2800 is required, regardless of the number of courses you
+            select.
           </p>
           <div class="table-responsive">
             <table class="table table-hover table-bordered">
@@ -198,33 +477,70 @@ const AdmissionResult = () => {
               </thead>
               <tbody>
                 <tr>
-                  <td>48079</td>
+                  <td>{formNumber}</td>
                   <td>
                     <ul>
-                      <li>Cross-Platform Apps with Flutter</li>
+                      {userCourses.length === 0 ? (
+                        <li>No courses selected</li>
+                      ) : (
+                        userCourses.map((course, idx) => (
+                          <li key={idx}>{course}</li>
+                        ))
+                      )}
                     </ul>
                   </td>
                   <td>
-                    <a
-                      href="#"
-                      data-toggle="modal"
-                      data-target="#editcourse"
-                      class="btn btn-success btn-green rounded-2 "
+                    <button
+                      className="btn btn-success btn-green rounded-2"
+                      onClick={handleEditClick}
+                      disabled={hasChallan}
                     >
-                      <i class="fas fa-edit"></i> Edit
-                    </a>
+                      <i className="fas fa-edit"></i>{" "}
+                      {hasChallan ? "Challan Submitted" : "Edit"}
+                    </button>
                   </td>
                 </tr>
               </tbody>
             </table>
           </div>
         </div>
-        <div className="d-flex align-items-center gap-1 alert alert-warning text-black">
-          <h4 className="fw-bold mb-0">
-            Last Date to pay Application Processing Fee:
-          </h4>
-          <p className="mb-0">May 23, 2025</p>
-        </div>
+          <div className="d-flex align-items-center gap-1 alert alert-warning text-black">
+            <h4 className="fw-bold mb-0">
+              Last Date to pay Application Processing Fee:
+            </h4>
+            <p className="mb-0" style={{ marginRight: 12 }}>
+              {(() => {
+                // Calculate date 4 days from now
+                const today = new Date();
+                today.setDate(today.getDate() + 4);
+                const options = {
+                  year: "numeric",
+                  month: "long",
+                  day: "numeric",
+                };
+                return today.toLocaleDateString("en-US", options);
+              })()}
+            </p>
+            {/* Challan Status */}
+            {challanStatus && (
+              <span
+                className={`badge px-3 py-2 ms-2 fw-bold ${
+                  challanStatus === "Paid"
+                    ? "bg-success text-white"
+                    : "bg-warning text-dark"
+                }`}
+                style={{
+                  fontSize: "1rem",
+                  borderRadius: "6px",
+                  letterSpacing: "0.5px",
+                  minWidth: 80,
+                  textAlign: "center",
+                }}
+              >
+                {challanStatus}
+              </span>
+            )}
+          </div>
       </div>
       <div style={{ backgroundColor: "#DDA30B", padding: "50px 0 80px" }}>
         <div className="container">
@@ -237,126 +553,9 @@ const AdmissionResult = () => {
             </p>
           </div>
           <Accordion defaultActiveKey="0">
-            <Accordion.Item eventKey="0" className="mb-3">
-              <Accordion.Header className="fw-bold">
-                Easily Pay Your Application Processing Fee Through Any Bank,
-                Anytime & Anywhere
-              </Accordion.Header>
-              <Accordion.Body>
-                <p>
-                  <b> Sindh Skills Development Program</b> is a Government
-                  supported program & is <b> interlinked with all banks</b>{" "}
-                  across Pakistan, enabling you to pay your Hunarmand voucher
-                  conveniently through
-                  <b> mobile applications , internet banking , or ATMs </b>.
-                  Each bank follows a slightly different process for paying the
-                  Hunarmand application processing fee using the generated
-                  PSID/Consumer Number provided below. Follow these simple steps
-                  to ensure your payment is processed smoothly:
-                </p>
-                <ul>
-                  <li>
-                    <b> Generate Your PSID/Consumer Number:</b> First, generate
-                    your PSID/Consumer Number. Once generated, it will appear
-                    below.
-                  </li>
-                  <li>
-                    <b> Copy Your Consumer Number:</b> Locate the PSID/Consumer
-                    Number displayed below and copy it.
-                  </li>
-                  <li>
-                    <b> Select Your Bank:</b> Choose your bank from the list
-                    below. A video tutorial will pop up showing step-by-step
-                    instructions on how to pay via that specific bank.
-                  </li>
-                  <li>
-                    <b> Watch the Video and Follow Instructions:</b> Carefully
-                    watch the tutorial and follow the guidelines provided.
-                  </li>
-                  <li>
-                    <b> Enter Your PSID/Consumer Number:</b> Open your banking
-                    app and navigate to the "1 Bill Invoice/Voucher" section.
-                    Paste the PSID/Consumer Number.
-                  </li>
-                  <li>
-                    <b> Confirm and Pay:</b> Your Hunarmand voucher details will
-                    be automatically fetched. Confirm the details and proceed to
-                    pay the fee.
-                  </li>
-                  <li>
-                    <b> Application Submission:</b> Once your payment is
-                    processed, your application will be sent to our team for
-                    review. You will receive an instant notification from the
-                    Hunarmand system.
-                  </li>
-                  <ul>
-                    <li>
-                      <b> If Approved:</b> You will receive your Learning Portal
-                      credentials and can start your journey with Hunarmand.
-                    </li>
-                    <li>
-                      <b> If Not Approved:</b> Your admission charges will be
-                      refunded to your account within 7 working days.
-                    </li>
-                  </ul>
-                </ul>
-                <p>
-                  <b>Important Note:</b>
-                </p>
-                <p>
-                  The application processing fee is 4500 PKR, which is a
-                  one-time charge regardless of whether you enroll in 1 course
-                  or up to 3 courses. This fee is required to process your
-                  application to the next step.
-                </p>
-                <p>
-                  All courses offered under the Hunarmand program are entirely
-                  free, with no additional charges for course materials or
-                  enrollment.
-                </p>
-                <button className="btn-green btn-success btn rounded-2">
-                  Generate PSID/Consumer Number
-                </button>
-                <div className="d-flex align-items-center banks">
-                  <div className="shadow-box">
-                    <img src={Bank1} alt={Bank1} />
-                  </div>{" "}
-                  <div className="shadow-box">
-                    <img src={Bank2} alt={Bank1} />
-                  </div>{" "}
-                  <div className="shadow-box">
-                    <img src={Bank1} alt={Bank1} />
-                  </div>{" "}
-                  <div className="shadow-box">
-                    <img src={Bank2} alt={Bank1} />
-                  </div>{" "}
-                  <div className="shadow-box">
-                    <img src={Bank1} alt={Bank1} />
-                  </div>{" "}
-                  <div className="shadow-box">
-                    <img src={Bank2} alt={Bank1} />
-                  </div>{" "}
-                  <div className="shadow-box">
-                    <img src={Bank1} alt={Bank1} />
-                  </div>{" "}
-                  <div className="shadow-box">
-                    <img src={Bank2} alt={Bank1} />
-                  </div>{" "}
-                </div>
-                <div className="alert alert-success mt-4 border">
-                  <b> Note: </b>After paying your Hunarmand application
-                  processing fee, no further action is required. Please allow up
-                  to 30 minutes for processing. Within this period, you should
-                  receive a confirmation email. If you do not receive the
-                  confirmation within 30 minutes , click on the below Check
-                  Status button to resolve the issue. If the confirmation is
-                  still not available, contact our support team at
-                  admissions@Hunarmand.pk for any kind of assistance.
-                </div>
-              </Accordion.Body>
-            </Accordion.Item>
-            <Accordion.Item eventKey="1">
-              <Accordion.Header>Accordion Item #2</Accordion.Header>
+            {/* ...omitted for brevity... */}
+            <Accordion.Item eventKey="0">
+              <Accordion.Header>Get Bank Challan</Accordion.Header>
               <Accordion.Body>
                 <p className="fw-bold">Instructions:</p>
                 <p>
@@ -411,13 +610,17 @@ const AdmissionResult = () => {
                 <button
                   className="btn-green btn-success btn rounded-2"
                   onClick={() => handleGeneratePdf()}
+                  disabled={hasChallan}
                 >
-                  <i className="fas fa-download"></i> Download Bank Challan
+                  <i className="fas fa-download"></i>{" "}
+                  {hasChallan
+                    ? "Challan Already Submitted"
+                    : "Download Bank Challan"}
                 </button>
 
                 <div className="alert alert-success mt-4 border">
                   <b> Note: </b>After paying your Hunarmand application
-                  processing fee, you don’t need to do anything further. Please
+                  processing fee, you don't need to do anything further. Please
                   allow up to 30 minutes for processing. Within this period, you
                   should receive a confirmation email. If you do not receive the
                   confirmation within 30 minutes , click on the below Check
@@ -430,6 +633,83 @@ const AdmissionResult = () => {
           </Accordion>
         </div>
       </div>
+      {/* Modal for editing courses */}
+      {showModal && (
+        <div style={modalOverlayStyle} tabIndex="-1" role="dialog">
+          <div style={{ width: "100%", maxWidth: 600 /* was 440 */ }}>
+            <div style={modalContentStyle}>
+              <div style={modalHeaderStyle}>
+                <h5 style={modalTitleStyle}>Edit Courses</h5>
+                <button
+                  type="button"
+                  style={closeBtnStyle}
+                  aria-label="Close"
+                  onClick={() => setShowModal(false)}
+                >
+                  <span aria-hidden="true">&times;</span>
+                </button>
+              </div>
+              <div style={modalBodyStyle}>
+                {editCourses.map((course, idx) => (
+                  <div
+                    key={idx}
+                    className="d-flex align-items-center mb-2 gap-2"
+                  >
+                    <select
+                      className="form-select"
+                      style={selectStyle}
+                      value={course}
+                      onChange={(e) => handleCourseChange(idx, e.target.value)}
+                    >
+                      <option value="">Select Course</option>
+                      {availableCourses.map((c, i) => (
+                        <option
+                          key={i}
+                          value={c.name}
+                          disabled={
+                            editCourses.includes(c.name) && c.name !== course
+                          }
+                        >
+                          {c.name}
+                        </option>
+                      ))}
+                    </select>
+                    <button
+                      style={deleteBtnStyle}
+                      onClick={() => handleDeleteCourse(idx)}
+                      disabled={editCourses.length === 1}
+                    >
+                      Delete
+                    </button>
+                  </div>
+                ))}
+                {editCourses.length < 2 && (
+                  <button style={addBtnStyle} onClick={handleAddCourse}>
+                    Add Course
+                  </button>
+                )}
+                {error && (
+                  <div className="text-danger mt-2" style={{ fontWeight: 500 }}>
+                    {error}
+                  </div>
+                )}
+              </div>
+              <div style={modalFooterStyle}>
+                <button
+                  type="button"
+                  style={cancelBtnStyle}
+                  onClick={() => setShowModal(false)}
+                >
+                  Cancel
+                </button>
+                <button type="button" style={saveBtnStyle} onClick={handleSave}>
+                  Save
+                </button>
+              </div>
+            </div>
+          </div>
+        </div>
+      )}
     </>
   );
 };

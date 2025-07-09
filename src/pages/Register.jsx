@@ -1,14 +1,13 @@
 import React, { useState } from "react";
 import Logo from "../assets/logo.png";
 import { signUp } from "../api/auth";
-import { toast } from 'react-toastify';
-import 'react-toastify/dist/ReactToastify.css';
+import { toast } from "react-toastify";
+import "react-toastify/dist/ReactToastify.css";
 import { useNavigate } from "react-router";
+import { AVAILABLE_COURSES } from "../utils/courses";
 
 const Register = () => {
   let navigate = useNavigate();
-
-
 
   const [formData, setFormData] = useState({
     fullName: "",
@@ -31,6 +30,7 @@ const Register = () => {
     // employmentStatus: false,
     password: "",
     agreement: false,
+    referralCode: "", // Added referral code field (optional)
   });
 
   const [documents, setDocuments] = useState({
@@ -97,6 +97,8 @@ const Register = () => {
       newErrors.agreement = "You must agree to the terms and conditions";
     }
 
+    // No validation for referralCode since it's optional
+
     setErrors(newErrors);
     return Object.keys(newErrors).length === 0;
   };
@@ -112,6 +114,10 @@ const Register = () => {
   const handleChange = (e) => {
     const { name, value, type, checked } = e.target;
     let processedValue = value;
+
+    if (type === "checkbox") {
+      processedValue = checked;
+    }
 
     setFormData((prev) => ({
       ...prev,
@@ -132,12 +138,14 @@ const Register = () => {
       });
 
       // Create and append courses array
-      const courses = [
-        formData.firstCourse,
-        formData.secondCourse
-      ].filter(Boolean);
-      
+      const courses = [formData.firstCourse, formData.secondCourse].filter(
+        Boolean
+      );
+
       formDataToSubmit.append("courses", JSON.stringify(courses));
+
+      // Save courses to localStorage
+      localStorage.setItem("selectedCourses", JSON.stringify(courses));
 
       // Append documents
       Object.entries(documents).forEach(([key, file]) => {
@@ -149,11 +157,16 @@ const Register = () => {
       try {
         const { data } = await signUp(formDataToSubmit);
         console.log("Registration successful:", data);
-        toast.success("Registration successful! Please check your email for verification.");
-        navigate('/admission-test');
+        toast.success(
+          "Registration successful! Please check your email for verification."
+        );
+        navigate("/admission-test");
       } catch (error) {
         console.error("Registration failed:", error);
-        toast.error(error.response?.data?.message || "Registration failed. Please try again.");
+        toast.error(
+          error.response?.data?.message ||
+            "Registration failed. Please try again."
+        );
       }
     }
   };
@@ -467,36 +480,14 @@ const Register = () => {
               value={formData.firstCourse}
               onChange={handleChange}
             >
-              <option value="" disabled selected>
+              <option value="" disabled>
                 Choose your Course
               </option>
-              <option>Advanced Amazon Virtual Assistant</option>
-              <option>Full Stack Digital Marketing & AI</option>
-              <option>Advanced Shopify & Daraz</option>
-              <option>Full Stack Graphic Designing & AI</option>
-              <option>Advanced UIUX Designing with AI for Web & APP</option>
-              <option>WordPress Website Development</option>
-              <option>Full Stack Web Development with React & Node JS</option>
-              <option>MERN Stack Web Development</option>
-              <option>Advanced PHP Laravel Web Development</option>
-              <option>Python Programming for Everyone</option>
-              <option>Web Development with Python Django</option>
-              <option>Search Engine Optimization - SEO</option>
-              <option>Advanced Google Ads</option>
-              <option>National Cyber Security</option>
-              <option>Penetration Testing Web Hacking</option>
-              <option>Video Editing & Animation</option>
-              <option>Artificial Intelligence</option>
-              <option>Machine Learning & Data Science</option>
-              <option>Forex Trading</option>
-              <option>BlockChain Development</option>
-              <option>Cross platform Flutter App Development</option>
-              <option>CGI Ads</option>
-              <option>Architectural Visualization with Blender 3D</option>
-              <option>Digital Embroidery</option>
-              <option>Textile Designing</option>
-              <option>Ielts</option>
-              <option>Freelancing Program</option>
+              {AVAILABLE_COURSES.map((course) => (
+                <option key={course.name} value={course.name}>
+                  {course.name}
+                </option>
+              ))}
             </select>
             {errors.firstCourse && (
               <div className="invalid-feedback">{errors.firstCourse}</div>
@@ -507,8 +498,6 @@ const Register = () => {
           <div className="mb-3">
             <label className="mb-2" htmlFor="secondCourse">
               Second Course
-              
-               
             </label>
             <select
               className={`form-select p-3 ${
@@ -518,40 +507,33 @@ const Register = () => {
               value={formData.secondCourse}
               onChange={handleChange}
             >
-              <option value="" disabled selected>
+              <option value="" disabled>
                 Choose your Course
               </option>
-              <option>Advanced Amazon Virtual Assistant</option>
-              <option>Full Stack Digital Marketing & AI</option>
-              <option>Advanced Shopify & Daraz</option>
-              <option>Full Stack Graphic Designing & AI</option>
-              <option>Advanced UIUX Designing with AI for Web & APP</option>
-              <option>WordPress Website Development</option>
-              <option>Full Stack Web Development with React & Node JS</option>
-              <option>MERN Stack Web Development</option>
-              <option>Advanced PHP Laravel Web Development</option>
-              <option>Python Programming for Everyone</option>
-              <option>Web Development with Python Django</option>
-              <option>Search Engine Optimization - SEO</option>
-              <option>Advanced Google Ads</option>
-              <option>National Cyber Security</option>
-              <option>Penetration Testing Web Hacking</option>
-              <option>Video Editing & Animation</option>
-              <option>Artificial Intelligence</option>
-              <option>Machine Learning & Data Science</option>
-              <option>Forex Trading</option>
-              <option>BlockChain Development</option>
-              <option>Cross platform Flutter App Development</option>
-              <option>CGI Ads</option>
-              <option>Architectural Visualization with Blender 3D</option>
-              <option>Digital Embroidery</option>
-              <option>Textile Designing</option>
-              <option>Ielts</option>
-              <option>Freelancing Program</option>
+              {AVAILABLE_COURSES.map((course) => (
+                <option key={course.name} value={course.name}>
+                  {course.name}
+                </option>
+              ))}
             </select>
             {errors.secondCourse && (
               <div className="invalid-feedback">{errors.secondCourse}</div>
             )}
+          </div>
+
+          {/* Referral Code (Optional) */}
+          <div className="mb-3">
+            <label className="mb-2" htmlFor="referralCode">
+              Referral Code (Optional)
+            </label>
+            <input
+              className="form-control p-3"
+              type="text"
+              name="referralCode"
+              value={formData.referralCode}
+              onChange={handleChange}
+              placeholder="Enter referral code if you have one"
+            />
           </div>
 
           {/* Internet Access */}
@@ -674,8 +656,7 @@ const Register = () => {
           {/* Upload CNIC (Front & Back Side) */}
           <div className="mb-3">
             <label className="mb-2" htmlFor="cnicDocument">
-              Upload CNIC (Back Side){" "}
-              <span className="text-danger">*</span>
+              Upload CNIC (Back Side) <span className="text-danger">*</span>
             </label>
             <div
               className="drop_box"

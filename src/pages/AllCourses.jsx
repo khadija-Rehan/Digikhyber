@@ -15,8 +15,11 @@ import Particles from "../components/ParticleBackground";
 import ParticleBackground from "../components/ParticleBackground";
 import { Link } from "react-router-dom";
 import StatCounter from "../components/StatsCounter";
+import { AVAILABLE_COURSES } from "../utils/courses";
+
 const AllCourses = () => {
     const [cardsPerRow, setCardsPerRow] = useState(3);
+    const [showAll, setShowAll] = useState(false);
 
     const updateCardsPerRow = () => {
         const width = window.innerWidth;
@@ -48,17 +51,9 @@ const AllCourses = () => {
         AOS.refresh();
     }, [cardsPerRow]);
 
-    const courses = [
-        { image: FS, title: "Full-Stack Web Development with JavaScript" },
-        { image: AD, title: "Native Android Application Development" },
-        { image: ML, title: "Machine Learning, AI, and Data Science" },
-        { image: WP, title: "WordPress Website Design & Deployment" },
-        { image: UI, title: "User Interface (UI) and User Experience (UX) Design" },
-        { image: DM, title: "Full Stack Digital Marketing" },
-    ];
+    // Only show first 9 courses unless showAll is true
+    const coursesToShow = showAll ? AVAILABLE_COURSES : AVAILABLE_COURSES.slice(0, 9);
 
-   
- 
     return (
         <>
             <div className="banner">
@@ -71,7 +66,7 @@ const AllCourses = () => {
                                 <p className="font-18 light-grey l-h-1 weight-400">
                                     Hunarmand Punjab courses are not just different — they are
                                     revolutionary. Designed with hands-on practice, live projects,
-                                    and international standards, we prepare you to lead in today’s
+                                    and international standards, we prepare you to lead in today's
                                     global digital economy.
                                 </p>
                             </div>
@@ -87,7 +82,7 @@ const AllCourses = () => {
             <div className="all-courses">
                 <div className="container">
                     <div className="courses-wrapper">
-                        {courses.map((course, index) => {
+                        {coursesToShow.map((course, index) => {
                             const delay = Math.floor(index / cardsPerRow) * 200;
                             return (
                                 <div
@@ -100,16 +95,16 @@ const AllCourses = () => {
                                     <img
                                         className="w-100"
                                         src={course.image}
-                                        alt={course.title}
+                                        alt={course.name}
                                     />
                                     <div className="course-card-details">
-                                        <p className="font-20">{course.title}</p>
+                                        <p className="font-20">{course.name}</p>
                                         <p className="font-12 green">By Hunarmand Punjab</p>
                                         <p className="font-14 green ratings">
                                             <StarRating />
                                             <span className="rate"> 4.9</span>
                                         </p>
-                                        <Link to={"/course-detail"}>
+                                        <Link to={`/course-detail?course=${encodeURIComponent(course.name)}`}>
                                             <button className="btn-green-sq">View Details</button>
                                         </Link>
                                     </div>
@@ -117,11 +112,21 @@ const AllCourses = () => {
                             );
                         })}
                     </div>
+                    {!showAll && AVAILABLE_COURSES.length > 9 && (
+                        <div className="text-center mt-4">
+                            <button
+                                className="btn-green-sq"
+                                onClick={() => setShowAll(true)}
+                                style={{ minWidth: 160 }}
+                            >
+                                Show More
+                            </button>
+                        </div>
+                    )}
                 </div>
             </div>
 
-            
-            <StatCounter/>
+            <StatCounter />
         </>
     );
 };

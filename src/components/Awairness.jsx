@@ -16,7 +16,7 @@ const Awairness = () => {
                                  Earn 1000$ to 5000 $ <br />Through Freelancing
                             </h2>
                             <h1>Build Your Future with Hunarmand Punjab</h1>
-                            <p className='font-18'>In Collaboration with the Government of Punjab, the Digital Skills Training and Support Program aims to empower youth by providing free digital skills education, creating online employment opportunities for a brighter future.</p>
+                            <p className='font-18'>Hunarmand Punjab provides the Digital Skills Training and Support Program aims to empower youth by providing free digital skills education, creating online employment opportunities for a brighter future.</p>
                             <div className='d-flex gap-4 buttons'>
                                 <Link to='/courses'>
                                 <button className='btn-green'>

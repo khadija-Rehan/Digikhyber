@@ -25,6 +25,7 @@ import FreeSolarPanel from "./pages/FreeSolarPanel";
 import Admissiontest from "./pages/Admissiontest";
 import AdmissionResult from "./pages/AdmissionResult";
 import { AuthProvider } from "./context/AuthContext";
+import { CoursesProvider } from "./context/CoursesContext";
 import ProtectedRoute from "./components/ProtectedRoute";
 import Notificationbar from "./components/Notificationbar";
 import BeacomeInstructors from "./pages/BeacomeInstructors";
@@ -67,6 +68,7 @@ function App() {
         theme="light"
       />
       <AuthProvider>
+        <CoursesProvider>
         <AOSWrapper>
           <ScrollToTop />
           <Notificationbar />
@@ -108,11 +110,10 @@ function App() {
                 </ProtectedRoute>
               }
             />
-            {/*
-          <Route path="/faqs" element={<FAQs />} /> */}
           </Routes>
           {!shouldHideHeaderFooter && <Footer />}
         </AOSWrapper>
+        </CoursesProvider>
       </AuthProvider>
     </>
   );
