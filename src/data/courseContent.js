@@ -1,4 +1,29 @@
-import image from "../assets/ML.jpg";
+import AmazonVA from "../assets/coursebanners/Amazon Virtual Assistant.jpg";
+import FullStackDM from "../assets/coursebanners/Full Stack Digital Marketing & AI.jpg";
+import ShopifyDaraz from "../assets/coursebanners/Shopify & Daraz Business.jpg";
+import FullStackGD from "../assets/coursebanners/Full Stack Graphic Designing & AI.jpg";
+import UIUXDesign from "../assets/coursebanners/UIUX Designing for Web & App.jpg";
+import WordPressDev from "../assets/coursebanners/WordPress Website Development.jpg";
+import ReactNodeJS from "../assets/coursebanners/React & Node js Full Stack Development.jpg";
+import MERNStack from "../assets/coursebanners/MERN Stack Web Development.jpg";
+import PHPLaravel from "../assets/coursebanners/PHP Laravel Web Development.jpg";
+import PythonProgramming from "../assets/coursebanners/Python Programming for Everyone.jpg";
+import VideoEditing from "../assets/coursebanners/Video Editing & Animation.jpg";
+import AI from "../assets/coursebanners/Artificial Intelligence (AI).jpg";
+import MLDataScience from "../assets/coursebanners/Machine Learning & Data Science.jpg";
+import CyberSecurity from "../assets/coursebanners/National Cyber Security.jpg";
+import IELTS from "../assets/coursebanners/IELTS Preparation.jpg";
+import Freelancing from "../assets/coursebanners/Freelancing Program.jpg";
+import ArchVizBlender from "../assets/coursebanners/Architechtural Visualization with Blender 3D.jpg";
+import TextileDesign from "../assets/coursebanners/Textile Designing.jpg";
+import DigitalEmbroidery from "../assets/coursebanners/Digital Embroidery.jpg";
+import CGIAds from "../assets/coursebanners/CGI Ads.jpg";
+import FlutterDev from "../assets/coursebanners/Flutter App Development.jpg";
+import BlockchainDev from "../assets/coursebanners/Blockchain Development.jpg";
+import ForexTrading from "../assets/coursebanners/Forex Trading.jpg";
+import PenetrationTesting from "../assets/coursebanners/Penetration Testing.jpg";
+import AdvancedGoogleAds from "../assets/coursebanners/Advanced Google Ads.jpg";
+import SEO from "../assets/coursebanners/SEO.jpg";
 
 export const courseContentData = {
   "Full Stack Graphic Designing & AI": {
@@ -7,7 +32,7 @@ export const courseContentData = {
       "Discover a comprehensive graphic design program that combines traditional design principles with cutting-edge AI tools. Learn to create stunning visuals for digital and print media.",
     duration: "4 Months",
     level: "Beginner to Advanced",
-    image: image,
+    image: FullStackGD,
     aboutCourse: `The Full Stack Graphic Designing & AI Course is a complete step-by-step training program designed to teach you professional graphic designing from scratch. Whether you're creating social media posts, brand logos, marketing materials, or personal projects, this course equips you with the creative and technical skills needed to succeed in today's design industry.
 
 You can learn at your own pace, anytime and anywhere. It covers all essential graphic design tools and techniques, using industry-leading software like Adobe Photoshop and Adobe Illustrator.
@@ -49,13 +74,13 @@ By the end of the course, you'll be able to confidently create professional desi
       "Portfolio creation and freelancing setup",
     ],
   },
-  "Full Stack Digital Marketing & AI Course": {
+  "Full Stack Digital Marketing & AI": {
     category: "Digital Marketing",
     description:
       "Master the complete digital marketing landscape with AI-powered strategies. Learn to grow businesses online through comprehensive marketing techniques.",
     duration: "4 Months",
     level: "Beginner to Advanced",
-    image: image,
+    image: FullStackDM,
     aboutCourse: `The Full Stack Digital Marketing & AI Course is designed to give you complete knowledge of how businesses grow online. This course covers everything from basic digital marketing concepts to advanced strategies. Whether your goal is to market your own business, work for a company, or offer your services as a freelancer, this course will prepare you for success in the digital world.
 
 You can learn at your own pace, whenever and wherever you want. It provides step-by-step guidance on how to run marketing campaigns, increase website traffic, build brand awareness, and generate leads using the latest digital platforms and tools.
@@ -97,13 +122,13 @@ By the end of the course, you'll be able to confidently plan and manage complete
       "Tracking performance with Google Analytics",
     ],
   },
-  "Amazon Virtual Assistant Course": {
+  "Amazon Virtual Assistant": {
     category: "E-commerce & Virtual Assistance",
     description:
       "Learn to support Amazon sellers and build a successful career as a virtual assistant in the booming e-commerce industry.",
     duration: "3 Months",
     level: "Beginner to Intermediate",
-    image: image,
+    image: AmazonVA,
     aboutCourse: `The Amazon Virtual Assistant Course is designed to help you build the skills needed to support Amazon sellers and businesses. Virtual assistants are in high demand worldwide, especially for managing Amazon accounts, product listings, order processing, and customer service.
 
 Through this course, you'll learn how to assist Amazon sellers from A to Z — from product research and store management to order handling and customer communication. You'll also learn the basics of how to start freelancing as an Amazon Virtual Assistant on platforms like Fiverr, Upwork, and Freelancer.
@@ -145,13 +170,13 @@ This is a self-paced, recorded video course, making it easy for you to learn any
       "Managing Customer Messages & Feedback",
     ],
   },
-  "Shopify & Daraz Business Course": {
+  "Shopify & Daraz Business": {
     category: "E-commerce & Business",
     description:
       "Master online selling with Shopify and Daraz. Learn to create and manage successful online stores for global and local markets.",
     duration: "4 Months",
     level: "Beginner to Intermediate",
-    image: image,
+    image: ShopifyDaraz,
     aboutCourse: `Start your journey in e-commerce and learn how to set up and run your own online store with Shopify and Daraz. This course is designed to teach you how to build a professional online business, manage products, handle orders, and generate sales through Pakistan's leading marketplace Daraz and the global e-commerce platform Shopify.
 
 Through this course, you will learn practical skills to start your own online business or work as an e-commerce virtual assistant. No prior business experience or technical skills are required — we start from the basics and progress to advanced store management.`,
@@ -191,13 +216,13 @@ Through this course, you will learn practical skills to start your own online bu
       "Finding trending products to sell",
     ],
   },
-  "National Cyber Security Course": {
+  "National Cyber Security": {
     category: "Cybersecurity & IT Security",
     description:
       "Learn essential cybersecurity skills to protect systems, networks, and data from cyber threats in today's digital world.",
     duration: "3 Months",
     level: "Beginner to Intermediate",
-    image: image,
+    image: CyberSecurity,
     aboutCourse: `Our National Cyber Security Course is designed to provide you with essential knowledge and practical skills to protect systems, networks, and data from cyber threats. In today's digital world, cyber security is one of the most in-demand fields, and this course helps you build a strong foundation to start a career in the cybersecurity industry.
 
 In this course, you can learn anytime, anywhere, at your own pace. From understanding how hackers operate to learning how to defend against attacks, this course will help you develop the practical skills needed for personal protection and professional opportunities.`,
@@ -237,13 +262,13 @@ In this course, you can learn anytime, anywhere, at your own pace. From understa
       "Introduction to ethical hacking & penetration testing",
     ],
   },
-  "UI/UX Designing for Web & App Course": {
+  "UI/UX Designing for Web & App": {
     category: "Design & User Experience",
     description:
       "Master the art of creating engaging and user-friendly digital experiences for web and mobile applications.",
     duration: "4 Months",
     level: "Beginner to Advanced",
-    image: image,
+    image: UIUXDesign,
     aboutCourse: `Our UI/UX Designing Course is carefully designed to help you master the art and science of creating engaging and user-friendly digital experiences. Whether you want to design mobile apps, websites, or software interfaces, this course covers everything from the fundamentals to advanced design techniques.
 
 This course, allowing you to learn flexibly at your own pace. You will learn to use industry-leading tools and methodologies to build intuitive and beautiful user interfaces (UI) and seamless user experiences (UX).
@@ -291,7 +316,7 @@ By completing this course, you will be ready to design user-centric digital prod
       "Master full-stack web development with React frontend and Node.js backend to build modern, scalable web applications.",
     duration: "5 Months",
     level: "Intermediate to Advanced",
-    image: image,
+    image: ReactNodeJS,
     aboutCourse: `Learn to build complete web applications using React for the frontend and Node.js for the backend. This comprehensive course covers everything from creating interactive user interfaces to building robust server-side applications and APIs.
 
 You can learn at your own pace, gaining practical skills to create dynamic, scalable, and responsive web apps. This course is designed to prepare you for careers as a full stack developer or freelancer in the web development field.`,
@@ -331,13 +356,13 @@ You can learn at your own pace, gaining practical skills to create dynamic, scal
       "Deploying full stack applications on cloud platforms",
     ],
   },
-  "MERN Stack Web Development Course": {
+  "MERN Stack Web Development": {
     category: "Web Development",
     description:
       "Master the MERN stack (MongoDB, Express.js, React.js, Node.js) to build powerful full-stack web applications.",
     duration: "5 Months",
     level: "Intermediate to Advanced",
-    image: image,
+    image: MERNStack,
     aboutCourse: `The MERN Stack Web Development Course offers complete training in building powerful web applications using the popular MERN stack — MongoDB, Express.js, React.js, and Node.js. This course takes you through the entire process of developing full-stack JavaScript applications, from designing the frontend interface to building backend APIs and managing databases.
 
 In this course, you can learn at your own pace, gaining practical skills to create dynamic, scalable, and responsive web apps. This course is designed to prepare you for careers as a MERN stack developer or freelancer in the web development field.`,
@@ -377,13 +402,13 @@ In this course, you can learn at your own pace, gaining practical skills to crea
       "Integrating React frontend with Express backend",
     ],
   },
-  "PHP Laravel Web Development Course": {
+  "PHP Laravel Web Development": {
     category: "Web Development",
     description:
       "Master PHP and Laravel framework to build robust, secure, and scalable web applications with modern development practices.",
     duration: "4 Months",
     level: "Beginner to Advanced",
-    image: image,
+    image: PHPLaravel,
     aboutCourse: `The PHP Laravel Web Development Course is designed to teach you how to build robust, secure, and scalable web applications using PHP and the powerful Laravel framework. Laravel is one of the most popular PHP frameworks known for its elegant syntax and rich features that simplify web development.
 
 This course allow you to learn at your own pace, mastering everything from basic PHP programming to advanced Laravel concepts. Whether you want to build custom websites, dynamic web apps, or backend APIs, this course provides hands-on training to make you a professional Laravel developer.`,
@@ -423,13 +448,13 @@ This course allow you to learn at your own pace, mastering everything from basic
       "Building RESTful APIs development with Laravel",
     ],
   },
-  "Python Programming for Everyone Course": {
+  "Python Programming for Everyone": {
     category: "Programming & Development",
     description:
       "Learn Python programming from scratch with practical projects and real-world applications for beginners and professionals.",
     duration: "3 Months",
     level: "Beginner to Intermediate",
-    image: image,
+    image: PythonProgramming,
     aboutCourse: `The Python Programming for Everyone Course is designed to make programming simple and accessible for learners of all backgrounds. Whether you're a student, professional, or hobbyist, this course will guide you step-by-step through the basics of Python — one of the world's most popular and versatile programming languages.
 
 This course allow you to learn at your own pace and build a strong foundation in programming concepts. You'll learn practical skills to write clean, efficient code and solve real-world problems using Python.`,
@@ -468,13 +493,13 @@ This course allow you to learn at your own pace and build a strong foundation in
       "Introduction to data analysis with Python",
     ],
   },
-  "Video Editing & Animation Course": {
+  "Video Editing & Animation": {
     category: "Media & Creative Arts",
     description:
       "Master video editing and animation techniques to create stunning visual content for digital media and marketing.",
     duration: "4 Months",
     level: "Beginner to Advanced",
-    image: image,
+    image: VideoEditing,
     aboutCourse: `Unlock your creative potential with our Video Editing & Animation Course! This course is designed to teach you how to craft stunning videos and animations using industry-standard software and techniques. Whether you want to create promotional videos, explainer animations, social media content, or cinematic edits, this course will guide you through every step of the process.
 
 In this course, you can learn at your own pace and practice hands-on projects that build your skills from basic editing to advanced animation. Gain the expertise to bring stories to life visually and boost your career in digital media.`,
@@ -514,13 +539,13 @@ In this course, you can learn at your own pace and practice hands-on projects th
       "Making explainer videos and intros",
     ],
   },
-  "Artificial Intelligence (AI) Course": {
+  "Artificial Intelligence (AI)": {
     category: "Technology & AI",
     description:
       "Explore the future of technology with comprehensive AI training covering machine learning, neural networks, and intelligent systems.",
     duration: "4 Months",
     level: "Beginner to Intermediate",
-    image: image,
+    image: AI,
     aboutCourse: `Step into the future with our comprehensive Artificial Intelligence (AI) Course, designed to introduce you to the concepts, techniques, and applications of AI. Learn how machines can simulate human intelligence to solve complex problems, automate tasks, and make smart decisions.
 
 In this course you can access anytime, allowing you to learn at your own pace. From fundamental AI principles to hands-on projects, gain the knowledge and skills needed to start your journey in one of the most exciting and rapidly evolving fields in technology.`,
@@ -560,13 +585,13 @@ In this course you can access anytime, allowing you to learn at your own pace. F
       "Computer vision and image recognition",
     ],
   },
-  "Machine Learning & Data Science Course": {
+  "Machine Learning & Data Science": {
     category: "Data Science & Analytics",
     description:
       "Master data science and machine learning to extract insights, build predictive models, and make data-driven decisions.",
     duration: "5 Months",
     level: "Intermediate to Advanced",
-    image: image,
+    image: MLDataScience,
     aboutCourse: `Dive into the powerful world of data with our Machine Learning & Data Science Course designed to teach you how to extract insights, build predictive models, and make data-driven decisions. Learn the essential concepts and tools used by data scientists and machine learning engineers to analyze complex datasets and create intelligent algorithms.
 
 This course allow you to learn at your own pace. Gain hands-on experience with real-world projects and popular data science libraries and tools, preparing you for a career in one of today's most in-demand fields.`,
@@ -606,13 +631,13 @@ This course allow you to learn at your own pace. Gain hands-on experience with r
       "Jupyter Notebook and Python environment setup",
     ],
   },
-  "IELTS Preparation Course": {
+  "IELTS Preparation": {
     category: "Language & Education",
     description:
       "Prepare for IELTS success with comprehensive training in all four components: Listening, Reading, Writing, and Speaking.",
     duration: "3 Months",
     level: "Beginner to Advanced",
-    image: image,
+    image: IELTS,
     aboutCourse: `Prepare to achieve your desired IELTS score with our comprehensive IELTS Preparation Course. This course is designed to help you master all four components of the IELTS exam—Listening, Reading, Writing, and Speaking. Whether you aim to study abroad, work internationally, or migrate, this course provides proven strategies, practice materials, and expert guidance to boost your confidence and performance.
 
 In this course, you can learn at your own pace, revisiting lessons as needed to improve your skills and exam readiness.`,
@@ -651,13 +676,13 @@ In this course, you can learn at your own pace, revisiting lessons as needed to 
       "Time management techniques",
     ],
   },
-  "Freelancing Program Course": {
+  "Freelancing Program": {
     category: "Career & Business",
     description:
       "Master the art of freelancing with comprehensive training in client acquisition, project management, and building a successful freelance business.",
     duration: "2 Months",
     level: "Beginner to Intermediate",
-    image: image,
+    image: Freelancing,
     aboutCourse: `Kickstart your freelancing career with our comprehensive Freelancing Program Course designed to equip you with the skills, strategies, and mindset needed to succeed in the competitive freelance marketplace. Learn how to find clients, manage projects, price your services, and build a sustainable freelance business — all through practical, you can access anytime.
 
 Whether you want to work independently, earn extra income, or build a full-time freelance career, this course guides you through the essentials of freelancing across various industries including design, writing, programming, marketing, and more.`,
@@ -697,13 +722,13 @@ Whether you want to work independently, earn extra income, or build a full-time 
       "Expanding your freelance business",
     ],
   },
-  "Architectural Visualization with Blender 3D Course": {
+  "Architectural Visualization with Blender 3D": {
     category: "3D Design & Architecture",
     description:
       "Master Blender 3D to create stunning architectural visualizations and photorealistic renders for architectural projects.",
     duration: "4 Months",
     level: "Beginner to Advanced",
-    image: image,
+    image: ArchVizBlender,
     aboutCourse: `Bring architectural designs to life with our Architectural Visualization with Blender 3D Course. Learn how to create stunning, photorealistic 3D visualizations and animations of buildings and interiors using Blender, a powerful and open-source 3D software. This course is perfect for architects, designers, and 3D artists who want to showcase their concepts with professional-quality renders.
 
 This course offers step-by-step tutorials on modeling, texturing, lighting, and rendering to help you craft compelling architectural presentations and marketing materials.`,
@@ -749,7 +774,7 @@ This course offers step-by-step tutorials on modeling, texturing, lighting, and 
       "Discover a wide range of skill-building programs designed to boost your career prospects. Find the perfect course to help you shine!",
     duration: "3 Months",
     level: "Intermediate",
-    image: image,
+    image: WordPressDev,
     aboutCourse: `This course is perfect for beginners who want to learn how to create professional websites using WordPress, the world's most popular content management system. It covers everything from installation to creating dynamic, fully functional websites. By the end of the course, students will have the skills to build, manage, and customize WordPress sites for various purposes.`,
     requirements: [
       "Basic computer and internet skills",
@@ -773,6 +798,420 @@ This course offers step-by-step tutorials on modeling, texturing, lighting, and 
       "Plugin management and development",
       "Content management and SEO optimization",
       "E-commerce integration with WooCommerce",
+    ],
+  },
+  "Textile Designing": {
+    category: "Fashion & Textile Design",
+    description:
+      "Discover the vibrant world of fabric and patterns with comprehensive textile design training for fashion, interiors, and creative industries.",
+    duration: "4 Months",
+    level: "Beginner to Advanced",
+    image: TextileDesign,
+    aboutCourse: `Discover the vibrant world of fabric and patterns with our Textile Designing Course. This course is crafted to teach you the fundamentals and advanced techniques of designing textiles for fashion, interiors, and other creative industries. Learn about fabric types, surface ornamentation, printing methods, and color theory to bring your creative visions to life.
+
+This course provides flexible learning at your own pace with practical assignments that build your skills in both traditional and digital textile design.`,
+    requirements: [
+      "Basic computer and internet skills",
+      "A laptop or desktop with internet access",
+      "No prior design experience required",
+      "Creative mindset and passion for colors and patterns",
+      "Interest in fashion and textile arts",
+    ],
+    materialIncludes: [
+      "Complete textile design fundamentals",
+      "Digital design software training",
+      "Traditional and digital printing techniques",
+      "Color theory and pattern development",
+      "Portfolio development guidance",
+      "Industry insights and career guidance",
+    ],
+    whoCanJoin: [
+      "Beginners: No prior experience needed; perfect for creative enthusiasts",
+      "Fashion Designers & Tailors: Looking to enhance their design skills",
+      "Artists & Illustrators: Interested in fabric design and pattern making",
+      "Entrepreneurs: Wanting to start a textile design or printing business",
+      "Students: Pursuing careers in fashion, interior design, or visual arts",
+      "Anyone passionate about colors, patterns, and fabric art",
+    ],
+    whatWillYouLearn: [
+      "Textile Design Basics: Introduction to textiles and fabric types",
+      "Understanding yarns, weaves, and textures",
+      "Design Principles & Color Theory: Elements and principles of design applied to textiles",
+      "Color schemes, palettes, and dyeing basics",
+      "Surface Ornamentation Techniques: Hand and machine embroidery",
+      "Printing methods: block printing, screen printing, digital printing",
+      "Digital Textile Design: Using software like Adobe Illustrator and Photoshop",
+      "Creating repeat patterns and motifs",
+      "Preparing designs for production",
+      "Fashion & Interior Applications: Designing for apparel and home décor",
+    ],
+  },
+  "Digital Embroidery": {
+    category: "Fashion & Textile Arts",
+    description:
+      "Master digital embroidery techniques using computerized machines and design software to create stunning patterns for fashion and home décor.",
+    duration: "3 Months",
+    level: "Beginner to Intermediate",
+    image: DigitalEmbroidery,
+    aboutCourse: `Unleash your creativity with our Digital Embroidery Course, designed to teach you the art and technology behind modern embroidery using computerized machines and design software. Learn how to create stunning, professional-quality embroidery patterns for fashion, home décor, and personalized gifts.
+
+This course allows you to learn at your own pace while gaining hands-on skills in digital embroidery design, machine operation, and troubleshooting, preparing you to turn your passion into a rewarding career or business.`,
+    requirements: [
+      "Basic computer and internet skills",
+      "A laptop or desktop with internet access",
+      "No prior embroidery experience required",
+      "Interest in textile arts and design",
+      "Creative mindset and attention to detail",
+    ],
+    materialIncludes: [
+      "Complete digital embroidery training",
+      "Embroidery design software tutorials",
+      "Machine operation guides",
+      "Design techniques and patterns",
+      "Project-based learning materials",
+      "Business setup guidance",
+    ],
+    whoCanJoin: [
+      "Beginners: No prior embroidery or design experience needed",
+      "Fashion Designers & Tailors: Wanting to add embroidery to their skillset",
+      "Hobbyists & Crafters: Interested in digital embroidery techniques",
+      "Entrepreneurs: Planning to start an embroidery business",
+      "Art & Textile Students: Looking to enhance their creative portfolio",
+      "Anyone passionate about combining creativity with technology",
+    ],
+    whatWillYouLearn: [
+      "Introduction to Digital Embroidery: Basics of embroidery and its applications",
+      "Overview of digital embroidery machines and software",
+      "Embroidery Design Software: Using popular software like Wilcom, Brother PE-Design",
+      "Creating and editing embroidery patterns",
+      "Converting artwork into embroidery files",
+      "Machine Operation: Setting up and operating computerized embroidery machines",
+      "Threading, hooping, and fabric preparation",
+      "Troubleshooting common machine issues",
+      "Design Techniques: Stitch types and their uses",
+      "Color management and layering",
+    ],
+  },
+  "CGI Ads": {
+    category: "Digital Arts & Advertising",
+    description:
+      "Create captivating computer-generated imagery for advertising with professional CGI techniques and industry-standard software.",
+    duration: "4 Months",
+    level: "Beginner to Advanced",
+    image: CGIAds,
+    aboutCourse: `Step into the world of stunning visual effects and digital creativity with our CGI Ads Course. Learn how to create captivating computer-generated imagery (CGI) for advertising that grabs attention and elevates brand storytelling. This course covers the essential tools and techniques used in the production of high-quality CGI ads, combining creativity with technical expertise.
+
+In this course, you can learn at your own pace and practice with hands-on projects, mastering everything from 3D modeling and animation to rendering and compositing for commercials, social media, and marketing campaigns.`,
+    requirements: [
+      "Basic computer and internet skills",
+      "A laptop or desktop with internet access",
+      "No prior CGI experience required",
+      "Creative mindset and visual storytelling skills",
+      "Interest in digital arts and advertising",
+    ],
+    materialIncludes: [
+      "Complete CGI production training",
+      "3D modeling and animation software",
+      "Rendering and compositing tools",
+      "Project files and templates",
+      "Industry-standard software access",
+      "Portfolio development resources",
+    ],
+    whoCanJoin: [
+      "Students: Interested in digital arts, animation, or advertising",
+      "Beginners: No prior CGI or animation experience required",
+      "Graphic Designers & Animators: Wanting to expand into CGI production",
+      "Marketing Professionals: Who want to create eye-catching ads",
+      "Freelancers & Content Creators: Looking to offer CGI ad services",
+      "Anyone passionate about blending art and technology to create impactful ads",
+    ],
+    whatWillYouLearn: [
+      "CGI Basics: Introduction to CGI and its role in advertising",
+      "Overview of CGI production pipeline",
+      "3D Modeling & Texturing: Creating realistic 3D models for ads",
+      "Applying textures and materials",
+      "Animation Techniques: Keyframe animation and motion graphics",
+      "Animating objects, cameras, and lighting",
+      "Rendering & Compositing: Rendering high-quality visuals",
+      "Compositing CGI with live-action footage",
+      "Software Mastery: Working with industry-standard tools like Blender, Cinema 4D",
+      "Using Adobe After Effects for compositing and effects",
+    ],
+  },
+  "Cross platform Flutter App Development": {
+    category: "Mobile App Development",
+    description:
+      "Build beautiful, high-performance mobile applications for both Android and iOS using Flutter's single codebase approach.",
+    duration: "5 Months",
+    level: "Beginner to Advanced",
+    image: FlutterDev,
+    aboutCourse: `Learn how to build beautiful, high-performance mobile applications that run seamlessly on both Android and iOS platforms with our Cross-Platform Flutter App Development Course. Flutter, developed by Google, is an open-source UI toolkit that enables fast development with a single codebase.
+
+This course guides you step-by-step from beginner fundamentals to advanced Flutter concepts. Master Flutter widgets, state management, API integration, and app deployment to become a confident app developer ready for the modern mobile landscape.`,
+    requirements: [
+      "Basic computer and internet skills",
+      "A laptop or desktop with internet access",
+      "No prior programming experience required",
+      "Interest in mobile app development",
+      "Willingness to learn new technologies",
+    ],
+    materialIncludes: [
+      "Complete Flutter development training",
+      "Dart programming language tutorials",
+      "Mobile app development tools",
+      "API integration guides",
+      "App deployment tutorials",
+      "Project-based learning materials",
+    ],
+    whoCanJoin: [
+      "Beginners: New to programming or app development",
+      "Developers: Looking to expand skills into mobile app development",
+      "Web Developers: Interested in building mobile apps using a single codebase",
+      "Freelancers: Wanting to offer cross-platform app development services",
+      "Entrepreneurs: Planning to create apps for their startups or businesses",
+      "Anyone passionate about building sleek, responsive mobile apps",
+    ],
+    whatWillYouLearn: [
+      "Flutter Basics: Installing and setting up Flutter SDK",
+      "Understanding widgets and Flutter architecture",
+      "Building simple user interfaces",
+      "Dart Programming Language: Core concepts of Dart language",
+      "Variables, functions, and object-oriented programming",
+      "Asynchronous programming with Futures and Streams",
+      "Advanced Flutter Concepts: State management techniques (Provider, Bloc)",
+      "Working with animations and gestures",
+      "Navigations and routing",
+      "API Integration & Data Handling: Fetching and displaying data from REST APIs",
+    ],
+  },
+  "BlockChain Development": {
+    category: "Blockchain & Web3",
+    description:
+      "Develop decentralized applications and smart contracts using blockchain technology for the future of web development.",
+    duration: "5 Months",
+    level: "Intermediate to Advanced",
+    image: BlockchainDev,
+    aboutCourse: `Explore the cutting-edge world of blockchain technology with our Blockchain Web Development Course. This course is designed to teach you how to develop decentralized applications (dApps) and smart contracts using blockchain platforms like Ethereum. Learn the fundamentals of blockchain, build secure web applications, and understand how blockchain can transform industries.
+
+This course lets you learn at your own pace with practical projects that empower you to create blockchain-powered web solutions from scratch.`,
+    requirements: [
+      "Basic computer and internet skills",
+      "A laptop or desktop with internet access",
+      "Basic understanding of programming concepts",
+      "Interest in emerging technologies",
+      "Willingness to learn complex technical concepts",
+    ],
+    materialIncludes: [
+      "Complete blockchain development training",
+      "Smart contract development tools",
+      "Web3 integration tutorials",
+      "Development environment setup",
+      "Project-based learning materials",
+      "Industry insights and career guidance",
+    ],
+    whoCanJoin: [
+      "Students: Interested in emerging technologies and decentralized applications",
+      "Web Developers: Looking to expand skills into blockchain development",
+      "Programmers: Who want to learn smart contract development",
+      "Tech Enthusiasts: Curious about blockchain and cryptocurrencies",
+      "Entrepreneurs: Wanting to build blockchain-based business solutions",
+      "Anyone passionate about pioneering the future of the web",
+    ],
+    whatWillYouLearn: [
+      "Blockchain Fundamentals: Understanding blockchain technology and distributed ledgers",
+      "Cryptography basics and consensus mechanisms",
+      "Overview of popular blockchain platforms",
+      "Smart Contract Development: Writing smart contracts with Solidity",
+      "Deploying and testing contracts on Ethereum network",
+      "Managing contract security and best practices",
+      "Building Decentralized Applications (dApps): Connecting smart contracts with frontend interfaces",
+      "Using Web3.js or ethers.js libraries",
+      "Integrating blockchain wallets (e.g., MetaMask)",
+      "Development Tools & Environment: Setting up development environment",
+    ],
+  },
+  "Forex Trading": {
+    category: "Finance & Trading",
+    description:
+      "Master currency trading fundamentals and advanced strategies to trade successfully in the global foreign exchange market.",
+    duration: "3 Months",
+    level: "Beginner to Intermediate",
+    image: ForexTrading,
+    aboutCourse: `Unlock the world of currency trading with our comprehensive Forex Trading Course. This course is designed to teach you the fundamentals and advanced strategies to trade currencies successfully in the global foreign exchange market. Learn how to analyze market trends, manage risks, and execute profitable trades with confidence.
+
+This course allows you to learn at your own pace and gain practical skills that can help you become a knowledgeable and disciplined forex trader.`,
+    requirements: [
+      "Basic computer and internet skills",
+      "A laptop or desktop with internet access",
+      "No prior trading experience required",
+      "Interest in financial markets",
+      "Discipline and risk management mindset",
+    ],
+    materialIncludes: [
+      "Complete forex trading training",
+      "Trading platform tutorials",
+      "Technical and fundamental analysis tools",
+      "Risk management strategies",
+      "Trading psychology guidance",
+      "Practice account setup",
+    ],
+    whoCanJoin: [
+      "Beginners: No prior trading experience needed; start from scratch",
+      "Aspiring Traders: Looking to enter the forex market professionally",
+      "Investors: Wanting to diversify portfolios with currency trading",
+      "Freelancers: Interested in trading as a source of income",
+      "Financial Enthusiasts: Who want to understand the mechanics of forex trading",
+      "Anyone motivated to learn how to trade currencies effectively",
+    ],
+    whatWillYouLearn: [
+      "Forex Market Basics: Understanding how the forex market works",
+      "Currency pairs and how they are quoted",
+      "Market participants and trading sessions",
+      "Technical Analysis: Chart reading and candlestick patterns",
+      "Support and resistance levels",
+      "Indicators like Moving Averages, RSI, MACD",
+      "Fundamental Analysis: Economic indicators and their impact on currency prices",
+      "News trading strategies",
+      "Central banks and monetary policies",
+      "Trading Strategies: Day trading, swing trading, and scalping",
+    ],
+  },
+  "Penetration Testing Web Hacking": {
+    category: "Cybersecurity & Ethical Hacking",
+    description:
+      "Learn to identify, analyze, and exploit vulnerabilities in web hosting environments through ethical penetration testing.",
+    duration: "4 Months",
+    level: "Intermediate to Advanced",
+    image: PenetrationTesting,
+    aboutCourse: `The Penetration Testing for Web Hosting Course is designed to equip you with the essential skills to identify, analyze, and exploit vulnerabilities in web hosting environments. Learn how to assess the security posture of websites and servers to protect against cyber threats and attacks.
+
+This course provides practical knowledge and hands-on experience in penetration testing methodologies specifically focused on web hosting infrastructure. Whether you want to work as a security professional or enhance your cybersecurity skills, this course will prepare you to detect and mitigate risks effectively.`,
+    requirements: [
+      "Basic computer and internet skills",
+      "A laptop or desktop with internet access",
+      "Basic understanding of networking concepts",
+      "Interest in cybersecurity and ethical hacking",
+      "Willingness to learn security tools and techniques",
+    ],
+    materialIncludes: [
+      "Complete penetration testing training",
+      "Security tools and software access",
+      "Practice environments and labs",
+      "Vulnerability assessment guides",
+      "Reporting and documentation templates",
+      "Career guidance and certification prep",
+    ],
+    whoCanJoin: [
+      "Students: Interested in cybersecurity and ethical hacking",
+      "Beginners: No prior penetration testing experience required; basics included",
+      "IT Professionals: Looking to specialize in web hosting security",
+      "Network Administrators: Wanting to strengthen server security",
+      "Freelancers: Planning to offer penetration testing services",
+      "Business Owners: Who want to understand and improve their web hosting security",
+    ],
+    whatWillYouLearn: [
+      "Introduction to Penetration Testing: Fundamentals of ethical hacking and penetration testing",
+      "Legal and ethical considerations",
+      "Web Hosting Environment Overview: Understanding web hosting architectures",
+      "Common hosting platforms and control panels (cPanel, Plesk)",
+      "Reconnaissance & Information Gathering: Techniques to gather information about the hosting environment",
+      "Tools for scanning and enumeration",
+      "Vulnerability Assessment: Identifying common vulnerabilities in web hosting",
+      "Exploiting misconfigurations and weak points",
+      "Penetration Testing Tools & Techniques: Using tools like Nmap, Metasploit, Burp Suite",
+      "Manual testing techniques",
+    ],
+  },
+  "Advanced Google Ads": {
+    category: "Digital Marketing & Advertising",
+    description:
+      "Master Google Ads platform to create, manage, and optimize paid advertising campaigns that deliver real results.",
+    duration: "3 Months",
+    level: "Intermediate to Advanced",
+    image: AdvancedGoogleAds,
+    aboutCourse: `The Google Ads Course is designed to teach you how to create, manage, and optimize paid advertising campaigns on Google's powerful advertising platform. Whether you want to promote your own business, work as a digital marketer, or offer freelance advertising services, this course will equip you with the skills to run effective Google Ads campaigns that deliver real results.
+
+This course allows you to learn at your own pace and apply practical techniques that increase visibility, traffic, and conversions through Google Search, Display, YouTube, and more.`,
+    requirements: [
+      "Basic computer and internet skills",
+      "A laptop or desktop with internet access",
+      "No prior Google Ads experience required",
+      "Interest in digital marketing and advertising",
+      "Willingness to learn new advertising platforms",
+    ],
+    materialIncludes: [
+      "Complete Google Ads training",
+      "Campaign setup and optimization guides",
+      "Keyword research tools and techniques",
+      "Analytics and reporting tutorials",
+      "Advanced targeting strategies",
+      "Portfolio development resources",
+    ],
+    whoCanJoin: [
+      "Students: Interested in digital marketing and advertising",
+      "Beginners: No prior experience with Google Ads required",
+      "Business Owners: Wanting to promote their products or services online",
+      "Freelancers: Planning to offer Google Ads management services",
+      "Marketing Professionals: Aiming to upgrade their advertising skills",
+      "Anyone: Looking to generate leads and sales through paid ads",
+    ],
+    whatWillYouLearn: [
+      "Google Ads Basics: Understanding Google Ads and its ecosystem",
+      "Types of Google Ads campaigns (Search, Display, Video, Shopping)",
+      "Setting up a Google Ads account",
+      "Keyword Research & Campaign Setup: Finding the right keywords for your ads",
+      "Creating targeted ad groups and campaigns",
+      "Writing effective ad copy",
+      "Bidding & Budget Management: Understanding bidding strategies",
+      "Setting daily budgets and bid adjustments",
+      "Optimizing cost per click (CPC) and return on ad spend (ROAS)",
+      "Ad Extensions & Targeting: Using ad extensions to improve ad visibility",
+    ],
+  },
+  "Search Engine Optimization - SEO": {
+    category: "Digital Marketing & SEO",
+    description:
+      "Master SEO techniques to improve website visibility and drive organic traffic from search engines like Google.",
+    duration: "3 Months",
+    level: "Beginner to Intermediate",
+    image: SEO,
+    aboutCourse: `The Search Engine Optimization (SEO) Course is designed to equip you with the essential skills to improve website visibility and drive organic traffic from search engines like Google. SEO is a vital digital marketing skill that helps businesses rank higher, attract more visitors, and increase conversions without paid advertising.
+
+This course provides practical techniques and strategies you can apply to any website. Learn how search engines work, keyword research, on-page and off-page optimization, and the latest SEO best practices to boost your website's performance.`,
+    requirements: [
+      "Basic computer and internet skills",
+      "A laptop or desktop with internet access",
+      "No prior SEO knowledge required",
+      "Interest in digital marketing",
+      "Willingness to learn technical concepts",
+    ],
+    materialIncludes: [
+      "Complete SEO fundamentals training",
+      "Keyword research tools and techniques",
+      "Technical SEO guides",
+      "Content optimization strategies",
+      "Analytics and reporting tools",
+      "Portfolio development resources",
+    ],
+    whoCanJoin: [
+      "Students: Looking to enter the digital marketing field",
+      "Beginners: No prior SEO knowledge required",
+      "Website Owners & Bloggers: Wanting to increase organic traffic",
+      "Digital Marketers: Aiming to enhance their SEO skills",
+      "Freelancers: Planning to offer SEO services",
+      "Business Owners: Who want to improve their website rankings and sales",
+    ],
+    whatWillYouLearn: [
+      "SEO Fundamentals: How search engines work",
+      "Understanding SEO ranking factors",
+      "White-hat vs black-hat SEO techniques",
+      "Keyword Research & Analysis: Finding high-impact keywords",
+      "Using keyword research tools",
+      "Competitor analysis",
+      "On-Page SEO: Optimizing titles, meta descriptions, and headers",
+      "URL structure and internal linking",
+      "Image optimization and page speed",
+      "Off-Page SEO: Link building strategies",
     ],
   },
 };
