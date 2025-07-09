@@ -1,6 +1,7 @@
 import React from "react";
 import icon3 from "../assets/ico-11.png";
 import icon4 from "../assets/ico-14.png";
+import TextReveal from "./TextReveal";
 const ApplicationSteps = () => {
     return (
         <>
@@ -8,7 +9,7 @@ const ApplicationSteps = () => {
                 <div className="row">
                     <div className="steps">
                         <h2 className="font-32">
-                            How to Get Started with Hunarmand Punjab
+                            <TextReveal text="How to Get Started with Hunarmand Punjab" />
                         </h2>
                         <p className="font-15 l-h-1">
                             It's easy to become a part of Hunarmand Punjab and start learning

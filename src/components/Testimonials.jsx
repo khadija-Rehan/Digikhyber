@@ -1,6 +1,8 @@
 import React from "react";
 import ML from "../assets/ML.jpg";
+import TextReveal from "./TextReveal";
 const Testimonials = () => {
+
   return (
     <>
       <div className="container">
