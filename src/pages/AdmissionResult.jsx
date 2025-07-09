@@ -47,9 +47,7 @@ const AdmissionResult = () => {
       : "-";
   const marksObtained = correctAnswers;
   const percentage =
-    testScore !== null && !isNaN(testScore)
-      ? `${testScore}%`
-      : "-";
+    testScore !== null && !isNaN(testScore) ? `${testScore}%` : "-";
 
   const isPassed = testScore !== null && !isNaN(testScore) && testScore >= 50;
 
@@ -151,7 +149,7 @@ const AdmissionResult = () => {
       const fileName = data.data.fileName;
       if (!fileName) {
         console.error("No file path returned");
-        return; 
+        return;
       }
       // const fileUrl = `http://localhost:3001/uploads/${fileName}`;
       const fileUrl = `https://backend.hunarmandpunjab.pk/uploads/${fileName}`;
@@ -322,7 +320,6 @@ const AdmissionResult = () => {
             role="alert"
           >
             <strong>
-
               <i className="fas fa-check-circle" style={{ color: "green" }}></i>{" "}
               Congratulations! You’ve Successfully Passed the Admission Test
             </strong>{" "}
@@ -407,11 +404,7 @@ const AdmissionResult = () => {
                 <td data-th="Details">{user?.user?.fullName || ""}</td>
               </tr>
               <tr>
-
-                {/* <td data-th="Field">Admission Test ID</td> */}
                 <td data-th="Field">Test ID</td>
-                <td data-th="Details">48079</td>
-                <td data-th="Field">Admission Test ID</td>
                 <td data-th="Details">{formNumber}</td>
               </tr>
               <tr>
@@ -465,8 +458,7 @@ const AdmissionResult = () => {
             in the optional courses. To add a course, choose from the available
             options. You can enroll in up to 2 courses at once. All courses are
             completely free, but a one-time application processing fee of PKR
-            2800 is required, regardless of the number of courses you
-            select.
+            2800 is required, regardless of the number of courses you select.
           </p>
           <div className="table-responsive">
             <table className="table table-hover table-bordered">
@@ -512,43 +504,43 @@ const AdmissionResult = () => {
             </table>
           </div>
         </div>
-          <div className="d-flex align-items-center gap-1 alert alert-warning text-black">
-            <h4 className="fw-bold mb-0">
-              Last Date to pay Application Processing Fee:
-            </h4>
-            <p className="mb-0" style={{ marginRight: 12 }}>
-              {(() => {
-                // Calculate date 4 days from now
-                const today = new Date();
-                today.setDate(today.getDate() + 4);
-                const options = {
-                  year: "numeric",
-                  month: "long",
-                  day: "numeric",
-                };
-                return today.toLocaleDateString("en-US", options);
-              })()}
-            </p>
-            {/* Challan Status */}
-            {challanStatus && (
-              <span
-                className={`badge px-3 py-2 ms-2 fw-bold ${
-                  challanStatus === "Paid"
-                    ? "bg-success text-white"
-                    : "bg-warning text-dark"
-                }`}
-                style={{
-                  fontSize: "1rem",
-                  borderRadius: "6px",
-                  letterSpacing: "0.5px",
-                  minWidth: 80,
-                  textAlign: "center",
-                }}
-              >
-                {challanStatus}
-              </span>
-            )}
-          </div>
+        <div className="d-flex align-items-center gap-1 alert alert-warning text-black">
+          <h4 className="fw-bold mb-0">
+            Last Date to pay Application Processing Fee:
+          </h4>
+          <p className="mb-0" style={{ marginRight: 12 }}>
+            {(() => {
+              // Calculate date 4 days from now
+              const today = new Date();
+              today.setDate(today.getDate() + 4);
+              const options = {
+                year: "numeric",
+                month: "long",
+                day: "numeric",
+              };
+              return today.toLocaleDateString("en-US", options);
+            })()}
+          </p>
+          {/* Challan Status */}
+          {challanStatus && (
+            <span
+              className={`badge px-3 py-2 ms-2 fw-bold ${
+                challanStatus === "Paid"
+                  ? "bg-success text-white"
+                  : "bg-warning text-dark"
+              }`}
+              style={{
+                fontSize: "1rem",
+                borderRadius: "6px",
+                letterSpacing: "0.5px",
+                minWidth: 80,
+                textAlign: "center",
+              }}
+            >
+              {challanStatus}
+            </span>
+          )}
+        </div>
       </div>
       <div style={{ backgroundColor: "#DDA30B", padding: "50px 0 80px" }}>
         <div className="container">
@@ -701,8 +693,15 @@ const AdmissionResult = () => {
                             enrollment.
                           </li>
                         </ol>
-                        <button className="btn-green btn-success btn rounded-2">
-                          Generate Challan
+                        <button
+                          className="btn-green btn-success btn rounded-2"
+                          onClick={() => handleGeneratePdf()}
+                          disabled={hasChallan}
+                        >
+                          <i className="fas fa-download"></i>{" "}
+                          {hasChallan
+                            ? "Challan Already Submitted"
+                            : "Generate Challan"}
                         </button>
                       </div>
                     </div>
