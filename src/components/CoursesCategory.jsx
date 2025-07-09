@@ -29,7 +29,7 @@ const courses = [
     category: "E-Commerce",
   },
   {
-    name: "Digital Mktg & AI",
+    name: "Digital Marketing & AI",
     icon: faBullhorn,
     category: "Marketing",
   },
@@ -39,7 +39,7 @@ const courses = [
     category: "E-Commerce",
   },
   {
-    name: "Web Dev (React/Node)",
+    name: "React & Node JS Web Development",
     icon: faReact,
     category: "Development",
   },

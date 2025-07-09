@@ -1,16 +1,10 @@
 import React, { useEffect, useState } from "react";
 import AOS from "aos";
 import "aos/dist/aos.css";
-
-import ML from "../assets/ML.jpg";
-import UI from "../assets/UI.jpg";
-import DM from "../assets/DM.jpg";
-import FS from "../assets/f-s-js.png";
-import AD from "../assets/android.jpg";
-import WP from "../assets/wordpress.jpg";
 import StarRating from "./StarRating";
 import { Link } from "react-router-dom";
 import TextReveal from "./TextReveal";
+import { AVAILABLE_COURSES } from "../utils/courses";
 
 const Courses = () => {
   const [cardsPerRow, setCardsPerRow] = useState(3);
@@ -44,14 +38,12 @@ const Courses = () => {
     AOS.refresh();
   }, [cardsPerRow]);
 
-  const courses = [
-    { image: FS, title: "Full-Stack Web Development with JavaScript" },
-    { image: AD, title: "Native Android Application Development" },
-    { image: ML, title: "Machine Learning, AI, and Data Science" },
-    { image: WP, title: "WordPress Website Design & Deployment" },
-    { image: UI, title: "User Interface (UI) and User Experience (UX) Design" },
-    { image: DM, title: "Full Stack Digital Marketing" },
-  ];
+
+    // Only show 6 courses
+    const courses = AVAILABLE_COURSES.slice(0, 6).map((course) => ({
+        image: course.image,
+        title: course.name,
+    }));
 
   return (
     <div className="all-courses container">
