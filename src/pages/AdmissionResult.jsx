@@ -1,87 +1,23 @@
 import React, { useState, useEffect } from "react";
 import { Accordion } from "react-bootstrap";
-import Bank1 from "../assets/bank1.webp";
-import Bank2 from "../assets/bank2.webp";
 import GIF from "../assets/approved.gif";
 import { generatePdf } from "../api/user";
-import { getUserProfile } from "../api/user";
 import { useCourses } from "../context/CoursesContext";
 import { useAuth } from "../context/AuthContext";
 import { toast } from "react-toastify";
-
-const getOrCreateFormNumber = () => {
-  let formNumber = localStorage.getItem("formNumber");
-  if (!formNumber) {
-    formNumber = Math.floor(10000 + Math.random() * 90000).toString();
-    localStorage.setItem("formNumber", formNumber);
-  }
-  return formNumber;
-};
 
 const AdmissionResult = () => {
   const { userCourses, availableCourses, setUserCourses, getTotalPrice } =
     useCourses();
 
-  const { user, login } = useAuth();
+  const { user } = useAuth();
   const [showModal, setShowModal] = useState(false);
   const [editCourses, setEditCourses] = useState([...userCourses]);
   const [error, setError] = useState("");
   const [totalPrice, setTotalPrice] = useState(0);
 
-  const [formNumber, setFormNumber] = useState(() => getOrCreateFormNumber());
-
-  const testScore =
-    user?.user?.data?.user?.testScore !== undefined &&
-    user?.user?.data?.user?.testScore !== null
-      ? Number(user.user.data.user.testScore)
-      : null;
-
-  const totalMcqs = 20;
-  const correctAnswers =
-    testScore !== null && !isNaN(testScore)
-      ? Math.round((testScore / 100) * totalMcqs)
-      : "-";
-  const incorrectAnswers =
-    testScore !== null && !isNaN(testScore)
-      ? totalMcqs - Math.round((testScore / 100) * totalMcqs)
-      : "-";
-  const marksObtained = correctAnswers;
-  const percentage =
-    testScore !== null && !isNaN(testScore)
-      ? `${testScore}%`
-      : "-";
-
-  const isPassed = testScore !== null && !isNaN(testScore) && testScore >= 50;
-
   useEffect(() => {
-    const fetchUserProfile = async () => {
-      try {
-        const profileResponse = await getUserProfile();
-        const profileData = profileResponse.data;
-
-        const updatedUserData = {
-          user: {
-            ...user.user,
-            ...profileData,
-          },
-          token: user.token,
-        };
-
-        login(updatedUserData);
-
-        console.log("User profile updated:", updatedUserData);
-      } catch (error) {
-        console.error("Error fetching user profile:", error);
-      }
-    };
-
-    if (user && user.token) {
-      fetchUserProfile();
-    }
-  }, []);
-
-  useEffect(() => {
-    const selectedCoursesFromStorage = user.user.courses;
+    const selectedCoursesFromStorage = localStorage.getItem("selectedCourses");
     if (selectedCoursesFromStorage) {
       try {
         const courses = JSON.parse(selectedCoursesFromStorage);
@@ -119,9 +55,7 @@ const AdmissionResult = () => {
   };
 
   const handleAddCourse = () => {
-    if (editCourses.length < 2) {
-      setEditCourses([...editCourses, ""]);
-    }
+    setEditCourses([...editCourses, ""]);
   };
 
   const handleDeleteCourse = (index) => {
@@ -131,10 +65,11 @@ const AdmissionResult = () => {
   };
 
   const handleSave = () => {
+    // Remove empty and duplicate courses
     const filtered = editCourses.filter(Boolean);
     const unique = Array.from(new Set(filtered));
-    if (unique.length > 2) {
-      setError("You can enroll in up to 2 courses only.");
+    if (unique.length > 3) {
+      setError("You can enroll in up to 3 courses only.");
       return;
     }
     setUserCourses(unique);
@@ -144,14 +79,14 @@ const AdmissionResult = () => {
   const handleGeneratePdf = async () => {
     try {
       if (totalPrice === 0) {
-        toast.error("Please add some courses!");
+        toast.error("Please add some coruses!");
         return;
       }
       const { data } = await generatePdf(totalPrice, userCourses);
       const fileName = data.data.fileName;
       if (!fileName) {
         console.error("No file path returned");
-        return; 
+        return;
       }
       // const fileUrl = `http://localhost:3001/uploads/${fileName}`;
       const fileUrl = `https://backend.hunarmandpunjab.pk/uploads/${fileName}`;
@@ -159,28 +94,11 @@ const AdmissionResult = () => {
       a.href = fileUrl;
       a.download = fileName;
       a.click();
+      localStorage.removeItem("selectedCourses");
     } catch (error) {
       console.error("Error generating PDF:", error);
     }
   };
-
-  // Check if user has a challan
-  const hasChallan = user?.user?.data?.challans?.total !== 0;
-
-  // --- New: Get first challan and its paid status ---
-  const firstChallan =
-    user?.user?.data?.user?.challans?.challans &&
-    Array.isArray(user.user.data.user.challans.challans) &&
-    user.user.data.user.challans.challans.length > 0
-      ? user.user.data.user.challans.challans[0]
-      : null;
-
-  // Only show challan status if there is a challan object
-  let challanStatus = null;
-  if (firstChallan && typeof firstChallan.paid !== "undefined") {
-    challanStatus = firstChallan.paid ? "Paid" : "Pending";
-  }
-  // --------------------------------------------------
 
   const modalOverlayStyle = {
     position: "fixed",
@@ -315,6 +233,7 @@ const AdmissionResult = () => {
         <div className="row  pb-5">
           <h2 className="text-center">
             Congratulations! You’ve Successfully Passed the Admission Test
+
           </h2>
           <div
             class="alert alert-success mt-4"
@@ -323,16 +242,10 @@ const AdmissionResult = () => {
           >
             <strong>
               <i class="fas fa-check-circle" style={{ color: "green" }}></i>{" "}
-              Congratulations! You’ve Successfully Passed the Admission Test
+                          Congratulations! You’ve Successfully Passed the Admission Test
+
             </strong>{" "}
-            We are thrilled to inform you that you have successfully cleared the
-            Hunarmand Punjab Admission Test. Now you are eligible for a
-            Scholarship Card. To confirm your seat & proceed with your enrolled
-            course. All the courses under the Hunarmand scholarship card are
-            100% free, but the application processing fee is necessary to
-            complete your application. Your processing fee will be reimbursed if
-            you achieve above 85% Marks in the final evaluation test under the
-            policy of Hunarmand Punjab. <br />
+            We are thrilled to inform you that you have successfully cleared the Hunarmand Punjab Admission Test. Now you are eligible for a Scholarship Card. To confirm your seat & proceed with your enrolled course. All the courses under the Hunarmand scholarship card are 100% free, but the application processing fee is necessary to complete your application. Your processing fee will be reimbursed if you achieve above 85% Marks in the final evaluation test under the policy of Hunarmand Punjab. <br />
             You’re just one step away from receiving your Scholarship Card!
             <div className="mt-4">
               <p className="fw-semibold ">
@@ -340,12 +253,12 @@ const AdmissionResult = () => {
               </p>
               <ul className="  mt-2">
                 <li> Access to Advanced IT Courses</li>
-                <li> Laptop Scheme</li>
+                <li>  Laptop Scheme</li>
                 <li> Solar Scheme</li>
                 <li>Access to Taleem Finance</li>
-                <li> Access to Study Abroad Free Consultancy</li>
-                <li> Hands-On Learning with Global Curriculum</li>
-                <li> Career Guidance & Freelancing Support</li>
+                <li>  Access to Study Abroad Free Consultancy</li>
+                <li>  Hands-On Learning with Global Curriculum</li>
+                <li>  Career Guidance & Freelancing Support</li>
               </ul>
             </div>
           </div>
@@ -407,31 +320,31 @@ const AdmissionResult = () => {
               </tr>
               <tr>
                 <td data-th="Field">Admission Test ID</td>
-                <td data-th="Details">{formNumber}</td>
+                <td data-th="Details">48079</td>
               </tr>
               <tr>
                 <td data-th="Field">Total MCQs</td>
-                <td data-th="Details">{totalMcqs}</td>
+                <td data-th="Details">25</td>
               </tr>
               <tr>
                 <td data-th="Field">Correct Answers</td>
-                <td data-th="Details">{correctAnswers}</td>
+                <td data-th="Details">18</td>
               </tr>
               <tr>
                 <td data-th="Field">Incorrect Answers</td>
-                <td data-th="Details">{incorrectAnswers}</td>
+                <td data-th="Details">7</td>
               </tr>
               <tr>
                 <td data-th="Field">Total Marks</td>
-                <td data-th="Details">{totalMcqs}</td>
+                <td data-th="Details">25</td>
               </tr>
               <tr>
                 <td data-th="Field">Marks Obtained</td>
-                <td data-th="Details">{marksObtained}</td>
+                <td data-th="Details">18</td>
               </tr>
               <tr>
                 <td data-th="Field">Percentage</td>
-                <td data-th="Details">{percentage}</td>
+                <td data-th="Details">72%</td>
               </tr>
               <tr>
                 <td data-th="Field">Pass/Fail Status</td>
@@ -440,7 +353,7 @@ const AdmissionResult = () => {
                     className="btn-green p-1 px-2"
                     style={{ fontSize: "12px" }}
                   >
-                    {isPassed ? "Pass" : "Fail"}
+                    Pass
                   </span>
                 </td>
               </tr>
@@ -455,9 +368,9 @@ const AdmissionResult = () => {
           <p>
             To edit your courses, click 'Edit.' To skip a course, select 'None'
             in the optional courses. To add a course, choose from the available
-            options. You can enroll in up to 2 courses at once. All courses are
-            completely free, but a one-time application processing fee of PKR
-            2800 is required, regardless of the number of courses you
+            options. You can enroll in up to 3 courses at once. All courses are
+            completely free, but a one-time application processing fee of PKR{" "}
+            {totalPrice} is required, regardless of the number of courses you
             select.
           </p>
           <div class="table-responsive">
@@ -477,7 +390,7 @@ const AdmissionResult = () => {
               </thead>
               <tbody>
                 <tr>
-                  <td>{formNumber}</td>
+                  <td>48079</td>
                   <td>
                     <ul>
                       {userCourses.length === 0 ? (
@@ -493,10 +406,8 @@ const AdmissionResult = () => {
                     <button
                       className="btn btn-success btn-green rounded-2"
                       onClick={handleEditClick}
-                      disabled={hasChallan}
                     >
-                      <i className="fas fa-edit"></i>{" "}
-                      {hasChallan ? "Challan Submitted" : "Edit"}
+                      <i className="fas fa-edit"></i> Edit
                     </button>
                   </td>
                 </tr>
@@ -504,43 +415,24 @@ const AdmissionResult = () => {
             </table>
           </div>
         </div>
-          <div className="d-flex align-items-center gap-1 alert alert-warning text-black">
-            <h4 className="fw-bold mb-0">
-              Last Date to pay Application Processing Fee:
-            </h4>
-            <p className="mb-0" style={{ marginRight: 12 }}>
-              {(() => {
-                // Calculate date 4 days from now
-                const today = new Date();
-                today.setDate(today.getDate() + 4);
-                const options = {
-                  year: "numeric",
-                  month: "long",
-                  day: "numeric",
-                };
-                return today.toLocaleDateString("en-US", options);
-              })()}
-            </p>
-            {/* Challan Status */}
-            {challanStatus && (
-              <span
-                className={`badge px-3 py-2 ms-2 fw-bold ${
-                  challanStatus === "Paid"
-                    ? "bg-success text-white"
-                    : "bg-warning text-dark"
-                }`}
-                style={{
-                  fontSize: "1rem",
-                  borderRadius: "6px",
-                  letterSpacing: "0.5px",
-                  minWidth: 80,
-                  textAlign: "center",
-                }}
-              >
-                {challanStatus}
-              </span>
-            )}
-          </div>
+        <div className="d-flex align-items-center gap-1 alert alert-warning text-black">
+          <h4 className="fw-bold mb-0">
+            Last Date to pay Application Processing Fee:
+          </h4>
+          <p className="mb-0">
+            {(() => {
+              // Calculate date 4 days from now
+              const today = new Date();
+              today.setDate(today.getDate() + 4);
+              const options = {
+                year: "numeric",
+                month: "long",
+                day: "numeric",
+              };
+              return today.toLocaleDateString("en-US", options);
+            })()}
+          </p>
+        </div>
       </div>
       <div style={{ backgroundColor: "#DDA30B", padding: "50px 0 80px" }}>
         <div className="container">
@@ -610,12 +502,8 @@ const AdmissionResult = () => {
                 <button
                   className="btn-green btn-success btn rounded-2"
                   onClick={() => handleGeneratePdf()}
-                  disabled={hasChallan}
                 >
-                  <i className="fas fa-download"></i>{" "}
-                  {hasChallan
-                    ? "Challan Already Submitted"
-                    : "Download Bank Challan"}
+                  <i className="fas fa-download"></i> Download Bank Challan
                 </button>
 
                 <div className="alert alert-success mt-4 border">
@@ -683,7 +571,7 @@ const AdmissionResult = () => {
                     </button>
                   </div>
                 ))}
-                {editCourses.length < 2 && (
+                {editCourses.length < 3 && (
                   <button style={addBtnStyle} onClick={handleAddCourse}>
                     Add Course
                   </button>
