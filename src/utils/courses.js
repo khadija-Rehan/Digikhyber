@@ -1,35 +1,37 @@
-import ML from "../assets/Hunarmand Punjab Website Banner 4-min.jpg";
-import UI from "../assets/Hunarmand Punjab Website Banner 4-min.jpg";
-import DM from "../assets/Hunarmand Punjab Website Banner 4-min.jpg";
-import FS from "../assets/Hunarmand Punjab Website Banner 4-min.jpg";
-import AD from "../assets/Hunarmand Punjab Website Banner 4-min.jpg";
-import WP from "../assets/Hunarmand Punjab Website Banner 4-min.jpg";
-
-
-
-
-
-
-
 export const COURSE_PRICE = 1000;
 
-// Course list strictly matches the provided list and order
 export const AVAILABLE_COURSES = [
-  { name: "Amazon Virtual Assistant Course", price: COURSE_PRICE, image: ML },
-  { name: "Full Stack Digital Marketing & AI Course", price: COURSE_PRICE, image: DM },
-  { name: "Shopify & Daraz Business Course", price: COURSE_PRICE, image: WP },
-  { name: "Full Stack Graphic Designing & AI", price: COURSE_PRICE, image: UI },
-  { name: "UI/UX Designing for Web & App Course", price: COURSE_PRICE, image: UI }, 
-  { name: "WordPress Website Development", price: COURSE_PRICE, image: WP },
-  { name: "React & Node.js Full Stack Development", price: COURSE_PRICE, image: FS },
-  { name: "MERN Stack Web Development Course", price: COURSE_PRICE, image: AD },
-  { name: "PHP Laravel Web Development Course", price: COURSE_PRICE, image: AD },
-  { name: "Python Programming for Everyone Course", price: COURSE_PRICE, image: AD },
-  { name: "Video Editing & Animation Course", price: COURSE_PRICE, image: AD },
-  { name: "Artificial Intelligence (AI) Course", price: COURSE_PRICE, image: AD },
-  { name: "Machine Learning & Data Science Course", price: COURSE_PRICE, image: AD },
-  { name: "National Cyber Security Course", price: COURSE_PRICE, image: AD },
-  { name: "IELTS Preparation Course", price: COURSE_PRICE, image: AD },
-  { name: "Freelancing Program Course", price: COURSE_PRICE, image: AD },
-  { name: "Architectural Visualization with Blender 3D Course", price: COURSE_PRICE, image: AD },
+  { name: "Advanced Amazon Virtual Assistant", price: COURSE_PRICE },
+  { name: "Full Stack Digital Marketing & AI", price: COURSE_PRICE },
+  { name: "Advanced Shopify & Daraz", price: COURSE_PRICE },
+  { name: "Full Stack Graphic Designing & AI", price: COURSE_PRICE },
+  {
+    name: "Advanced UIUX Designing with AI for Web & APP",
+    price: COURSE_PRICE,
+  },
+  { name: "WordPress Website Development", price: COURSE_PRICE },
+  {
+    name: "Full Stack Web Development with React & Node JS",
+    price: COURSE_PRICE,
+  },
+  { name: "MERN Stack Web Development", price: COURSE_PRICE },
+  { name: "Advanced PHP Laravel Web Development", price: COURSE_PRICE },
+  { name: "Python Programming for Everyone", price: COURSE_PRICE },
+  { name: "Web Development with Python Django", price: COURSE_PRICE },
+  { name: "Search Engine Optimization - SEO", price: COURSE_PRICE },
+  { name: "Advanced Google Ads", price: COURSE_PRICE },
+  { name: "National Cyber Security", price: COURSE_PRICE },
+  { name: "Penetration Testing Web Hacking", price: COURSE_PRICE },
+  { name: "Video Editing & Animation", price: COURSE_PRICE },
+  { name: "Artificial Intelligence", price: COURSE_PRICE },
+  { name: "Machine Learning & Data Science", price: COURSE_PRICE },
+  { name: "Forex Trading", price: COURSE_PRICE },
+  { name: "BlockChain Development", price: COURSE_PRICE },
+  { name: "Cross platform Flutter App Development", price: COURSE_PRICE },
+  { name: "CGI Ads", price: COURSE_PRICE },
+  { name: "Architectural Visualization with Blender 3D", price: COURSE_PRICE },
+  { name: "Digital Embroidery", price: COURSE_PRICE },
+  { name: "Textile Designing", price: COURSE_PRICE },
+  { name: "Ielts", price: COURSE_PRICE },
+  { name: "Freelancing Program", price: COURSE_PRICE },
 ];

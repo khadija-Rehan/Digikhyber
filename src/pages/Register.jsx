@@ -1,8 +1,8 @@
 import React, { useState } from "react";
 import Logo from "../assets/logo.png";
 import { signUp } from "../api/auth";
-import { toast } from "react-toastify";
-import "react-toastify/dist/ReactToastify.css";
+import { toast } from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css';
 import { useNavigate } from "react-router";
 import { AVAILABLE_COURSES } from "../utils/courses";
 
@@ -30,7 +30,6 @@ const Register = () => {
     // employmentStatus: false,
     password: "",
     agreement: false,
-    referralCode: "", // Added referral code field (optional)
   });
 
   const [documents, setDocuments] = useState({
@@ -97,8 +96,6 @@ const Register = () => {
       newErrors.agreement = "You must agree to the terms and conditions";
     }
 
-    // No validation for referralCode since it's optional
-
     setErrors(newErrors);
     return Object.keys(newErrors).length === 0;
   };
@@ -114,10 +111,6 @@ const Register = () => {
   const handleChange = (e) => {
     const { name, value, type, checked } = e.target;
     let processedValue = value;
-
-    if (type === "checkbox") {
-      processedValue = checked;
-    }
 
     setFormData((prev) => ({
       ...prev,
@@ -138,14 +131,15 @@ const Register = () => {
       });
 
       // Create and append courses array
-      const courses = [formData.firstCourse, formData.secondCourse].filter(
-        Boolean
-      );
-
+      const courses = [
+        formData.firstCourse,
+        formData.secondCourse
+      ].filter(Boolean);
+      
       formDataToSubmit.append("courses", JSON.stringify(courses));
 
       // Save courses to localStorage
-      localStorage.setItem("selectedCourses", JSON.stringify(courses));
+      localStorage.setItem('selectedCourses', JSON.stringify(courses));
 
       // Append documents
       Object.entries(documents).forEach(([key, file]) => {
@@ -157,16 +151,11 @@ const Register = () => {
       try {
         const { data } = await signUp(formDataToSubmit);
         console.log("Registration successful:", data);
-        toast.success(
-          "Registration successful! Please check your email for verification."
-        );
-        navigate("/admission-test");
+        toast.success("Registration successful! Please check your email for verification.");
+        navigate('/admission-test');
       } catch (error) {
         console.error("Registration failed:", error);
-        toast.error(
-          error.response?.data?.message ||
-            "Registration failed. Please try again."
-        );
+        toast.error(error.response?.data?.message || "Registration failed. Please try again.");
       }
     }
   };
@@ -480,7 +469,7 @@ const Register = () => {
               value={formData.firstCourse}
               onChange={handleChange}
             >
-              <option value="" disabled>
+              <option value="" disabled selected>
                 Choose your Course
               </option>
               {AVAILABLE_COURSES.map((course) => (
@@ -498,6 +487,8 @@ const Register = () => {
           <div className="mb-3">
             <label className="mb-2" htmlFor="secondCourse">
               Second Course
+              
+               
             </label>
             <select
               className={`form-select p-3 ${
@@ -507,7 +498,7 @@ const Register = () => {
               value={formData.secondCourse}
               onChange={handleChange}
             >
-              <option value="" disabled>
+              <option value="" disabled selected>
                 Choose your Course
               </option>
               {AVAILABLE_COURSES.map((course) => (
@@ -519,21 +510,6 @@ const Register = () => {
             {errors.secondCourse && (
               <div className="invalid-feedback">{errors.secondCourse}</div>
             )}
-          </div>
-
-          {/* Referral Code (Optional) */}
-          <div className="mb-3">
-            <label className="mb-2" htmlFor="referralCode">
-              Referral Code (Optional)
-            </label>
-            <input
-              className="form-control p-3"
-              type="text"
-              name="referralCode"
-              value={formData.referralCode}
-              onChange={handleChange}
-              placeholder="Enter referral code if you have one"
-            />
           </div>
 
           {/* Internet Access */}
@@ -656,7 +632,8 @@ const Register = () => {
           {/* Upload CNIC (Front & Back Side) */}
           <div className="mb-3">
             <label className="mb-2" htmlFor="cnicDocument">
-              Upload CNIC (Back Side) <span className="text-danger">*</span>
+              Upload CNIC (Back Side){" "}
+              <span className="text-danger">*</span>
             </label>
             <div
               className="drop_box"
