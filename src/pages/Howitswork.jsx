@@ -202,7 +202,7 @@ const HowItsWork = () => {
             <div class="process-point-right"></div>
           </div>
         </div>
-        <div class="row  mb-4">
+        <div class="row mb-4">
           <div class="col-lg-5 position-relative">
             <div class="process-point-left "></div>
           </div>
@@ -273,7 +273,7 @@ const HowItsWork = () => {
             <div class="process-point-right"></div>
           </div>
         </div>
-        <div class="row  mb-4">
+        <div class="row mb-4">
           <div class="col-lg-5 position-relative">
             <div class="process-point-left"></div>
           </div>
@@ -306,7 +306,7 @@ const HowItsWork = () => {
         <div class="row mb-4">
           <div class="col-lg-5">
             <div
-              class="process-box process-box-desktop  process-left aos-init aos-animate"
+              class="process-box process-box-desktop process-left aos-init aos-animate"
               data-aos="fade-right"
               data-aos-duration="1000"
             >
@@ -342,7 +342,52 @@ const HowItsWork = () => {
           </div>
           <div class="col-lg-2"></div>
           <div class="col-lg-5  position-relative">
-            <div class="process-point-right process-last"></div>
+            <div class="process-point-right"></div>
+          </div>
+        </div>
+        <div class="row  mb-4">
+          <div class="col-lg-5 position-relative">
+            <div class="process-point-left last-point"></div>
+          </div>
+          <div class="col-lg-2"></div>
+          <div class="col-lg-5">
+            <div
+              class="process-box process-box-desktop process-right aos-init aos-animate"
+              data-aos="fade-left"
+              data-aos-duration="1000"
+            >
+              <div class="row">
+                <div class="col-lg-5">
+                  <div class="process-step">
+                    <p class="m-0 p-0">Step</p>
+                    <h2 class="m-0 p-0">10</h2>
+                  </div>
+                </div>
+                <div class="col-lg-7">
+                  <h5>Step 10: Scholarship Card</h5>
+                  <OverlayTrigger
+                    placement="top"
+                    overlay={
+                      <Tooltip id="tooltip-top-admission-fee">
+                        If you're eligible for financial assistance, you will
+                        receive a Scholarship Card. This card confirms your
+                        scholarship status and can be used to avail various
+                        course-related benefits. Please ensure you meet the
+                        scholarship criteria and have submitted all required
+                        documentation.
+                      </Tooltip>
+                    }
+                  >
+                    <p>
+                      If you're eligible for financial assistance, you will
+                      receive a Scholarship Card. This card confirms your
+                      scholarship ...
+                    </p>
+                  </OverlayTrigger>
+                </div>
+              </div>
+              <div class="process-line-r"></div>
+            </div>
           </div>
         </div>
       </div>

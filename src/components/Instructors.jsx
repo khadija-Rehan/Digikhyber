@@ -2,6 +2,7 @@ import React from 'react'
 import icon3 from "../assets/ico-11.png";
 import icon4 from "../assets/ico-14.png";
 import ML from "../assets/ML.jpg";
+import TextReveal from './TextReveal';
 const Instructors = () => {
     return (
         <>
@@ -13,7 +14,9 @@ const Instructors = () => {
                     </div>
                     <div className='col-lg-6 col-md-12 '>
                         <p className='white font-14 d-p-2'>Who We Are</p>
-                        <h2 className='font-32'>Grow Your Skills and Career with Hunarmand Punjab</h2>
+                        <h2 className='font-32'>
+                            <TextReveal text="Grow Your Skills and Career with Hunarmand Punjab" />
+                        </h2>
                         <p className='font-15 l-h-1'>Welcome to Hunarmand Punjab! We're here to help the young people of Punjab get the digital skills they need to find good jobs. Our goal is to train 500,000 students and help them become professional earners. We want to lower unemployment and make Punjab's economy stronger by teaching skills that are in demand.</p>
                         <p className='font-20'>Our Mission</p>
                         <p className='font-14 weight-400'>To provide training to 500,000 students and make them professional earners.</p>
