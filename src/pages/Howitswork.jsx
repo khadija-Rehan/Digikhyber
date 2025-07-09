@@ -369,7 +369,7 @@ const HowItsWork = () => {
                     placement="top"
                     overlay={
                       <Tooltip id="tooltip-top-admission-fee">
-                        If you're eligible for financial assistance, you will
+                        If you're eligible, you will
                         receive a Scholarship Card. This card confirms your
                         scholarship status and can be used to avail various
                         course-related benefits. Please ensure you meet the

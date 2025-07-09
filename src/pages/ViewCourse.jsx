@@ -129,7 +129,7 @@ const ViewCourse = () => {
                   style={{ width: "fit-content" }}
                 >
                   <div>Classes: Recorded</div>
-                  <div>Duration: {courseContent.duration}</div>
+                  <div>Duration: 3 Months</div>
                   <div>Level: {courseContent.level}</div>
                 </div>
               </div>
