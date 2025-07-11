@@ -168,8 +168,8 @@ const AdmissionResult = () => {
         setIsGeneratingChallan(false);
         return;
       }
-      const fileUrl = `http://localhost:3001/uploads/${fileName}`;
-      // const fileUrl = `https://backend.hunarmandpunjab.pk/uploads/${fileName}`;
+      // const fileUrl = `http://localhost:3001/uploads/${fileName}`;
+      const fileUrl = `https://backend.hunarmandpunjab.pk/uploads/${fileName}`;
       const a = document.createElement("a");
       a.href = fileUrl;
       a.download = fileName;
