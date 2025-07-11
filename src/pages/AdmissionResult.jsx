@@ -79,30 +79,42 @@ const AdmissionResult = () => {
   }, []);
 
   useEffect(() => {
-    const selectedCoursesFromStorage = user.user.courses;
-    if (selectedCoursesFromStorage) {
+    if (!user || !user.user || !user.user.data || !user.user.data.user) return;
+
+    // user.user.data.user.courses is expected to be a JSON string or an array
+    let selectedCourses = user.user.data.user.courses;
+
+    let parsedCourses = [];
+    if (selectedCourses) {
       try {
-        const courses = JSON.parse(selectedCoursesFromStorage);
-        if (Array.isArray(courses) && courses.length > 0) {
-          const existingCourses = new Set(userCourses);
-          const newCourses = courses.filter(
-            (course) => !existingCourses.has(course)
-          );
-          if (newCourses.length > 0) {
-            setUserCourses([...userCourses, ...newCourses]);
-          }
+        // If it's a string, try to parse it as JSON
+        if (typeof selectedCourses === "string") {
+          parsedCourses = JSON.parse(selectedCourses);
+        } else if (Array.isArray(selectedCourses)) {
+          // If it's already an array, use it directly
+          parsedCourses = selectedCourses;
         }
       } catch (error) {
-        console.error(
-          "Error parsing selectedCourses from localStorage:",
-          error
-        );
+        // If parsing fails, fallback to empty array
+        console.error("Error parsing selectedCourses:", error);
+        parsedCourses = [];
+      }
+    }
+
+    if (Array.isArray(parsedCourses) && parsedCourses.length > 0) {
+      // Only add courses that are not already in userCourses
+      const existingCourses = new Set(userCourses);
+      const newCourses = parsedCourses.filter(
+        (course) => !existingCourses.has(course)
+      );
+      if (newCourses.length > 0) {
+        setUserCourses([...userCourses, ...newCourses]);
       }
     }
 
     let price = getTotalPrice();
     setTotalPrice(price);
-  }, [userCourses, setUserCourses]);
+  }, [userCourses, setUserCourses, user]);
 
   const handleEditClick = () => {
     setEditCourses([...userCourses]);
@@ -139,46 +151,59 @@ const AdmissionResult = () => {
     setShowModal(false);
   };
 
+  // Add loading state for challan generation
+  const [isGeneratingChallan, setIsGeneratingChallan] = useState(false);
+
   const handleGeneratePdf = async () => {
     try {
       if (totalPrice === 0) {
         toast.error("Please add some courses!");
         return;
       }
+      setIsGeneratingChallan(true);
       const { data } = await generatePdf(totalPrice, userCourses);
       const fileName = data.data.fileName;
       if (!fileName) {
         console.error("No file path returned");
+        setIsGeneratingChallan(false);
         return;
       }
-      // const fileUrl = `http://localhost:3001/uploads/${fileName}`;
-      const fileUrl = `https://backend.hunarmandpunjab.pk/uploads/${fileName}`;
+      const fileUrl = `http://localhost:3001/uploads/${fileName}`;
+      // const fileUrl = `https://backend.hunarmandpunjab.pk/uploads/${fileName}`;
       const a = document.createElement("a");
       a.href = fileUrl;
       a.download = fileName;
       a.click();
     } catch (error) {
       console.error("Error generating PDF:", error);
+    } finally {
+      setIsGeneratingChallan(false);
     }
   };
 
-  // Check if user has a challan
-  const hasChallan = user?.user?.data?.challans?.total !== 0;
+  const [hasChallan, setHasChallan] = useState(false);
+  const [firstChallan, setFirstChallan] = useState(null);
+  const [challanStatus, setChallanStatus] = useState(null);
 
-  // --- New: Get first challan and its paid status ---
-  const firstChallan =
-    user?.user?.data?.user?.challans?.challans &&
-    Array.isArray(user.user.data.user.challans.challans) &&
-    user.user.data.user.challans.challans.length > 0
-      ? user.user.data.user.challans.challans[0]
-      : null;
+  useEffect(() => {
+    // Check if user has a challan
+    const challanTotal = user?.user?.data?.challans?.total;
+    setHasChallan(challanTotal !== 0);
 
-  // Only show challan status if there is a challan object
-  let challanStatus = null;
-  if (firstChallan && typeof firstChallan.paid !== "undefined") {
-    challanStatus = firstChallan.paid ? "Paid" : "Pending";
-  }
-  // --------------------------------------------------
+    // Get first challan and its paid status
+    const challanObj = user?.user?.data?.challans?.challans[0];
+    setFirstChallan(challanObj);
+
+    // Only show challan status if there is a challan object
+    if (challanObj && typeof challanObj.paid !== "undefined") {
+      setChallanStatus(challanObj.paid ? "Paid" : "Pending");
+    } else {
+      setChallanStatus(null);
+    }
+
+    // For debugging
+    console.log(challanObj);
+  }, [user]);
 
   const modalOverlayStyle = {
     position: "fixed",
@@ -521,7 +546,6 @@ const AdmissionResult = () => {
               return today.toLocaleDateString("en-US", options);
             })()}
           </p>
-          {/* Challan Status */}
           {challanStatus && (
             <span
               className={`badge px-3 py-2 ms-2 fw-bold ${
@@ -659,7 +683,10 @@ const AdmissionResult = () => {
                             your registration charges.
                           </li>
                         </ol>
-                        <button className="btn-green btn-success btn rounded-2">
+                        <button
+                          className="btn-green btn-success btn rounded-2"
+                          disabled={hasChallan}
+                        >
                           Generate PSID
                         </button>
                       </div>
@@ -695,13 +722,26 @@ const AdmissionResult = () => {
                         </ol>
                         <button
                           className="btn-green btn-success btn rounded-2"
-                          onClick={() => handleGeneratePdf()}
-                          disabled={hasChallan}
+                          onClick={handleGeneratePdf}
+                          disabled={hasChallan || isGeneratingChallan}
                         >
-                          <i className="fas fa-download"></i>{" "}
-                          {hasChallan
-                            ? "Challan Already Submitted"
-                            : "Generate Challan"}
+                          {isGeneratingChallan ? (
+                            <>
+                              <span
+                                className="spinner-border spinner-border-sm me-2"
+                                role="status"
+                                aria-hidden="true"
+                              ></span>
+                              Generating...
+                            </>
+                          ) : (
+                            <>
+                              <i className="fas fa-download"></i>{" "}
+                              {hasChallan
+                                ? "Challan Already Submitted"
+                                : "Generate Challan"}
+                            </>
+                          )}
                         </button>
                       </div>
                     </div>
@@ -798,13 +838,26 @@ const AdmissionResult = () => {
                 </ul>
                 <button
                   className="btn-green btn-success btn rounded-2"
-                  onClick={() => handleGeneratePdf()}
-                  disabled={hasChallan}
+                  onClick={handleGeneratePdf}
+                  disabled={hasChallan || isGeneratingChallan}
                 >
-                  <i className="fas fa-download"></i>{" "}
-                  {hasChallan
-                    ? "Challan Already Submitted"
-                    : "Download Bank Challan"}
+                  {isGeneratingChallan ? (
+                    <>
+                      <span
+                        className="spinner-border spinner-border-sm me-2"
+                        role="status"
+                        aria-hidden="true"
+                      ></span>
+                      Generating...
+                    </>
+                  ) : (
+                    <>
+                      <i className="fas fa-download"></i>{" "}
+                      {hasChallan
+                        ? "Challan Already Submitted"
+                        : "Download Bank Challan"}
+                    </>
+                  )}
                 </button>
 
                 <div className="alert alert-success mt-4 border">
