@@ -77,7 +77,20 @@ const AdmissionResult = () => {
     if (user && user.token) {
       fetchUserProfile();
     }
-  }, []);
+
+    // Listen for when the user comes back to this page (tab focus)
+    const handleVisibilityChange = () => {
+      if (document.visibilityState === "visible" && user && user.token) {
+        fetchUserProfile();
+      }
+    };
+
+    document.addEventListener("visibilitychange", handleVisibilityChange);
+
+    return () => {
+      document.removeEventListener("visibilitychange", handleVisibilityChange);
+    };
+  }, [user, login]);
 
   useEffect(() => {
     if (!user || !user.user || !user.user.data || !user.user.data.user) return;
@@ -501,9 +514,9 @@ const AdmissionResult = () => {
                   <th style={{ backgroundColor: "#dee2e6" }} scope="col">
                     Applied Courses
                   </th>
-                  <th style={{ backgroundColor: "#dee2e6" }} scope="col">
+                  {/* <th className="d-none" style={{ backgroundColor: "#dee2e6" }} scope="col">
                     Edit Courses
-                  </th>
+                  </th> */}
                 </tr>
               </thead>
               <tbody>
@@ -520,7 +533,7 @@ const AdmissionResult = () => {
                       )}
                     </ul>
                   </td>
-                  <td>
+                  {/* <td>
                     <button
                       className="btn btn-success btn-green rounded-2 d-none"
                       onClick={handleEditClick}
@@ -529,7 +542,7 @@ const AdmissionResult = () => {
                       <i className="fas fa-edit"></i>{" "}
                       {hasChallan ? "Challan Submitted" : "Edit"}
                     </button>
-                  </td>
+                  </td> */}
                 </tr>
               </tbody>
             </table>
@@ -549,7 +562,7 @@ const AdmissionResult = () => {
               if (challanCreatedAt) {
                 // Show challan created at date + 7 days
                 const challanDate = new Date(challanCreatedAt);
-                challanDate.setDate(challanDate.getDate() + 7);
+                challanDate.setDate(challanDate.getDate() + 3);
                 return challanDate.toLocaleDateString("en-US", options);
               } else {
                 // Show today + 7 days
@@ -698,9 +711,9 @@ const AdmissionResult = () => {
                         </ol>
                         <button
                           className="btn-green btn-success btn rounded-2"
-                          disabled={hasChallan}
+                          disabled={true}
                         >
-                          Generate PSID
+                          PSID Coming Soon
                         </button>
                       </div>
                       <div
