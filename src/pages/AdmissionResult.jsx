@@ -27,6 +27,7 @@ const AdmissionResult = () => {
   const [editCourses, setEditCourses] = useState([...userCourses]);
   const [error, setError] = useState("");
   const [totalPrice, setTotalPrice] = useState(0);
+  const [challanCreatedAt, setChallanCreatedAt] = useState(null);
 
   const [formNumber, setFormNumber] = useState(() => getOrCreateFormNumber());
 
@@ -168,8 +169,8 @@ const AdmissionResult = () => {
         setIsGeneratingChallan(false);
         return;
       }
-      // const fileUrl = `http://localhost:3001/uploads/${fileName}`;
-      const fileUrl = `https://backend.hunarmandpunjab.pk/uploads/${fileName}`;
+      const fileUrl = `http://localhost:3001/uploads/${fileName}`;
+      // const fileUrl = `https://backend.hunarmandpunjab.pk/uploads/${fileName}`;
       const a = document.createElement("a");
       a.href = fileUrl;
       a.download = fileName;
@@ -199,6 +200,11 @@ const AdmissionResult = () => {
       setChallanStatus(challanObj.paid ? "Paid" : "Pending");
     } else {
       setChallanStatus(null);
+    }
+
+    // Get createdAt date from challanObj if available
+    if (challanObj && challanObj.createdAt) {
+      setChallanCreatedAt(challanObj.createdAt);
     }
 
     // For debugging
@@ -483,7 +489,7 @@ const AdmissionResult = () => {
             in the optional courses. To add a course, choose from the available
             options. You can enroll in up to 2 courses at once. All courses are
             completely free, but a one-time application processing fee of PKR
-            2800 is required, regardless of the number of courses you select.
+            2850 is required, regardless of the number of courses you select.
           </p>
           <div className="table-responsive">
             <table className="table table-hover table-bordered">
@@ -516,7 +522,7 @@ const AdmissionResult = () => {
                   </td>
                   <td>
                     <button
-                      className="btn btn-success btn-green rounded-2"
+                      className="btn btn-success btn-green rounded-2 d-none"
                       onClick={handleEditClick}
                       disabled={hasChallan}
                     >
@@ -535,15 +541,22 @@ const AdmissionResult = () => {
           </h4>
           <p className="mb-0" style={{ marginRight: 12 }}>
             {(() => {
-              // Calculate date 4 days from now
-              const today = new Date();
-              today.setDate(today.getDate() + 4);
               const options = {
                 year: "numeric",
                 month: "long",
                 day: "numeric",
               };
-              return today.toLocaleDateString("en-US", options);
+              if (challanCreatedAt) {
+                // Show challan created at date + 7 days
+                const challanDate = new Date(challanCreatedAt);
+                challanDate.setDate(challanDate.getDate() + 7);
+                return challanDate.toLocaleDateString("en-US", options);
+              } else {
+                // Show today + 7 days
+                const today = new Date();
+                today.setDate(today.getDate() + 7);
+                return today.toLocaleDateString("en-US", options);
+              }
             })()}
           </p>
           {challanStatus && (

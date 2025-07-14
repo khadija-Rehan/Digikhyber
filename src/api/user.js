@@ -34,3 +34,13 @@ export const getUserProfile = async () => {
   });
   return data;
 };
+
+export const submitContactForm = async (contactData) => {
+  const data = await invoke({
+    url: `/contact/contact`,
+    method: "POST",
+    headers: { "x-api-key": "12345678" },
+    data: contactData,
+  });
+  return data;
+};
