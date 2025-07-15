@@ -23,7 +23,8 @@ const HowItsWork = () => {
               }}
             >
               <iframe
-                src="https://www.youtube.com/embed/vumLjmUN7P8"
+                // src="https://www.youtube.com/embed/vumLjmUN7P8"
+                src="https://www.youtube.com/embed/MwaXTW0_jc8"
                 title="YouTube video player"
                 style={{
                   position: "absolute",
@@ -39,10 +40,12 @@ const HowItsWork = () => {
               ></iframe>
             </div>
             <h3 className="text-center pt-4">
-              How To Apply - Hunarmand Video Tutorial
+              {/* How To Apply - Hunarmand Video Tutorial */}
+              How To Get Scholarship Card - Hunarman Punjab
             </h3>
             <p className="text-center">
-              Learn how to easily apply using our step-by-step video guide.
+              {/* Learn how to easily apply using our step-by-step video guide. */}
+              Learn how to easily apply using our step-by-step guide.
             </p>
           </div>
         </div>
@@ -369,19 +372,17 @@ const HowItsWork = () => {
                     placement="top"
                     overlay={
                       <Tooltip id="tooltip-top-admission-fee">
-                        If you're eligible, you will
-                        receive a Scholarship Card. This card confirms your
-                        scholarship status and can be used to avail various
-                        course-related benefits. Please ensure you meet the
-                        scholarship criteria and have submitted all required
-                        documentation.
+                        If you're eligible, you will receive a Scholarship Card.
+                        This card confirms your scholarship status and can be
+                        used to avail various course-related benefits. Please
+                        ensure you meet the scholarship criteria and have
+                        submitted all required documentation.
                       </Tooltip>
                     }
                   >
                     <p>
-                      If you're eligible for financial assistance, you will
-                      receive a Scholarship Card. This card confirms your
-                      scholarship ...
+                      If you're eligible, you will receive a Scholarship Card.
+                      This card confirms your scholarship ...
                     </p>
                   </OverlayTrigger>
                 </div>

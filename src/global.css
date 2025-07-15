@@ -859,7 +859,7 @@ a:hover {
 }
 
 .course {
-    flex: 1 1 calc(33.333% - 20px);
+    flex: 0 1 calc(33.333% - 20px);
     background: white;
     padding: 0px;
     border-radius: 10px;
@@ -933,7 +933,7 @@ a:hover {
     border-radius: 10px;
     background-color: #ffffff00;
     color: #747474;
-    height: fit-content;
+    /* height: fit-content; */
     transition: filter 0.3s ease;
     flex: 1 1 calc(25% - 20px);
     box-sizing: border-box;

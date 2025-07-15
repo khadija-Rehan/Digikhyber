@@ -28,7 +28,6 @@ import SEO from "../assets/coursebanners/SEO.jpg";
 
 export const COURSE_PRICE = 1000;
 
-// Course list strictly matches the provided list and order
 export const AVAILABLE_COURSES = [
   { name: "Amazon Virtual Assistant", price: COURSE_PRICE, image: AmazonVA },
   { name: "Full Stack Digital Marketing & AI", price: COURSE_PRICE, image: FullStackDM },

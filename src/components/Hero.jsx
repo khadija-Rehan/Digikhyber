@@ -24,31 +24,31 @@ const Hero = () => {
             >
                 <SwiperSlide>
                     <img
-                        src="/images/Hunarmand Punjab 50000 Schilarship Slider 1.jpg"
+                        src="/images/Slider1.jpg"
                         alt="Hero 1"
                     />
                 </SwiperSlide>
                 <SwiperSlide>
                     <img
-                        src="/images/Scholarship Card Slider 2.jpg"
+                        src="/images/Slider2.jpg"
                         alt="Hero 2"
                     />
                 </SwiperSlide>
                 <SwiperSlide>
                     <img
-                        src="/images/Hunarmand Punjab Courses Slider 3.jpg"
+                        src="/images/Slider3.jpg"
                         alt="Hero 3"
                     />
                 </SwiperSlide>
                 <SwiperSlide>
                     <img
-                        src="/images/Hunarmand Punjab Freelancing Banner 4.jpg"
+                        src="/images/Slider4.jpg"
                         alt="Hero 4"
                     />
                 </SwiperSlide>
                 <SwiperSlide>
                     <img
-                        src="/images/Hunarmand Punjab ESkills Slider 5.jpg"
+                        src="/images/Slider5.jpg"
                         alt="Hero 5"
                     />
                 </SwiperSlide>

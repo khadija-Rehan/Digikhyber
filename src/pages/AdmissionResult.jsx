@@ -1,10 +1,7 @@
 import React, { useState, useEffect } from "react";
 import { Accordion } from "react-bootstrap";
-import Bank1 from "../assets/bank1.webp";
-import Bank2 from "../assets/bank2.webp";
 import GIF from "../assets/approved.gif";
 import { generatePdf } from "../api/user";
-import { getUserProfile } from "../api/user";
 import { useCourses } from "../context/CoursesContext";
 import { useAuth } from "../context/AuthContext";
 import { toast } from "react-toastify";
@@ -22,7 +19,7 @@ const AdmissionResult = () => {
   const { userCourses, availableCourses, setUserCourses, getTotalPrice } =
     useCourses();
 
-  const { user, login } = useAuth();
+  const { user } = useAuth();
   const [showModal, setShowModal] = useState(false);
   const [editCourses, setEditCourses] = useState([...userCourses]);
   const [error, setError] = useState("");
@@ -143,9 +140,7 @@ const AdmissionResult = () => {
   };
 
   const handleAddCourse = () => {
-    if (editCourses.length < 2) {
-      setEditCourses([...editCourses, ""]);
-    }
+    setEditCourses([...editCourses, ""]);
   };
 
   const handleDeleteCourse = (index) => {
@@ -155,10 +150,11 @@ const AdmissionResult = () => {
   };
 
   const handleSave = () => {
+    // Remove empty and duplicate courses
     const filtered = editCourses.filter(Boolean);
     const unique = Array.from(new Set(filtered));
-    if (unique.length > 2) {
-      setError("You can enroll in up to 2 courses only.");
+    if (unique.length > 3) {
+      setError("You can enroll in up to 3 courses only.");
       return;
     }
     setUserCourses(unique);
@@ -171,7 +167,7 @@ const AdmissionResult = () => {
   const handleGeneratePdf = async () => {
     try {
       if (totalPrice === 0) {
-        toast.error("Please add some courses!");
+        toast.error("Please add some coruses!");
         return;
       }
       setIsGeneratingChallan(true);
@@ -181,6 +177,7 @@ const AdmissionResult = () => {
         console.error("No file path returned");
         setIsGeneratingChallan(false);
         return;
+        return;
       }
       // const fileUrl = `http://localhost:3001/uploads/${fileName}`;
       const fileUrl = `https://backend.hunarmandpunjab.pk/uploads/${fileName}`;
@@ -188,6 +185,7 @@ const AdmissionResult = () => {
       a.href = fileUrl;
       a.download = fileName;
       a.click();
+      localStorage.removeItem("selectedCourses");
     } catch (error) {
       console.error("Error generating PDF:", error);
     } finally {
@@ -453,7 +451,7 @@ const AdmissionResult = () => {
               </tr>
               <tr>
                 <td data-th="Field">Total MCQs</td>
-                <td data-th="Details">{totalMcqs}</td>
+                <td data-th="Details">25</td>
               </tr>
               {/* <tr>
                 <td data-th="Field">Correct Answers</td>
@@ -467,15 +465,15 @@ const AdmissionResult = () => {
 
               <tr>
                 <td data-th="Field">Total Marks</td>
-                <td data-th="Details">{totalMcqs}</td>
+                <td data-th="Details">25</td>
               </tr>
               <tr>
                 <td data-th="Field">Marks Obtained</td>
-                <td data-th="Details">{marksObtained}</td>
+                <td data-th="Details">18</td>
               </tr>
               <tr>
                 <td data-th="Field">Percentage</td>
-                <td data-th="Details">{percentage}</td>
+                <td data-th="Details">72%</td>
               </tr>
               <tr>
                 {/* <td data-th="Field">Pass/Fail Status</td> */}
@@ -485,7 +483,7 @@ const AdmissionResult = () => {
                     className="btn-green p-1 px-2"
                     style={{ fontSize: "12px" }}
                   >
-                    {isPassed ? "Pass" : "Fail"}
+                    Pass
                   </span>
                 </td>
               </tr>
@@ -521,7 +519,7 @@ const AdmissionResult = () => {
               </thead>
               <tbody>
                 <tr>
-                  <td>{formNumber}</td>
+                  <td>48079</td>
                   <td>
                     <ul>
                       {userCourses.length === 0 ? (
@@ -537,10 +535,8 @@ const AdmissionResult = () => {
                     <button
                       className="btn btn-success btn-green rounded-2 d-none"
                       onClick={handleEditClick}
-                      disabled={hasChallan}
                     >
-                      <i className="fas fa-edit"></i>{" "}
-                      {hasChallan ? "Challan Submitted" : "Edit"}
+                      <i className="fas fa-edit"></i> Edit
                     </button>
                   </td> */}
                 </tr>
@@ -597,9 +593,12 @@ const AdmissionResult = () => {
           <div className="payment white">
             <h2 className="text-center">Pay Application Processing Fee!</h2>
             <p className=" white">
-              Now, you're just one step away from confirming your admission
+              {/* Now, you're just one step away from confirming your admission
               seat. Please follow the instructions below to submit the
-              application fee through the given payment methods.
+              application fee through the given payment methods. */}
+              Now, you're just one step away from confirming your Scholarship
+              Card . Please follow the instructions below to submit the
+              processing fee through the given payment methods.
             </p>
           </div>
           <div className="row">
@@ -617,7 +616,7 @@ const AdmissionResult = () => {
                   id="pills-tab"
                   role="tablist"
                 >
-                  <div
+                  {/* <div
                     className="nav-item col-md-6 mb-3 mb-lg-0"
                     role="present ation"
                   >
@@ -644,7 +643,7 @@ const AdmissionResult = () => {
                         </div>
                       </div>
                     </button>
-                  </div>
+                  </div> */}
                   <div className="nav-item col-md-6" role="presentation">
                     <button
                       className="nav-link w-100 h-100 p-3"
@@ -663,8 +662,7 @@ const AdmissionResult = () => {
                         <div className="ms-3 text-start">
                           <h4>Bank Challan</h4>
                           <p>
-                            Pay at any bank using Kamyaab Freelancer Program
-                            bank challan
+                            Pay at any BOP Branch Using Hunarmand Punjab Challan
                           </p>
                         </div>
                       </div>
@@ -677,7 +675,7 @@ const AdmissionResult = () => {
                       className="tab-content bg-white p-3 rounded-2 shadow-sm"
                       id="pills-tabContent"
                     >
-                      <div
+                      {/* <div
                         className="tab-pane fade show active"
                         id="pills-home"
                         role="tabpanel"
@@ -715,7 +713,7 @@ const AdmissionResult = () => {
                         >
                           PSID Coming Soon
                         </button>
-                      </div>
+                      </div> */}
                       <div
                         className="tab-pane fade"
                         id="pills-profile"
@@ -740,10 +738,10 @@ const AdmissionResult = () => {
                           </li>
                           <li>
                             <span className="fw-bold">
-                              Pay the challan at any nearest bank branch
+                              Pay the challan at any nearest BOP Bank Branch
                             </span>{" "}
-                            to complete your payment and confirm your
-                            enrollment.
+                            to complete your payment, confirm your Enrollment &
+                            Get a chance to avail Scholarship Card.
                           </li>
                         </ol>
                         <button
@@ -951,7 +949,7 @@ const AdmissionResult = () => {
                     </button>
                   </div>
                 ))}
-                {editCourses.length < 2 && (
+                {editCourses.length < 3 && (
                   <button style={addBtnStyle} onClick={handleAddCourse}>
                     Add Course
                   </button>

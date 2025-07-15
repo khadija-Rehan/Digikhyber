@@ -76,8 +76,9 @@ const PrivacyPolicy = () => {
 
       <h4 className="mt-4">5. Program Affiliation</h4>
       <p>
-        Hunarmand Punjab is a Government of Punjab initiative focused on youth
-        empowerment through IT-Training Program.
+        Hunarmand Punjab{" "}
+        {/* is a Government of Punjab initiative  */}
+        focused on youth empowerment through IT-Training Program.
       </p>
       <p>
         By enrolling in our programs, you acknowledge and agree to the terms

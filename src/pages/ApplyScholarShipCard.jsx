@@ -138,8 +138,8 @@ const ApplyScholarShipCard = () => {
         <h1 className="fs-5 fw-bold text-black text-center pt-4">
           Scholarship Card Form
         </h1>
-        <p>
-          To Become eligible for scholarship card (free laptop, Solar scheme,
+        <p className="text-center text-black">
+          To Become eligible for scholarship card (Free laptop, Solar scheme,
           Taleem Finance, Taleem Abroad, Advance Courses) you must be enrolled
           in one ore more programs under Hunarmand Punjab
         </p>
