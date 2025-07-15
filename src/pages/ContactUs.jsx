@@ -26,15 +26,18 @@ const ContactUs = () => {
                                     className="btn-green bg-transparent border-white text-white register-btn btn btn-success w-100 mt-3 rounded-2"
                                 >
                                     <i className="fas fa-phone me-1"></i>
-                                    Helpline: 03-111-133-053 | Whatsapp: 03-111-133-053
+                                    Helpline: 03-111-133-053 
+                                    {/* | Whatsapp: 03-111-133-053 */}
                                 </a>
 
                                 <a
-                                    href="mailto:admissions@hunarmandpunjab.pk"
+                                    // href="mailto:admissions@hunarmandpunjab.pk"
+                                    href="mailto:contact@hunarmandpunjab.pk"
                                     className="btn-green register-btn btn btn-success w-100 mt-3 rounded-2"
                                 >
                                     <i className="fas fa-envelope me-1"></i>
-                                    admissions@hunarmandpunjab.pk
+                                    {/* admissions@hunarmandpunjab.pk */}
+                                    contact@hunarmandpunjab.pk
                                 </a>
 
 

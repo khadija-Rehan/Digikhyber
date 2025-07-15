@@ -282,7 +282,6 @@ const AdmissionResult = () => {
         <div className="row  pb-5">
           <h2 className="text-center">
             Congratulations! You’ve Successfully Passed the Admission Test
-
           </h2>
           <div
             className="alert alert-success mt-4"
@@ -293,7 +292,14 @@ const AdmissionResult = () => {
               <i className="fas fa-check-circle" style={{ color: "green" }}></i>{" "}
               Congratulations! You’ve Successfully Passed the Admission Test
             </strong>{" "}
-            We are thrilled to inform you that you have successfully cleared the Hunarmand Punjab Admission Test. Now you are eligible for a Scholarship Card. To confirm your seat & proceed with your enrolled course. All the courses under the Hunarmand scholarship card are 100% free, but the application processing fee is necessary to complete your application. Your processing fee will be reimbursed if you achieve above 85% Marks in the final evaluation test under the policy of Hunarmand Punjab. <br />
+            We are thrilled to inform you that you have successfully cleared the
+            Hunarmand Punjab Admission Test. Now you are eligible for a
+            Scholarship Card. To confirm your seat & proceed with your enrolled
+            course. All the courses under the Hunarmand scholarship card are
+            100% free, but the application processing fee is necessary to
+            complete your application. Your processing fee will be reimbursed if
+            you achieve above 85% Marks in the final evaluation test under the
+            policy of Hunarmand Punjab. <br />
             You’re just one step away from receiving your Scholarship Card!
             <div className="mt-4">
               <p className="fw-semibold ">
@@ -301,12 +307,12 @@ const AdmissionResult = () => {
               </p>
               <ul className="  mt-2">
                 <li> Access to Advanced IT Courses</li>
-                <li>  Laptop Scheme</li>
+                <li> Laptop Scheme</li>
                 <li> Solar Scheme</li>
                 <li>Access to Taleem Finance</li>
-                <li>  Access to Study Abroad Free Consultancy</li>
-                <li>  Hands-On Learning with Global Curriculum</li>
-                <li>  Career Guidance & Freelancing Support</li>
+                <li> Access to Study Abroad Free Consultancy</li>
+                <li> Hands-On Learning with Global Curriculum</li>
+                <li> Career Guidance & Freelancing Support</li>
               </ul>
             </div>
           </div>
@@ -508,9 +514,12 @@ const AdmissionResult = () => {
           <div className="payment white">
             <h2 className="text-center">Pay Application Processing Fee!</h2>
             <p className=" white">
-              Now, you're just one step away from confirming your admission
+              {/* Now, you're just one step away from confirming your admission
               seat. Please follow the instructions below to submit the
-              application fee through the given payment methods.
+              application fee through the given payment methods. */}
+              Now, you're just one step away from confirming your Scholarship
+              Card . Please follow the instructions below to submit the
+              processing fee through the given payment methods.
             </p>
           </div>
           <div className="row">
@@ -528,7 +537,7 @@ const AdmissionResult = () => {
                   id="pills-tab"
                   role="tablist"
                 >
-                  <div
+                  {/* <div
                     className="nav-item col-md-6 mb-3 mb-lg-0"
                     role="present ation"
                   >
@@ -555,7 +564,7 @@ const AdmissionResult = () => {
                         </div>
                       </div>
                     </button>
-                  </div>
+                  </div> */}
                   <div className="nav-item col-md-6" role="presentation">
                     <button
                       className="nav-link w-100 h-100 p-3"
@@ -574,8 +583,7 @@ const AdmissionResult = () => {
                         <div className="ms-3 text-start">
                           <h4>Bank Challan</h4>
                           <p>
-                            Pay at any bank using Kamyaab Freelancer Program
-                            bank challan
+                            Pay at any BOP Branch Using Hunarmand Punjab Challan
                           </p>
                         </div>
                       </div>
@@ -588,7 +596,7 @@ const AdmissionResult = () => {
                       className="tab-content bg-white p-3 rounded-2 shadow-sm"
                       id="pills-tabContent"
                     >
-                      <div
+                      {/* <div
                         className="tab-pane fade show active"
                         id="pills-home"
                         role="tabpanel"
@@ -623,7 +631,7 @@ const AdmissionResult = () => {
                         <button className="btn-green btn-success btn rounded-2">
                           Generate PSID
                         </button>
-                      </div>
+                      </div> */}
                       <div
                         className="tab-pane fade"
                         id="pills-profile"
@@ -648,10 +656,10 @@ const AdmissionResult = () => {
                           </li>
                           <li>
                             <span className="fw-bold">
-                              Pay the challan at any nearest bank branch
+                              Pay the challan at any nearest BOP Bank Branch
                             </span>{" "}
-                            to complete your payment and confirm your
-                            enrollment.
+                            to complete your payment, confirm your Enrollment &
+                            Get a chance to avail Scholarship Card.
                           </li>
                         </ol>
                         <button
