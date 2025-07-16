@@ -35,8 +35,11 @@ const Login = () => {
       const { data } = await logIn(formData);
       login({ user: data.user, token: data.token });
 
-      const from = location.state?.from?.pathname || "/admission-test";
-      navigate(from, { replace: true });
+      if (data.user.testPassed === false) {
+        navigate("/admission-test", { replace: true });
+      } else {
+        navigate("/admission-result", { replace: true });
+      }
     } catch (error) {
       setError(
         error.response?.data?.message || "Login failed. Please try again."
