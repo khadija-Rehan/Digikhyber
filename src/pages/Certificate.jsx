@@ -103,7 +103,7 @@ const Certificate = () => {
             </div>
           </div>
         </div>
-        <div className="certificate mt-5 d-none">
+        {/* <div className="certificate mt-5 d-none">
           <h3 className="text-center mb-5">Track Certificate</h3>
           <p>
             If you’ve requested a hardcopy of your course completion
@@ -146,7 +146,7 @@ const Certificate = () => {
               <button className="btn-green rounded-2">Track Certificate</button>
             </div>
           </div>
-        </div>
+        </div> */}
       </div>
     </div>
   );

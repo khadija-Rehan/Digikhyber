@@ -589,7 +589,10 @@ const AdmissionResult = () => {
           )}
         </div>
       </div>
-      <div style={{ backgroundColor: "#DDA30B", padding: "50px 0 80px" }}>
+      <div style={{ 
+        // backgroundColor: "#DDA30B", 
+        backgroundColor: "orange",
+        padding: "50px 0 80px" }}>
         <div className="container">
           <div className="payment white">
             <h2 className="text-center">Pay Application Processing Fee!</h2>
