@@ -5,6 +5,7 @@ import { generatePdf } from "../api/user";
 import { useCourses } from "../context/CoursesContext";
 import { useAuth } from "../context/AuthContext";
 import { toast } from "react-toastify";
+import { getUserProfile } from "../api/user";
 
 const getOrCreateFormNumber = () => {
   let formNumber = localStorage.getItem("formNumber");
@@ -19,11 +20,12 @@ const AdmissionResult = () => {
   const { userCourses, availableCourses, setUserCourses, getTotalPrice } =
     useCourses();
 
-  const { user } = useAuth();
+  const { user, login } = useAuth();
   const [showModal, setShowModal] = useState(false);
   const [editCourses, setEditCourses] = useState([...userCourses]);
   const [error, setError] = useState("");
   const [totalPrice, setTotalPrice] = useState(0);
+  const [challanCreatedAt, setChallanCreatedAt] = useState(null);
 
   const [formNumber, setFormNumber] = useState(() => getOrCreateFormNumber());
 
@@ -49,30 +51,82 @@ const AdmissionResult = () => {
   const isPassed = testScore !== null && !isNaN(testScore) && testScore >= 50;
 
   useEffect(() => {
-    const selectedCoursesFromStorage = localStorage.getItem("selectedCourses");
-    if (selectedCoursesFromStorage) {
+    const fetchUserProfile = async () => {
       try {
-        const courses = JSON.parse(selectedCoursesFromStorage);
-        if (Array.isArray(courses) && courses.length > 0) {
-          const existingCourses = new Set(userCourses);
-          const newCourses = courses.filter(
-            (course) => !existingCourses.has(course)
-          );
-          if (newCourses.length > 0) {
-            setUserCourses([...userCourses, ...newCourses]);
-          }
+        const profileResponse = await getUserProfile();
+        const profileData = profileResponse.data;
+
+        const updatedUserData = {
+          user: {
+            ...user.user,
+            ...profileData,
+          },
+          token: user.token,
+        };
+
+        login(updatedUserData);
+
+        console.log("User profile updated:", updatedUserData);
+      } catch (error) {
+        console.error("Error fetching user profile:", error);
+      }
+    };
+
+    if (user && user.token) {
+      fetchUserProfile();
+    }
+
+    // Listen for when the user comes back to this page (tab focus)
+    const handleVisibilityChange = () => {
+      if (document.visibilityState === "visible" && user && user.token) {
+        fetchUserProfile();
+      }
+    };
+
+    document.addEventListener("visibilitychange", handleVisibilityChange);
+
+    return () => {
+      document.removeEventListener("visibilitychange", handleVisibilityChange);
+    };
+  }, [user, login]);
+
+  useEffect(() => {
+    if (!user || !user.user || !user.user.data || !user.user.data.user) return;
+
+    // user.user.data.user.courses is expected to be a JSON string or an array
+    let selectedCourses = user.user.data.user.courses;
+
+    let parsedCourses = [];
+    if (selectedCourses) {
+      try {
+        // If it's a string, try to parse it as JSON
+        if (typeof selectedCourses === "string") {
+          parsedCourses = JSON.parse(selectedCourses);
+        } else if (Array.isArray(selectedCourses)) {
+          // If it's already an array, use it directly
+          parsedCourses = selectedCourses;
         }
       } catch (error) {
-        console.error(
-          "Error parsing selectedCourses from localStorage:",
-          error
-        );
+        // If parsing fails, fallback to empty array
+        console.error("Error parsing selectedCourses:", error);
+        parsedCourses = [];
+      }
+    }
+
+    if (Array.isArray(parsedCourses) && parsedCourses.length > 0) {
+      // Only add courses that are not already in userCourses
+      const existingCourses = new Set(userCourses);
+      const newCourses = parsedCourses.filter(
+        (course) => !existingCourses.has(course)
+      );
+      if (newCourses.length > 0) {
+        setUserCourses([...userCourses, ...newCourses]);
       }
     }
 
     let price = getTotalPrice();
     setTotalPrice(price);
-  }, [userCourses, setUserCourses]);
+  }, [userCourses, setUserCourses, user]);
 
   const handleEditClick = () => {
     setEditCourses([...userCourses]);
@@ -108,16 +162,21 @@ const AdmissionResult = () => {
     setShowModal(false);
   };
 
+  // Add loading state for challan generation
+  const [isGeneratingChallan, setIsGeneratingChallan] = useState(false);
+
   const handleGeneratePdf = async () => {
     try {
       if (totalPrice === 0) {
         toast.error("Please add some coruses!");
         return;
       }
+      setIsGeneratingChallan(true);
       const { data } = await generatePdf(totalPrice, userCourses);
       const fileName = data.data.fileName;
       if (!fileName) {
         console.error("No file path returned");
+        setIsGeneratingChallan(false);
         return;
         return;
       }
@@ -130,24 +189,39 @@ const AdmissionResult = () => {
       localStorage.removeItem("selectedCourses");
     } catch (error) {
       console.error("Error generating PDF:", error);
+    } finally {
+      setIsGeneratingChallan(false);
     }
   };
 
-  const hasChallan = user?.user?.data?.challans?.total !== 0;
+  const [hasChallan, setHasChallan] = useState(false);
+  const [firstChallan, setFirstChallan] = useState(null);
+  const [challanStatus, setChallanStatus] = useState(null);
 
-  // --- New: Get first challan and its paid status ---
-  const firstChallan =
-    user?.user?.data?.user?.challans?.challans &&
-    Array.isArray(user.user.data.user.challans.challans) &&
-    user.user.data.user.challans.challans.length > 0
-      ? user.user.data.user.challans.challans[0]
-      : null;
+  useEffect(() => {
+    // Check if user has a challan
+    const challanTotal = user?.user?.data?.challans?.total;
+    setHasChallan(challanTotal !== 0);
 
-  // Only show challan status if there is a challan object
-  let challanStatus = null;
-  if (firstChallan && typeof firstChallan.paid !== "undefined") {
-    challanStatus = firstChallan.paid ? "Paid" : "Pending";
-  }
+    // Get first challan and its paid status
+    const challanObj = user?.user?.data?.challans?.challans[0];
+    setFirstChallan(challanObj);
+
+    // Only show challan status if there is a challan object
+    if (challanObj && typeof challanObj.paid !== "undefined") {
+      setChallanStatus(challanObj.paid ? "Paid" : "Pending");
+    } else {
+      setChallanStatus(null);
+    }
+
+    // Get createdAt date from challanObj if available
+    if (challanObj && challanObj.createdAt) {
+      setChallanCreatedAt(challanObj.createdAt);
+    }
+
+    // For debugging
+    console.log(challanObj);
+  }, [user]);
 
   const modalOverlayStyle = {
     position: "fixed",
@@ -427,7 +501,7 @@ const AdmissionResult = () => {
             in the optional courses. To add a course, choose from the available
             options. You can enroll in up to 2 courses at once. All courses are
             completely free, but a one-time application processing fee of PKR
-            2800 is required, regardless of the number of courses you select.
+            2850 is required, regardless of the number of courses you select.
           </p>
           <div className="table-responsive">
             <table className="table table-hover table-bordered">
@@ -439,9 +513,9 @@ const AdmissionResult = () => {
                   <th style={{ backgroundColor: "#dee2e6" }} scope="col">
                     Applied Courses
                   </th>
-                  <th style={{ backgroundColor: "#dee2e6" }} scope="col">
+                  {/* <th className="d-none" style={{ backgroundColor: "#dee2e6" }} scope="col">
                     Edit Courses
-                  </th>
+                  </th> */}
                 </tr>
               </thead>
               <tbody>
@@ -458,14 +532,14 @@ const AdmissionResult = () => {
                       )}
                     </ul>
                   </td>
-                  <td>
+                  {/* <td>
                     <button
-                      className="btn btn-success btn-green rounded-2"
+                      className="btn btn-success btn-green rounded-2 d-none"
                       onClick={handleEditClick}
                     >
                       <i className="fas fa-edit"></i> Edit
                     </button>
-                  </td>
+                  </td> */}
                 </tr>
               </tbody>
             </table>
@@ -477,18 +551,24 @@ const AdmissionResult = () => {
           </h4>
           <p className="mb-0" style={{ marginRight: 12 }}>
             {(() => {
-              // Calculate date 4 days from now
-              const today = new Date();
-              today.setDate(today.getDate() + 4);
               const options = {
                 year: "numeric",
                 month: "long",
                 day: "numeric",
               };
-              return today.toLocaleDateString("en-US", options);
+              if (challanCreatedAt) {
+                // Show challan created at date + 7 days
+                const challanDate = new Date(challanCreatedAt);
+                challanDate.setDate(challanDate.getDate() + 3);
+                return challanDate.toLocaleDateString("en-US", options);
+              } else {
+                // Show today + 7 days
+                const today = new Date();
+                today.setDate(today.getDate() + 7);
+                return today.toLocaleDateString("en-US", options);
+              }
             })()}
           </p>
-          {/* Challan Status */}
           {challanStatus && (
             <span
               className={`badge px-3 py-2 ms-2 fw-bold ${
@@ -628,8 +708,11 @@ const AdmissionResult = () => {
                             your registration charges.
                           </li>
                         </ol>
-                        <button className="btn-green btn-success btn rounded-2">
-                          Generate PSID
+                        <button
+                          className="btn-green btn-success btn rounded-2"
+                          disabled={true}
+                        >
+                          PSID Coming Soon
                         </button>
                       </div> */}
                       <div
@@ -664,13 +747,26 @@ const AdmissionResult = () => {
                         </ol>
                         <button
                           className="btn-green btn-success btn rounded-2"
-                          onClick={() => handleGeneratePdf()}
-                          disabled={hasChallan}
+                          onClick={handleGeneratePdf}
+                          disabled={hasChallan || isGeneratingChallan}
                         >
-                          <i className="fas fa-download"></i>{" "}
-                          {hasChallan
-                            ? "Challan Already Submitted"
-                            : "Generate Challan"}
+                          {isGeneratingChallan ? (
+                            <>
+                              <span
+                                className="spinner-border spinner-border-sm me-2"
+                                role="status"
+                                aria-hidden="true"
+                              ></span>
+                              Generating...
+                            </>
+                          ) : (
+                            <>
+                              <i className="fas fa-download"></i>{" "}
+                              {hasChallan
+                                ? "Challan Already Submitted"
+                                : "Generate Challan"}
+                            </>
+                          )}
                         </button>
                       </div>
                     </div>
@@ -767,9 +863,26 @@ const AdmissionResult = () => {
                 </ul>
                 <button
                   className="btn-green btn-success btn rounded-2"
-                  onClick={() => handleGeneratePdf()}
+                  onClick={handleGeneratePdf}
+                  disabled={hasChallan || isGeneratingChallan}
                 >
-                  <i className="fas fa-download"></i> Download Bank Challan
+                  {isGeneratingChallan ? (
+                    <>
+                      <span
+                        className="spinner-border spinner-border-sm me-2"
+                        role="status"
+                        aria-hidden="true"
+                      ></span>
+                      Generating...
+                    </>
+                  ) : (
+                    <>
+                      <i className="fas fa-download"></i>{" "}
+                      {hasChallan
+                        ? "Challan Already Submitted"
+                        : "Download Bank Challan"}
+                    </>
+                  )}
                 </button>
 
                 <div className="alert alert-success mt-4 border">
