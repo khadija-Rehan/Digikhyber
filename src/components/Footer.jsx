@@ -9,6 +9,7 @@ import {
   FaMapMarkerAlt,
   FaPhoneAlt,
   FaEnvelope,
+  FaYoutube,
 } from "react-icons/fa";
 
 import { Link } from "react-router-dom";
@@ -30,7 +31,7 @@ const Footer = () => {
               </p>
               <div className="social">
                 <button className="social-button">
-                  <a href="#">
+                  <a href="https://www.facebook.com/hunarmandpunjab.pk" target="_blank">
                     <FaFacebookF />
                   </a>
                 </button>
@@ -40,7 +41,7 @@ const Footer = () => {
                                     </a>
                                 </button> */}
                 <button className="social-button">
-                  <a href="#">
+                  <a href="https://www.instagram.com/hunarmandpunjab.pk/" target="_blank">
                     <FaInstagram />
                   </a>
                 </button>
@@ -50,8 +51,8 @@ const Footer = () => {
                                     </a>
                                 </button> */}
                 <button className="social-button">
-                  <a href="#">
-                    <FaWhatsapp />
+                  <a href="https://www.youtube.com/@hunarmandpunjab" target="_blank">
+                    <FaYoutube />
                   </a>
                 </button>
               </div>
