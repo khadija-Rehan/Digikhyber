@@ -1,6 +1,6 @@
 import React, { useState } from "react";
 import Logo from "../assets/logo.png";
-import { Link, useNavigate } from "react-router-dom";
+import { Link, useNavigate, useLocation } from "react-router-dom";
 import { logIn } from "../api/auth";
 import { useAuth } from "../context/AuthContext";
 
@@ -10,8 +10,8 @@ const Login = () => {
     password: "",
   });
   const [error, setError] = useState("");
-  const [loading, setLoading] = useState(false);
   const navigate = useNavigate();
+  const location = useLocation();
   const { login } = useAuth();
 
   const handleChange = (e) => {
@@ -25,7 +25,6 @@ const Login = () => {
   const handleSubmit = async (e) => {
     e.preventDefault();
     setError("");
-    setLoading(true);
     try {
       const { data } = await logIn(formData);
       login({ user: data.user, token: data.token });
@@ -39,8 +38,6 @@ const Login = () => {
       setError(
         error.response?.data?.message || "Login failed. Please try again."
       );
-    } finally {
-      setLoading(false);
     }
   };
 
@@ -66,7 +63,6 @@ const Login = () => {
               onChange={handleChange}
               placeholder="Enter your email"
               required
-              disabled={loading}
             />
           </div>
           <div className="mb-3">
@@ -81,7 +77,6 @@ const Login = () => {
               onChange={handleChange}
               placeholder="Enter your password"
               required
-              disabled={loading}
             />
           </div>
           {error && <div className="alert alert-danger">{error}</div>}
@@ -91,20 +86,8 @@ const Login = () => {
           <button
             type="submit"
             className="btn-green register-btn btn btn-success w-100 mt-3 rounded-2"
-            disabled={loading}
           >
-            {loading ? (
-              <>
-                <span
-                  className="spinner-border spinner-border-sm me-2"
-                  role="status"
-                  aria-hidden="true"
-                ></span>
-                Logging in...
-              </>
-            ) : (
-              "Login"
-            )}
+            Login
           </button>
           <div className="text-center mt-3 fs-6">
             <span>Don't have an account? </span>

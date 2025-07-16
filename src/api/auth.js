@@ -20,3 +20,21 @@ export const logIn = async (loginData) => {
   });
   return data;
 };
+
+export const forgotPasswordRequest = async (emailData) => {
+  const data = await invoke({
+    url: `/auth/forgot-password`,
+    method: "POST",
+    data: emailData,
+  });
+  return data;
+};
+
+export const resetPassword = async (resetData, token) => {
+  const data = await invoke({
+    url: `/auth/reset-password/${token}`,
+    method: "PUT",
+    data: resetData,
+  });
+  return data;
+};

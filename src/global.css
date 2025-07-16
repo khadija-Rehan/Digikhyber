@@ -443,11 +443,11 @@ a:hover {
 }
 
 .s {
-    height: 400px;
+    /* height: 400px; */
+    height: 200px;
     background-color: #079560;
-
     border: solid 3px rgb(167, 167, 167);
-    border-radius: 4px;
+    border-radius: 23px;
     position: relative;
 }
 
@@ -491,6 +491,7 @@ a:hover {
     height: 100%;
     width: 100%;
     left: 0%;
+    border-radius: 23px;
     top: 0%;
     transition: all linear 0.50s;
     background-color: #079560;
@@ -668,7 +669,7 @@ a:hover {
     /* makes sure content stays above the particles */
 }
 
-.btn-green::before {
+/* .btn-green::before {
     content: "";
     position: absolute;
     top: 50%;
@@ -686,11 +687,12 @@ a:hover {
     width: 300%;
     height: 300%;
     transform: translate(-50%, -50%) scale(1);
-}
+} */
 
 .btn-green:hover {
+    opacity: 0.8;
     color: white;
-    border: 1px solid #1a1e1d;
+    /* border: 1px solid #1a1e1d; */
 }
 
 .hero img {
@@ -883,8 +885,9 @@ a:hover {
 }
 
 .btn-green-sq:hover {
-    background-color: #1a1e1d;
-    border: 1px solid #1a1e1d;
+    /* background-color: #1a1e1d;
+    border: 1px solid #1a1e1d; */
+    opacity: 0.8;
 }
 
 .course-card-details {
@@ -932,7 +935,7 @@ a:hover {
     border-radius: 10px;
     background-color: #ffffff00;
     color: #747474;
-    height: fit-content;
+    /* height: fit-content; */
     transition: filter 0.3s ease;
     flex: 1 1 calc(25% - 20px);
     box-sizing: border-box;
@@ -1404,7 +1407,7 @@ p {
     width: 25px;
     height: 25px;
     border-radius: 50%;
-    border: 8px solid #dda30b;
+    border: 8px solid #ffffff;
     box-shadow: 0 0 0px 4px #079560;
     margin: auto 0;
     position: absolute;
@@ -1417,7 +1420,7 @@ p {
     width: 25px;
     height: 25px;
     border-radius: 50%;
-    border: 8px solid #dda30b;
+    border: 8px solid #ffffff;
     box-shadow: 0 0 0px 4px #079560;
     margin: auto 0;
     position: absolute;
@@ -1436,6 +1439,9 @@ p {
     z-index: -1;
     top: -8px;
 }
+.process-point-left.last-point:before {  
+    background: #ffffff;
+}
 
 .process-line-l {
     background: #02010021;
@@ -1450,6 +1456,27 @@ p {
 .cus-container {
     max-width: 1200px !important;
     margin: auto !important;
+}
+
+
+.text-reveal {
+    /* display: flex;
+    flex-wrap: wrap;
+    line-height: 1.7; */
+    /* justify-content: center; */
+}
+
+.text-reveal .word {
+    opacity: 0.2;
+    transition: opacity 0.6s ease;
+    display: inline-block;
+}
+.visible {
+    visibility: visible !important;
+}
+
+.text-reveal .word.visible {
+    opacity: 1;
 }
 
 .process-line-r {
@@ -1630,6 +1657,44 @@ ul li {
     width: 100px;
 }
 
+
+.payment-header {
+    background-color: #079560;
+    color: white;
+    font-weight: 700;
+    font-size: 20px;
+    border-top-right-radius: 20px;
+    border-top-left-radius: 20px;
+}
+
+.payment-options .nav-link{
+    border: 1px solid gainsboro;
+}
+.payment-options .nav-link .icon{
+    color: #000;
+    background-color: #bed6fc;
+    padding: 1rem;
+    width: 40px;
+    height: 40px;
+    font-size: 1rem;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+.payment-options .nav-link.active{
+    border: 1px solid #0d6efd;
+    background: #e6eefb;
+    box-shadow: 0 0 10px 0 rgba(0, 0, 0, 0.1);
+}
+.payment-options .nav-link h4{
+    color: #000;
+    font-size: 18px;
+}
+.payment-options-container {
+    border-bottom-left-radius: 10px;
+    border-bottom-right-radius: 10px;
+}
 .accordion-button:not(.collapsed) {
     color: white !important;
     border-top-left-radius: 15px !important;

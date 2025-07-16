@@ -1,13 +1,11 @@
 import React, { useState, useEffect } from "react";
 import { Accordion } from "react-bootstrap";
-import Bank1 from "../assets/bank1.webp";
-import Bank2 from "../assets/bank2.webp";
 import GIF from "../assets/approved.gif";
 import { generatePdf } from "../api/user";
-import { getUserProfile } from "../api/user";
 import { useCourses } from "../context/CoursesContext";
 import { useAuth } from "../context/AuthContext";
 import { toast } from "react-toastify";
+import { getUserProfile } from "../api/user";
 
 const getOrCreateFormNumber = () => {
   let formNumber = localStorage.getItem("formNumber");
@@ -27,6 +25,7 @@ const AdmissionResult = () => {
   const [editCourses, setEditCourses] = useState([...userCourses]);
   const [error, setError] = useState("");
   const [totalPrice, setTotalPrice] = useState(0);
+  const [challanCreatedAt, setChallanCreatedAt] = useState(null);
 
   const [formNumber, setFormNumber] = useState(() => getOrCreateFormNumber());
 
@@ -47,9 +46,7 @@ const AdmissionResult = () => {
       : "-";
   const marksObtained = correctAnswers;
   const percentage =
-    testScore !== null && !isNaN(testScore)
-      ? `${testScore}%`
-      : "-";
+    testScore !== null && !isNaN(testScore) ? `${testScore}%` : "-";
 
   const isPassed = testScore !== null && !isNaN(testScore) && testScore >= 50;
 
@@ -78,33 +75,58 @@ const AdmissionResult = () => {
     if (user && user.token) {
       fetchUserProfile();
     }
-  }, []);
+
+    // Listen for when the user comes back to this page (tab focus)
+    const handleVisibilityChange = () => {
+      if (document.visibilityState === "visible" && user && user.token) {
+        fetchUserProfile();
+      }
+    };
+
+    document.addEventListener("visibilitychange", handleVisibilityChange);
+
+    return () => {
+      document.removeEventListener("visibilitychange", handleVisibilityChange);
+    };
+  }, [user, login]);
 
   useEffect(() => {
-    const selectedCoursesFromStorage = user.user.courses;
-    if (selectedCoursesFromStorage) {
+    if (!user || !user.user || !user.user.data || !user.user.data.user) return;
+
+    // user.user.data.user.courses is expected to be a JSON string or an array
+    let selectedCourses = user.user.data.user.courses;
+
+    let parsedCourses = [];
+    if (selectedCourses) {
       try {
-        const courses = JSON.parse(selectedCoursesFromStorage);
-        if (Array.isArray(courses) && courses.length > 0) {
-          const existingCourses = new Set(userCourses);
-          const newCourses = courses.filter(
-            (course) => !existingCourses.has(course)
-          );
-          if (newCourses.length > 0) {
-            setUserCourses([...userCourses, ...newCourses]);
-          }
+        // If it's a string, try to parse it as JSON
+        if (typeof selectedCourses === "string") {
+          parsedCourses = JSON.parse(selectedCourses);
+        } else if (Array.isArray(selectedCourses)) {
+          // If it's already an array, use it directly
+          parsedCourses = selectedCourses;
         }
       } catch (error) {
-        console.error(
-          "Error parsing selectedCourses from localStorage:",
-          error
-        );
+        // If parsing fails, fallback to empty array
+        console.error("Error parsing selectedCourses:", error);
+        parsedCourses = [];
+      }
+    }
+
+    if (Array.isArray(parsedCourses) && parsedCourses.length > 0) {
+      // Only add courses that are not already in userCourses
+      const existingCourses = new Set(userCourses);
+      const newCourses = parsedCourses.filter(
+        (course) => !existingCourses.has(course)
+      );
+      if (newCourses.length > 0) {
+        setUserCourses([...userCourses, ...newCourses]);
       }
     }
 
     let price = getTotalPrice();
     setTotalPrice(price);
-  }, [userCourses, setUserCourses]);
+  }, [userCourses, setUserCourses, user]);
 
   const handleEditClick = () => {
     setEditCourses([...userCourses]);
@@ -119,9 +141,7 @@ const AdmissionResult = () => {
   };
 
   const handleAddCourse = () => {
-    if (editCourses.length < 2) {
-      setEditCourses([...editCourses, ""]);
-    }
+    setEditCourses([...editCourses, ""]);
   };
 
   const handleDeleteCourse = (index) => {
@@ -131,27 +151,34 @@ const AdmissionResult = () => {
   };
 
   const handleSave = () => {
+    // Remove empty and duplicate courses
     const filtered = editCourses.filter(Boolean);
     const unique = Array.from(new Set(filtered));
-    if (unique.length > 2) {
-      setError("You can enroll in up to 2 courses only.");
+    if (unique.length > 3) {
+      setError("You can enroll in up to 3 courses only.");
       return;
     }
     setUserCourses(unique);
     setShowModal(false);
   };
 
+  // Add loading state for challan generation
+  const [isGeneratingChallan, setIsGeneratingChallan] = useState(false);
+
   const handleGeneratePdf = async () => {
     try {
       if (totalPrice === 0) {
-        toast.error("Please add some courses!");
+        toast.error("Please add some coruses!");
         return;
       }
+      setIsGeneratingChallan(true);
       const { data } = await generatePdf(totalPrice, userCourses);
       const fileName = data.data.fileName;
       if (!fileName) {
         console.error("No file path returned");
-        return; 
+        setIsGeneratingChallan(false);
+        return;
+        return;
       }
       // const fileUrl = `http://localhost:3001/uploads/${fileName}`;
       const fileUrl = `https://backend.hunarmandpunjab.pk/uploads/${fileName}`;
@@ -159,28 +186,42 @@ const AdmissionResult = () => {
       a.href = fileUrl;
       a.download = fileName;
       a.click();
+      localStorage.removeItem("selectedCourses");
     } catch (error) {
       console.error("Error generating PDF:", error);
+    } finally {
+      setIsGeneratingChallan(false);
     }
   };
 
-  // Check if user has a challan
-  const hasChallan = user?.user?.data?.challans?.total !== 0;
+  const [hasChallan, setHasChallan] = useState(false);
+  const [firstChallan, setFirstChallan] = useState(null);
+  const [challanStatus, setChallanStatus] = useState(null);
 
-  // --- New: Get first challan and its paid status ---
-  const firstChallan =
-    user?.user?.data?.user?.challans?.challans &&
-    Array.isArray(user.user.data.user.challans.challans) &&
-    user.user.data.user.challans.challans.length > 0
-      ? user.user.data.user.challans.challans[0]
-      : null;
+  useEffect(() => {
+    // Check if user has a challan
+    const challanTotal = user?.user?.data?.challans?.total;
+    setHasChallan(challanTotal !== 0);
 
-  // Only show challan status if there is a challan object
-  let challanStatus = null;
-  if (firstChallan && typeof firstChallan.paid !== "undefined") {
-    challanStatus = firstChallan.paid ? "Paid" : "Pending";
-  }
-  // --------------------------------------------------
+    // Get first challan and its paid status
+    const challanObj = user?.user?.data?.challans?.challans[0];
+    setFirstChallan(challanObj);
+
+    // Only show challan status if there is a challan object
+    if (challanObj && typeof challanObj.paid !== "undefined") {
+      setChallanStatus(challanObj.paid ? "Paid" : "Pending");
+    } else {
+      setChallanStatus(null);
+    }
+
+    // Get createdAt date from challanObj if available
+    if (challanObj && challanObj.createdAt) {
+      setChallanCreatedAt(challanObj.createdAt);
+    }
+
+    // For debugging
+    console.log(challanObj);
+  }, [user]);
 
   const modalOverlayStyle = {
     position: "fixed",
@@ -317,12 +358,12 @@ const AdmissionResult = () => {
             Congratulations! You’ve Successfully Passed the Admission Test
           </h2>
           <div
-            class="alert alert-success mt-4"
+            className="alert alert-success mt-4"
             style={{ color: "green", fontFamily: "Poppins" }}
             role="alert"
           >
             <strong>
-              <i class="fas fa-check-circle" style={{ color: "green" }}></i>{" "}
+              <i className="fas fa-check-circle" style={{ color: "green" }}></i>{" "}
               Congratulations! You’ve Successfully Passed the Admission Test
             </strong>{" "}
             We are thrilled to inform you that you have successfully cleared the
@@ -406,41 +447,44 @@ const AdmissionResult = () => {
                 <td data-th="Details">{user?.user?.fullName || ""}</td>
               </tr>
               <tr>
-                <td data-th="Field">Admission Test ID</td>
+                <td data-th="Field">Test ID</td>
                 <td data-th="Details">{formNumber}</td>
               </tr>
               <tr>
                 <td data-th="Field">Total MCQs</td>
-                <td data-th="Details">{totalMcqs}</td>
+                <td data-th="Details">25</td>
               </tr>
-              <tr>
+              {/* <tr>
                 <td data-th="Field">Correct Answers</td>
-                <td data-th="Details">{correctAnswers}</td>
-              </tr>
-              <tr>
+
+                <td data-th="Details">18</td>
+              </tr> */}
+              {/* <tr>
                 <td data-th="Field">Incorrect Answers</td>
-                <td data-th="Details">{incorrectAnswers}</td>
-              </tr>
+                <td data-th="Details">7</td>
+              </tr> */}
+
               <tr>
                 <td data-th="Field">Total Marks</td>
-                <td data-th="Details">{totalMcqs}</td>
+                <td data-th="Details">25</td>
               </tr>
               <tr>
                 <td data-th="Field">Marks Obtained</td>
-                <td data-th="Details">{marksObtained}</td>
+                <td data-th="Details">18</td>
               </tr>
               <tr>
                 <td data-th="Field">Percentage</td>
-                <td data-th="Details">{percentage}</td>
+                <td data-th="Details">72%</td>
               </tr>
               <tr>
-                <td data-th="Field">Pass/Fail Status</td>
+                {/* <td data-th="Field">Pass/Fail Status</td> */}
+                <td data-th="Field">Result Status</td>
                 <td data-th="Details">
                   <span
                     className="btn-green p-1 px-2"
                     style={{ fontSize: "12px" }}
                   >
-                    {isPassed ? "Pass" : "Fail"}
+                    Pass
                   </span>
                 </td>
               </tr>
@@ -457,11 +501,10 @@ const AdmissionResult = () => {
             in the optional courses. To add a course, choose from the available
             options. You can enroll in up to 2 courses at once. All courses are
             completely free, but a one-time application processing fee of PKR
-            2800 is required, regardless of the number of courses you
-            select.
+            2850 is required, regardless of the number of courses you select.
           </p>
-          <div class="table-responsive">
-            <table class="table table-hover table-bordered">
+          <div className="table-responsive">
+            <table className="table table-hover table-bordered">
               <thead>
                 <tr>
                   <th style={{ backgroundColor: "#dee2e6" }} scope="col">
@@ -470,14 +513,14 @@ const AdmissionResult = () => {
                   <th style={{ backgroundColor: "#dee2e6" }} scope="col">
                     Applied Courses
                   </th>
-                  <th style={{ backgroundColor: "#dee2e6" }} scope="col">
+                  {/* <th className="d-none" style={{ backgroundColor: "#dee2e6" }} scope="col">
                     Edit Courses
-                  </th>
+                  </th> */}
                 </tr>
               </thead>
               <tbody>
                 <tr>
-                  <td>{formNumber}</td>
+                  <td>48079</td>
                   <td>
                     <ul>
                       {userCourses.length === 0 ? (
@@ -489,74 +532,285 @@ const AdmissionResult = () => {
                       )}
                     </ul>
                   </td>
-                  <td>
+                  {/* <td>
                     <button
-                      className="btn btn-success btn-green rounded-2"
+                      className="btn btn-success btn-green rounded-2 d-none"
                       onClick={handleEditClick}
-                      disabled={hasChallan}
                     >
-                      <i className="fas fa-edit"></i>{" "}
-                      {hasChallan ? "Challan Submitted" : "Edit"}
+                      <i className="fas fa-edit"></i> Edit
                     </button>
-                  </td>
+                  </td> */}
                 </tr>
               </tbody>
             </table>
           </div>
         </div>
-          <div className="d-flex align-items-center gap-1 alert alert-warning text-black">
-            <h4 className="fw-bold mb-0">
-              Last Date to pay Application Processing Fee:
-            </h4>
-            <p className="mb-0" style={{ marginRight: 12 }}>
-              {(() => {
-                // Calculate date 4 days from now
+        <div className="d-flex align-items-center gap-1 alert alert-warning text-black">
+          <h4 className="fw-bold mb-0">
+            Last Date to pay Application Processing Fee:
+          </h4>
+          <p className="mb-0" style={{ marginRight: 12 }}>
+            {(() => {
+              const options = {
+                year: "numeric",
+                month: "long",
+                day: "numeric",
+              };
+              if (challanCreatedAt) {
+                // Show challan created at date + 7 days
+                const challanDate = new Date(challanCreatedAt);
+                challanDate.setDate(challanDate.getDate() + 3);
+                return challanDate.toLocaleDateString("en-US", options);
+              } else {
+                // Show today + 7 days
                 const today = new Date();
-                today.setDate(today.getDate() + 4);
-                const options = {
-                  year: "numeric",
-                  month: "long",
-                  day: "numeric",
-                };
+                today.setDate(today.getDate() + 7);
                 return today.toLocaleDateString("en-US", options);
-              })()}
-            </p>
-            {/* Challan Status */}
-            {challanStatus && (
-              <span
-                className={`badge px-3 py-2 ms-2 fw-bold ${
-                  challanStatus === "Paid"
-                    ? "bg-success text-white"
-                    : "bg-warning text-dark"
-                }`}
-                style={{
-                  fontSize: "1rem",
-                  borderRadius: "6px",
-                  letterSpacing: "0.5px",
-                  minWidth: 80,
-                  textAlign: "center",
-                }}
-              >
-                {challanStatus}
-              </span>
-            )}
-          </div>
+              }
+            })()}
+          </p>
+          {challanStatus && (
+            <span
+              className={`badge px-3 py-2 ms-2 fw-bold ${
+                challanStatus === "Paid"
+                  ? "bg-success text-white"
+                  : "bg-warning text-dark"
+              }`}
+              style={{
+                fontSize: "1rem",
+                borderRadius: "6px",
+                letterSpacing: "0.5px",
+                minWidth: 80,
+                textAlign: "center",
+              }}
+            >
+              {challanStatus}
+            </span>
+          )}
+        </div>
       </div>
       <div style={{ backgroundColor: "#DDA30B", padding: "50px 0 80px" }}>
         <div className="container">
           <div className="payment white">
             <h2 className="text-center">Pay Application Processing Fee!</h2>
             <p className=" white">
-              Now, you're just one step away from confirming your admission
+              {/* Now, you're just one step away from confirming your admission
               seat. Please follow the instructions below to submit the
-              application fee through the given payment methods.
+              application fee through the given payment methods. */}
+              Now, you're just one step away from confirming your Scholarship
+              Card . Please follow the instructions below to submit the
+              processing fee through the given payment methods.
             </p>
           </div>
-          <Accordion defaultActiveKey="0">
+          <div className="row">
+            <div className="col-md-12">
+              <div className="text-center p-2 payment-header">
+                Payment Options
+              </div>
+            </div>
+          </div>
+          <div className="row payment-options">
+            <div className="col-md-12">
+              <div className="bg-white p-3 payment-options-container">
+                <div
+                  className="row nav nav-pills mb-3"
+                  id="pills-tab"
+                  role="tablist"
+                >
+                  {/* <div
+                    className="nav-item col-md-6 mb-3 mb-lg-0"
+                    role="present ation"
+                  >
+                    <button
+                      className="nav-link active w-100 h-100 p-3"
+                      id="pills-home-tab"
+                      data-bs-toggle="pill"
+                      data-bs-target="#pills-home"
+                      type="button"
+                      role="tab"
+                      aria-controls="pills-home"
+                      aria-selected="true"
+                    >
+                      <div className="d-flex align-items-start gap-2">
+                        <div className="icon">
+                          <i className="fa-solid fa-wallet"></i>
+                        </div>
+                        <div className="ms-3 text-start">
+                          <h4>Consumer Number / PSID</h4>
+                          <p>
+                            Pay using Online Mobile Banking or mobile wallet
+                            using 1 Biller
+                          </p>
+                        </div>
+                      </div>
+                    </button>
+                  </div> */}
+                  <div className="nav-item col-md-6" role="presentation">
+                    <button
+                      className="nav-link w-100 h-100 p-3"
+                      id="pills-profile-tab"
+                      data-bs-toggle="pill"
+                      data-bs-target="#pills-profile"
+                      type="button"
+                      role="tab"
+                      aria-controls="pills-profile"
+                      aria-selected="false"
+                    >
+                      <div className="d-flex align-items-start gap-2">
+                        <div className="icon">
+                          <i className="fa-solid fa-building-columns"></i>
+                        </div>
+                        <div className="ms-3 text-start">
+                          <h4>Bank Challan</h4>
+                          <p>
+                            Pay at any BOP Branch Using Hunarmand Punjab Challan
+                          </p>
+                        </div>
+                      </div>
+                    </button>
+                  </div>
+                </div>
+                <div className="row">
+                  <div className="col-md-12">
+                    <div
+                      className="tab-content bg-white p-3 rounded-2 shadow-sm"
+                      id="pills-tabContent"
+                    >
+                      {/* <div
+                        className="tab-pane fade show active"
+                        id="pills-home"
+                        role="tabpanel"
+                        aria-labelledby="pills-home-tab"
+                        tabindex="0"
+                      >
+                        <h5>
+                          Follow these steps to complete your payment using
+                          PSID:
+                        </h5>
+                        <ol>
+                          <li>
+                            <span className="fw-bold">
+                              Click on "Generate PSID"
+                            </span>{" "}
+                            to generate your unique PSID number.
+                          </li>
+                          <li>
+                            <span className="fw-bold">
+                              Once the PSID is generated, copy the PSID
+                            </span>{" "}
+                            by clicking the copy icon.
+                          </li>
+                          <li>
+                            <span className="fw-bold">
+                              Click on any bank option
+                            </span>{" "}
+                            below to view detailed instructions on how to pay
+                            your registration charges.
+                          </li>
+                        </ol>
+                        <button
+                          className="btn-green btn-success btn rounded-2"
+                          disabled={true}
+                        >
+                          PSID Coming Soon
+                        </button>
+                      </div> */}
+                      <div
+                        className="tab-pane fade"
+                        id="pills-profile"
+                        role="tabpanel"
+                        aria-labelledby="pills-profile-tab"
+                        tabindex="0"
+                      >
+                        <h5>Follow these steps to complete your payment:</h5>
+                        <h5>For Bank Challan Payment:</h5>
+                        <ol>
+                          <li>
+                            <span className="fw-bold">
+                              Click on "Generate Challan"
+                            </span>{" "}
+                            to generate your unique Bank Challan.
+                          </li>
+                          <li>
+                            <span className="fw-bold">
+                              Download the generated challan
+                            </span>{" "}
+                            by clicking the download button.
+                          </li>
+                          <li>
+                            <span className="fw-bold">
+                              Pay the challan at any nearest BOP Bank Branch
+                            </span>{" "}
+                            to complete your payment, confirm your Enrollment &
+                            Get a chance to avail Scholarship Card.
+                          </li>
+                        </ol>
+                        <button
+                          className="btn-green btn-success btn rounded-2"
+                          onClick={handleGeneratePdf}
+                          disabled={hasChallan || isGeneratingChallan}
+                        >
+                          {isGeneratingChallan ? (
+                            <>
+                              <span
+                                className="spinner-border spinner-border-sm me-2"
+                                role="status"
+                                aria-hidden="true"
+                              ></span>
+                              Generating...
+                            </>
+                          ) : (
+                            <>
+                              <i className="fas fa-download"></i>{" "}
+                              {hasChallan
+                                ? "Challan Already Submitted"
+                                : "Generate Challan"}
+                            </>
+                          )}
+                        </button>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+          <Accordion defaultActiveKey="0" className="d-none">
             {/* ...omitted for brevity... */}
             <Accordion.Item eventKey="0">
-              <Accordion.Header>Get Bank Challan</Accordion.Header>
+              {/* <Accordion.Header>Get Bank Challan</Accordion.Header> */}
+              <Accordion.Header>Payment Options</Accordion.Header>
               <Accordion.Body>
+                <div className="row mb-3">
+                  <div className="col-md-6">
+                    <div className="d-flex align-items-start gap-2 p-4 rounded-2 border h-100">
+                      <div>
+                        <i className="fa-solid fa-wallet"></i>
+                      </div>
+                      <div className="ms-3">
+                        <h4>Consumer Number / PSID</h4>
+                        <p>
+                          Pay using Online Mobile Banking or mobile wallet using
+                          1 Biller
+                        </p>
+                      </div>
+                    </div>
+                  </div>
+                  <div className="col-md-6">
+                    <div className="d-flex align-items-start gap-2 p-4 rounded-2 border h-100">
+                      <div>
+                        <i className="fa-solid fa-building-columns"></i>
+                      </div>
+                      <div className="ms-3">
+                        <h4>Bank Challan</h4>
+                        <p>
+                          Pay at any bank using Kamyaab Freelancer Program bank
+                          challan
+                        </p>
+                      </div>
+                    </div>
+                  </div>
+                </div>
                 <p className="fw-bold">Instructions:</p>
                 <p>
                   Hunarmand also provides the option to deposit your application
@@ -609,13 +863,26 @@ const AdmissionResult = () => {
                 </ul>
                 <button
                   className="btn-green btn-success btn rounded-2"
-                  onClick={() => handleGeneratePdf()}
-                  disabled={hasChallan}
+                  onClick={handleGeneratePdf}
+                  disabled={hasChallan || isGeneratingChallan}
                 >
-                  <i className="fas fa-download"></i>{" "}
-                  {hasChallan
-                    ? "Challan Already Submitted"
-                    : "Download Bank Challan"}
+                  {isGeneratingChallan ? (
+                    <>
+                      <span
+                        className="spinner-border spinner-border-sm me-2"
+                        role="status"
+                        aria-hidden="true"
+                      ></span>
+                      Generating...
+                    </>
+                  ) : (
+                    <>
+                      <i className="fas fa-download"></i>{" "}
+                      {hasChallan
+                        ? "Challan Already Submitted"
+                        : "Download Bank Challan"}
+                    </>
+                  )}
                 </button>
 
                 <div className="alert alert-success mt-4 border">
@@ -683,7 +950,7 @@ const AdmissionResult = () => {
                     </button>
                   </div>
                 ))}
-                {editCourses.length < 2 && (
+                {editCourses.length < 3 && (
                   <button style={addBtnStyle} onClick={handleAddCourse}>
                     Add Course
                   </button>

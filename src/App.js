@@ -13,6 +13,8 @@ import AOSWrapper from "./components/AOAWrapper";
 import ApplyNow from "./pages/ApplyNow";
 import Register from "./pages/Register";
 import Login from "./pages/Login";
+import ForgotPassword from "./pages/ForgotPassword";
+import ResetPassword from "./pages/ResetPassword";
 import NewsEvents from "./pages/NewsEvents";
 import "@fortawesome/fontawesome-free/css/all.min.css";
 import Certificate from "./pages/Certificate";
@@ -44,6 +46,8 @@ function App() {
   const hideHeaderFooterRoutes = [
     "/login",
     "/register",
+    "/forgot-password",
+    "/reset-password",
     "/apply-now",
     "/news",
     "/certificate",
@@ -77,6 +81,8 @@ function App() {
             <Route path="/" element={<Home />} />
             <Route path="/register" element={<Register />} />
             <Route path="/login" element={<Login />} />
+            <Route path="/forgot-password" element={<ForgotPassword />} />
+            <Route path="/reset-password/:token" element={<ResetPassword />} />
             <Route path="/courses" element={<AllCourses />} />
             <Route path="/apply-now" element={<ApplyNow />} />
             <Route path="/news" element={<NewsEvents />} />
