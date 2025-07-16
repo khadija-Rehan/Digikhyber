@@ -4,19 +4,22 @@ import "aos/dist/aos.css";
 import CountUp from "react-countup";
 import { useInView } from "react-intersection-observer";
 
-import ML from "../assets/Machine Learning & Data Science.jpg";
-import UI from "../assets/Advanced UIUX Designing.jpg";
-import DM from "../assets/Digital Marketing & AI.jpg";
-import FS from "../assets/Full Stack Web Developement with React & Node JS.jpg";
+import ML from "../assets/Hunarmand Punjab Website Banner 4-min.jpg";
+import UI from "../assets/Hunarmand Punjab Website Banner 4-min.jpg";
+import DM from "../assets/Hunarmand Punjab Website Banner 4-min.jpg";
+import FS from "../assets/Hunarmand Punjab Website Banner 4-min.jpg";
 import AD from "../assets/Hunarmand Punjab Website Banner 4-min.jpg";
-import WP from "../assets/WordPress Web Development.jpg";
+import WP from "../assets/Hunarmand Punjab Website Banner 4-min.jpg";
 import StarRating from "../components/StarRating";
 import Particles from "../components/ParticleBackground";
 import ParticleBackground from "../components/ParticleBackground";
 import { Link } from "react-router-dom";
 import StatCounter from "../components/StatsCounter";
+import { AVAILABLE_COURSES } from "../utils/courses";
+
 const AllCourses = () => {
     const [cardsPerRow, setCardsPerRow] = useState(3);
+    const [showAll, setShowAll] = useState(false);
 
     const updateCardsPerRow = () => {
         const width = window.innerWidth;
@@ -48,17 +51,9 @@ const AllCourses = () => {
         AOS.refresh();
     }, [cardsPerRow]);
 
-    const courses = [
-        { image: FS, title: "Full-Stack Web Development with JavaScript" },
-        { image: AD, title: "Native Android Application Development" },
-        { image: ML, title: "Machine Learning, AI, and Data Science" },
-        { image: WP, title: "WordPress Website Design & Deployment" },
-        { image: UI, title: "User Interface (UI) and User Experience (UX) Design" },
-        { image: DM, title: "Full Stack Digital Marketing" },
-    ];
+    // Only show first 9 courses unless showAll is true
+    const coursesToShow = showAll ? AVAILABLE_COURSES : AVAILABLE_COURSES.slice(0, 9);
 
-   
- 
     return (
         <>
             <div className="banner">
@@ -87,7 +82,7 @@ const AllCourses = () => {
             <div className="all-courses">
                 <div className="container">
                     <div className="courses-wrapper">
-                        {courses.map((course, index) => {
+                        {coursesToShow.map((course, index) => {
                             const delay = Math.floor(index / cardsPerRow) * 200;
                             return (
                                 <div
@@ -100,16 +95,16 @@ const AllCourses = () => {
                                     <img
                                         className="w-100"
                                         src={course.image}
-                                        alt={course.title}
+                                        alt={course.name}
                                     />
-                                    <div className="course-card-details d-flex flex-column justify-content-between h-100">
-                                        <p className="font-20">{course.title}</p>
+                                    <div className="course-card-details">
+                                        <p className="font-20">{course.name}</p>
                                         <p className="font-12 green">By Hunarmand Punjab</p>
                                         <p className="font-14 green ratings">
                                             <StarRating />
                                             <span className="rate"> 4.9</span>
                                         </p>
-                                        <Link to={`/course-detail?course=${encodeURIComponent(course.title)}`}>
+                                        <Link to={`/course-detail?course=${encodeURIComponent(course.name)}`}>
                                             <button className="btn-green-sq">View Details</button>
                                         </Link>
                                     </div>
@@ -117,11 +112,21 @@ const AllCourses = () => {
                             );
                         })}
                     </div>
+                    {!showAll && AVAILABLE_COURSES.length > 9 && (
+                        <div className="text-center mt-4">
+                            <button
+                                className="btn-green-sq"
+                                onClick={() => setShowAll(true)}
+                                style={{ minWidth: 160 }}
+                            >
+                                Show More
+                            </button>
+                        </div>
+                    )}
                 </div>
             </div>
 
-            
-            <StatCounter/>
+            <StatCounter />
         </>
     );
 };
