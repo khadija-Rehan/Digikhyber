@@ -2,6 +2,7 @@ import React, { useState } from "react";
 import Logo from "../assets/logo.png";
 import { Link, useNavigate } from "react-router-dom";
 import { forgotPasswordRequest } from "../api/auth";
+import ParticleBackground from "../components/ParticleBackground";
 
 const ForgotPassword = () => {
   const [formData, setFormData] = useState({
@@ -25,15 +26,17 @@ const ForgotPassword = () => {
     setError("");
     setSuccess("");
     setLoading(true);
-    
+
     try {
       const { data } = await forgotPasswordRequest(formData);
-      setSuccess("Password reset link has been sent to your email address. Please check your inbox and click on the link to reset your password.");
+      setSuccess(
+        "Password reset link has been sent to your email address. Please check your inbox and click on the link to reset your password."
+      );
       setLoading(false);
-      
     } catch (error) {
       setError(
-        error.response?.data?.message || "Failed to send reset link. Please try again."
+        error.response?.data?.message ||
+          "Failed to send reset link. Please try again."
       );
       setLoading(false);
     }
@@ -41,13 +44,16 @@ const ForgotPassword = () => {
 
   return (
     <div className="login">
+      <ParticleBackground />
       <div className="login-form">
         <div className="text-center mb-4">
           <img src={Logo} alt={Logo} />
         </div>
         <div className="text-center mb-4">
           <h5>FORGOT PASSWORD</h5>
-          <p className="text-muted">Enter your email address to reset your password</p>
+          <p className="text-muted">
+            Enter your email address to reset your password
+          </p>
         </div>
         <form onSubmit={handleSubmit}>
           <div className="mb-3">
@@ -95,4 +101,4 @@ const ForgotPassword = () => {
   );
 };
 
-export default ForgotPassword; 
+export default ForgotPassword;

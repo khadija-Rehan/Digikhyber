@@ -3,6 +3,7 @@ import Logo from "../assets/logo.png";
 import { Link, useNavigate, useLocation } from "react-router-dom";
 import { logIn } from "../api/auth";
 import { useAuth } from "../context/AuthContext";
+import ParticleBackground from "../components/ParticleBackground";
 
 const Login = () => {
   const [formData, setFormData] = useState({
@@ -10,6 +11,7 @@ const Login = () => {
     password: "",
   });
   const [error, setError] = useState("");
+  const [showPassword, setShowPassword] = useState(false);
   const navigate = useNavigate();
   const location = useLocation();
   const { login } = useAuth();
@@ -20,6 +22,10 @@ const Login = () => {
       ...prev,
       [name]: value,
     }));
+  };
+
+  const togglePasswordVisibility = () => {
+    setShowPassword(!showPassword);
   };
 
   const handleSubmit = async (e) => {
@@ -40,6 +46,7 @@ const Login = () => {
 
   return (
     <div className="login">
+      <ParticleBackground />
       <div className="login-form">
         <div className="text-center mb-4">
           <img src={Logo} alt={Logo} />
@@ -66,15 +73,25 @@ const Login = () => {
             <label className="mb-2" htmlFor="password">
               Password <span className="text-danger">*</span>
             </label>
-            <input
-              className="form-control p-3"
-              type="password"
-              name="password"
-              value={formData.password}
-              onChange={handleChange}
-              placeholder="Enter your password"
-              required
-            />
+            <div className="position-relative">
+              <input
+                className="form-control p-3 pe-5"
+                type={showPassword ? "text" : "password"}
+                name="password"
+                value={formData.password}
+                onChange={handleChange}
+                placeholder="Enter your password"
+                required
+              />
+              <button
+                type="button"
+                className="btn position-absolute top-50 end-0 translate-middle-y me-3"
+                onClick={togglePasswordVisibility}
+                style={{ background: "none", border: "none", zIndex: 10 }}
+              >
+                <i className={`fas ${showPassword ? "fa-eye" : "fa-eye-slash"}`}></i>
+              </button>
+            </div>
           </div>
           {error && <div className="alert alert-danger">{error}</div>}
           <div className="text-end">
