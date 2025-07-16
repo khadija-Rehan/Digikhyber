@@ -669,7 +669,7 @@ a:hover {
     /* makes sure content stays above the particles */
 }
 
-.btn-green::before {
+/* .btn-green::before {
     content: "";
     position: absolute;
     top: 50%;
@@ -687,11 +687,12 @@ a:hover {
     width: 300%;
     height: 300%;
     transform: translate(-50%, -50%) scale(1);
-}
+} */
 
 .btn-green:hover {
+    opacity: 0.8;
     color: white;
-    border: 1px solid #1a1e1d;
+    /* border: 1px solid #1a1e1d; */
 }
 
 .hero img {
@@ -884,8 +885,9 @@ a:hover {
 }
 
 .btn-green-sq:hover {
-    background-color: #1a1e1d;
-    border: 1px solid #1a1e1d;
+    /* background-color: #1a1e1d;
+    border: 1px solid #1a1e1d; */
+    opacity: 0.8;
 }
 
 .course-card-details {

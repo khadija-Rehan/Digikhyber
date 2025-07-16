@@ -78,7 +78,7 @@ const Courses = () => {
               key={index}
             >
               <img className="w-100" src={course.image} alt={course.title} />
-              <div className="course-card-details">
+              <div className="course-card-details d-flex flex-column justify-content-between h-100">
                 <p className="font-20">{course.title}</p>
                 <p className="font-12 green">By Hunarmand Punjab</p>
                 <p className="font-14 green ratings">

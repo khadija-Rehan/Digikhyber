@@ -66,17 +66,19 @@ const CoursesCategory = () => {
         <div className="row mt-3 mb-3">
           {courses.map((course, index) => (
             <div key={index} className="col-lg-3 col-md-4 col-sm-6 mb-4">
-              <Link to="/courses">
-                <div className="course-cat d-flex align-items-center gap-3">
-                  <button className="course-icon-btn text-white">
-                    <FontAwesomeIcon icon={course.icon} size="1x" />
-                  </button>
-                  <div className="left">
-                    <h6 className="fw-semi-bold mb-1">{course.name}</h6>
-                    <p className="fs-6 mb-0">View Course</p>
+              <div className="h-100">
+                <Link to="/courses">
+                  <div className="course-cat d-flex align-items-center gap-3 h-100">
+                    <button className="course-icon-btn text-white">
+                      <FontAwesomeIcon icon={course.icon} size="1x" />
+                    </button>
+                    <div className="left">
+                      <h6 className="fw-semi-bold mb-1">{course.name}</h6>
+                      <p className="fs-6 mb-0">View Course</p>
+                    </div>
                   </div>
-                </div>
-              </Link>
+                </Link>
+              </div>
             </div>
           ))}
         </div>
