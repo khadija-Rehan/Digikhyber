@@ -132,7 +132,8 @@ const ViewCourse = () => {
                   <div>Duration: 3 Months
                      {/* {courseContent.duration} */}
                   </div>
-                  <div>Level: {courseContent.level}</div>
+                  {/* <div>Level: {courseContent.level}</div> */}
+                  <div>Level: Beginner to Advanced</div>
                 </div>
               </div>
             </div>
