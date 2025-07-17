@@ -27,7 +27,7 @@ const ScholarshipModal = () => {
     e.preventDefault();
     handleClose();
     setTimeout(() => {
-      navigate("/apply-scholarshipcard");
+      navigate("/apply-now");
     }, 300); // Give modal time to close
   };
 
@@ -84,7 +84,7 @@ const ScholarshipModal = () => {
                     marginBottom: "10px",
                   }}
                 >
-                  جدید ترین IT TRAININGSیں ENROLL ہونے والے پہلے 50,000 سٹوڈنٹس
+                  جدید ترین IT {" "} TRAININGS میںENROLL ہونے والے پہلے 50,000 سٹوڈنٹس
                   کو سکالر شپ کارڈز فراہم کیے جائیں گے ۔ اس کے بعد موصول ہونے
                   والی درخواستوں کو اگلے بیچ میں شامل کیا جائے گا۔
                 </p>
@@ -157,7 +157,6 @@ const ScholarshipModal = () => {
                 <button
                   onClick={handleApplyNow}
                   style={{
-                    color: "orange",
                     background: "none",
                     border: "none",
                     padding: 0,
@@ -165,8 +164,9 @@ const ScholarshipModal = () => {
                     cursor: "pointer",
                     textDecoration: "underline"
                   }}
+                  className="text-danger text-decoration-none"
                 >
-                  Apply Now
+                  Apply Now?
                 </button>
               </div>
             </div>

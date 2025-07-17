@@ -943,7 +943,8 @@ a:hover {
 }
 
 .img-round:hover {
-  background-color: #1a1e1d;
+  /* background-color: #1a1e1d; */
+  opacity: 0.8;
 }
 
 .steps-cards {
@@ -1581,11 +1582,13 @@ p {
 }
 
 .first-td td {
-  background-color: #dda30b !important;
+  /* background-color: #dda30b !important; */
+  background-color: orange !important;
 }
 
 .rwd-table tbody tr:nth-child(odd) td {
-  background-color: #f7e7c3;
+  /* background-color: #f7e7c3; */
+  background-color: #ffc107;
   padding: 15px;
 }
 

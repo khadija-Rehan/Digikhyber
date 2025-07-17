@@ -420,7 +420,7 @@ const AdmissionResult = () => {
           <table className="table rwd-table">
             <thead
               className="thead-light"
-              style={{ backgroundColor: "#004613", color: "#fff" }}
+              style={{ backgroundColor: "#079560", color: "#fff" }}
             >
               <tr>
                 <th
@@ -429,7 +429,7 @@ const AdmissionResult = () => {
                   style={{
                     textAlign: "center",
                     color: "white",
-                    backgroundColor: "#004613",
+                    backgroundColor: "#079560",
                     fontWeight: "bold",
                   }}
                 >
@@ -497,9 +497,10 @@ const AdmissionResult = () => {
             <h5 className="fw-bold mb-0">Selected Study Programs</h5>
           </div>
           <p>
-            To edit your courses, click 'Edit.' To skip a course, select 'None'
+            {/* To edit your courses, click 'Edit.' To skip a course, select 'None'
             in the optional courses. To add a course, choose from the available
-            options. You can enroll in up to 2 courses at once. All courses are
+            options. */}
+             You can enroll in up to 2 courses at once. All courses are
             completely free, but a one-time application processing fee of PKR
             2850 is required, regardless of the number of courses you select.
           </p>
