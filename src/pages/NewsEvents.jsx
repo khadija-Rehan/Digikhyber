@@ -13,8 +13,6 @@ const NewsEvents = () => {
       id: 1,
       title: "🎉 Inauguration of Hunarmand Punjab",
       videoUrl: "https://www.youtube.com/embed/NC4ExcWTkOE",
-      shortDescription:
-        "Hunarmand Punjab was officially inaugurated by Rana Sikandar Hayat, Minister for School & Higher Education, marking a major milestone in Pakistan's digital transformation.",
       fullDescription: `Hunarmand Punjab was officially inaugurated by Rana Sikandar Hayat, Minister for School & Higher Education, marking a major milestone in Pakistan’s digital transformation.
           The program aims to equip 500,000 students with free, government-backed IT courses and skill-based training.
           Students will also benefit from the Scholarship Card, Laptop Scheme, and other support initiatives.
@@ -26,35 +24,29 @@ const NewsEvents = () => {
       title:
         "Inauguration of Hunarmand Punjab by Minister of School & Higher Education Rana Sikanadar Hayat",
       videoUrl: "https://www.youtube.com/embed/Ss0cuzczCMM",
-      shortDescription:
-        "We proudly announce the official launch of Hunarmand Punjab, inaugurated by Rana Sikandar Hayat, Minister for School & Higher Education, Punjab.",
       fullDescription: `🎉 Inauguration of Hunarmand Punjab
-We proudly announce the official launch of Hunarmand Punjab, inaugurated by Rana Sikandar Hayat, Minister for School & Higher Education, Punjab.
-This historic initiative aims to empower 500,000+ youth with free IT courses, modern skills, and digital tools for a brighter future.
-From Cyber Security, Artificial Intelligence to Web Development, the program is designed to meet the needs of Pakistan's growing tech industry.
-Students will also benefit from Scholarship Cards, Laptop & Solar Schemes, and Taleem Finance.
-💡 A new era of digital learning and youth empowerment begins now!
-Be a part of the largest skill development movement in Pakistan.`,
+        We proudly announce the official launch of Hunarmand Punjab, inaugurated by Rana Sikandar Hayat, Minister for School & Higher Education, Punjab.
+        This historic initiative aims to empower 500,000+ youth with free IT courses, modern skills, and digital tools for a brighter future.
+        From Cyber Security, Artificial Intelligence to Web Development, the program is designed to meet the needs of Pakistan's growing tech industry.
+        Students will also benefit from Scholarship Cards, Laptop & Solar Schemes, and Taleem Finance.
+        💡 A new era of digital learning and youth empowerment begins now!
+        Be a part of the largest skill development movement in Pakistan.`,
     },
     {
       id: 3,
       title: "1st Time in Pakistan Launching Laptop Scheme",
       videoUrl: "https://www.youtube.com/embed/49Xr-WHgGGA",
-      shortDescription:
-        "In a groundbreaking move, we're providing free laptops to talented students through the Hunarmand Punjab Scholarship Card.",
       fullDescription: `💻 1st Time in Pakistan – Launching the Laptop Scheme under Hunarmand Punjab!
-In a groundbreaking move, we're providing free laptops to talented students through the Hunarmand Punjab Scholarship Card.
-Empowering youth with digital tools to support online learning, freelancing, and IT skill development.
-🎓 Enroll in eligible IT courses and get a chance to receive a laptop – absolutely free!
-Limited slots available – apply today and step into your digital future.
-📢 Pakistan's digital transformation begins with you!`,
+        In a groundbreaking move, we're providing free laptops to talented students through the Hunarmand Punjab Scholarship Card.
+        Empowering youth with digital tools to support online learning, freelancing, and IT skill development.
+        🎓 Enroll in eligible IT courses and get a chance to receive a laptop – absolutely free!
+        Limited slots available – apply today and step into your digital future.
+        📢 Pakistan's digital transformation begins with you!`,
     },
     {
       id: 4,
       title: "Launching Scholarship Card (Only 50,000 Available)",
       videoUrl: "https://www.youtube.com/embed/MwaXTW0_jc8",
-      shortDescription:
-        "We're excited to announce the official launch of the Scholarship Card. Only 50,000 cards available for the first phase.",
       fullDescription: `🎉 Launching the Hunarmand Punjab Scholarship Card! 💳
 We're excited to announce the official launch of the Scholarship Card.
 Only 50,000 cards available for the first phase – apply now before seats run out!
@@ -68,8 +60,6 @@ Apply today and take the first step toward a brighter, skill-powered future!`,
       title:
         "500,000 Free IT Courses under the Ministry of School & Higher Education Rana Sikanadar Hayat",
       videoUrl: "https://www.youtube.com/embed/Prb2SI-2wtQ",
-      shortDescription:
-        "Offered under the visionary leadership of Rana Sikandar Hayat, Minister for School & Higher Education, Punjab.",
       fullDescription: `🎓 500,000 Free IT Courses
 Offered under the visionary leadership of Rana Sikandar Hayat, Minister for School & Higher Education, Punjab — the Hunarmand Punjab Scholarship Card initiative is transforming futures through technology. Gain access to cutting-edge IT training in fields like Artificial Intelligence, Web Development, Cybersecurity, and more.
 Hunarmand Punjab aims to empower youth with in-demand digital skills — completely free of cost.
@@ -78,16 +68,16 @@ Hunarmand Punjab aims to empower youth with in-demand digital skills — complet
 ✔ 100% Scholarship-Based Learning
 Don't miss your chance to be part of Pakistan's largest IT skills revolution.`,
     },
-//     {
-//       id: 6,
-//       title:
-//         "Hunarmand Punjab Scholarship Cards Are Now OPEN! (Only 50,000 Available)",
-//       videoUrl: "",
-//       shortDescription:
-//         "We are thrilled to announce that the distribution of Hunarmand Punjab Scholarship Cards has officially begun!",
-//       fullDescription: `🎉 Hunarmand Punjab Scholarship Cards Are Now OPEN!
-// We are thrilled to announce that the distribution of Hunarmand Punjab Scholarship Cards has officially begun! A total of 50,000 Scholarship Cards will be awarded to selected applicants across Pakistan. 25,000 Scholarship Cards are exclusively reserved for students from Punjab. The remaining 25,000 Cards will be distributed among students from other provinces. These cards grant access to completely free, advanced IT and digital skills training under the Hunarmand Punjab initiative. Don't miss your chance — Apply Now and be part of the digital transformation!`,
-//     },
+    //     {
+    //       id: 6,
+    //       title:
+    //         "Hunarmand Punjab Scholarship Cards Are Now OPEN! (Only 50,000 Available)",
+    //       videoUrl: "",
+    //       shortDescription:
+    //         "We are thrilled to announce that the distribution of Hunarmand Punjab Scholarship Cards has officially begun!",
+    //       fullDescription: `🎉 Hunarmand Punjab Scholarship Cards Are Now OPEN!
+    // We are thrilled to announce that the distribution of Hunarmand Punjab Scholarship Cards has officially begun! A total of 50,000 Scholarship Cards will be awarded to selected applicants across Pakistan. 25,000 Scholarship Cards are exclusively reserved for students from Punjab. The remaining 25,000 Cards will be distributed among students from other provinces. These cards grant access to completely free, advanced IT and digital skills training under the Hunarmand Punjab initiative. Don't miss your chance — Apply Now and be part of the digital transformation!`,
+    //     },
   ];
 
   const handleReadMore = (news) => {
@@ -122,11 +112,11 @@ Don't miss your chance to be part of Pakistan's largest IT skills revolution.`,
             {newsData.map((news) => (
               <div key={news.id} className="col-lg-4 col-md-6 mb-4">
                 <div className="course h-100 p-0">
-                  <div className="course-card-details h-100 d-flex flex-column justify-content-between align-items-start">
+                  <div className="course-card-details h-100 d-flex flex-column gap-2 justify-content-between align-items-start">
                     {/* Title First */}
                     <h6 className="mb-2 font-18 text-start">{news.title}</h6>
 
-                    <div className="vid-wrapper p-0 m-0 w-100">
+                    <div className="video-wrapper w-100">
                       <div className="vid-container">
                         <iframe
                           src={news.videoUrl}
