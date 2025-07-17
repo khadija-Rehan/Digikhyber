@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from "react";
+import React, { useState, useEffect, useRef } from "react";
 import { Accordion } from "react-bootstrap";
 import GIF from "../assets/approved.gif";
 import { generatePdf } from "../api/user";
@@ -50,6 +50,11 @@ const AdmissionResult = () => {
 
   const isPassed = testScore !== null && !isNaN(testScore) && testScore >= 50;
 
+  // --- FIX: Prevent profile API call loop ---
+  // We'll only fetch the profile once on mount, and on tab focus, but not on every user/login change.
+  // We'll use a ref to prevent multiple fetches on mount.
+  const hasFetchedProfile = useRef(false);
+
   useEffect(() => {
     const fetchUserProfile = async () => {
       try {
@@ -72,7 +77,13 @@ const AdmissionResult = () => {
       }
     };
 
-    if (user && user.token) {
+    // Only fetch once on mount if user and token exist
+    if (
+      user &&
+      user.token &&
+      !hasFetchedProfile.current
+    ) {
+      hasFetchedProfile.current = true;
       fetchUserProfile();
     }
 
@@ -88,7 +99,9 @@ const AdmissionResult = () => {
     return () => {
       document.removeEventListener("visibilitychange", handleVisibilityChange);
     };
-  }, [user, login]);
+    // Only run on mount and when user/token changes, not on every login change
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [user]);
 
   useEffect(() => {
     if (!user || !user.user || !user.user.data || !user.user.data.user) return;
