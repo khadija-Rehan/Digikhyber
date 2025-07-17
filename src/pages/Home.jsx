@@ -10,10 +10,12 @@ import Testimonials from "../components/Testimonials";
 import Opportunities from "../components/Opportunities";
 import Ourpartner from "../components/Ourpartners";
 import StatCounter from "../components/StatsCounter";
+import ScholarshipModal from "../components/ScholarshipModal";
 
 const Home = () => {
     return (
         <>
+            <ScholarshipModal />
             <Hero />
             <DigitalPunjab />
             <Opportunities />

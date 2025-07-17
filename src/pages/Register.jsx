@@ -181,7 +181,7 @@ const Register = () => {
                 <i className="fas fa-user icon fs-3"></i>
                 <div>
                   <h2 className="fs-5 fw-bold">Step:1</h2>
-                  <p className="mb-0">Student Signup</p>
+                  <p className="mb-0">Student Registration</p>
                 </div>
               </div>
               <i className="fas fa-clock icon fs-2"></i>
@@ -193,7 +193,7 @@ const Register = () => {
                 <i className="fas fa-book icon fs-3"></i>
                 <div>
                   <h2 className="fs-5 fw-bold">Step:2</h2>
-                  <p className="mb-0">Admission Test</p>
+                  <p className="mb-0">Attempt Online Admission Test</p>
                 </div>
               </div>
             </div>
