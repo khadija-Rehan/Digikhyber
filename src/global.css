@@ -1950,6 +1950,9 @@ ul li {
 
 /* Scholarship Modal Responsive Styles */
 @media (max-width: 768px) {
+    .scholarship-card {
+        width: 100%;
+    }
   .modal-content {
     margin: 10px;
     max-height: 95vh;

@@ -119,13 +119,13 @@ const ScholarshipModal = () => {
                     </div>
                     <div className="d-flex align-items-center mb-3">
                       <i className="fas fa-envelope text-success me-2"></i>
-                      <p className="mb-0">support@hunarmandpunjab.pk</p>
+                      <p className="mb-0" style={{wordBreak: "break-all"}}>support@hunarmandpunjab.pk</p>
                     </div>
                   </div>
                   <div className="col-md-6">
                     <div className="d-flex align-items-center mb-3">
                       <i className="fas fa-globe text-success me-2"></i>
-                      <p className="mb-0">www.hunarmandpunjab.pk</p>
+                      <p className="mb-0" style={{wordBreak: "break-all"}}>www.hunarmandpunjab.pk</p>
                     </div>
                     <p className="mb-0 text-success">
                       Monday to Friday, 9:00am to 5:00pm
