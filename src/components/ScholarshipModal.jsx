@@ -2,10 +2,11 @@ import React, { useEffect, useState } from "react";
 import Logo from "../assets/logo.png";
 import Education from "../assets/higher-education.png";
 import Header from "../assets/modal-banner.png";
-import { Link } from "react-router-dom";
+import { useNavigate } from "react-router-dom";
 
 const ScholarshipModal = () => {
   const [show, setShow] = useState(false);
+  const navigate = useNavigate();
 
   useEffect(() => {
     const timer = setTimeout(() => {
@@ -20,6 +21,14 @@ const ScholarshipModal = () => {
     setShow(false);
     const modal = window.bootstrap.Modal.getInstance(document.getElementById("scholarshipModal"));
     modal.hide();
+  };
+
+  const handleApplyNow = (e) => {
+    e.preventDefault();
+    handleClose();
+    setTimeout(() => {
+      navigate("/apply-scholarshipcard");
+    }, 300); // Give modal time to close
   };
 
   return (
@@ -145,14 +154,20 @@ const ScholarshipModal = () => {
               </p>
 
               <div className="text-start mt-3">
-                <Link
-                  to="/apply-scholarshipcard"
+                <button
+                  onClick={handleApplyNow}
                   style={{
                     color: "orange",
+                    background: "none",
+                    border: "none",
+                    padding: 0,
+                    font: "inherit",
+                    cursor: "pointer",
+                    textDecoration: "underline"
                   }}
                 >
                   Apply Now
-                </Link>
+                </button>
               </div>
             </div>
           </div>
