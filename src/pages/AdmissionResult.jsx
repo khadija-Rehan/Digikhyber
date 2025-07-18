@@ -465,7 +465,7 @@ const AdmissionResult = () => {
               </tr>
               <tr>
                 <td data-th="Field">Total MCQs</td>
-                <td data-th="Details">25</td>
+                <td data-th="Details">{totalMcqs}</td>
               </tr>
               {/* <tr>
                 <td data-th="Field">Correct Answers</td>
@@ -479,15 +479,15 @@ const AdmissionResult = () => {
 
               <tr>
                 <td data-th="Field">Total Marks</td>
-                <td data-th="Details">25</td>
+                <td data-th="Details">{totalMcqs * 1}</td>
               </tr>
               <tr>
                 <td data-th="Field">Marks Obtained</td>
-                <td data-th="Details">18</td>
+                <td data-th="Details">{correctAnswers}</td>
               </tr>
               <tr>
                 <td data-th="Field">Percentage</td>
-                <td data-th="Details">72%</td>
+                <td data-th="Details">{percentage}</td>
               </tr>
               <tr>
                 {/* <td data-th="Field">Pass/Fail Status</td> */}
