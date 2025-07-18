@@ -396,7 +396,7 @@ const FAQs = () => {
               <div className="p-3">
                 The solar panel is provided <b> completely free of cost </b>to
                 eligible and selected trainees who meet the criteria. One time
-                processing fee is charged per course.
+                processing fee is charged.
               </div>
             </Accordion.Body>
           </Accordion.Item>
@@ -530,7 +530,7 @@ const FAQs = () => {
           <Accordion.Item eventKey="26">
             <Accordion.Header>
               <div className="p-3 fw-medium">
-                Who can I contact for questions about Hunarmand Punjab?
+                How can I contact for questions about Hunarmand Punjab?
               </div>
             </Accordion.Header>
             <Accordion.Body>

@@ -1954,13 +1954,15 @@ ul li {
 /* Scholarship Modal Responsive Styles */
 @media (max-width: 768px) {
     .scholarship-card {
-        width: 100%;
+        width: 60% !important;
     }
   .modal-content {
     margin: 10px;
     max-height: 95vh;
   }
-
+  .modal-content p {
+    font-size: 12px !important;
+  }
   .modal-content h1 {
     font-size: 24px !important;
   }

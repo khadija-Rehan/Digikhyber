@@ -40,66 +40,56 @@ const ScholarshipModal = () => {
         aria-labelledby="scholarshipModalLabel"
         aria-hidden="true"
       >
-        <div className="modal-dialog modal-lg modal-dialog-centered modal-dialog-scrollable">
+        <div className="modal-dialog modal-md modal-dialog-centered modal-dialog-scrollable">
           <div className="modal-content">
             {/* Close Button */}
             <button
               type="button"
-              className="btn-close position-absolute top-0 end-0 m-3"
+              className="btn-close position-absolute top-0 end-0 m-2"
               aria-label="Close"
               onClick={handleClose}
             ></button>
 
             {/* Modal Header Image */}
-            <img src={Header} alt="Header" className="img-fluid w-100" />
+            <img src={Header} alt="Header" className="img-fluid w-100" style={{ maxHeight: "120px", objectFit: "cover" }} />
 
             {/* Modal Body */}
-            <div className="modal-body">
-              <div
-                className="text-center m-4 p-5"
-                style={{
-                  backgroundColor: "rgb(247 226 223)",
-                  borderRadius: "10px",
+            <div className="modal-body" style={{ padding: "15px" }}>
+              {/* Scholarship Information */}
+              <div 
+                className="d-flex align-items-start mb-3" 
+                style={{ 
+                  fontSize: "14px",
+                  background: "#ffe6e6",
+                  borderRadius: "6px",
+                  border: "1px solid #ffcccc",
+                  overflow: "hidden"
                 }}
               >
-                <h1
-                  className="text-start mb-3"
-                  style={{
-                    color: "#dc3545",
-                    fontWeight: "bold",
-                    fontSize: "36px",
-                  }}
-                >
-                  50,000 SCHOLARSHIP CARDS
-                </h1>
-                <p
-                  dir="rtl"
-                  lang="ur"
-                  className="urdu-font"
-                  style={{
-                    fontSize: "16px",
-                    textAlign: "right",
-                    lineHeight: "1.6",
-                    color: "#333",
-                    marginBottom: "10px",
-                  }}
-                >
-                  جدید ترین IT {" "} TRAININGS میںENROLL ہونے والے پہلے 50,000 سٹوڈنٹس
-                  کو سکالر شپ کارڈز فراہم کیے جائیں گے ۔ اس کے بعد موصول ہونے
-                  والی درخواستوں کو اگلے بیچ میں شامل کیا جائے گا۔
-                </p>
+                <div className="d-flex align-items-start p-3" style={{ gap: "12px" }}>
+                  <i className="fas fa-graduation-cap text-danger" style={{ fontSize: "16px", marginTop: "2px" }}></i>
+                  <div>
+                    <div className="fw-bold text-danger mb-1" style={{ fontSize: "15px" }}>
+                      50,000 SCHOLARSHIP CARDS
+                    </div>
+                    <div className="text-danger urdu-font" style={{ fontSize: "10px" }}>
+                      جدید ترین IT TRAININGS میں ENROLL ہونے والے پہلے 50,000 سٹوڈنٹس کو سکالر شپ کارڈز فراہم کیے جائیں گے۔ اس کے بعد موصول ہونے والی درخواستوں کو اگلے بیچ میں شامل کیا جائے گا۔
+                    </div>
+                  </div>
+                </div>
               </div>
 
               {/* Scholarship Card */}
-              <div className="scholarship-card mb-4">
+              <div className="scholarship-card mb-3 w-80">
                 <img
-                  className="w-100 rounded-4 shadow-lg"
+                  className="w-100 rounded-3 shadow"
                   src="/scholarship card.jpg"
                   alt=""
+                  style={{ objectFit: "cover" }}
                 />
               </div>
 
-              <p className="text-center">
+              <p className="text-center" style={{ fontSize: "14px" }}>
                 <strong>25,000 </strong> Scholarship cards reserved for{" "}
                 <strong>Punjab</strong> and <strong>25,000</strong> Scholarship
                 cards reserved for{" "}
@@ -109,36 +99,33 @@ const ScholarshipModal = () => {
               {/* Information Desk */}
               <div
                 style={{
-                  background:
-                    "linear-gradient(135deg, #e8f5e8 0%, #d4edda 100%)",
-                  borderRadius: "10px",
-                  padding: "25px",
-                  marginBottom: "30px",
-                  border: "2px solid #079560",
+                  background: "#f8f9fa",
+                  borderRadius: "6px",
+                  padding: "10px",
+                  marginBottom: "15px",
+                  border: "1px solid #dee2e6",
                 }}
               >
-                <h4 className="text-uppercase fw-bold mb-4">
-                  Information Desk
-                </h4>
-                <div className="row">
-                  <div className="col-md-12">
-                    <div className="d-flex align-items-center mb-3">
-                      <i className="fas fa-phone text-success me-2"></i>
-                      <p className="mb-0">UAN: 03-111-130-053</p>
+                <h6 className="text-uppercase fw-bold mb-2" style={{ fontSize: "12px", color: "#079560" }}>
+                  Helpline Center
+                </h6>
+                <div className="row g-1">
+                  <div className="col-12">
+                    <div className="d-flex align-items-center mb-1">
+                      <i className="fas fa-phone text-success me-2" style={{ fontSize: "11px", width: "12px" }}></i>
+                      <span style={{ fontSize: "11px" }}>UAN: 03-111-130-053</span>
                     </div>
-                    <div className="d-flex align-items-center mb-3">
-                      <i className="fas fa-envelope text-success me-2"></i>
-                      <p className="mb-0" style={{wordBreak: "break-all"}}>support@hunarmandpunjab.pk</p>
+                    <div className="d-flex align-items-center mb-1">
+                      <i className="fas fa-envelope text-success me-2" style={{ fontSize: "11px", width: "12px" }}></i>
+                      <span style={{ fontSize: "11px", wordBreak: "break-all" }}>support@hunarmandpunjab.pk</span>
                     </div>
-                  </div>
-                  <div className="col-md-6">
-                    <div className="d-flex align-items-center mb-3">
-                      <i className="fas fa-globe text-success me-2"></i>
-                      <p className="mb-0" style={{wordBreak: "break-all"}}>www.hunarmandpunjab.pk</p>
+                    <div className="d-flex align-items-center mb-1">
+                      <i className="fas fa-globe text-success me-2" style={{ fontSize: "11px", width: "12px" }}></i>
+                      <span style={{ fontSize: "11px", wordBreak: "break-all" }}>www.hunarmandpunjab.pk</span>
                     </div>
-                    <p className="mb-0 text-success">
+                    <small className="text-muted" style={{ fontSize: "10px" }}>
                       Monday to Friday, 9:00am to 5:00pm
-                    </p>
+                    </small>
                   </div>
                 </div>
               </div>
@@ -148,12 +135,12 @@ const ScholarshipModal = () => {
                 dir="rtl"
                 lang="ur"
                 className="text-end fw-bold urdu-font text-danger"
-                style={{ fontSize: "18px" }}
+                style={{ fontSize: "10px" }}
               >
                 نامکمل یا غلط اندراج کی گئی درخواستیں مسترد کر دی جائیں گی۔
               </p>
 
-              <div className="text-start mt-3">
+              <div className="text-start mt-2">
                 <button
                   onClick={handleApplyNow}
                   style={{
@@ -162,7 +149,8 @@ const ScholarshipModal = () => {
                     padding: 0,
                     font: "inherit",
                     cursor: "pointer",
-                    textDecoration: "underline"
+                    textDecoration: "underline",
+                    fontSize: "14px"
                   }}
                   className="text-danger text-decoration-none"
                 >
