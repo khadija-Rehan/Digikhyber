@@ -68,6 +68,72 @@ Hunarmand Punjab aims to empower youth with in-demand digital skills — complet
 ✔ 100% Scholarship-Based Learning
 Don't miss your chance to be part of Pakistan's largest IT skills revolution.`,
     },
+    {
+      id: 6,
+      title:
+        "nterview with Honorable Guest Prof. Dr. Yasir Ayaz | NCAI Pakistan | Inauguration Hunarmand Punjab",
+      videoUrl: "https://youtu.be/9dgJMrVYouo",
+      fullDescription: `Interview with Prof. Dr. Yasir Ayaz – Inauguration of Hunarmand Punjab
+We had the honor of welcoming Prof. Dr. Yasir Ayaz, Chairman of National Center of Artificial Intelligence - NCAI Pakistan, at the inauguration of the Hunarmand Punjab.
+Prof. Dr. Yasir Ayaz praised this visionary initiative for empowering youth with advanced IT skills and digital opportunities.
+He highlighted the importance of such programs in shaping Pakistan’s future workforce for the global tech industry.
+His appreciation motivates us to continue building a skilled and technologically empowered Pakistan.
+`,
+    },{
+      id: 7,
+      title:
+        "Interview with Honorable Guest Dr. Wajahat Qazi | Comsats University | Inauguration Hunarmand Punjab",
+      videoUrl: "https://youtu.be/_3hRDF_FQqQ",
+      fullDescription: `Interview with Dr. Wajahat Qazi – Inauguration of Hunarmand Punjab
+We were honored to host Dr. Wajahat Qazi from COMSATS University during the inauguration of Hunarmand Punjab.
+Dr. Wajahat Qazi praised this groundbreaking initiative for providing youth with modern IT skills and career opportunities.
+He emphasized how such programs are vital for building a digitally empowered Pakistan and strengthening the tech ecosystem.
+His words of encouragement inspire us to continue our mission of youth empowerment through modern IT skills.`,
+    },{
+      id: 8,
+      title:
+        "Interview with Honorable Guest Dr. Yasir Niaz Khan | CTO PSCA | Inauguration Hunarmand Punjab",
+      videoUrl: "https://youtu.be/N5OYV3PkDXo",
+      fullDescription: `Interview with Dr. Yasir Niaz Khan – Inauguration of Hunarmand Punjab
+We had the privilege of hosting Dr. Yasir Niaz Khan, Chief Technology Officer at Punjab Safe City Authority - PSCA, during the inauguration of the Hunarmand Punjab.
+Dr. Yasir Niaz highly appreciated this initiative for creating opportunities in IT education, innovation, and digital transformation.
+He emphasized the importance of such programs in preparing a skilled workforce for Pakistan’s future tech landscape.
+His valuable insights and encouragement strengthen our commitment to building a digitally empowered youth.`,
+    },{
+      id: 9,
+      title:
+        "Interview with Honorable Guest Dr. Yasir Niaz Khan | CTO PSCA | Inauguration Hunarmand Punjab",
+      videoUrl: "https://youtu.be/N5OYV3PkDXo",
+      fullDescription: `Interview with Mubashir Hussain Chand – Hunarmand Punjab
+We were honored to welcome Mubashir Hussain Chand, CEO of Hum Mashal E Rah Foundation, during the inauguration of Hunarmand Punjab initiative.
+He praised this visionary program for empowering youth through free IT education, scholarships, and digital skill development.
+Mubashir Hussain Chand highlighted the importance of Hunarmand Punjab Vision in creating a strong, skilled workforce for Pakistan’s future.
+His appreciation motivates us to continue building opportunities for thousands of students across Punjab.
+`,
+    },{
+      id: 10,
+      title:
+        "Laptop Winner Highlights | Minhal Raza From Sargodha | Inauguration Hunarmand Punjab",
+      videoUrl: "https://youtu.be/JWXBm9v2QyY",
+      fullDescription: `Laptop Winner Highlights – Minhal Raza from Sargodha
+We proudly celebrate the success of Minhal Raza, a dedicated student from Sargodha, who received a laptop under the Hunarmand Punjab Scholarship Card Program.
+Minhal Raza expressed heartfelt appreciation for this initiative, which is empowering students with digital tools for learning, freelancing, and IT skill development.
+He highlighted how the Laptop Scheme is helping students achieve their academic and professional goals.
+His success story inspires thousands of youth to join this mission and transform their future.
+`,
+    },{
+      id: 11,
+      title:
+        "Laptop Winner Highlights | Abdul Rehman from Lahore | Inauguration Hunarmand Punjab",
+      videoUrl: "https://youtu.be/DgXT0twJJFI",
+      fullDescription: `Laptop Winner Student Review – Abdul Rehman from Lahore
+We are proud to share the success story of Abdul Rehman from Lahore, who received a laptop under the Hunarmand Punjab Scholarship Card Program.
+Abdul Rehman expressed deep gratitude for this remarkable initiative that provides students with digital resources and free IT education.
+He acknowledged how the Laptop Scheme is bridging the digital gap and helping youth explore new opportunities in learning and freelancing.
+His appreciation motivates us to continue empowering students across Punjab with technology and skills.
+`,
+    },
+    },
     //     {
     //       id: 6,
     //       title:
