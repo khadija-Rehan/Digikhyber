@@ -99,10 +99,6 @@ const Notificationbar = () => {
               />
               25+ Hands on Practical Courses
             </div>
-          </div>
-          <div className="comm">
-            {/* Duplicate content with white icons */}
-            <div></div>
             <div className="cmn-textslide">
               <img
                 className="white-icon"
@@ -122,7 +118,7 @@ const Notificationbar = () => {
                 alt="parliament"
               />
               {/* Endorsed By Government */}
-              Endorsed by Government of Punjab
+              Endorsed By Ministry of School & Higher Education Government of Punjab
             </div>
             <div className="cmn-textslide">
               <img
@@ -194,7 +190,7 @@ const Notificationbar = () => {
               />
               25+ Hands on Practical Courses
             </div>
-          </div>
+          
         </div>
       </div>
 
@@ -210,6 +206,7 @@ const Notificationbar = () => {
           align-items: center;
         }
       `}</style>
+    </div>
     </div>
   );
 };
