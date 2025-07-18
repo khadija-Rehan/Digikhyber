@@ -132,7 +132,7 @@ Abdul Rehman expressed deep gratitude for this remarkable initiative that provid
 He acknowledged how the Laptop Scheme is bridging the digital gap and helping youth explore new opportunities in learning and freelancing.
 His appreciation motivates us to continue empowering students across Punjab with technology and skills.
 `,
-    },
+    
     },
     //     {
     //       id: 6,

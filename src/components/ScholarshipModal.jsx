@@ -72,8 +72,8 @@ const ScholarshipModal = () => {
                     <div className="fw-bold text-danger mb-1" style={{ fontSize: "15px" }}>
                       50,000 SCHOLARSHIP CARDS
                     </div>
-                    <div className="text-danger urdu-font" style={{ fontSize: "10px" }}>
-                      جدید ترین IT TRAININGS میں ENROLL ہونے والے پہلے 50,000 سٹوڈنٹس کو سکالر شپ کارڈز فراہم کیے جائیں گے۔ اس کے بعد موصول ہونے والی درخواستوں کو اگلے بیچ میں شامل کیا جائے گا۔
+                                        <div className="text-danger urdu-font" style={{ fontSize: "10px", direction: "rtl", textAlign: "right" }}>
+                      جدید ترین IT Trainings میں Enroll ہونے والے پہلے 50,000 سٹوڈنٹس کو سکالرشپ کارڈز فراہم کیے جائیں گے۔ اس کے بعد موصول ہونے والی درخواستوں کو اگلے بیچ میں شامل کیا جائے گا۔
                     </div>
                   </div>
                 </div>
@@ -89,7 +89,7 @@ const ScholarshipModal = () => {
                 />
               </div>
 
-              <p className="text-center" style={{ fontSize: "14px" }}>
+              <p className="text-center text-cont" style={{ fontSize: "14px" }}>
                 <strong>25,000 </strong> Scholarship cards reserved for{" "}
                 <strong>Punjab</strong> and <strong>25,000</strong> Scholarship
                 cards reserved for{" "}
