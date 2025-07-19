@@ -537,10 +537,10 @@ const AdmissionResult = () => {
                   <td>48079</td>
                   <td>
                     <ul>
-                      {userCourses.length === 0 ? (
+                      {user?.user?.data?.user?.testScore.length === 0 ? (
                         <li>No courses selected</li>
                       ) : (
-                        userCourses.map((course, idx) => (
+                        user?.user?.data?.user?.testScore.map((course, idx) => (
                           <li key={idx}>{course}</li>
                         ))
                       )}
