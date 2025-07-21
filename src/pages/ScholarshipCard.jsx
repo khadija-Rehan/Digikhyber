@@ -95,10 +95,10 @@ const ScholarshipCard = () => {
                             Scholarship Card is the key to it all.
                         </p>
                         <div className="mt-4">
-                            <p className="fw-semibold ">
+                            <p className="fw-semibold" style={{color: "#079560"}}>
                                 ⚡ Benefits of the Scholarship Card:
                             </p>
-                            <ul className="  mt-2">
+                            <ul className="  mt-2 list-unstyled">
                                 <li> Advanced IT Training with real-world skills</li>
                                 <li> Laptop, Solar & Education Finance Support</li>
                                 <li> Hands-On Learning with Global Curriculum</li>

@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from "react";
+import React, { useState, useEffect, useRef } from "react";
 import { Accordion } from "react-bootstrap";
 import GIF from "../assets/approved.gif";
 import { generatePdf } from "../api/user";
@@ -50,6 +50,11 @@ const AdmissionResult = () => {
 
   const isPassed = testScore !== null && !isNaN(testScore) && testScore >= 50;
 
+  // --- FIX: Prevent profile API call loop ---
+  // We'll only fetch the profile once on mount, and on tab focus, but not on every user/login change.
+  // We'll use a ref to prevent multiple fetches on mount.
+  const hasFetchedProfile = useRef(false);
+
   useEffect(() => {
     const fetchUserProfile = async () => {
       try {
@@ -72,7 +77,13 @@ const AdmissionResult = () => {
       }
     };
 
-    if (user && user.token) {
+    // Only fetch once on mount if user and token exist
+    if (
+      user &&
+      user.token &&
+      !hasFetchedProfile.current
+    ) {
+      hasFetchedProfile.current = true;
       fetchUserProfile();
     }
 
@@ -88,7 +99,9 @@ const AdmissionResult = () => {
     return () => {
       document.removeEventListener("visibilitychange", handleVisibilityChange);
     };
-  }, [user, login]);
+    // Only run on mount and when user/token changes, not on every login change
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [user]);
 
   useEffect(() => {
     if (!user || !user.user || !user.user.data || !user.user.data.user) return;
@@ -420,7 +433,7 @@ const AdmissionResult = () => {
           <table className="table rwd-table">
             <thead
               className="thead-light"
-              style={{ backgroundColor: "#004613", color: "#fff" }}
+              style={{ backgroundColor: "#079560", color: "#fff" }}
             >
               <tr>
                 <th
@@ -429,7 +442,7 @@ const AdmissionResult = () => {
                   style={{
                     textAlign: "center",
                     color: "white",
-                    backgroundColor: "#004613",
+                    backgroundColor: "#079560",
                     fontWeight: "bold",
                   }}
                 >
@@ -452,7 +465,7 @@ const AdmissionResult = () => {
               </tr>
               <tr>
                 <td data-th="Field">Total MCQs</td>
-                <td data-th="Details">25</td>
+                <td data-th="Details">{totalMcqs}</td>
               </tr>
               {/* <tr>
                 <td data-th="Field">Correct Answers</td>
@@ -466,15 +479,15 @@ const AdmissionResult = () => {
 
               <tr>
                 <td data-th="Field">Total Marks</td>
-                <td data-th="Details">25</td>
+                <td data-th="Details">{totalMcqs * 1}</td>
               </tr>
               <tr>
                 <td data-th="Field">Marks Obtained</td>
-                <td data-th="Details">18</td>
+                <td data-th="Details">{correctAnswers}</td>
               </tr>
               <tr>
                 <td data-th="Field">Percentage</td>
-                <td data-th="Details">72%</td>
+                <td data-th="Details">{percentage}</td>
               </tr>
               <tr>
                 {/* <td data-th="Field">Pass/Fail Status</td> */}
@@ -497,9 +510,10 @@ const AdmissionResult = () => {
             <h5 className="fw-bold mb-0">Selected Study Programs</h5>
           </div>
           <p>
-            To edit your courses, click 'Edit.' To skip a course, select 'None'
+            {/* To edit your courses, click 'Edit.' To skip a course, select 'None'
             in the optional courses. To add a course, choose from the available
-            options. You can enroll in up to 2 courses at once. All courses are
+            options. */}
+             You can enroll in up to 2 courses at once. All courses are
             completely free, but a one-time application processing fee of PKR
             2850 is required, regardless of the number of courses you select.
           </p>
@@ -523,10 +537,10 @@ const AdmissionResult = () => {
                   <td>48079</td>
                   <td>
                     <ul>
-                      {userCourses.length === 0 ? (
+                      {user?.user?.data?.user?.testScore.length === 0 ? (
                         <li>No courses selected</li>
                       ) : (
-                        userCourses.map((course, idx) => (
+                        user?.user?.data?.user?.testScore.map((course, idx) => (
                           <li key={idx}>{course}</li>
                         ))
                       )}
@@ -589,7 +603,10 @@ const AdmissionResult = () => {
           )}
         </div>
       </div>
-      <div style={{ backgroundColor: "#DDA30B", padding: "50px 0 80px" }}>
+      <div style={{ 
+        // backgroundColor: "#DDA30B", 
+        backgroundColor: "orange",
+        padding: "50px 0 80px" }}>
         <div className="container">
           <div className="payment white">
             <h2 className="text-center">Pay Application Processing Fee!</h2>

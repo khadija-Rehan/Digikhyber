@@ -129,8 +129,11 @@ const ViewCourse = () => {
                   style={{ width: "fit-content" }}
                 >
                   <div>Classes: Recorded</div>
-                  <div>Duration: {courseContent.duration}</div>
-                  <div>Level: {courseContent.level}</div>
+                  <div>Duration: 3 Months
+                     {/* {courseContent.duration} */}
+                  </div>
+                  {/* <div>Level: {courseContent.level}</div> */}
+                  <div>Level: Beginner to Advanced</div>
                 </div>
               </div>
             </div>
@@ -194,7 +197,7 @@ const ViewCourse = () => {
           </div>
           <div className="col-lg-4">
             <div className="courses-wrapper">
-              <div className="course">
+              <div className="course flex-grow-1">
                 <img
                   className="w-100"
                   src={courseContent.image}
