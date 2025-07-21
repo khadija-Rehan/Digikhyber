@@ -9,6 +9,7 @@ import { AVAILABLE_COURSES } from "../utils/courses";
 const Register = () => {
   let navigate = useNavigate();
   const [showPassword, setShowPassword] = useState(false);
+  const [loading, setLoading] = useState(false);
 
   const togglePasswordVisibility = () => {
     setShowPassword(!showPassword);
@@ -132,6 +133,7 @@ const Register = () => {
 
   const handleSubmit = async (e) => {
     e.preventDefault();
+    setLoading(true);
     if (validateForm()) {
       const formDataToSubmit = new FormData();
 
@@ -165,6 +167,7 @@ const Register = () => {
         toast.success(
           "Registration successful! Please check your email for verification."
         );
+        setLoading(false);
         navigate("/admission-test");
       } catch (error) {
         console.error("Registration failed:", error);
@@ -172,6 +175,7 @@ const Register = () => {
           error.response?.data?.message ||
             "Registration failed. Please try again."
         );
+        setLoading(false);
       }
     }
   };
@@ -754,8 +758,20 @@ const Register = () => {
             <button
               type="submit"
               className="btn btn-success fw-bold hbtn text-white p-3 w-100"
+              disabled={loading}
             >
-              Submit Application
+              {loading ? (
+                <>
+                  <span
+                    className="spinner-border spinner-border-sm me-2"
+                    role="status"
+                    aria-hidden="true"
+                  ></span>
+                  Submitting...
+                </>
+              ) : (
+                "Submit Application"
+              )}
             </button>
           </div>
         </form>
