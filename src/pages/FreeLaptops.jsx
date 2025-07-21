@@ -74,7 +74,7 @@ const FreeLaptops = () => {
             </div>
             <div className="container">
                 <div className="row pt-5 pb-5 align-items-center">
-                    <div className="col-lg-6">
+                    <div className="col-lg-6" data-aos="fade-right">
                         <img
                             className="w-100"
                             src="/images/Laptop Scheme Page Image (3).jpeg"
@@ -82,7 +82,7 @@ const FreeLaptops = () => {
                         />
                        
                     </div>
-                    <div className="col-lg-6">
+                    <div className="col-lg-6" data-aos="fade-left">
                         <h2 className="fw-semibold">
                             Your Digital Future Starts Here – Free Laptops for Eligible
                             Students

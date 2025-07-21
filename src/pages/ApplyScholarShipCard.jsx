@@ -138,7 +138,10 @@ const ApplyScholarShipCard = () => {
         <h1 className="fs-5 fw-bold text-black text-center pt-4">
           Scholarship Card Form
         </h1>
-        <p className="text-center text-black">
+        <p 
+        className="text-center text-danger"
+        // className="text-center text-black"
+        >
           To Become eligible for scholarship card (Free laptop, Solar scheme,
           Taleem Finance, Taleem Abroad, Advance Courses) you must be enrolled
           in one ore more programs under Hunarmand Punjab
@@ -240,7 +243,9 @@ const ApplyScholarShipCard = () => {
 
         <div className="mb-3">
           <label htmlFor="firstCourse" className="mb-2">
-            Select First Course <span className="text-danger">*</span>
+            {/* Select First Course */}
+            In which Course Did you Apply?
+             <span className="text-danger">*</span>
           </label>
           <select
             className={`form-control p-3 ${
@@ -265,7 +270,9 @@ const ApplyScholarShipCard = () => {
 
         <div className="mb-3">
           <label htmlFor="secondCourse" className="mb-2">
-            Select Second Course <small>(Optional)</small>
+            {/* Select Second Course */}
+            In which Course Did you Apply?
+            <small>(Optional)</small>
           </label>
           <select
             className={`form-control p-3 ${

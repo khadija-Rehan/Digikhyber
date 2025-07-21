@@ -72,10 +72,10 @@ const FreeSolarPanel = () => {
             </div>
             <div className="container pt-5">
                 <div className="row pt-5 pb-5  ">
-                    <div className="col-lg-6">
+                    <div className="col-lg-6" data-aos="fade-right">
                         <img className="w-100" src="/images/Solar Scheme Page Image (2).jpeg" alt="" />
                     </div>
-                    <div className="col-lg-6">
+                    <div className="col-lg-6" data-aos="fade-left">
                         <h2 className="fw-semibold">
                             Powering Your Dreams — Even When the Lights Go Out!
                         </h2>
