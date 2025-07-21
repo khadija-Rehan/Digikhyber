@@ -51,7 +51,7 @@
   color: #333;
   font-size: 1.1rem;
   font-weight: 600;
-  border-bottom: 2px solid #007bff;
+  border-bottom: 2px solid #079560;
   padding-bottom: 0.5rem;
   margin-bottom: 1rem;
   flex-shrink: 0;
@@ -82,11 +82,11 @@
 .video-thumbnail:hover {
   transform: translateY(-2px);
   box-shadow: 0 6px 16px rgba(0, 0, 0, 0.15);
-  border-color: #007bff;
+  border-color: #079560;
 }
 
 .video-thumbnail.active {
-  border-color: #007bff;
+  border-color: #079560;
   box-shadow: 0 0 0 3px rgba(0, 123, 255, 0.25);
   background: #f8f9ff;
 }
@@ -165,7 +165,7 @@
 /* Firefox scrollbar */
 .video-playlist {
   scrollbar-width: thin;
-  scrollbar-color: #007bff #f1f3f4;
+  scrollbar-color: #079560 #f1f3f4;
 }
 
 /* Responsive design */
