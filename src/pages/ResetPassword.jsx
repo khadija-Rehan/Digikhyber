@@ -20,6 +20,14 @@ const ResetPassword = () => {
   const navigate = useNavigate();
   const { token } = useParams();
   const [searchParams] = useSearchParams();
+  const [showPassword, setShowPassword] = useState(false);
+  const [showConfirmPassword, setShowConfirmPassword] = useState(false);
+  const togglePasswordVisibility = () => {
+    setShowPassword(!showPassword);
+  };
+  const toggleConfirmPasswordVisibility = () => {
+    setShowConfirmPassword(!showConfirmPassword);
+  };
   // const email = searchParams.get("email") || "";
 
   useEffect(() => {
@@ -149,16 +157,28 @@ const ResetPassword = () => {
             <label className="mb-2" htmlFor="password">
               New Password <span className="text-danger">*</span>
             </label>
-            <input
-              className="form-control p-3"
-              type="password"
-              name="password"
-              value={formData.password}
-              onChange={handleChange}
-              placeholder="Enter your new password"
-              required
-              disabled={loading}
-            />
+            <div className="position-relative">
+              <input
+                className="form-control p-3 pe-5"
+                type={showPassword ? "text" : "password"}
+                name="password"
+                value={formData.password}
+                onChange={handleChange}
+                placeholder="Enter your new password"
+                required
+                disabled={loading}
+              />
+              <button
+                type="button"
+                className="btn position-absolute top-50 end-0 translate-middle-y me-3"
+                onClick={togglePasswordVisibility}
+                style={{ background: "none", border: "none", zIndex: 10 }}
+              >
+                <i
+                  className={`fas ${showPassword ? "fa-eye" : "fa-eye-slash"}`}
+                ></i>
+              </button>
+            </div>
             {passwordStrength && (
               <small className={`${getPasswordStrengthColor()} mt-1 d-block`}>
                 {getPasswordStrengthText()}
@@ -169,16 +189,28 @@ const ResetPassword = () => {
             <label className="mb-2" htmlFor="confirmPassword">
               Confirm Password <span className="text-danger">*</span>
             </label>
-            <input
-              className="form-control p-3"
-              type="password"
-              name="confirmPassword"
-              value={formData.confirmPassword}
-              onChange={handleChange}
-              placeholder="Confirm your new password"
-              required
-              disabled={loading}
-            />
+            <div className="position-relative">
+              <input
+                className="form-control p-3 pe-5"
+                type={showConfirmPassword ? "text" : "password"}
+                name="confirmPassword"
+                value={formData.confirmPassword}
+                onChange={handleChange}
+                placeholder="Confirm your new password"
+                required
+                disabled={loading}
+              />
+              <button
+                type="button"
+                className="btn position-absolute top-50 end-0 translate-middle-y me-3"
+                onClick={toggleConfirmPasswordVisibility}
+                style={{ background: "none", border: "none", zIndex: 10 }}
+              >
+                <i
+                  className={`fas ${showConfirmPassword ? "fa-eye" : "fa-eye-slash"}`}
+                ></i>
+              </button>
+            </div>
           </div>
           {error && <div className="alert alert-danger">{error}</div>}
           {success && <div className="alert alert-success">{success}</div>}

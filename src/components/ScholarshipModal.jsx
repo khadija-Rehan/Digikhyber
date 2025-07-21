@@ -156,15 +156,16 @@ const ScholarshipModal = () => {
               <div className="text-start mt-3">
                 <button
                   onClick={handleApplyNow}
-                  style={{
-                    background: "none",
-                    border: "none",
-                    padding: 0,
-                    font: "inherit",
-                    cursor: "pointer",
-                    textDecoration: "underline"
-                  }}
-                  className="text-danger text-decoration-none"
+                  // style={{
+                  //   background: "none",
+                  //   border: "none",
+                  //   padding: 0,
+                  //   font: "inherit",
+                  //   cursor: "pointer",
+                  //   textDecoration: "underline"
+                  // }}
+                  // className="text-danger text-decoration-none"
+                  className="btn btn-danger"
                 >
                   Apply Now?
                 </button>

@@ -11,7 +11,7 @@ const NewsEvents = () => {
   const newsData = [
     {
       id: 1,
-      title: "🎉 Inauguration of Hunarmand Punjab",
+      title: "Honorable Guest Adnan Afzal Chattha, Chairperson of the CM Task Force for Skills Development, addressing in the inauguration of Hunarmand Punjab.",
       videoUrl: "https://www.youtube.com/embed/NC4ExcWTkOE",
       fullDescription: `Hunarmand Punjab was officially inaugurated by Rana Sikandar Hayat, Minister for School & Higher Education, marking a major milestone in Pakistan’s digital transformation.
           The program aims to equip 500,000 students with free, government-backed IT courses and skill-based training.

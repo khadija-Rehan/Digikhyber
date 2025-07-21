@@ -82,7 +82,7 @@ const Login = () => {
                 type={showPassword ? "text" : "password"}
                 name="password"
                 value={formData.password}
-                onChange={handleChange}
+                onChange={handleChange} 
                 placeholder="Enter your password"
                 required
               />
