@@ -202,7 +202,7 @@ const ScholarshipModal = () => {
                   //   textDecoration: "underline"
                   // }}
                   // className="text-danger text-decoration-none"
-                  className="btn btn-green"
+                  className="btn-green modal-btn"
                 >
                   Apply Now?
                 </button>
