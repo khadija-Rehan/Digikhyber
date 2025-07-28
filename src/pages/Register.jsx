@@ -1,13 +1,14 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import Logo from "../assets/logo.png";
 import { signUp } from "../api/auth";
-import { toast } from "react-toastify";
-import "react-toastify/dist/ReactToastify.css";
-import { useNavigate } from "react-router";
+import { useModal } from "../context/ModalContext";
+import { useNavigate, useSearchParams } from "react-router";
 import { AVAILABLE_COURSES } from "../utils/courses";
 
 const Register = () => {
   let navigate = useNavigate();
+  const [searchParams] = useSearchParams();
+  const { showSuccess, showError } = useModal();
   const [showPassword, setShowPassword] = useState(false);
   const [loading, setLoading] = useState(false);
 
@@ -22,21 +23,15 @@ const Register = () => {
     email: "",
     mobile: "",
     dateOfBirth: "",
-    // maritalStatus: "",
     gender: "",
     qualification: "",
-    // institute: "",
-    // fieldOfStudy: "",
-    // yearOfCompletion: "",
     firstCourse: "",
     secondCourse: "",
-    // internetAccess: false,
     city: "",
     permanentAddress: "",
-    // employmentStatus: false,
     password: "",
     agreement: false,
-    referralCode: "", // Added referral code field (optional)
+    referralCode: "",
   });
 
   const [documents, setDocuments] = useState({
@@ -46,64 +41,180 @@ const Register = () => {
 
   const [errors, setErrors] = useState({});
 
+  // Extract referral code from URL on component mount
+  useEffect(() => {
+    const referralCode = searchParams.get('ref') || searchParams.get('referral') || searchParams.get('code');
+    if (referralCode) {
+      setFormData(prev => ({
+        ...prev,
+        referralCode: referralCode
+      }));
+    }
+  }, [searchParams]);
+
+  // Clear error when user starts typing
+  const clearError = (fieldName) => {
+    if (errors[fieldName]) {
+      setErrors(prev => ({
+        ...prev,
+        [fieldName]: ""
+      }));
+    }
+  };
+
+  // Password strength validation
+  const validatePassword = (password) => {
+    const hasUpperCase = /[A-Z]/.test(password);
+    const hasLowerCase = /[a-z]/.test(password);
+    const hasNumbers = /\d/.test(password);
+    const hasSpecialChar = /[!@#$%^&*(),.?":{}|<>]/.test(password);
+    const isLongEnough = password.length >= 8;
+
+    if (password.length === 0) return "";
+    if (hasUpperCase && hasLowerCase && hasNumbers && hasSpecialChar && isLongEnough) {
+      return "strong";
+    } else if ((hasUpperCase || hasLowerCase) && hasNumbers && isLongEnough) {
+      return "medium";
+    } else {
+      return "weak";
+    }
+  };
+
+  // Age validation (must be 16 or older)
+  const validateAge = (dateOfBirth) => {
+    if (!dateOfBirth) return false;
+    const today = new Date();
+    const birthDate = new Date(dateOfBirth);
+    const age = today.getFullYear() - birthDate.getFullYear();
+    const monthDiff = today.getMonth() - birthDate.getMonth();
+    
+    if (monthDiff < 0 || (monthDiff === 0 && today.getDate() < birthDate.getDate())) {
+      return age - 1;
+    }
+    return age;
+  };
+
+  // File validation
+  const validateFile = (file, maxSize = 5 * 1024 * 1024) => {
+    if (!file) return "File is required";
+    
+    const allowedTypes = ['image/jpeg', 'image/jpg', 'image/png', 'application/pdf'];
+    if (!allowedTypes.includes(file.type)) {
+      return "File must be JPG, JPEG, PNG, or PDF";
+    }
+    
+    if (file.size > maxSize) {
+      return "File size must be less than 5MB";
+    }
+    
+    return "";
+  };
+
   const validateForm = () => {
     const newErrors = {};
 
     // Required fields validation
     if (!formData.fullName.trim()) {
       newErrors.fullName = "Full name is required";
+    } else if (formData.fullName.trim().length < 3) {
+      newErrors.fullName = "Full name must be at least 3 characters";
     }
+
     if (!formData.fatherName.trim()) {
       newErrors.fatherName = "Father's name is required";
+    } else if (formData.fatherName.trim().length < 3) {
+      newErrors.fatherName = "Father's name must be at least 3 characters";
     }
+
+    // CNIC validation
     if (!formData.cnic.trim()) {
       newErrors.cnic = "CNIC/B-Form number is required";
     } else if (!/^\d{13}$/.test(formData.cnic)) {
-      newErrors.cnic = "CNIC/B-Form must be 13 digits";
+      newErrors.cnic = "CNIC/B-Form must be exactly 13 digits";
     }
+
+    // Email validation
     if (!formData.email.trim()) {
       newErrors.email = "Email is required";
     } else if (!/\S+@\S+\.\S+/.test(formData.email)) {
-      newErrors.email = "Email is invalid";
+      newErrors.email = "Please enter a valid email address";
     }
+
+    // Mobile validation
     if (!formData.mobile.trim()) {
       newErrors.mobile = "Mobile number is required";
     } else if (!/^03\d{9}$/.test(formData.mobile)) {
-      newErrors.mobile = "Mobile number must start with 03 and be 11 digits";
+      newErrors.mobile = "Mobile number must start with 03 and be 11 digits (e.g., 03001234567)";
     }
+
+    // Date of birth validation
     if (!formData.dateOfBirth) {
       newErrors.dateOfBirth = "Date of birth is required";
+    } else {
+      const age = validateAge(formData.dateOfBirth);
+      if (age < 16) {
+        newErrors.dateOfBirth = "You must be at least 16 years old to register";
+      } else if (age > 100) {
+        newErrors.dateOfBirth = "Please enter a valid date of birth";
+      }
     }
+
     if (!formData.gender) {
       newErrors.gender = "Gender is required";
     }
+
     if (!formData.qualification) {
       newErrors.qualification = "Qualification is required";
     }
 
+    // Course validation
     if (!formData.firstCourse) {
       newErrors.firstCourse = "First course selection is required";
     }
+
+    // Second course validation (if selected, must be different from first)
+    if (formData.secondCourse && formData.secondCourse === formData.firstCourse) {
+      newErrors.secondCourse = "Second course must be different from first course";
+    }
+
     if (!formData.city.trim()) {
       newErrors.city = "City is required";
+    } else if (formData.city.trim().length < 2) {
+      newErrors.city = "City name must be at least 2 characters";
     }
+
     if (!formData.permanentAddress.trim()) {
       newErrors.permanentAddress = "Address is required";
+    } else if (formData.permanentAddress.trim().length < 10) {
+      newErrors.permanentAddress = "Address must be at least 10 characters";
     }
+
+    // Password validation
     if (!formData.password) {
       newErrors.password = "Password is required";
+    } else if (formData.password.length < 8) {
+      newErrors.password = "Password must be at least 8 characters long";
+    } else {
+      const passwordStrength = validatePassword(formData.password);
+      if (passwordStrength === "weak") {
+        newErrors.password = "Password is too weak. Include uppercase, lowercase, numbers, and special characters";
+      }
     }
-    if (!documents.cnicFront) {
-      newErrors.cnicFront = "CNIC Front is required";
+
+    // File validations
+    const cnicFrontError = validateFile(documents.cnicFront);
+    if (cnicFrontError) {
+      newErrors.cnicFront = cnicFrontError;
     }
-    if (!documents.cnicBack) {
-      newErrors.cnicBack = "CNIC Backt is required";
+
+    const cnicBackError = validateFile(documents.cnicBack);
+    if (cnicBackError) {
+      newErrors.cnicBack = cnicBackError;
     }
+
     if (!formData.agreement) {
       newErrors.agreement = "You must agree to the terms and conditions";
     }
-
-    // No validation for referralCode since it's optional
 
     setErrors(newErrors);
     return Object.keys(newErrors).length === 0;
@@ -115,6 +226,9 @@ const Register = () => {
       ...prev,
       [type]: file,
     }));
+    
+    // Clear file error when user selects a new file
+    clearError(type);
   };
 
   const handleChange = (e) => {
@@ -125,21 +239,37 @@ const Register = () => {
       processedValue = checked;
     }
 
+    // Handle CNIC formatting - keep only digits
+    if (name === "cnic") {
+      processedValue = value.replace(/[^\d]/g, "");
+    }
+
     setFormData((prev) => ({
       ...prev,
       [name]: processedValue,
     }));
+
+    // Clear error when user starts typing
+    clearError(name);
   };
 
   const handleSubmit = async (e) => {
     e.preventDefault();
+    
+    // Validate form first
+    if (!validateForm()) {
+      showError("Please fix the errors in the form before submitting.");
+      return;
+    }
+
     setLoading(true);
-    if (validateForm()) {
+
+    try {
       const formDataToSubmit = new FormData();
 
       // Append all form fields
       Object.entries(formData).forEach(([key, value]) => {
-        if (value !== null && value !== undefined) {
+        if (value !== null && value !== undefined && value !== "") {
           formDataToSubmit.append(key, value);
         }
       });
@@ -161,22 +291,104 @@ const Register = () => {
         }
       });
 
-      try {
-        const { data } = await signUp(formDataToSubmit);
-        console.log("Registration successful:", data);
-        toast.success(
-          "Registration successful! Please check your email for verification."
-        );
-        setLoading(false);
-        navigate("/admission-test");
-      } catch (error) {
-        console.error("Registration failed:", error);
-        toast.error(
-          error.response?.data?.message ||
-            "Registration failed. Please try again."
-        );
-        setLoading(false);
+      const { data } = await signUp(formDataToSubmit);
+      console.log("Registration successful:", data);
+      showSuccess(
+        "Registration successful! Please check your email for verification."
+      );
+      navigate("/admission-test");
+    } catch (error) {
+      console.error("Registration failed:", error);
+      console.error("Error response:", error.response);
+      console.error("Error data:", error.response?.data);
+      
+      // Extract detailed error message
+      let errorMessage = "Registration failed. Please try again.";
+      
+      // Check for different error response formats
+      if (error.response?.data?.message) {
+        errorMessage = error.response.data.message;
+      } else if (error.response?.data?.error) {
+        errorMessage = error.response.data.error;
+      } else if (error.response?.data?.errors) {
+        // Handle validation errors array
+        const errors = error.response.data.errors;
+        if (Array.isArray(errors)) {
+          errorMessage = errors.map(err => err.message || err.msg).join(', ');
+        } else if (typeof errors === 'object') {
+          errorMessage = Object.values(errors).join(', ');
+        }
+      } else if (error.response?.data?.msg) {
+        errorMessage = error.response.data.msg;
+      } else if (error.response?.data?.detail) {
+        errorMessage = error.response.data.detail;
+      } else if (error.response?.status === 409) {
+        errorMessage = "Email or CNIC already exists. Please use different credentials.";
+      } else if (error.response?.status === 400) {
+        errorMessage = "Invalid data provided. Please check your information.";
+      } else if (error.response?.status === 422) {
+        errorMessage = "Validation failed. Please check your form data.";
+      } else if (error.response?.status === 500) {
+        errorMessage = "Server error. Please try again later.";
+      } else if (error.response?.status === 401) {
+        errorMessage = "Unauthorized. Please try again.";
+      } else if (error.response?.status === 403) {
+        errorMessage = "Access denied. Please try again.";
+      } else if (error.response?.status === 404) {
+        errorMessage = "Service not found. Please try again.";
+      } else if (error.message) {
+        errorMessage = error.message;
+      } else if (error.response?.statusText) {
+        errorMessage = `Error: ${error.response.statusText}`;
+      } else if (error.code === 'NETWORK_ERROR') {
+        errorMessage = "Network error. Please check your internet connection.";
+      } else if (error.code === 'ECONNABORTED') {
+        errorMessage = "Request timeout. Please try again.";
       }
+      
+      // If still generic message, try to extract from response text
+      if (errorMessage === "Registration failed. Please try again." && error.response?.data) {
+        try {
+          const responseText = JSON.stringify(error.response.data);
+          if (responseText && responseText !== '{}') {
+            errorMessage = `Server response: ${responseText}`;
+          }
+        } catch (e) {
+          console.error("Could not parse error response:", e);
+        }
+      }
+      
+      showError(errorMessage);
+    } finally {
+      setLoading(false);
+    }
+  };
+
+  const getPasswordStrengthColor = () => {
+    const strength = validatePassword(formData.password);
+    switch (strength) {
+      case "strong":
+        return "text-success";
+      case "medium":
+        return "text-warning";
+      case "weak":
+        return "text-danger";
+      default:
+        return "";
+    }
+  };
+
+  const getPasswordStrengthText = () => {
+    const strength = validatePassword(formData.password);
+    switch (strength) {
+      case "strong":
+        return "Strong password";
+      case "medium":
+        return "Medium strength password";
+      case "weak":
+        return "Weak password";
+      default:
+        return "";
     }
   };
 
@@ -230,8 +442,9 @@ const Register = () => {
           <p className="text-center text-danger">
             To Become eligible for scholarship card (free laptop, Solar scheme,
             Taleem Finance, Taleem Abroad, Advance Courses) you must be enrolled
-            in one ore more programs under Hunarmand Punjab.
+            in one or more programs under Hunarmand Punjab.
           </p>
+          
           {/* Full Name */}
           <div className="mb-3">
             <label className="mb-2" htmlFor="fullName">
@@ -284,6 +497,7 @@ const Register = () => {
               value={formData.cnic}
               onChange={handleChange}
               placeholder="Enter your 13 digits CNIC or B-Form number without hyphenation"
+              maxLength="13"
             />
             {errors.cnic && (
               <div className="invalid-feedback">{errors.cnic}</div>
@@ -322,6 +536,7 @@ const Register = () => {
               value={formData.mobile}
               onChange={handleChange}
               placeholder="Enter your mobile number in the format e.g. 03001234567"
+              maxLength="11"
             />
             {errors.mobile && (
               <div className="invalid-feedback">{errors.mobile}</div>
@@ -341,33 +556,12 @@ const Register = () => {
               name="dateOfBirth"
               value={formData.dateOfBirth}
               onChange={handleChange}
+              max={new Date().toISOString().split('T')[0]}
             />
             {errors.dateOfBirth && (
               <div className="invalid-feedback">{errors.dateOfBirth}</div>
             )}
           </div>
-
-          {/* Marital Status */}
-          {/* <div className="mb-3">
-            <label className="mb-2" htmlFor="maritalStatus">
-              Marital Status <span className="text-danger">*</span>
-            </label>
-            <select
-              className={`form-select p-3 ${
-                errors.maritalStatus ? "is-invalid" : ""
-              }`}
-              name="maritalStatus"
-              value={formData.maritalStatus}
-              onChange={handleChange}
-            >
-              <option value="">Select</option>
-              <option value="single">Single</option>
-              <option value="married">Married</option>
-            </select>
-            {errors.maritalStatus && (
-              <div className="invalid-feedback">{errors.maritalStatus}</div>
-            )}
-          </div> */}
 
           {/* Gender */}
           <div className="mb-3">
@@ -409,72 +603,12 @@ const Register = () => {
               </option>
               <option value="matric">Matric</option>
               <option value="intermediate">Intermediate</option>
-              <option value="bachelor">Bachelor's</option>
+              <option value="bachelor">Bachelor / Higher</option>
             </select>
             {errors.qualification && (
               <div className="invalid-feedback">{errors.qualification}</div>
             )}
           </div>
-
-          {/* Institute/University Name */}
-          {/* <div className="mb-3">
-            <label className="mb-2" htmlFor="institute">
-              Institute/University Name <span className="text-danger">*</span>
-            </label>
-            <input
-              className={`form-control p-3 ${
-                errors.institute ? "is-invalid" : ""
-              }`}
-              type="text"
-              name="institute"
-              value={formData.institute}
-              onChange={handleChange}
-              placeholder="Enter the name of your institute or university."
-            />
-            {errors.institute && (
-              <div className="invalid-feedback">{errors.institute}</div>
-            )}
-          </div> */}
-
-          {/* Field of Study */}
-          {/* <div className="mb-3">
-            <label className="mb-2" htmlFor="fieldOfStudy">
-              Field of Study <span className="text-danger">*</span>
-            </label>
-            <input
-              className={`form-control p-3 ${
-                errors.fieldOfStudy ? "is-invalid" : ""
-              }`}
-              type="text"
-              name="fieldOfStudy"
-              value={formData.fieldOfStudy}
-              onChange={handleChange}
-              placeholder="Enter your field of study."
-            />
-            {errors.fieldOfStudy && (
-              <div className="invalid-feedback">{errors.fieldOfStudy}</div>
-            )}
-          </div> */}
-
-          {/* Year of Completion */}
-          {/* <div className="mb-3">
-            <label className="mb-2" htmlFor="yearOfCompletion">
-              Year of Completion <span className="text-danger">*</span>
-            </label>
-            <input
-              className={`form-control p-3 ${
-                errors.yearOfCompletion ? "is-invalid" : ""
-              }`}
-              type="text"
-              name="yearOfCompletion"
-              value={formData.yearOfCompletion}
-              onChange={handleChange}
-              placeholder="Enter the year of completion."
-            />
-            {errors.yearOfCompletion && (
-              <div className="invalid-feedback">{errors.yearOfCompletion}</div>
-            )}
-          </div> */}
 
           {/* First Course */}
           <div className="mb-3">
@@ -489,7 +623,7 @@ const Register = () => {
               value={formData.firstCourse}
               onChange={handleChange}
             >
-              <option value="" disabled>
+              <option value="">
                 Choose your Course
               </option>
               {AVAILABLE_COURSES.map((course) => (
@@ -516,8 +650,8 @@ const Register = () => {
               value={formData.secondCourse}
               onChange={handleChange}
             >
-              <option value="" disabled>
-                Choose your Course
+              <option value="">
+                Choose your Course (Optional)
               </option>
               {AVAILABLE_COURSES.map((course) => (
                 <option key={course.name} value={course.name}>
@@ -542,30 +676,14 @@ const Register = () => {
               value={formData.referralCode}
               onChange={handleChange}
               placeholder="Enter referral code if you have one"
+              readOnly={!!searchParams.get('ref') || !!searchParams.get('referral') || !!searchParams.get('code')}
             />
-          </div>
-
-          {/* Internet Access */}
-          {/* <div className="mb-3">
-            <label className="mb-2" htmlFor="internetAccess">
-              Do you have access to a reliable internet connection?*
-            </label>
-            <select
-              className={`form-select p-3 ${
-                errors.internetAccess ? "is-invalid" : ""
-              }`}
-              name="internetAccess"
-              value={formData.internetAccess ? "yes" : "no"}
-              onChange={handleChange}
-            >
-              <option value="">Select</option>
-              <option value="yes">Yes</option>
-              <option value="no">No</option>
-            </select>
-            {errors.internetAccess && (
-              <div className="invalid-feedback">{errors.internetAccess}</div>
+            {(searchParams.get('ref') || searchParams.get('referral') || searchParams.get('code')) && (
+              <small className="text-muted">
+                Referral code automatically filled from URL
+              </small>
             )}
-          </div> */}
+          </div>
 
           {/* City */}
           <div className="mb-3">
@@ -590,46 +708,24 @@ const Register = () => {
             <label className="mb-2" htmlFor="permanentAddress">
               Address <span className="text-danger">*</span>
             </label>
-            <input
+            <textarea
               className={`form-control p-3 ${
                 errors.permanentAddress ? "is-invalid" : ""
               }`}
-              type="text"
               name="permanentAddress"
               value={formData.permanentAddress}
               onChange={handleChange}
               placeholder="Enter your complete address."
+              rows="3"
             />
             {errors.permanentAddress && (
               <div className="invalid-feedback">{errors.permanentAddress}</div>
             )}
           </div>
 
-          {/* Employment Status */}
-          {/* <div className="mb-3">
-            <label className="mb-2" htmlFor="employmentStatus">
-              Are you currently employed?*
-            </label>
-            <select
-              className={`form-select p-3 ${
-                errors.employmentStatus ? "is-invalid" : ""
-              }`}
-              name="employmentStatus"
-              value={formData.employmentStatus ? "yes" : "no"}
-              onChange={handleChange}
-            >
-              <option value="">Select</option>
-              <option value="yes">Yes</option>
-              <option value="no">No</option>
-            </select>
-            {errors.employmentStatus && (
-              <div className="invalid-feedback">{errors.employmentStatus}</div>
-            )}
-          </div> */}
-
-          {/* Upload Last Degree Document */}
+          {/* Upload CNIC (Front Side) */}
           <div className="mb-3">
-            <label className="mb-2" htmlFor="degreeDocument">
+            <label className="mb-2" htmlFor="cnicFront">
               Upload CNIC (Front Side) <span className="text-danger">*</span>
             </label>
             <div
@@ -642,7 +738,7 @@ const Register = () => {
                 <h4>Click to choose or drop your file here</h4>
               </header>
               <p className="text-center">
-                Accepted formats: jpg, jpeg, png, pdf
+                Accepted formats: jpg, jpeg, png, pdf (Max 5MB)
               </p>
               <input
                 type="file"
@@ -662,9 +758,9 @@ const Register = () => {
             )}
           </div>
 
-          {/* Upload CNIC (Front & Back Side) */}
+          {/* Upload CNIC (Back Side) */}
           <div className="mb-3">
-            <label className="mb-2" htmlFor="cnicDocument">
+            <label className="mb-2" htmlFor="cnicBack">
               Upload CNIC (Back Side) <span className="text-danger">*</span>
             </label>
             <div
@@ -677,7 +773,7 @@ const Register = () => {
                 <h4>Click to choose or drop your file here</h4>
               </header>
               <p className="text-center">
-                Accepted formats: jpg, jpeg, png, pdf
+                Accepted formats: jpg, jpeg, png, pdf (Max 5MB)
               </p>
               <input
                 type="file"
@@ -692,7 +788,7 @@ const Register = () => {
                 </p>
               )}
             </div>
-            {errors.cnicDocument && (
+            {errors.cnicBack && (
               <div className="text-danger">{errors.cnicBack}</div>
             )}
           </div>
@@ -711,7 +807,7 @@ const Register = () => {
                 name="password"
                 value={formData.password}
                 onChange={handleChange}
-                placeholder="Create a password"
+                placeholder="Create a strong password (min 8 characters)"
               />
               <button
                 type="button"
@@ -724,6 +820,11 @@ const Register = () => {
                 ></i>
               </button>
             </div>
+            {formData.password && (
+              <small className={`${getPasswordStrengthColor()} mt-1 d-block`}>
+                {getPasswordStrengthText()}
+              </small>
+            )}
             {errors.password && (
               <div className="invalid-feedback">{errors.password}</div>
             )}

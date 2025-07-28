@@ -4,7 +4,7 @@ import GIF from "../assets/approved.gif";
 import { generatePdf } from "../api/user";
 import { useCourses } from "../context/CoursesContext";
 import { useAuth } from "../context/AuthContext";
-import { toast } from "react-toastify";
+import { useModal } from "../context/ModalContext";
 import { getUserProfile } from "../api/user";
 
 const getOrCreateFormNumber = () => {
@@ -21,6 +21,7 @@ const AdmissionResult = () => {
     useCourses();
 
   const { user, login } = useAuth();
+  const { showError } = useModal();
   const [showModal, setShowModal] = useState(false);
   const [editCourses, setEditCourses] = useState([...userCourses]);
   const [error, setError] = useState("");
@@ -181,7 +182,7 @@ const AdmissionResult = () => {
   const handleGeneratePdf = async () => {
     try {
       if (totalPrice === 0) {
-        toast.error("Please add some coruses!");
+        showError("Please add some courses!");
         return;
       }
       setIsGeneratingChallan(true);

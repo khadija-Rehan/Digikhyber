@@ -3,7 +3,7 @@ import ParticleBackground from "../components/ParticleBackground";
 import { Link, useNavigate, useSearchParams } from "react-router-dom";
 import { useAuth } from "../context/AuthContext";
 import { useCourses } from "../context/CoursesContext";
-import { toast } from "react-toastify";
+import { useModal } from "../context/ModalContext";
 import image from "../assets/ML.jpg";
 // import graphicDesignImage from "../assets/graphic-design.jpg"; // You'll need to add this image
 import { courseContentData } from "../data/courseContent";
@@ -33,6 +33,7 @@ const ViewCourse = () => {
   const [searchParams] = useSearchParams();
   const { isAuthenticated } = useAuth();
   const { userCourses, addCourse } = useCourses();
+  const { showSuccess, showError, showWarning, showInfo } = useModal();
 
   // Get course name from URL parameter, default to WordPress if not provided
   const courseNameFromURL = searchParams.get("course");
@@ -87,7 +88,7 @@ const ViewCourse = () => {
     if (isAuthenticated()) {
       // Check if user already has 2 courses
       if (userCourses.length >= 2) {
-        toast.warning(
+        showWarning(
           "You can only enroll in up to 2 courses. Please remove a course from your selection first."
         );
         return;
@@ -95,18 +96,18 @@ const ViewCourse = () => {
 
       // Check if course is already selected
       if (userCourses.includes(courseName)) {
-        toast.info("This course is already in your selection!");
+        showInfo("This course is already in your selection!");
         return;
       }
 
       // Add course to user's selection
       addCourse(courseName);
-      toast.success(`${courseName} has been added to your course selection!`);
+      showSuccess(`${courseName} has been added to your course selection!`);
 
       // Navigate to admission test
       navigate("/admission-test");
     } else {
-      toast.info("Please login first to register for the course");
+      showInfo("Please login first to register for the course");
       navigate("/login");
     }
   };

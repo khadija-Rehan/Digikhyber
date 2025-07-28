@@ -4,6 +4,7 @@ import { Link, useNavigate, useLocation } from "react-router-dom";
 import { logIn } from "../api/auth";
 import { useAuth } from "../context/AuthContext";
 import ParticleBackground from "../components/ParticleBackground";
+import { useModal } from "../context/ModalContext";
 
 const Login = () => {
   const [formData, setFormData] = useState({
@@ -16,6 +17,7 @@ const Login = () => {
   const navigate = useNavigate();
   const location = useLocation();
   const { login } = useAuth();
+  const { showError } = useModal();
 
   const handleChange = (e) => {
     const { name, value } = e.target;
