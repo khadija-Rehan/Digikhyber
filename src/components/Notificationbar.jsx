@@ -16,7 +16,8 @@ const Notificationbar = () => {
                 src="https://img.icons8.com/windows/32/admission.png"
                 alt="admission"
               />
-              Admissions Are Closing Soon
+              {/* Admissions Are Closing Soon */}
+              Applications Are Closing Soon
             </div>
             <div className="cmn-textslide">
               <img
@@ -107,7 +108,8 @@ const Notificationbar = () => {
                 src="https://img.icons8.com/windows/32/admission.png"
                 alt="admission"
               />
-              Admissions Are Closing Soon
+              {/* Admissions Are Closing Soon */}
+              Applications Are Closing Soon
             </div>
             <div className="cmn-textslide">
               <img

@@ -513,7 +513,7 @@ const AdmissionResult = () => {
             {/* To edit your courses, click 'Edit.' To skip a course, select 'None'
             in the optional courses. To add a course, choose from the available
             options. */}
-             You can enroll in up to 2 courses at once. All courses are
+            You can enroll in up to 2 courses at once. All courses are
             completely free, but a one-time application processing fee of PKR
             2850 is required, regardless of the number of courses you select.
           </p>
@@ -537,10 +537,10 @@ const AdmissionResult = () => {
                   <td>48079</td>
                   <td>
                     <ul>
-                      {user?.user?.data?.user?.testScore.length === 0 ? (
+                      {user?.user?.data?.user?.courses.length === 0 ? (
                         <li>No courses selected</li>
                       ) : (
-                        user?.user?.data?.user?.testScore.map((course, idx) => (
+                        user?.user?.data?.user?.courses.map((course, idx) => (
                           <li key={idx}>{course}</li>
                         ))
                       )}
@@ -560,10 +560,10 @@ const AdmissionResult = () => {
           </div>
         </div>
         <div className="d-flex align-items-center gap-1 alert alert-warning text-black">
-          <h4 className="fw-bold mb-0">
+          <h4 className="fw-bold mb-0 text-black">
             Last Date to pay Application Processing Fee:
           </h4>
-          <p className="mb-0" style={{ marginRight: 12 }}>
+          <p className="mb-0 text-black" style={{ marginRight: 12 }}>
             {(() => {
               const options = {
                 year: "numeric",
@@ -594,7 +594,7 @@ const AdmissionResult = () => {
                 fontSize: "1rem",
                 borderRadius: "6px",
                 letterSpacing: "0.5px",
-                minWidth: 80,
+                // minWidth: 80,
                 textAlign: "center",
               }}
             >
@@ -603,14 +603,18 @@ const AdmissionResult = () => {
           )}
         </div>
       </div>
-      <div style={{ 
-        // backgroundColor: "#DDA30B", 
-        backgroundColor: "orange",
-        padding: "50px 0 80px" }}>
+      <div
+        style={{
+          // backgroundColor: "#DDA30B",
+          // backgroundColor: "orange",
+          color: "#000",
+          padding: "50px 0 80px",
+        }}
+      >
         <div className="container">
-          <div className="payment white">
+          <div className="payment">
             <h2 className="text-center">Pay Application Processing Fee!</h2>
-            <p className=" white">
+            <p>
               {/* Now, you're just one step away from confirming your admission
               seat. Please follow the instructions below to submit the
               application fee through the given payment methods. */}
@@ -628,7 +632,7 @@ const AdmissionResult = () => {
           </div>
           <div className="row payment-options">
             <div className="col-md-12">
-              <div className="bg-white p-3 payment-options-container">
+              <div className="bg-white p-3 payment-options-container shadow-sm">
                 <div
                   className="row nav nav-pills mb-3"
                   id="pills-tab"
@@ -678,7 +682,8 @@ const AdmissionResult = () => {
                           <i className="fa-solid fa-building-columns"></i>
                         </div>
                         <div className="ms-3 text-start">
-                          <h4>Bank Challan</h4>
+                          {/* <h4>Bank Challan</h4> */}
+                          <h4>CLICK HERE FOR BANK CHALLAN </h4>
                           <p>
                             Pay at any BOP Branch Using Hunarmand Punjab Challan
                           </p>
@@ -733,7 +738,7 @@ const AdmissionResult = () => {
                         </button>
                       </div> */}
                       <div
-                        className="tab-pane fade"
+                        className="tab-pane fade "
                         id="pills-profile"
                         role="tabpanel"
                         aria-labelledby="pills-profile-tab"

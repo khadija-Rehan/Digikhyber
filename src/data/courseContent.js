@@ -21,6 +21,7 @@ import CGIAds from "../assets/coursebanners/CGI Ads.jpg";
 import FlutterDev from "../assets/coursebanners/Flutter App Development.jpg";
 import BlockchainDev from "../assets/coursebanners/Blockchain Development.jpg";
 import ForexTrading from "../assets/coursebanners/Forex Trading.jpg";
+import YouTubeMonetization from "../assets/coursebanners/YouTube Monetization.jpg";
 import PenetrationTesting from "../assets/coursebanners/Penetration Testing.jpg";
 import AdvancedGoogleAds from "../assets/coursebanners/Advanced Google Ads.jpg";
 import SEO from "../assets/coursebanners/SEO.jpg";
@@ -1179,11 +1180,11 @@ This course allows you to learn at your own pace and apply practical techniques 
 
 This course provides practical techniques and strategies you can apply to any website. Learn how search engines work, keyword research, on-page and off-page optimization, and the latest SEO best practices to boost your website's performance.`,
     requirements: [
-      "Basic computer and internet skills",
-      "A laptop or desktop with internet access",
-      "No prior SEO knowledge required",
-      "Interest in digital marketing",
-      "Willingness to learn technical concepts",
+      "Professional thumbnail design templates.",
+      "SEO checklist for videos.",
+      "Monetization roadmap and strategies.",
+      "Video editing software tips & resources.",
+      "Growth hacks to boost subscribers and watch hours.",
     ],
     materialIncludes: [
       "Complete SEO fundamentals training",
@@ -1212,6 +1213,46 @@ This course provides practical techniques and strategies you can apply to any we
       "URL structure and internal linking",
       "Image optimization and page speed",
       "Off-Page SEO: Link building strategies",
+    ],
+  },
+  "YouTube Monetization": {
+    category: "Digital Marketing & YouTube",
+    description:
+      "Master YouTube monetization techniques to earn money from your videos.",
+    duration: "3 Months",
+    level: "Beginner to Intermediate",
+    image: YouTubeMonetization,
+    aboutCourse: `The YouTube Monetization & Growth Course is designed to teach you how to build, grow, and monetize your YouTube channel. From creating engaging videos to understanding YouTube’s algorithm, this course gives you all the tools and strategies to earn through YouTube. Whether you want to create content for fun, grow your brand, or start a career as a YouTuber, this course covers everything step-by-step.`,
+    requirements: [
+      "Basic knowledge of using a computer or smartphone.",
+      "Laptop or smartphone with a camera (for video creation).",
+      "Internet connection.",
+      "No prior YouTube experience required.",
+      "YouTube channel setup guide.",
+    ],
+    materialIncludes: [
+      "Professional thumbnail design templates.",
+      "SEO checklist for videos.",
+      "Monetization roadmap and strategies.",
+      "Video editing software tips & resources.",
+      "Growth hacks to boost subscribers and watch hours.",
+    ],
+    whoCanJoin: [
+      "Students:  Looking to build a career or side income through YouTube.",
+      "Content Creators & Influencers: Who want to grow their audience and monetize content.",
+      "Small Business Owners: Wanting to promote products and services on YouTube.",
+      "Freelancers & Marketers: Offering YouTube content and channel management as services.",
+      "Beginners: No prior video editing or YouTube experience is required.",
+    ],
+    whatWillYouLearn: [
+      "YouTube Basics: How YouTube works & how to set up your channel.",
+      "Content Strategy: How to find trending topics and plan viral content.",
+      "Video SEO: Optimizing titles, tags, descriptions & thumbnails.",
+      "Audience Growth: Tips to increase subscribers and watch time.",
+      "YouTube Monetization: How to join the YouTube Partner Program.",
+      "Earning Methods: Ad revenue, brand sponsorships, affiliate marketing, and merchandise.",
+      "Video Editing: Step-by-step guide to creating professional videos.",
+      "Analytics & Insights: Using YouTube Studio to track performance.",
     ],
   },
 };

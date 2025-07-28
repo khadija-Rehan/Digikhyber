@@ -8,6 +8,12 @@ import { AVAILABLE_COURSES } from "../utils/courses";
 
 const Register = () => {
   let navigate = useNavigate();
+  const [showPassword, setShowPassword] = useState(false);
+  const [loading, setLoading] = useState(false);
+
+  const togglePasswordVisibility = () => {
+    setShowPassword(!showPassword);
+  };
 
   const [formData, setFormData] = useState({
     fullName: "",
@@ -127,6 +133,7 @@ const Register = () => {
 
   const handleSubmit = async (e) => {
     e.preventDefault();
+    setLoading(true);
     if (validateForm()) {
       const formDataToSubmit = new FormData();
 
@@ -160,6 +167,7 @@ const Register = () => {
         toast.success(
           "Registration successful! Please check your email for verification."
         );
+        setLoading(false);
         navigate("/admission-test");
       } catch (error) {
         console.error("Registration failed:", error);
@@ -167,6 +175,7 @@ const Register = () => {
           error.response?.data?.message ||
             "Registration failed. Please try again."
         );
+        setLoading(false);
       }
     }
   };
@@ -218,7 +227,7 @@ const Register = () => {
           <h1 className="fs-5 fw-bold text-black text-center pt-4">
             Admission Form
           </h1>
-          <p className="text-center">
+          <p className="text-center text-danger">
             To Become eligible for scholarship card (free laptop, Solar scheme,
             Taleem Finance, Taleem Abroad, Advance Courses) you must be enrolled
             in one ore more programs under Hunarmand Punjab.
@@ -693,16 +702,28 @@ const Register = () => {
             <label className="mb-2" htmlFor="password">
               Password <span className="text-danger">*</span>
             </label>
-            <input
-              className={`form-control p-3 ${
-                errors.password ? "is-invalid" : ""
-              }`}
-              type="password"
-              name="password"
-              value={formData.password}
-              onChange={handleChange}
-              placeholder="Create a password"
-            />
+            <div className="position-relative">
+              <input
+                className={`form-control p-3 pe-5 ${
+                  errors.password ? "is-invalid" : ""
+                }`}
+                type={showPassword ? "text" : "password"}
+                name="password"
+                value={formData.password}
+                onChange={handleChange}
+                placeholder="Create a password"
+              />
+              <button
+                type="button"
+                className="btn position-absolute top-50 end-0 translate-middle-y me-3"
+                onClick={togglePasswordVisibility}
+                style={{ background: "none", border: "none", zIndex: 10 }}
+              >
+                <i
+                  className={`fas ${showPassword ? "fa-eye" : "fa-eye-slash"}`}
+                ></i>
+              </button>
+            </div>
             {errors.password && (
               <div className="invalid-feedback">{errors.password}</div>
             )}
@@ -737,8 +758,20 @@ const Register = () => {
             <button
               type="submit"
               className="btn btn-success fw-bold hbtn text-white p-3 w-100"
+              disabled={loading}
             >
-              Submit Application
+              {loading ? (
+                <>
+                  <span
+                    className="spinner-border spinner-border-sm me-2"
+                    role="status"
+                    aria-hidden="true"
+                  ></span>
+                  Submitting...
+                </>
+              ) : (
+                "Submit Application"
+              )}
             </button>
           </div>
         </form>

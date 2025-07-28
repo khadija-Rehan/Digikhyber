@@ -116,9 +116,9 @@ const Footer = () => {
                       <a href="#">Terms & Policy</a>
                     </p>
                   </Link>
-                  <p className="links">
+                  {/* <p className="links">
                     <a>Refund</a>
-                  </p>{" "}
+                  </p>{" "} */}
                   <p className="links">
                     <Link to={"/privacy-policy"}>Privacy Policy</Link>
                   </p>

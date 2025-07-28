@@ -19,6 +19,7 @@ import ArchVizBlender from "../assets/CoursesImgs/Architechtural Visualization w
 import TextileDesign from "../assets/CoursesImgs/Textile Designing.jpg";
 import DigitalEmbroidery from "../assets/CoursesImgs/Digital Embroidery.jpg";
 import CGIAds from "../assets/CoursesImgs/CGI Ads.jpg";
+import YouTubeMonetization from "../assets/coursebanners/YouTube Monetization.jpg";
 import FlutterDev from "../assets/CoursesImgs/Flutter App Development.jpg";
 import BlockchainDev from "../assets/CoursesImgs/Blockchain Development.jpg";
 import ForexTrading from "../assets/CoursesImgs/Forex Trading.jpg";
@@ -55,5 +56,6 @@ export const AVAILABLE_COURSES = [
   { name: "Penetration Testing Web Hacking", price: COURSE_PRICE, image: PenetrationTesting },
   { name: "Advanced Google Ads", price: COURSE_PRICE, image: AdvancedGoogleAds },
   { name: "Search Engine Optimization - SEO", price: COURSE_PRICE, image: SEO },
+  { name: "YouTube Monetization", price: COURSE_PRICE, image: YouTubeMonetization },
 ];
 // Total number of courses: 27

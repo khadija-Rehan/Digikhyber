@@ -660,6 +660,11 @@ a:hover {
   z-index: 1;
 }
 
+.modal-btn{
+  padding: 10px 20px !important;
+  font-size: 14px !important;
+}
+
 .banner-content {
   position: relative;
   overflow: hidden;
@@ -806,12 +811,12 @@ a:hover {
   margin: 0 auto;
 }
 
-.digital-punjab {
+/* .digital-punjab {
   display: flex;
   flex-wrap: wrap;
   align-items: center;
   justify-content: space-between;
-}
+} */
 
 .vid-wrapper {
   margin: 0 auto;
@@ -1284,6 +1289,10 @@ p {
   color: #ff9b20 !important;
 }
 
+.alert-warning .text-black {
+  color: #000 !important;
+}
+
 .alert-warning ul li {
   color: #ff9b20 !important;
 }
@@ -1583,21 +1592,23 @@ p {
 
 .first-td td {
   /* background-color: #dda30b !important; */
-  background-color: orange !important;
+  /* background-color: orange !important; */
+  background-color: rgba(7, 149, 96, 0.5) !important;
 }
 
 .rwd-table tbody tr:nth-child(odd) td {
   /* background-color: #f7e7c3; */
-  background-color: #ffc107;
+  /* background-color: #ffc107; */
+  background-color: rgba(7, 149, 96, 0.5) !important;
   padding: 15px;
 }
 
 .rwd-table table tbody {
-  background-color: #fff1d0;
+  background-color: rgba(255, 255, 255, 0.8);
 }
 
 .rwd-table tbody tr:nth-child(even) td {
-  background-color: #fff1d0;
+  background-color: rgba(255, 255, 255, 0.8);
   padding: 15px;
 }
 

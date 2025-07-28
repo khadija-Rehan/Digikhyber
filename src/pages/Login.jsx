@@ -12,6 +12,7 @@ const Login = () => {
   });
   const [error, setError] = useState("");
   const [showPassword, setShowPassword] = useState(false);
+  const [loading, setLoading] = useState(false);
   const navigate = useNavigate();
   const location = useLocation();
   const { login } = useAuth();
@@ -31,10 +32,12 @@ const Login = () => {
   const handleSubmit = async (e) => {
     e.preventDefault();
     setError("");
+    setLoading(true)
     try {
       const { data } = await logIn(formData);
       login({ user: data.user, token: data.token });
-
+      
+      setLoading(false)
       if (data.user.testPassed === false) {
         navigate("/admission-test", { replace: true });
       } else {
@@ -44,6 +47,7 @@ const Login = () => {
       setError(
         error.response?.data?.message || "Login failed. Please try again."
       );
+      setLoading(false)
     }
   };
 
@@ -82,7 +86,7 @@ const Login = () => {
                 type={showPassword ? "text" : "password"}
                 name="password"
                 value={formData.password}
-                onChange={handleChange}
+                onChange={handleChange} 
                 placeholder="Enter your password"
                 required
               />
@@ -103,8 +107,20 @@ const Login = () => {
           <button
             type="submit"
             className="btn-green register-btn btn btn-success w-100 mt-3 rounded-2"
+            disabled={loading}
           >
-            Login
+            {loading ? (
+              <>
+                <span
+                  className="spinner-border spinner-border-sm me-2"
+                  role="status"
+                  aria-hidden="true"
+                ></span>
+                Logging in...
+              </>
+            ) : (
+              "Login"
+            )}
           </button>
           <div className="text-center mt-3 fs-6">
             <span>Don't have an account? </span>
