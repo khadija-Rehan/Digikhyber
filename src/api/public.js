@@ -1,6 +1,6 @@
 import axios from 'axios';
 
-const API_BASE_URL = process.env.REACT_APP_API_URL || 'http://localhost:3001/api';
+const API_BASE_URL = process.env.REACT_APP_API_URL || 'https://backend.hunarmandpunjab.pk';
 
 export const applyForScholarship = async (formData) => {
   const response = await axios.post(`${API_BASE_URL}/scholarship/apply`, formData, {
