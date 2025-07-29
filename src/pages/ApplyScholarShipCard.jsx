@@ -495,7 +495,7 @@ const ApplyScholarShipCard = () => {
             name="mobileNumber"
             value={formData.mobileNumber}
             onChange={handleChange}
-            placeholder="e.g. 0300-1234567"
+            placeholder="e.g. 03001234567"
             maxLength={12}
             required
           />
