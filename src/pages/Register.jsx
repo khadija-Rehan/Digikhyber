@@ -294,7 +294,7 @@ const Register = () => {
       const { data } = await signUp(formDataToSubmit);
       console.log("Registration successful:", data);
       showSuccess(
-        "Registration successful! Please check your email for verification."
+        "Registration successful! You can now log in to your account."
       );
       navigate("/admission-test");
     } catch (error) {
