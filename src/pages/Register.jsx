@@ -440,7 +440,7 @@ const Register = () => {
             Admission Form
           </h1>
           <p className="text-center text-danger">
-            To Become eligible for scholarship card (free laptop, Solar scheme,
+            To Become eligible for scholarship card (free laptops, Solar scheme,
             Taleem Finance, Taleem Abroad, Advance Courses) you must be enrolled
             in one or more programs under Hunarmand Punjab.
           </p>
