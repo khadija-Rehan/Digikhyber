@@ -10,9 +10,11 @@ import {
 } from "react-bootstrap";
 import Logo from "../assets/logo.png";
 import { useAuth } from "../context/AuthContext";
+import UnderConstructionModal from "./UnderConstructionModal";
 
 const Header = () => {
   const [showOffcanvas, setShowOffcanvas] = useState(false);
+  const [showConstructionModal, setShowConstructionModal] = useState(false);
   const { user, logout } = useAuth();
   const navigate = useNavigate();
 
@@ -22,6 +24,14 @@ const Header = () => {
   const handleLogout = () => {
     logout();
     navigate("/login");
+  };
+
+  const handleShowConstructionModal = () => {
+    setShowConstructionModal(true);
+  };
+
+  const handleCloseConstructionModal = () => {
+    setShowConstructionModal(false);
   };
 
   return (
@@ -43,10 +53,17 @@ const Header = () => {
           </div>
 
           <div className="d-flex align-items-center">
-            <Button
+            {/* <Button
               variant="success"
               as={Link}
               to="/apply-now"
+              className="btn-green register-btn mobile"
+            >
+              APPLY NOW
+            </Button> */}
+            <Button
+              variant="success"
+              onClick={handleShowConstructionModal}
               className="btn-green register-btn mobile"
             >
               APPLY NOW
@@ -143,7 +160,7 @@ const Header = () => {
                   </>
                 ) : (
                   <>
-                    <Button
+                    {/* <Button
                       as={Link}
                     onClick={handleClose}
                       to="/login"
@@ -158,6 +175,25 @@ const Header = () => {
                       className="btn-green register-btn desktop"
                     >
                       APPLY NOW
+                    </Button> */}
+                    <Button
+                      onClick={() => {
+                        handleShowConstructionModal();
+                        handleClose();
+                      }}
+                      className="btn-black bg-none login-btn p-0"
+                    >
+                      <i className="fas fa-sign-in-alt me-1"></i>CANDIDATE LOGIN
+                    </Button>
+                    <Button
+                      variant="success"
+                      onClick={() => {
+                        handleShowConstructionModal();
+                        handleClose();
+                      }}
+                      className="btn-green register-btn desktop"
+                    >
+                      APPLY NOW
                     </Button>
                   </>
                 )}
@@ -166,6 +202,10 @@ const Header = () => {
           </Navbar.Offcanvas>
         </Container>
       </Navbar>
+      <UnderConstructionModal 
+        show={showConstructionModal} 
+        onHide={handleCloseConstructionModal} 
+      />
     </header>
   );
 };
