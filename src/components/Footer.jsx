@@ -1,5 +1,6 @@
 import React from "react";
 import Logo from "../assets/logo-white.png";
+import QuantumBasesLogo from "../assets/quantumbaseslogo.png";
 import {
   FaFacebookF,
   FaTwitter,
@@ -151,10 +152,41 @@ const Footer = () => {
       <div className="copy">
         <hr className="m-0" />
         <div className="container">
-          <p className="mb-0 py-3 text-white">
-            &copy; {new Date().getFullYear()} Hunarmand Punjab. All rights
-            reserved.
-          </p>
+          <div className="row align-items-center">
+            <div className="col-md-8">
+              <p className="mb-0 py-3 text-white">
+                &copy; {new Date().getFullYear()} Hunarmand Punjab. All rights reserved.
+              </p>
+            </div>
+            <div className="col-md-4 text-end">
+              <p className="mb-0 py-3 text-white">
+                Developed by{" "}
+                <a 
+                  href="https://quantumbases.com/" 
+                  target="_blank" 
+                  rel="noopener noreferrer"
+                  style={{ 
+                    color: '#fff', 
+                    textDecoration: 'none',
+                    display: 'inline-flex',
+                    alignItems: 'center',
+                    gap: '5px'
+                  }}
+                >
+                  {/* <img 
+                    src={QuantumBasesLogo} 
+                    alt="QuantumBases" 
+                    style={{ 
+                      height: '20px', 
+                      width: 'auto',
+                      filter: 'brightness(0) invert(1)' // Makes the logo white
+                    }} 
+                  /> */}
+                  QuantumBases
+                </a>
+              </p>
+            </div>
+          </div>
         </div>
       </div>
     </div>

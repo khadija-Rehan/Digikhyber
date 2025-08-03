@@ -1,8 +1,8 @@
 import AOS from "aos";
 import "aos/dist/aos.css";
 import React from 'react';
-import { ToastContainer } from 'react-toastify';
-import 'react-toastify/dist/ReactToastify.css';
+import { ModalProvider } from './context/ModalContext';
+import NotificationModal from './components/NotificationModal';
 
 import { Routes, Route, useLocation } from "react-router-dom";
 import Home from "./pages/Home";
@@ -59,21 +59,11 @@ function App() {
   );
   return (
     <>
-      <ToastContainer
-        position="top-right"
-        autoClose={5000}
-        hideProgressBar={false}
-        newestOnTop
-        closeOnClick
-        rtl={false}
-        pauseOnFocusLoss
-        draggable
-        pauseOnHover
-        theme="light"
-      />
-      <AuthProvider>
-        <CoursesProvider>
-        <AOSWrapper>
+      <ModalProvider>
+        <NotificationModal />
+        <AuthProvider>
+          <CoursesProvider>
+          <AOSWrapper>
           <ScrollToTop />
           <Notificationbar />
           <Header />
@@ -118,9 +108,10 @@ function App() {
             />
           </Routes>
           {!shouldHideHeaderFooter && <Footer />}
-        </AOSWrapper>
+                  </AOSWrapper>
         </CoursesProvider>
       </AuthProvider>
+      </ModalProvider>
     </>
   );
 }
