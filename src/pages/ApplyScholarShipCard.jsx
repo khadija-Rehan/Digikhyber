@@ -51,14 +51,17 @@ const ApplyScholarShipCard = () => {
     // Roll number validation
     if (!formData.rollNumber.trim()) {
       newErrors.rollNumber = "Roll number is required";
-    } else if (!/^HM-\d{4}-\d{4}$/.test(formData.rollNumber)) {
-      newErrors.rollNumber = "Roll number must be in format: HM-YYYY-XXXX (e.g., HM-2024-0001)";
+    } else if (
+      !/^HM-\d{4}-(?:\d{4,}|\d{3}-\d+)$/.test(formData.rollNumber)
+    ) {
+      newErrors.rollNumber =
+        "Roll number must be in format: HM-YYYY-XXXX, HM-YYYY-XXXX-XXX, or HM-YYYY-XXX-XXX (e.g., HM-2024-0001, HM-2025-1005-724, or HM-2025-999-451)";
     } else {
       // Additional roll number validation
-      const parts = formData.rollNumber.split('-');
+      const parts = formData.rollNumber.split("-");
       const year = parseInt(parts[1]);
       const currentYear = new Date().getFullYear();
-      
+
       if (year < 2020 || year > currentYear + 1) {
         newErrors.rollNumber = `Roll number year should be between 2020 and ${currentYear + 1}`;
       }
@@ -216,12 +219,13 @@ const ApplyScholarShipCard = () => {
 
   // Helper function to validate roll number
   const validateRollNumber = (rollNumber) => {
-    if (!/^HM-\d{4}-\d{4}$/.test(rollNumber)) return false;
-    
+    // Accept HM-YYYY-XXXX, HM-YYYY-XXXX-XXX, or HM-YYYY-XXX-XXX
+    if (!/^HM-\d{4}-(?:\d{4,}|\d{3}-\d+)$/.test(rollNumber)) return false;
+
     const parts = rollNumber.split('-');
     const year = parseInt(parts[1]);
     const currentYear = new Date().getFullYear();
-    
+
     return year >= 2020 && year <= currentYear + 1;
   };
 
@@ -445,10 +449,10 @@ const ApplyScholarShipCard = () => {
             }`}
             type="text"
             name="rollNumber"
-            placeholder="e.g. HM-2024-0001"
+            placeholder="e.g. HM-2024-0001 or HM-2025-999-451"
             value={formData.rollNumber}
             onChange={handleChange}
-            maxLength={12}
+            maxLength={20}
             required
           />
           {errors.rollNumber && (
