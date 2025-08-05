@@ -68,7 +68,7 @@ function App() {
           <ScrollToTop />
           <Notificationbar />
           <Header />
-          <LoginAlertWrapper />
+          {/* <LoginAlertWrapper /> */}
           <Routes>
             <Route path="/" element={<Home />} />
             <Route path="/register" element={<Register />} />

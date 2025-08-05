@@ -48,25 +48,6 @@ const ApplyScholarShipCard = () => {
     // CNIC validation is complete with just the 13-digit check
     // Additional date validation removed as CNIC formats can vary
 
-    // Roll number validation
-    if (!formData.rollNumber.trim()) {
-      newErrors.rollNumber = "Roll number is required";
-    } else if (
-      !/^HM-\d{4}-(?:\d{4,}|\d{3}-\d+)$/.test(formData.rollNumber)
-    ) {
-      newErrors.rollNumber =
-        "Roll number must be in format: HM-YYYY-XXXX, HM-YYYY-XXXX-XXX, or HM-YYYY-XXX-XXX (e.g., HM-2024-0001, HM-2025-1005-724, or HM-2025-999-451)";
-    } else {
-      // Additional roll number validation
-      const parts = formData.rollNumber.split("-");
-      const year = parseInt(parts[1]);
-      const currentYear = new Date().getFullYear();
-
-      if (year < 2020 || year > currentYear + 1) {
-        newErrors.rollNumber = `Roll number year should be between 2020 and ${currentYear + 1}`;
-      }
-    }
-
     // Email validation
     const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
     if (!formData.email.trim()) {
@@ -217,18 +198,6 @@ const ApplyScholarShipCard = () => {
     return /^03\d{9}$/.test(cleanMobile);
   };
 
-  // Helper function to validate roll number
-  const validateRollNumber = (rollNumber) => {
-    // Accept HM-YYYY-XXXX, HM-YYYY-XXXX-XXX, or HM-YYYY-XXX-XXX
-    if (!/^HM-\d{4}-(?:\d{4,}|\d{3}-\d+)$/.test(rollNumber)) return false;
-
-    const parts = rollNumber.split('-');
-    const year = parseInt(parts[1]);
-    const currentYear = new Date().getFullYear();
-
-    return year >= 2020 && year <= currentYear + 1;
-  };
-
   // Helper function to validate email
   const validateEmail = (email) => {
     const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
@@ -237,7 +206,7 @@ const ApplyScholarShipCard = () => {
 
   // Calculate form completion percentage
   const getFormProgress = () => {
-    const requiredFields = ['fullName', 'cnic', 'rollNumber', 'email', 'mobileNumber', 'firstCourse', 'challanNumber', 'image'];
+    const requiredFields = ['fullName', 'cnic', 'email', 'mobileNumber', 'firstCourse', 'challanNumber', 'image'];
     const completedFields = requiredFields.filter(field => {
       if (field === 'image') return formData[field];
       return formData[field] && formData[field].trim() && !errors[field];
@@ -441,26 +410,17 @@ const ApplyScholarShipCard = () => {
 
         <div className="mb-3">
           <label htmlFor="rollNumber" className="mb-2">
-            Roll No <span className="text-danger">*</span>
+            Roll No <small className="text-muted">(Optional)</small>
           </label>
           <input
-            className={`form-control p-3 ${
-              errors.rollNumber ? "is-invalid" : formData.rollNumber.trim() && validateRollNumber(formData.rollNumber) ? "is-valid" : ""
-            }`}
+            className="form-control p-3"
             type="text"
             name="rollNumber"
-            placeholder="e.g. HM-2024-0001 or HM-2025-999-451"
+            placeholder="Enter your roll number (optional)"
             value={formData.rollNumber}
             onChange={handleChange}
             maxLength={20}
-            required
           />
-          {errors.rollNumber && (
-            <div className="invalid-feedback">{errors.rollNumber}</div>
-          )}
-          {formData.rollNumber.trim() && validateRollNumber(formData.rollNumber) && (
-            <div className="valid-feedback">Roll number format is correct!</div>
-          )}
         </div>
 
         <div className="mb-3">

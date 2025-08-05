@@ -65,6 +65,10 @@ export const CoursesProvider = ({ children }) => {
     setUserCourses(courses);
   };
 
+  const clearUserCourses = () => {
+    setUserCourses([]);
+  };
+
   const getCoursePrice = (courseName) => {
     const course = AVAILABLE_COURSES.find(c => c.name === courseName);
     return course ? course.price : 0;
@@ -91,6 +95,7 @@ export const CoursesProvider = ({ children }) => {
         deleteCourse,
         updateCoursesAPI,
         setUserCourses,
+        clearUserCourses,
         getCoursePrice,
         getTotalPrice,
         coursePrice: COURSE_PRICE,

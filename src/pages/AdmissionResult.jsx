@@ -6,6 +6,7 @@ import { useCourses } from "../context/CoursesContext";
 import { useAuth } from "../context/AuthContext";
 import { useModal } from "../context/ModalContext";
 import { getUserProfile } from "../api/user";
+import LoginAlertWrapper from "../components/LoginAlertWrapper";
 
 const getOrCreateFormNumber = () => {
   let formNumber = localStorage.getItem("formNumber");
@@ -211,10 +212,15 @@ const AdmissionResult = () => {
   const [hasChallan, setHasChallan] = useState(false);
   const [firstChallan, setFirstChallan] = useState(null);
   const [challanStatus, setChallanStatus] = useState(null);
+  const [showLoginAlert, setShowLoginAlert] = useState(false);
 
   useEffect(() => {
     // Check if user has a challan
-    const challanTotal = user?.user?.data?.challans?.total;
+    const challanTotal = user?.user?.data?.challans?.total || 0;
+
+    console.log("user", user);
+
+    console.log("challanTotal", challanTotal !== 0);
     setHasChallan(challanTotal !== 0);
 
     // Get first challan and its paid status
@@ -233,9 +239,16 @@ const AdmissionResult = () => {
       setChallanCreatedAt(challanObj.createdAt);
     }
 
-    // For debugging
-    console.log(challanObj);
   }, [user]);
+
+  // Show login alert modal when hasChallan is true
+  useEffect(() => {
+    if (hasChallan) {
+
+      console.log("hasChallan", hasChallan);
+      setShowLoginAlert(true);
+    }
+  }, [hasChallan]);
 
   const modalOverlayStyle = {
     position: "fixed",
@@ -1000,6 +1013,7 @@ const AdmissionResult = () => {
           </div>
         </div>
       )}
+      {showLoginAlert && <LoginAlertWrapper />}
     </>
   );
 };
