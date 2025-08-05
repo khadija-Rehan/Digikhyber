@@ -1998,3 +1998,53 @@ ul li {
   position: relative;
   background-color: white;
 }
+
+        /* Login Alert Modal Responsive Styles */
+        @media (max-width: 768px) {
+          .login-alert-modal .modal-content {
+            margin: 10px;
+            max-height: 95vh;
+            max-width: 95vw;
+          }
+
+          .login-alert-modal .modal-content h3 {
+            font-size: 1rem !important;
+          }
+
+          .login-alert-modal .modal-content h5 {
+            font-size: 0.8rem !important;
+          }
+
+          .login-alert-modal .modal-content p {
+            font-size: 0.75rem !important;
+          }
+
+          .login-alert-modal .modal-content button {
+            font-size: 0.8rem !important;
+            padding: 8px 18px !important;
+          }
+        }
+
+        @media (max-width: 480px) {
+          .login-alert-modal .modal-content {
+            margin: 5px;
+            max-height: 98vh;
+          }
+
+          .login-alert-modal .modal-content h3 {
+            font-size: 0.9rem !important;
+          }
+
+          .login-alert-modal .modal-content h5 {
+            font-size: 0.75rem !important;
+          }
+
+          .login-alert-modal .modal-content p {
+            font-size: 0.7rem !important;
+          }
+
+          .login-alert-modal .modal-content button {
+            font-size: 0.75rem !important;
+            padding: 6px 14px !important;
+          }
+        }
