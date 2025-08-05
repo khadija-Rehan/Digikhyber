@@ -410,7 +410,7 @@ const ApplyScholarShipCard = () => {
 
         <div className="mb-3">
           <label htmlFor="rollNumber" className="mb-2">
-            Roll No <small className="text-muted">(Optional)</small>
+            Roll No
           </label>
           <input
             className="form-control p-3"
