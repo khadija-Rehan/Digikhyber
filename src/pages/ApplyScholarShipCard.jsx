@@ -416,7 +416,7 @@ const ApplyScholarShipCard = () => {
             className="form-control p-3"
             type="text"
             name="rollNumber"
-            placeholder="Enter your roll number (optional)"
+            placeholder="Enter your roll number"
             value={formData.rollNumber}
             onChange={handleChange}
             maxLength={20}
