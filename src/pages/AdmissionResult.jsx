@@ -28,6 +28,13 @@ const AdmissionResult = () => {
   const [error, setError] = useState("");
   const [totalPrice, setTotalPrice] = useState(0);
   const [challanCreatedAt, setChallanCreatedAt] = useState(null);
+  const [paymentMethod, setPaymentMethod] = useState("psid");
+  const [psid, setPsid] = useState("");
+    // Add loading state for challan generation
+    const [isGeneratingChallan, setIsGeneratingChallan] = useState(false);
+
+    // Track if PSID was just generated (for showing in UI)
+    const [psidJustGenerated, setPsidJustGenerated] = useState(false);
 
   const [formNumber, setFormNumber] = useState(() => getOrCreateFormNumber());
 
@@ -57,6 +64,31 @@ const AdmissionResult = () => {
   // We'll use a ref to prevent multiple fetches on mount.
   const hasFetchedProfile = useRef(false);
 
+  const fetchUserProfile = async () => {
+    try {
+      const profileResponse = await getUserProfile();
+      const profileData = profileResponse.data;
+
+      const updatedUserData = {
+        user: {
+          ...user.user,
+          ...profileData,
+        },
+        token: user.token,
+      };
+
+      login(updatedUserData);
+    } catch (error) {
+      console.error("Error fetching user profile:", error);
+    }
+  };
+
+  useEffect(() => {
+    if (psidJustGenerated) {
+      fetchUserProfile();
+    }
+  }, [psidJustGenerated]);
+
   useEffect(() => {
     const fetchUserProfile = async () => {
       try {
@@ -72,19 +104,13 @@ const AdmissionResult = () => {
         };
 
         login(updatedUserData);
-
-        console.log("User profile updated:", updatedUserData);
       } catch (error) {
         console.error("Error fetching user profile:", error);
       }
     };
 
     // Only fetch once on mount if user and token exist
-    if (
-      user &&
-      user.token &&
-      !hasFetchedProfile.current
-    ) {
+    if (user && user.token && !hasFetchedProfile.current) {
       hasFetchedProfile.current = true;
       fetchUserProfile();
     }
@@ -177,8 +203,8 @@ const AdmissionResult = () => {
     setShowModal(false);
   };
 
-  // Add loading state for challan generation
-  const [isGeneratingChallan, setIsGeneratingChallan] = useState(false);
+
+
 
   const handleGeneratePdf = async () => {
     try {
@@ -189,17 +215,30 @@ const AdmissionResult = () => {
       setIsGeneratingChallan(true);
       const { data } = await generatePdf(totalPrice, userCourses);
       const fileName = data.data.fileName;
+
+      if (paymentMethod === "psid") {
+        // Remove "challan-" from the filename and use it in setPsid
+        let psidValue = fileName.replace(/^challan-/, "").replace(/\.pdf$/, "");
+        setPsid(`267200309${psidValue}`);
+        setPsidJustGenerated(true);
+        localStorage.removeItem("selectedCourses");
+        setPaymentMethod("challan");
+        setIsGeneratingChallan(false);
+        return;
+      }
+
       if (!fileName) {
         console.error("No file path returned");
         setIsGeneratingChallan(false);
         return;
-        return;
       }
+
       // const fileUrl = `http://localhost:3001/uploads/${fileName}`;
       const fileUrl = `https://backend.hunarmandpunjab.pk/uploads/${fileName}`;
       const a = document.createElement("a");
       a.href = fileUrl;
       a.download = fileName;
+      a.target = "_blank";
       a.click();
       localStorage.removeItem("selectedCourses");
     } catch (error) {
@@ -217,10 +256,11 @@ const AdmissionResult = () => {
   useEffect(() => {
     // Check if user has a challan
     const challanTotal = user?.user?.data?.challans?.total || 0;
+    const challanNumber = user?.user?.data?.challans?.challans[0]?.challanId || null;
+    if (challanNumber && challanNumber !== null) {
+      setPsid(`267200309${challanNumber}`);
+    }
 
-    console.log("user", user);
-
-    console.log("challanTotal", challanTotal !== 0);
     setHasChallan(challanTotal !== 0);
 
     // Get first challan and its paid status
@@ -238,17 +278,19 @@ const AdmissionResult = () => {
     if (challanObj && challanObj.createdAt) {
       setChallanCreatedAt(challanObj.createdAt);
     }
-
   }, [user]);
 
   // Show login alert modal when hasChallan is true
   useEffect(() => {
     if (hasChallan) {
-
-      console.log("hasChallan", hasChallan);
       setShowLoginAlert(true);
     }
   }, [hasChallan]);
+
+  // Reset psidJustGenerated when user switches to another tab or on mount
+  useEffect(() => {
+    setPsidJustGenerated(false);
+  }, []);
 
   const modalOverlayStyle = {
     position: "fixed",
@@ -372,6 +414,13 @@ const AdmissionResult = () => {
     fontWeight: 600,
     padding: "7px 18px",
     fontSize: "1rem",
+  };
+
+  // Copy PSID to clipboard
+  const handleCopyPsid = () => {
+    if (psid) {
+      navigator.clipboard.writeText(psid);
+    }
   };
 
   return (
@@ -652,7 +701,7 @@ const AdmissionResult = () => {
                   id="pills-tab"
                   role="tablist"
                 >
-                  {/* <div
+                  <div
                     className="nav-item col-md-6 mb-3 mb-lg-0"
                     role="present ation"
                   >
@@ -665,6 +714,9 @@ const AdmissionResult = () => {
                       role="tab"
                       aria-controls="pills-home"
                       aria-selected="true"
+                      onClick={() => {
+                        setPaymentMethod("psid");
+                      }}
                     >
                       <div className="d-flex align-items-start gap-2">
                         <div className="icon">
@@ -679,7 +731,7 @@ const AdmissionResult = () => {
                         </div>
                       </div>
                     </button>
-                  </div> */}
+                  </div>
                   <div className="nav-item col-md-6" role="presentation">
                     <button
                       className="nav-link w-100 h-100 p-3"
@@ -690,6 +742,9 @@ const AdmissionResult = () => {
                       role="tab"
                       aria-controls="pills-profile"
                       aria-selected="false"
+                      onClick={() => {
+                        setPaymentMethod("challan");
+                      }}
                     >
                       <div className="d-flex align-items-start gap-2">
                         <div className="icon">
@@ -712,12 +767,12 @@ const AdmissionResult = () => {
                       className="tab-content bg-white p-3 rounded-2 shadow-sm"
                       id="pills-tabContent"
                     >
-                      {/* <div
+                      <div
                         className="tab-pane fade show active"
                         id="pills-home"
                         role="tabpanel"
                         aria-labelledby="pills-home-tab"
-                        tabindex="0"
+                        tabIndex="0"
                       >
                         <h5>
                           Follow these steps to complete your payment using
@@ -744,19 +799,53 @@ const AdmissionResult = () => {
                             your registration charges.
                           </li>
                         </ol>
+                        <div>
+                          {psid && (
+                            <div className="alert alert-info d-flex align-items-center justify-content-between" style={{marginBottom: 16}}>
+                              <div>
+                                <strong>Your PSID:</strong>{" "}
+                                <span style={{fontFamily: "monospace", fontSize: "1.1em"}}>{psid}</span>
+                              </div>
+                              <button
+                                className="btn btn-sm btn-outline-success ms-3"
+                                onClick={handleCopyPsid}
+                                title="Copy PSID"
+                              >
+                                <i className="fa fa-copy"></i>
+                              </button>
+                            </div>
+                          )}
+                        </div>
                         <button
                           className="btn-green btn-success btn rounded-2"
-                          disabled={true}
+                          onClick={handleGeneratePdf}
+                          disabled={hasChallan || isGeneratingChallan}
                         >
-                          PSID Coming Soon
+                          {isGeneratingChallan ? (
+                            <>
+                              <span
+                                className="spinner-border spinner-border-sm me-2"
+                                role="status"
+                                aria-hidden="true"
+                              ></span>
+                              Generating...
+                            </>
+                          ) : (
+                            <>
+                              <i className="fas fa-download"></i>{" "}
+                              {hasChallan
+                                ? "PSID Already Generated"
+                                : "Generate PSID"}
+                            </>
+                          )}
                         </button>
-                      </div> */}
+                      </div>
                       <div
                         className="tab-pane fade "
                         id="pills-profile"
                         role="tabpanel"
                         aria-labelledby="pills-profile-tab"
-                        tabindex="0"
+                        tabIndex="0"
                       >
                         <h5>Follow these steps to complete your payment:</h5>
                         <h5>For Bank Challan Payment:</h5>
@@ -811,7 +900,7 @@ const AdmissionResult = () => {
               </div>
             </div>
           </div>
-          <Accordion defaultActiveKey="0" className="d-none">
+          <Accordion defaultActiveKey="0" className="d-none ">
             {/* ...omitted for brevity... */}
             <Accordion.Item eventKey="0">
               {/* <Accordion.Header>Get Bank Challan</Accordion.Header> */}
