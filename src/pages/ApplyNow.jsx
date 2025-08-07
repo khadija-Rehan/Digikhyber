@@ -5,6 +5,7 @@ import { Link } from "react-router-dom";
 import ParticleBackground from "../components/ParticleBackground";
 
 const ApplyNow = () => {
+
     return (
         <div style={{ backgroundColor: " #079560", height: "100vh" }}>
             <ParticleBackground />

@@ -48,22 +48,6 @@ const ApplyScholarShipCard = () => {
     // CNIC validation is complete with just the 13-digit check
     // Additional date validation removed as CNIC formats can vary
 
-    // Roll number validation
-    if (!formData.rollNumber.trim()) {
-      newErrors.rollNumber = "Roll number is required";
-    } else if (!/^HM-\d{4}-\d{4}$/.test(formData.rollNumber)) {
-      newErrors.rollNumber = "Roll number must be in format: HM-YYYY-XXXX (e.g., HM-2024-0001)";
-    } else {
-      // Additional roll number validation
-      const parts = formData.rollNumber.split('-');
-      const year = parseInt(parts[1]);
-      const currentYear = new Date().getFullYear();
-      
-      if (year < 2020 || year > currentYear + 1) {
-        newErrors.rollNumber = `Roll number year should be between 2020 and ${currentYear + 1}`;
-      }
-    }
-
     // Email validation
     const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
     if (!formData.email.trim()) {
@@ -214,17 +198,6 @@ const ApplyScholarShipCard = () => {
     return /^03\d{9}$/.test(cleanMobile);
   };
 
-  // Helper function to validate roll number
-  const validateRollNumber = (rollNumber) => {
-    if (!/^HM-\d{4}-\d{4}$/.test(rollNumber)) return false;
-    
-    const parts = rollNumber.split('-');
-    const year = parseInt(parts[1]);
-    const currentYear = new Date().getFullYear();
-    
-    return year >= 2020 && year <= currentYear + 1;
-  };
-
   // Helper function to validate email
   const validateEmail = (email) => {
     const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
@@ -233,7 +206,7 @@ const ApplyScholarShipCard = () => {
 
   // Calculate form completion percentage
   const getFormProgress = () => {
-    const requiredFields = ['fullName', 'cnic', 'rollNumber', 'email', 'mobileNumber', 'firstCourse', 'challanNumber', 'image'];
+    const requiredFields = ['fullName', 'cnic', 'email', 'mobileNumber', 'firstCourse', 'challanNumber', 'image'];
     const completedFields = requiredFields.filter(field => {
       if (field === 'image') return formData[field];
       return formData[field] && formData[field].trim() && !errors[field];
@@ -368,7 +341,7 @@ const ApplyScholarShipCard = () => {
         >
           To Become eligible for scholarship card (Free laptop, Solar scheme,
           Taleem Finance, Taleem Abroad, Advance Courses) you must be enrolled
-          in one ore more programs under Hunarmand Punjab
+          in one or more programs under Hunarmand Punjab
         </p>
 
         {/* Form Progress Indicator */}
@@ -437,26 +410,17 @@ const ApplyScholarShipCard = () => {
 
         <div className="mb-3">
           <label htmlFor="rollNumber" className="mb-2">
-            Roll No <span className="text-danger">*</span>
+            Roll No
           </label>
           <input
-            className={`form-control p-3 ${
-              errors.rollNumber ? "is-invalid" : formData.rollNumber.trim() && validateRollNumber(formData.rollNumber) ? "is-valid" : ""
-            }`}
+            className="form-control p-3"
             type="text"
             name="rollNumber"
-            placeholder="e.g. HM-2024-0001"
+            placeholder="Enter your roll number"
             value={formData.rollNumber}
             onChange={handleChange}
-            maxLength={12}
-            required
+            maxLength={20}
           />
-          {errors.rollNumber && (
-            <div className="invalid-feedback">{errors.rollNumber}</div>
-          )}
-          {formData.rollNumber.trim() && validateRollNumber(formData.rollNumber) && (
-            <div className="valid-feedback">Roll number format is correct!</div>
-          )}
         </div>
 
         <div className="mb-3">

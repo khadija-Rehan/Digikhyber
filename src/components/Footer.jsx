@@ -32,7 +32,10 @@ const Footer = () => {
               </p>
               <div className="social">
                 <button className="social-button">
-                  <a href="https://www.facebook.com/hunarmandpunjab.pk" target="_blank">
+                  <a
+                    href="https://www.facebook.com/hunarmandpunjab.pk"
+                    target="_blank"
+                  >
                     <FaFacebookF />
                   </a>
                 </button>
@@ -42,7 +45,10 @@ const Footer = () => {
                                     </a>
                                 </button> */}
                 <button className="social-button">
-                  <a href="https://www.instagram.com/hunarmandpunjab.pk/" target="_blank">
+                  <a
+                    href="https://www.instagram.com/hunarmandpunjab.pk/"
+                    target="_blank"
+                  >
                     <FaInstagram />
                   </a>
                 </button>
@@ -52,7 +58,10 @@ const Footer = () => {
                                     </a>
                                 </button> */}
                 <button className="social-button">
-                  <a href="https://www.youtube.com/@hunarmandpunjab" target="_blank">
+                  <a
+                    href="https://www.youtube.com/@hunarmandpunjab"
+                    target="_blank"
+                  >
                     <FaYoutube />
                   </a>
                 </button>
@@ -128,8 +137,16 @@ const Footer = () => {
                 <div className="col-lg-6 col-sm-12   contact-f">
                   <h2 className="font-18 weight-700">Contact us</h2>
                   <p className="links">
-                    <a href="#">
-                      <FaMapMarkerAlt /> &nbsp; &nbsp; E-Library, Lahore
+                    <a href="#" className="d-flex align-items-start gap-2">
+                      <div>
+                        <FaMapMarkerAlt />
+                      </div>
+                      <div className="ms-2 d-flex flex-column">
+                        {/* E-Library, Lahore */}
+                        Test Venue: E-Library, Lahore
+                        <br />
+                        Head Office: Sabzazar, Lahore
+                      </div>
                     </a>
                   </p>
                   <p className="links">
@@ -155,11 +172,12 @@ const Footer = () => {
           <div className="row align-items-center">
             <div className="col-md-8">
               <p className="mb-0 py-3 text-white">
-                &copy; {new Date().getFullYear()} Hunarmand Punjab. All rights reserved.
+                &copy; {new Date().getFullYear()} Hunarmand Punjab. All rights
+                reserved.
               </p>
             </div>
             <div className="col-md-4 text-end">
-              <p className="mb-0 py-3 text-white">
+              {/* <p className="mb-0 py-3 text-white">
                 Developed by{" "}
                 <a 
                   href="https://quantumbases.com/" 
@@ -172,8 +190,8 @@ const Footer = () => {
                     alignItems: 'center',
                     gap: '5px'
                   }}
-                >
-                  {/* <img 
+                > */}
+              {/* <img 
                     src={QuantumBasesLogo} 
                     alt="QuantumBases" 
                     style={{ 
@@ -182,9 +200,9 @@ const Footer = () => {
                       filter: 'brightness(0) invert(1)' // Makes the logo white
                     }} 
                   /> */}
-                  QuantumBases
+              {/* QuantumBases
                 </a>
-              </p>
+              </p> */}
             </div>
           </div>
         </div>

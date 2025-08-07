@@ -120,7 +120,8 @@ const Notificationbar = () => {
                 alt="parliament"
               />
               {/* Endorsed By Government */}
-              Endorsed By Ministry of School & Higher Education Government of Punjab
+              Endorsed By Ministry of School & Higher Education
+              {/* Government of Punjab */}
             </div>
             <div className="cmn-textslide">
               <img
@@ -192,12 +193,12 @@ const Notificationbar = () => {
               />
               25+ Hands on Practical Courses
             </div>
-          
-        </div>
-      </div>
 
-      {/* Add CSS for white icons */}
-      <style jsx>{`
+          </div>
+        </div>
+
+        {/* Add CSS for white icons */}
+        <style jsx>{`
         .white-icon {
           filter: brightness(0) invert(1);
           vertical-align: middle;
@@ -208,7 +209,7 @@ const Notificationbar = () => {
           align-items: center;
         }
       `}</style>
-    </div>
+      </div>
     </div>
   );
 };

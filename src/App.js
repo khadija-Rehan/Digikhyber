@@ -3,6 +3,7 @@ import "aos/dist/aos.css";
 import React from 'react';
 import { ModalProvider } from './context/ModalContext';
 import NotificationModal from './components/NotificationModal';
+import LoginAlertWrapper from './components/LoginAlertWrapper';
 
 import { Routes, Route, useLocation } from "react-router-dom";
 import Home from "./pages/Home";
@@ -67,6 +68,7 @@ function App() {
           <ScrollToTop />
           <Notificationbar />
           <Header />
+          {/* <LoginAlertWrapper /> */}
           <Routes>
             <Route path="/" element={<Home />} />
             <Route path="/register" element={<Register />} />

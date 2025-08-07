@@ -11,6 +11,7 @@ export const useAuth = () => {
 export const AuthProvider = ({ children }) => {
   const [user, setUser] = useState(null);
   const [loading, setLoading] = useState(true);
+  const [showLoginAlert, setShowLoginAlert] = useState(false);
 
   const verifyToken = (token) => {
     try {
@@ -43,6 +44,8 @@ export const AuthProvider = ({ children }) => {
     if (userData.token && verifyToken(userData.token)) {
       setUser(userData);
       localStorage.setItem("user", JSON.stringify(userData));
+      // Show login alert modal for enrolled students
+      setShowLoginAlert(true);
     } else {
       throw new Error("Invalid token");
     }
@@ -63,6 +66,8 @@ export const AuthProvider = ({ children }) => {
     logout,
     loading,
     isAuthenticated,
+    showLoginAlert,
+    setShowLoginAlert,
   };
 
   return (

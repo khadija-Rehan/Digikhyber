@@ -6,6 +6,7 @@ import { useCourses } from "../context/CoursesContext";
 import { useAuth } from "../context/AuthContext";
 import { useModal } from "../context/ModalContext";
 import { getUserProfile } from "../api/user";
+import LoginAlertWrapper from "../components/LoginAlertWrapper";
 
 const getOrCreateFormNumber = () => {
   let formNumber = localStorage.getItem("formNumber");
@@ -27,6 +28,13 @@ const AdmissionResult = () => {
   const [error, setError] = useState("");
   const [totalPrice, setTotalPrice] = useState(0);
   const [challanCreatedAt, setChallanCreatedAt] = useState(null);
+  const [paymentMethod, setPaymentMethod] = useState("psid");
+  const [psid, setPsid] = useState("");
+  // Add loading state for challan generation
+  const [isGeneratingChallan, setIsGeneratingChallan] = useState(false);
+
+  // Track if PSID was just generated (for showing in UI)
+  const [psidJustGenerated, setPsidJustGenerated] = useState(false);
 
   const [formNumber, setFormNumber] = useState(() => getOrCreateFormNumber());
 
@@ -56,6 +64,31 @@ const AdmissionResult = () => {
   // We'll use a ref to prevent multiple fetches on mount.
   const hasFetchedProfile = useRef(false);
 
+  const fetchUserProfile = async () => {
+    try {
+      const profileResponse = await getUserProfile();
+      const profileData = profileResponse.data;
+
+      const updatedUserData = {
+        user: {
+          ...user.user,
+          ...profileData,
+        },
+        token: user.token,
+      };
+
+      login(updatedUserData);
+    } catch (error) {
+      console.error("Error fetching user profile:", error);
+    }
+  };
+
+  useEffect(() => {
+    if (psidJustGenerated) {
+      fetchUserProfile();
+    }
+  }, [psidJustGenerated]);
+
   useEffect(() => {
     const fetchUserProfile = async () => {
       try {
@@ -71,19 +104,13 @@ const AdmissionResult = () => {
         };
 
         login(updatedUserData);
-
-        console.log("User profile updated:", updatedUserData);
       } catch (error) {
         console.error("Error fetching user profile:", error);
       }
     };
 
     // Only fetch once on mount if user and token exist
-    if (
-      user &&
-      user.token &&
-      !hasFetchedProfile.current
-    ) {
+    if (user && user.token && !hasFetchedProfile.current) {
       hasFetchedProfile.current = true;
       fetchUserProfile();
     }
@@ -176,9 +203,6 @@ const AdmissionResult = () => {
     setShowModal(false);
   };
 
-  // Add loading state for challan generation
-  const [isGeneratingChallan, setIsGeneratingChallan] = useState(false);
-
   const handleGeneratePdf = async () => {
     try {
       if (totalPrice === 0) {
@@ -188,17 +212,30 @@ const AdmissionResult = () => {
       setIsGeneratingChallan(true);
       const { data } = await generatePdf(totalPrice, userCourses);
       const fileName = data.data.fileName;
+
+      if (paymentMethod === "psid") {
+        // Remove "challan-" from the filename and use it in setPsid
+        let psidValue = fileName.replace(/^challan-/, "").replace(/\.pdf$/, "");
+        setPsid(`267200309${psidValue}`);
+        setPsidJustGenerated(true);
+        localStorage.removeItem("selectedCourses");
+        setPaymentMethod("challan");
+        setIsGeneratingChallan(false);
+        return;
+      }
+
       if (!fileName) {
         console.error("No file path returned");
         setIsGeneratingChallan(false);
         return;
-        return;
       }
+
       // const fileUrl = `http://localhost:3001/uploads/${fileName}`;
       const fileUrl = `https://backend.hunarmandpunjab.pk/uploads/${fileName}`;
       const a = document.createElement("a");
       a.href = fileUrl;
       a.download = fileName;
+      a.target = "_blank";
       a.click();
       localStorage.removeItem("selectedCourses");
     } catch (error) {
@@ -211,10 +248,17 @@ const AdmissionResult = () => {
   const [hasChallan, setHasChallan] = useState(false);
   const [firstChallan, setFirstChallan] = useState(null);
   const [challanStatus, setChallanStatus] = useState(null);
+  const [showLoginAlert, setShowLoginAlert] = useState(false);
 
   useEffect(() => {
     // Check if user has a challan
-    const challanTotal = user?.user?.data?.challans?.total;
+    const challanTotal = user?.user?.data?.challans?.total || 0;
+    const challanNumber =
+      user?.user?.data?.challans?.challans[0]?.challanId || null;
+    if (challanNumber && challanNumber !== null) {
+      setPsid(`267200309${challanNumber}`);
+    }
+
     setHasChallan(challanTotal !== 0);
 
     // Get first challan and its paid status
@@ -232,10 +276,19 @@ const AdmissionResult = () => {
     if (challanObj && challanObj.createdAt) {
       setChallanCreatedAt(challanObj.createdAt);
     }
-
-    // For debugging
-    console.log(challanObj);
   }, [user]);
+
+  // Show login alert modal when hasChallan is true
+  useEffect(() => {
+    if (hasChallan && challanStatus === "Paid") {
+      setShowLoginAlert(true);
+    }
+  }, [hasChallan, challanStatus]);
+
+  // Reset psidJustGenerated when user switches to another tab or on mount
+  useEffect(() => {
+    setPsidJustGenerated(false);
+  }, []);
 
   const modalOverlayStyle = {
     position: "fixed",
@@ -359,6 +412,13 @@ const AdmissionResult = () => {
     fontWeight: 600,
     padding: "7px 18px",
     fontSize: "1rem",
+  };
+
+  // Copy PSID to clipboard
+  const handleCopyPsid = () => {
+    if (psid) {
+      navigator.clipboard.writeText(psid);
+    }
   };
 
   return (
@@ -639,7 +699,7 @@ const AdmissionResult = () => {
                   id="pills-tab"
                   role="tablist"
                 >
-                  {/* <div
+                  <div
                     className="nav-item col-md-6 mb-3 mb-lg-0"
                     role="present ation"
                   >
@@ -652,6 +712,9 @@ const AdmissionResult = () => {
                       role="tab"
                       aria-controls="pills-home"
                       aria-selected="true"
+                      onClick={() => {
+                        setPaymentMethod("psid");
+                      }}
                     >
                       <div className="d-flex align-items-start gap-2">
                         <div className="icon">
@@ -666,7 +729,7 @@ const AdmissionResult = () => {
                         </div>
                       </div>
                     </button>
-                  </div> */}
+                  </div>
                   <div className="nav-item col-md-6" role="presentation">
                     <button
                       className="nav-link w-100 h-100 p-3"
@@ -677,6 +740,9 @@ const AdmissionResult = () => {
                       role="tab"
                       aria-controls="pills-profile"
                       aria-selected="false"
+                      onClick={() => {
+                        setPaymentMethod("challan");
+                      }}
                     >
                       <div className="d-flex align-items-start gap-2">
                         <div className="icon">
@@ -699,14 +765,14 @@ const AdmissionResult = () => {
                       className="tab-content bg-white p-3 rounded-2 shadow-sm"
                       id="pills-tabContent"
                     >
-                      {/* <div
+                      <div
                         className="tab-pane fade show active"
                         id="pills-home"
                         role="tabpanel"
                         aria-labelledby="pills-home-tab"
-                        tabindex="0"
+                        tabIndex="0"
                       >
-                        <h5>
+                        {/* <h5>
                           Follow these steps to complete your payment using
                           PSID:
                         </h5>
@@ -730,20 +796,282 @@ const AdmissionResult = () => {
                             below to view detailed instructions on how to pay
                             your registration charges.
                           </li>
-                        </ol>
+                        </ol> */}
+                        <h5>Instructions How to Pay:</h5>
+                        {/* Payment Method Tabs */}
+                        <div className="mt-4">
+                          <ul
+                            className="nav nav-tabs border-0"
+                            id="paymentTabs"
+                            role="tablist"
+                            style={{ borderBottom: "1px solid #dee2e6" }}
+                          >
+                            <li className="nav-item" role="presentation">
+                              <button
+                                className="nav-link active border-0"
+                                id="banking-tab"
+                                data-bs-toggle="tab"
+                                data-bs-target="#banking"
+                                type="button"
+                                role="tab"
+                                aria-controls="banking"
+                                aria-selected="true"
+                                style={{ borderBottom: "2px solid #007bff" }}
+                              >
+                                <i className="fas fa-university me-2"></i>
+                                Banking App
+                              </button>
+                            </li>
+                            <li className="nav-item" role="presentation">
+                              <button
+                                className="nav-link border-0 d-flex align-items-center"
+                                id="jazzcash-tab"
+                                data-bs-toggle="tab"
+                                data-bs-target="#jazzcash"
+                                type="button"
+                                role="tab"
+                                aria-controls="jazzcash"
+                                aria-selected="false"
+                              >
+                                <img
+                                  src="/images/jazzcash.png"
+                                  alt="JazzCash"
+                                  style={{
+                                    width: "24px",
+                                    height: "24px",
+                                    marginRight: "8px",
+                                    objectFit: "contain"
+                                  }}
+                                />
+                                JazzCash
+                              </button>
+                            </li>
+                            <li className="nav-item" role="presentation">
+                              <button
+                                className="nav-link border-0 d-flex align-items-center"
+                                id="easypaisa-tab"
+                                data-bs-toggle="tab"
+                                data-bs-target="#easypaisa"
+                                type="button"
+                                role="tab"
+                                aria-controls="easypaisa"
+                                aria-selected="false"
+                              >
+                                <img
+                                  src="/images/Easypaisa.png"
+                                  alt="Easypaisa"
+                                  style={{
+                                    width: "24px",
+                                    height: "24px",
+                                    marginRight: "8px",
+                                    objectFit: "contain"
+                                  }}
+                                />
+                                Easypaisa
+                              </button>
+                            </li>
+                          </ul>
+
+                          <div
+                            className="tab-content my-3"
+                            id="paymentTabContent"
+                          >
+                            {/* Banking App Tab */}
+                            <div
+                              className="tab-pane fade show active"
+                              id="banking"
+                              role="tabpanel"
+                              aria-labelledby="banking-tab"
+                            >
+                              <div className="card border-0">
+                                <div className="card-header bg-light border-0">
+                                  <h6 className="mb-0">
+                                    <i className="fas fa-university me-2"></i>
+                                    Banking App Payment
+                                  </h6>
+                                  <small className="text-muted">
+                                    (HBL, Meezan, UBL, Bank Alfalah, etc.)
+                                  </small>
+                                </div>
+                                <div className="card-body">
+                                  <ol className="ps-3">
+                                    <li>Open your bank's mobile app</li>
+                                    <li>
+                                      Log in with your credentials (MPIN,
+                                      fingerprint, or face ID)
+                                    </li>
+                                    <li>Go to "Bill Payments" or "Payments"</li>
+                                    <li>
+                                      Select "1Bill" (some banks list it under
+                                      "Add Biller" or "Pay Bill")
+                                    </li>
+                                    <li>
+                                      Enter the 1Bill Consumer/Invoice Number
+                                      (usually 12–15 digits)
+                                    </li>
+                                    <li>
+                                      The system will fetch and display the bill
+                                      details
+                                    </li>
+                                    <li>
+                                      Verify the name, amount, and service
+                                    </li>
+                                    <li>Tap "Pay" or "Confirm"</li>
+                                    <li>
+                                      Enter your PIN/OTP to authorize the
+                                      transaction
+                                    </li>
+                                    <li>Receive confirmation receipt/SMS</li>
+                                  </ol>
+                                </div>
+                              </div>
+                            </div>
+
+                            {/* JazzCash Tab */}
+                            <div
+                              className="tab-pane fade"
+                              id="jazzcash"
+                              role="tabpanel"
+                              aria-labelledby="jazzcash-tab"
+                            >
+                              <div className="card border-0">
+                                <div className="card-header bg-light border-0 d-flex align-items-center">
+                                  <img
+                                    src="/images/jazzcash.png"
+                                    alt="JazzCash"
+                                    style={{
+                                      width: "24px",
+                                      height: "24px",
+                                      marginRight: "8px",
+                                      objectFit: "contain"
+                                    }}
+                                  />
+                                  <h6 className="mb-0">JazzCash Payment</h6>
+                                </div>
+                                <div className="card-body">
+                                  <ol className="ps-3">
+                                    <li>Open your JazzCash App</li>
+                                    <li>Tap on "Pay Bills"</li>
+                                    <li>Scroll to and select "1Bill"</li>
+                                    <li>
+                                      Enter the 1Bill invoice/consumer number
+                                    </li>
+                                    <li>
+                                      Tap "Fetch Bill" — details will appear
+                                    </li>
+                                    <li>
+                                      Confirm the amount and service provider
+                                    </li>
+                                    <li>Tap "Pay Now"</li>
+                                    <li>
+                                      Enter your MPIN to complete the payment
+                                    </li>
+                                    <li>
+                                      You'll receive a confirmation
+                                      SMS/notification
+                                    </li>
+                                  </ol>
+                                </div>
+                              </div>
+                            </div>
+
+                            {/* Easypaisa Tab */}
+                            <div
+                              className="tab-pane fade"
+                              id="easypaisa"
+                              role="tabpanel"
+                              aria-labelledby="easypaisa-tab"
+                            >
+                              <div className="card border-0">
+                                <div className="card-header bg-light border-0 d-flex align-items-center">
+                                  <img
+                                    src="/images/Easypaisa.png"
+                                    alt="Easypaisa"
+                                    style={{
+                                      width: "24px",
+                                      height: "24px",
+                                      marginRight: "8px",
+                                      objectFit: "contain"
+                                    }}
+                                  />
+                                  <h6 className="mb-0">Easypaisa Payment</h6>
+                                </div>
+                                <div className="card-body">
+                                  <ol className="ps-3">
+                                    <li>Open your Easypaisa App</li>
+                                    <li>Go to "Pay Bills"</li>
+                                    <li>Select the category "1Bill"</li>
+                                    <li>Enter the 1Bill invoice number</li>
+                                    <li>Tap "Proceed" or "Fetch Bill"</li>
+                                    <li>
+                                      Verify bill amount and merchant details
+                                    </li>
+                                    <li>Tap "Confirm & Pay"</li>
+                                    <li>Enter your Easypaisa PIN</li>
+                                    <li>You will get a payment confirmation</li>
+                                  </ol>
+                                </div>
+                              </div>
+                            </div>
+                          </div>
+                        </div>
+                        <div>
+                          {psid && (
+                            <div
+                              className="alert alert-info d-flex align-items-center justify-content-between"
+                              style={{ marginBottom: 16 }}
+                            >
+                              <div>
+                                <strong>Your PSID:</strong>{" "}
+                                <span
+                                  style={{
+                                    fontFamily: "monospace",
+                                    fontSize: "1.1em",
+                                  }}
+                                >
+                                  {psid}
+                                </span>
+                              </div>
+                              <button
+                                className="btn btn-sm btn-outline-success ms-3"
+                                onClick={handleCopyPsid}
+                                title="Copy PSID"
+                              >
+                                <i className="fa fa-copy"></i>
+                              </button>
+                            </div>
+                          )}
+                        </div>
                         <button
                           className="btn-green btn-success btn rounded-2"
-                          disabled={true}
+                          onClick={handleGeneratePdf}
+                          disabled={hasChallan || isGeneratingChallan}
                         >
-                          PSID Coming Soon
+                          {isGeneratingChallan ? (
+                            <>
+                              <span
+                                className="spinner-border spinner-border-sm me-2"
+                                role="status"
+                                aria-hidden="true"
+                              ></span>
+                              Generating...
+                            </>
+                          ) : (
+                            <>
+                              <i className="fas fa-download"></i>{" "}
+                              {hasChallan
+                                ? "PSID Already Generated"
+                                : "Generate PSID"}
+                            </>
+                          )}
                         </button>
-                      </div> */}
+                      </div>
                       <div
                         className="tab-pane fade "
                         id="pills-profile"
                         role="tabpanel"
                         aria-labelledby="pills-profile-tab"
-                        tabindex="0"
+                        tabIndex="0"
                       >
                         <h5>Follow these steps to complete your payment:</h5>
                         <h5>For Bank Challan Payment:</h5>
@@ -798,7 +1126,7 @@ const AdmissionResult = () => {
               </div>
             </div>
           </div>
-          <Accordion defaultActiveKey="0" className="d-none">
+          <Accordion defaultActiveKey="0" className="d-none ">
             {/* ...omitted for brevity... */}
             <Accordion.Item eventKey="0">
               {/* <Accordion.Header>Get Bank Challan</Accordion.Header> */}
@@ -1000,6 +1328,7 @@ const AdmissionResult = () => {
           </div>
         </div>
       )}
+      {showLoginAlert && <LoginAlertWrapper />}
     </>
   );
 };
