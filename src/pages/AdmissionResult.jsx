@@ -282,10 +282,10 @@ const AdmissionResult = () => {
 
   // Show login alert modal when hasChallan is true
   useEffect(() => {
-    if (hasChallan) {
+    if (hasChallan && challanStatus === "Paid") {
       setShowLoginAlert(true);
     }
-  }, [hasChallan]);
+  }, [hasChallan, challanStatus]);
 
   // Reset psidJustGenerated when user switches to another tab or on mount
   useEffect(() => {
