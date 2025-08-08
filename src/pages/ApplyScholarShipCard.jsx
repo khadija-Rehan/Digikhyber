@@ -20,6 +20,7 @@ const ApplyScholarShipCard = () => {
     secondCourse: "",
     challanNumber: "",
     image: null,
+    termsAccepted: false,
   });
 
   const [errors, setErrors] = useState({});
@@ -113,15 +114,22 @@ const ApplyScholarShipCard = () => {
       }
     }
 
+    // Terms and Conditions acceptance validation
+    if (!formData.termsAccepted) {
+      newErrors.termsAccepted = "You must accept the terms and conditions to proceed.";
+    }
+
     setErrors(newErrors);
     return Object.keys(newErrors).length === 0;
   };
 
   const handleChange = (e) => {
-    const { name, value, files } = e.target;
+    const { name, value, files, type, checked } = e.target;
 
     if (name === "image") {
       setFormData({ ...formData, [name]: files[0] });
+    } else if (type === "checkbox") {
+      setFormData({ ...formData, [name]: checked });
     } else {
       setFormData({ ...formData, [name]: value });
     }
@@ -179,6 +187,7 @@ const ApplyScholarShipCard = () => {
       secondCourse: "",
       challanNumber: "",
       image: null,
+      termsAccepted: false,
     });
     setErrors({});
   };
@@ -206,9 +215,10 @@ const ApplyScholarShipCard = () => {
 
   // Calculate form completion percentage
   const getFormProgress = () => {
-    const requiredFields = ['fullName', 'cnic', 'email', 'mobileNumber', 'firstCourse', 'challanNumber', 'image'];
+    const requiredFields = ['fullName', 'cnic', 'email', 'mobileNumber', 'firstCourse', 'challanNumber', 'image', 'termsAccepted'];
     const completedFields = requiredFields.filter(field => {
       if (field === 'image') return formData[field];
+      if (field === 'termsAccepted') return formData[field];
       return formData[field] && formData[field].trim() && !errors[field];
     });
     return Math.round((completedFields.length / requiredFields.length) * 100);
@@ -235,6 +245,7 @@ const ApplyScholarShipCard = () => {
       submitData.append("email", formData.email);
       submitData.append("mobileNumber", formData.mobileNumber);
       submitData.append("challanNumber", formData.challanNumber);
+      submitData.append("termsAccepted", formData.termsAccepted); // Add termsAccepted to FormData
 
       if (formData.image) {
         submitData.append("image", formData.image);
@@ -255,6 +266,7 @@ const ApplyScholarShipCard = () => {
         secondCourse: "",
         challanNumber: "",
         image: null,
+        termsAccepted: false,
       });
 
       // Navigate to success page or home
@@ -577,6 +589,158 @@ const ApplyScholarShipCard = () => {
           <small className="form-text text-muted">
             Accepted formats: JPG, PNG, PDF (Max size: 20MB)
           </small>
+        </div>
+
+        {/* Terms and Conditions Section */}
+        <div className="mb-4">
+          <h5 className="mb-3">
+            Hunarmand Punjab Scholarship Card – Terms & Conditions
+          </h5>
+          <div className="terms-content" style={{ fontSize: '0.9rem', lineHeight: '1.6' }}>
+                    
+                    {/* Eligibility Criteria */}
+                    <div className="mb-3">
+                      <h6 className="mb-2">
+                        1. Eligibility Criteria
+                      </h6>
+                      <ul className="list-unstyled ms-3">
+                        <li className="mb-1">
+                          Only students enrolled in IT training courses under the Hunarmand Punjab program are eligible to apply for the Scholarship Card.
+                        </li>
+                        <li className="mb-1">
+                          Students must successfully complete their course and obtain a minimum of 85% marks in their final evaluation to qualify.
+                        </li>
+                      </ul>
+                    </div>
+
+                    {/* Merit-Based Selection */}
+                    <div className="mb-3">
+                      <h6 className="mb-2">
+                        2. Merit-Based Selection
+                      </h6>
+                      <ul className="list-unstyled ms-3">
+                        <li className="mb-1">
+                          Scholarship Cards and associated rewards (laptops, solar panels, e-bikes, etc.) will be awarded strictly on a merit basis.
+                        </li>
+                        <li className="mb-1">
+                          Meeting the minimum criteria does not guarantee selection; final recipients will be chosen based on top performance rankings.
+                        </li>
+                      </ul>
+                    </div>
+
+                    {/* Course Completion */}
+                    <div className="mb-3">
+                      <h6 className="mb-2">
+                        3. Course Completion
+                      </h6>
+                      <ul className="list-unstyled ms-3">
+                        <li className="mb-1">
+                          Students must attend all required classes and fulfill the attendance and assignment criteria set by the training provider.
+                        </li>
+                        <li className="mb-1">
+                          Any incomplete coursework or failure to appear in the final assessment will result in disqualification from scholarship eligibility.
+                        </li>
+                      </ul>
+                    </div>
+
+                    {/* Verification Process */}
+                    <div className="mb-3">
+                      <h6 className="mb-2">
+                        4. Verification Process
+                      </h6>
+                      <ul className="list-unstyled ms-3">
+                        <li className="mb-1">
+                          All academic records, attendance, and marks will be verified by the program management before awarding the Scholarship Card.
+                        </li>
+                        <li className="mb-1">
+                          Misrepresentation of information or cheating during assessments will lead to immediate disqualification.
+                        </li>
+                      </ul>
+                    </div>
+
+                    {/* Distribution of Rewards */}
+                    <div className="mb-3">
+                      <h6 className="mb-2">
+                        5. Distribution of Rewards
+                      </h6>
+                      <ul className="list-unstyled ms-3">
+                        <li className="mb-1">
+                          Rewards under this program (e.g., laptops, solar panels, e-bikes) are subject to availability and will be distributed in phases.
+                        </li>
+                        <li className="mb-1">
+                          The program reserves the right to change, replace, or cancel any reward without prior notice.
+                        </li>
+                      </ul>
+                    </div>
+
+                    {/* Non-Transferable */}
+                    <div className="mb-3">
+                      <h6 className="mb-2">
+                        6. Non-Transferable
+                      </h6>
+                      <ul className="list-unstyled ms-3">
+                        <li className="mb-1">
+                          The Scholarship Card and associated rewards are non-transferable and may only be used by the selected student.
+                        </li>
+                      </ul>
+                    </div>
+
+                    {/* Right to Amend */}
+                    <div className="mb-3">
+                      <h6 className="mb-2">
+                        7. Right to Amend
+                      </h6>
+                      <ul className="list-unstyled ms-3">
+                        <li className="mb-1">
+                          Hunarmand Punjab reserves the right to amend or update these terms and conditions at any time without prior notice.
+                        </li>
+                      </ul>
+                    </div>
+
+                    {/* Final Decision */}
+                    <div className="mb-3">
+                      <h6 className="mb-2">
+                        8. Final Decision
+                      </h6>
+                      <ul className="list-unstyled ms-3">
+                        <li className="mb-1">
+                          All decisions made by the Hunarmand Punjab management regarding eligibility, merit ranking, and reward distribution shall be considered final and binding.
+                        </li>
+                      </ul>
+                    </div>
+
+                  </div>
+                </div>
+
+        {/* Terms and Conditions Acceptance */}
+        <div className="mb-4">
+          <div className="form-check">
+            <input
+              className={`form-check-input ${errors.termsAccepted ? "is-invalid" : formData.termsAccepted ? "is-valid" : ""}`}
+              type="checkbox"
+              id="termsAccepted"
+              name="termsAccepted"
+              checked={formData.termsAccepted || false}
+              onChange={handleChange}
+              required
+            />
+            <label className="form-check-label" htmlFor="termsAccepted">
+              I have read and agree to the{" "}
+              <span className="fw-bold">Terms & Conditions</span>{" "}
+              of the Hunarmand Punjab Scholarship Card program.
+              <span className="text-danger">*</span>
+            </label>
+            {errors.termsAccepted && (
+              <div className="invalid-feedback d-block">
+                You must accept the terms and conditions to proceed.
+              </div>
+            )}
+            {formData.termsAccepted && !errors.termsAccepted && (
+              <div className="valid-feedback d-block">
+                Terms and conditions accepted!
+              </div>
+            )}
+          </div>
         </div>
 
         <div className="text-center mt-4">
