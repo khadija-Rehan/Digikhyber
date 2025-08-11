@@ -64,18 +64,22 @@ const ApplyScholarShipCard = () => {
     if (!formData.mobileNumber.trim()) {
       newErrors.mobileNumber = "Mobile number is required";
     } else if (!mobileRegex.test(formData.mobileNumber.replace(/[-\s]/g, ""))) {
-      newErrors.mobileNumber = "Please enter a valid mobile number starting with 03 (e.g., 03001234567)";
+      newErrors.mobileNumber =
+        "Please enter a valid mobile number starting with 03 (e.g., 03001234567)";
     }
 
     // Challan number validation
     if (!formData.challanNumber.trim()) {
       newErrors.challanNumber = "Challan number is required";
     } else if (formData.challanNumber.trim().length < 3) {
-      newErrors.challanNumber = "Challan number must be at least 3 characters long";
+      newErrors.challanNumber =
+        "Challan number must be at least 3 characters long";
     } else if (formData.challanNumber.trim().length > 50) {
-      newErrors.challanNumber = "Challan number must be less than 50 characters";
+      newErrors.challanNumber =
+        "Challan number must be less than 50 characters";
     } else if (!/^[a-zA-Z0-9\-\s]+$/.test(formData.challanNumber.trim())) {
-      newErrors.challanNumber = "Challan number should only contain letters, numbers, hyphens, and spaces";
+      newErrors.challanNumber =
+        "Challan number should only contain letters, numbers, hyphens, and spaces";
     }
 
     // Course validation
@@ -84,8 +88,12 @@ const ApplyScholarShipCard = () => {
     }
 
     // Second course validation (optional but if selected, must be different from first)
-    if (formData.secondCourse.trim() && formData.secondCourse === formData.firstCourse) {
-      newErrors.secondCourse = "Second course must be different from first course";
+    if (
+      formData.secondCourse.trim() &&
+      formData.secondCourse === formData.firstCourse
+    ) {
+      newErrors.secondCourse =
+        "Second course must be different from first course";
     }
 
     // File validation
@@ -93,13 +101,13 @@ const ApplyScholarShipCard = () => {
       newErrors.image = "Please select a file (JPG, PNG, or PDF)";
     } else {
       const maxSize = 20 * 1024 * 1024; // 20MB (matching backend)
-      const allowedTypes = ['image/jpeg', 'image/png', 'application/pdf'];
-      const allowedExtensions = ['.jpg', '.jpeg', '.png', '.pdf'];
-      
+      const allowedTypes = ["image/jpeg", "image/png", "application/pdf"];
+      const allowedExtensions = [".jpg", ".jpeg", ".png", ".pdf"];
+
       // Check file size
       if (formData.image.size > maxSize) {
         newErrors.image = "File size should be less than 20MB";
-      } 
+      }
       // Check file type
       else if (!allowedTypes.includes(formData.image.type)) {
         newErrors.image = "Only JPG, PNG, and PDF files are allowed";
@@ -107,16 +115,20 @@ const ApplyScholarShipCard = () => {
       // Check file extension
       else {
         const fileName = formData.image.name.toLowerCase();
-        const hasValidExtension = allowedExtensions.some(ext => fileName.endsWith(ext));
+        const hasValidExtension = allowedExtensions.some((ext) =>
+          fileName.endsWith(ext)
+        );
         if (!hasValidExtension) {
-          newErrors.image = "File must have .jpg, .jpeg, .png, or .pdf extension";
+          newErrors.image =
+            "File must have .jpg, .jpeg, .png, or .pdf extension";
         }
       }
     }
 
     // Terms and Conditions acceptance validation
     if (!formData.termsAccepted) {
-      newErrors.termsAccepted = "You must accept the terms and conditions to proceed.";
+      newErrors.termsAccepted =
+        "You must accept the terms and conditions to proceed.";
     }
 
     setErrors(newErrors);
@@ -132,7 +144,7 @@ const ApplyScholarShipCard = () => {
       setFormData({ ...formData, [name]: checked });
       // Immediately clear error for checkbox when checked
       if (checked && errors[name]) {
-        setErrors(prev => ({ ...prev, [name]: "" }));
+        setErrors((prev) => ({ ...prev, [name]: "" }));
       }
     } else {
       setFormData({ ...formData, [name]: value });
@@ -140,7 +152,7 @@ const ApplyScholarShipCard = () => {
 
     // Clear error when user starts typing (for non-checkbox fields)
     if (type !== "checkbox" && errors[name]) {
-      setErrors(prev => ({ ...prev, [name]: "" }));
+      setErrors((prev) => ({ ...prev, [name]: "" }));
     }
 
     // Real-time validation for specific fields
@@ -148,35 +160,38 @@ const ApplyScholarShipCard = () => {
       // Remove non-numeric characters for CNIC and mobile
       const cleanValue = value.replace(/[^\d]/g, "");
       if (name === "cnic" && cleanValue.length > 13) {
-        setFormData(prev => ({ ...prev, [name]: cleanValue.slice(0, 13) }));
+        setFormData((prev) => ({ ...prev, [name]: cleanValue.slice(0, 13) }));
       } else if (name === "mobileNumber" && cleanValue.length > 11) {
-        setFormData(prev => ({ ...prev, [name]: cleanValue.slice(0, 11) }));
+        setFormData((prev) => ({ ...prev, [name]: cleanValue.slice(0, 11) }));
       }
     }
 
     // Keep CNIC without dashes - just numbers
     if (name === "cnic") {
       const cleanCNIC = value.replace(/[^\d]/g, "");
-      setFormData(prev => ({ ...prev, [name]: cleanCNIC }));
+      setFormData((prev) => ({ ...prev, [name]: cleanCNIC }));
     }
 
     // Format mobile number with dash
     if (name === "mobileNumber" && value.length === 11) {
       const formatted = value.replace(/(\d{4})(\d{7})/, "$1-$2");
-      setFormData(prev => ({ ...prev, [name]: formatted }));
+      setFormData((prev) => ({ ...prev, [name]: formatted }));
     }
 
     // Course selection validation
     if (name === "secondCourse" && value && value === formData.firstCourse) {
-      setErrors(prev => ({ ...prev, [name]: "Second course must be different from first course" }));
+      setErrors((prev) => ({
+        ...prev,
+        [name]: "Second course must be different from first course",
+      }));
     } else if (name === "secondCourse" && errors.secondCourse) {
-      setErrors(prev => ({ ...prev, [name]: "" }));
+      setErrors((prev) => ({ ...prev, [name]: "" }));
     }
   };
 
   const clearError = (fieldName) => {
     if (errors[fieldName]) {
-      setErrors(prev => ({ ...prev, [fieldName]: "" }));
+      setErrors((prev) => ({ ...prev, [fieldName]: "" }));
     }
   };
 
@@ -200,7 +215,7 @@ const ApplyScholarShipCard = () => {
   const validateCNIC = (cnic) => {
     const cleanCNIC = cnic.replace(/[^\d]/g, "");
     if (cleanCNIC.length !== 13) return false;
-    
+
     // Check if all characters are digits
     return /^\d{13}$/.test(cleanCNIC);
   };
@@ -219,10 +234,19 @@ const ApplyScholarShipCard = () => {
 
   // Calculate form completion percentage
   const getFormProgress = () => {
-    const requiredFields = ['fullName', 'cnic', 'email', 'mobileNumber', 'firstCourse', 'challanNumber', 'image', 'termsAccepted'];
-    const completedFields = requiredFields.filter(field => {
-      if (field === 'image') return formData[field];
-      if (field === 'termsAccepted') return formData[field];
+    const requiredFields = [
+      "fullName",
+      "cnic",
+      "email",
+      "mobileNumber",
+      "firstCourse",
+      "challanNumber",
+      "image",
+      "termsAccepted",
+    ];
+    const completedFields = requiredFields.filter((field) => {
+      if (field === "image") return formData[field];
+      if (field === "termsAccepted") return formData[field];
       return formData[field] && formData[field].trim() && !errors[field];
     });
     return Math.round((completedFields.length / requiredFields.length) * 100);
@@ -279,10 +303,11 @@ const ApplyScholarShipCard = () => {
       console.error("Scholarship application error:", error);
       console.error("Error response:", error.response);
       console.error("Error data:", error.response?.data);
-      
+
       // Extract detailed error message
-      let errorMessage = "Failed to submit scholarship application. Please try again.";
-      
+      let errorMessage =
+        "Failed to submit scholarship application. Please try again.";
+
       // Check for different error response formats
       if (error.response?.data?.message) {
         errorMessage = error.response.data.message;
@@ -292,9 +317,9 @@ const ApplyScholarShipCard = () => {
         // Handle validation errors array
         const errors = error.response.data.errors;
         if (Array.isArray(errors)) {
-          errorMessage = errors.map(err => err.message || err.msg).join(', ');
-        } else if (typeof errors === 'object') {
-          errorMessage = Object.values(errors).join(', ');
+          errorMessage = errors.map((err) => err.message || err.msg).join(", ");
+        } else if (typeof errors === "object") {
+          errorMessage = Object.values(errors).join(", ");
         }
       } else if (error.response?.data?.msg) {
         errorMessage = error.response.data.msg;
@@ -318,24 +343,28 @@ const ApplyScholarShipCard = () => {
         errorMessage = error.message;
       } else if (error.response?.statusText) {
         errorMessage = `Error: ${error.response.statusText}`;
-      } else if (error.code === 'NETWORK_ERROR') {
+      } else if (error.code === "NETWORK_ERROR") {
         errorMessage = "Network error. Please check your internet connection.";
-      } else if (error.code === 'ECONNABORTED') {
+      } else if (error.code === "ECONNABORTED") {
         errorMessage = "Request timeout. Please try again.";
       }
-      
+
       // If still generic message, try to extract from response text
-      if (errorMessage === "Failed to submit scholarship application. Please try again." && error.response?.data) {
+      if (
+        errorMessage ===
+          "Failed to submit scholarship application. Please try again." &&
+        error.response?.data
+      ) {
         try {
           const responseText = JSON.stringify(error.response.data);
-          if (responseText && responseText !== '{}') {
+          if (responseText && responseText !== "{}") {
             errorMessage = `Server response: ${responseText}`;
           }
         } catch (e) {
           console.error("Could not parse error response:", e);
         }
       }
-      
+
       showError(errorMessage);
     } finally {
       setLoading(false);
@@ -351,13 +380,23 @@ const ApplyScholarShipCard = () => {
         <h1 className="fs-5 fw-bold text-black text-center pt-4">
           Scholarship Card Form
         </h1>
-        <p 
-        className="text-center text-danger"
-        // className="text-center text-black"
+        <p
+          className="text-center text-danger"
+          // className="text-center text-black"
         >
           To Become eligible for scholarship card (Free laptop, Solar scheme,
           Taleem Finance, Taleem Abroad, Advance Courses) you must be enrolled
-          in one or more programs under Hunarmand Punjab
+          in one or more programs under Hunarmand Punjab.
+          Hunarmand Punjab is introducing a merit-based Scholarship Card to
+          encourage and reward outstanding students. This policy states that
+          only those students who successfully complete their enrolled IT
+          training courses and achieve a minimum of 85% marks will be eligible
+          for the Scholarship Card. Recipients of this card will have the
+          opportunity to be considered for high-value merit-based rewards such
+          as laptops, solar panels, and e-bikes. These incentives aim to
+          motivate students to perform at their best and equip them with the
+          tools needed to further their skills and career development in the
+          digital age.
         </p>
 
         {/* Form Progress Indicator */}
@@ -366,13 +405,13 @@ const ApplyScholarShipCard = () => {
             <small className="text-muted">Form Progress</small>
             <small className="text-muted">{getFormProgress()}% Complete</small>
           </div>
-          <div className="progress" style={{ height: '8px' }}>
-            <div 
-              className="progress-bar bg-success" 
-              role="progressbar" 
+          <div className="progress" style={{ height: "8px" }}>
+            <div
+              className="progress-bar bg-success"
+              role="progressbar"
               style={{ width: `${getFormProgress()}%` }}
-              aria-valuenow={getFormProgress()} 
-              aria-valuemin="0" 
+              aria-valuenow={getFormProgress()}
+              aria-valuemin="0"
               aria-valuemax="100"
             ></div>
           </div>
@@ -384,7 +423,11 @@ const ApplyScholarShipCard = () => {
           </label>
           <input
             className={`form-control p-3 ${
-              errors.fullName ? "is-invalid" : formData.fullName.trim() && !errors.fullName ? "is-valid" : ""
+              errors.fullName
+                ? "is-invalid"
+                : formData.fullName.trim() && !errors.fullName
+                ? "is-valid"
+                : ""
             }`}
             type="text"
             name="fullName"
@@ -408,7 +451,11 @@ const ApplyScholarShipCard = () => {
           </label>
           <input
             className={`form-control p-3 ${
-              errors.cnic ? "is-invalid" : formData.cnic.trim() && validateCNIC(formData.cnic) ? "is-valid" : ""
+              errors.cnic
+                ? "is-invalid"
+                : formData.cnic.trim() && validateCNIC(formData.cnic)
+                ? "is-valid"
+                : ""
             }`}
             type="text"
             name="cnic"
@@ -445,7 +492,11 @@ const ApplyScholarShipCard = () => {
           </label>
           <input
             className={`form-control p-3 ${
-              errors.email ? "is-invalid" : formData.email.trim() && validateEmail(formData.email) ? "is-valid" : ""
+              errors.email
+                ? "is-invalid"
+                : formData.email.trim() && validateEmail(formData.email)
+                ? "is-valid"
+                : ""
             }`}
             type="email"
             name="email"
@@ -469,7 +520,12 @@ const ApplyScholarShipCard = () => {
           </label>
           <input
             className={`form-control p-3 ${
-              errors.mobileNumber ? "is-invalid" : formData.mobileNumber.trim() && validateMobile(formData.mobileNumber) ? "is-valid" : ""
+              errors.mobileNumber
+                ? "is-invalid"
+                : formData.mobileNumber.trim() &&
+                  validateMobile(formData.mobileNumber)
+                ? "is-valid"
+                : ""
             }`}
             type="text"
             name="mobileNumber"
@@ -482,19 +538,26 @@ const ApplyScholarShipCard = () => {
           {errors.mobileNumber && (
             <div className="invalid-feedback">{errors.mobileNumber}</div>
           )}
-          {formData.mobileNumber.trim() && validateMobile(formData.mobileNumber) && (
-            <div className="valid-feedback">Mobile number format is correct!</div>
-          )}
+          {formData.mobileNumber.trim() &&
+            validateMobile(formData.mobileNumber) && (
+              <div className="valid-feedback">
+                Mobile number format is correct!
+              </div>
+            )}
         </div>
 
         <div className="mb-3">
           <label htmlFor="firstCourse" className="mb-2">
             In which Course Did you Apply?
-             <span className="text-danger">*</span>
+            <span className="text-danger">*</span>
           </label>
           <select
             className={`form-control p-3 ${
-              errors.firstCourse ? "is-invalid" : formData.firstCourse.trim() && !errors.firstCourse ? "is-valid" : ""
+              errors.firstCourse
+                ? "is-invalid"
+                : formData.firstCourse.trim() && !errors.firstCourse
+                ? "is-valid"
+                : ""
             }`}
             name="firstCourse"
             value={formData.firstCourse}
@@ -519,11 +582,18 @@ const ApplyScholarShipCard = () => {
         <div className="mb-3">
           <label htmlFor="secondCourse" className="mb-2">
             Second Course (Optional)
-            <small className="text-muted"> - Select if you applied for multiple courses</small>
+            <small className="text-muted">
+              {" "}
+              - Select if you applied for multiple courses
+            </small>
           </label>
           <select
             className={`form-control p-3 ${
-              errors.secondCourse ? "is-invalid" : formData.secondCourse.trim() && !errors.secondCourse ? "is-valid" : ""
+              errors.secondCourse
+                ? "is-invalid"
+                : formData.secondCourse.trim() && !errors.secondCourse
+                ? "is-valid"
+                : ""
             }`}
             name="secondCourse"
             value={formData.secondCourse}
@@ -540,7 +610,9 @@ const ApplyScholarShipCard = () => {
             <div className="invalid-feedback">{errors.secondCourse}</div>
           )}
           {formData.secondCourse.trim() && !errors.secondCourse && (
-            <div className="valid-feedback">Second course selected successfully!</div>
+            <div className="valid-feedback">
+              Second course selected successfully!
+            </div>
           )}
         </div>
 
@@ -550,7 +622,12 @@ const ApplyScholarShipCard = () => {
           </label>
           <input
             className={`form-control p-3 ${
-              errors.challanNumber ? "is-invalid" : formData.challanNumber.trim() && formData.challanNumber.trim().length >= 3 ? "is-valid" : ""
+              errors.challanNumber
+                ? "is-invalid"
+                : formData.challanNumber.trim() &&
+                  formData.challanNumber.trim().length >= 3
+                ? "is-valid"
+                : ""
             }`}
             type="text"
             placeholder="Enter your challan number"
@@ -563,9 +640,11 @@ const ApplyScholarShipCard = () => {
           {errors.challanNumber && (
             <div className="invalid-feedback">{errors.challanNumber}</div>
           )}
-          {formData.challanNumber.trim() && formData.challanNumber.trim().length >= 3 && !errors.challanNumber && (
-            <div className="valid-feedback">Challan number looks good!</div>
-          )}
+          {formData.challanNumber.trim() &&
+            formData.challanNumber.trim().length >= 3 &&
+            !errors.challanNumber && (
+              <div className="valid-feedback">Challan number looks good!</div>
+            )}
         </div>
 
         <div className="mb-4">
@@ -574,7 +653,11 @@ const ApplyScholarShipCard = () => {
           </label>
           <input
             className={`form-control p-3 ${
-              errors.image ? "is-invalid" : formData.image && !errors.image ? "is-valid" : ""
+              errors.image
+                ? "is-invalid"
+                : formData.image && !errors.image
+                ? "is-valid"
+                : ""
             }`}
             type="file"
             name="image"
@@ -587,7 +670,8 @@ const ApplyScholarShipCard = () => {
           )}
           {formData.image && !errors.image && (
             <div className="valid-feedback">
-              File selected: {formData.image.name} ({(formData.image.size / 1024 / 1024).toFixed(2)} MB)
+              File selected: {formData.image.name} (
+              {(formData.image.size / 1024 / 1024).toFixed(2)} MB)
             </div>
           )}
           <small className="form-text text-muted">
@@ -597,7 +681,13 @@ const ApplyScholarShipCard = () => {
         <div className="mb-4">
           <div className="form-check">
             <input
-              className={`form-check-input ${errors.termsAccepted ? "is-invalid" : formData.termsAccepted ? "is-valid" : ""}`}
+              className={`form-check-input ${
+                errors.termsAccepted
+                  ? "is-invalid"
+                  : formData.termsAccepted
+                  ? "is-valid"
+                  : ""
+              }`}
               type="checkbox"
               id="termsAccepted"
               name="termsAccepted"
@@ -607,8 +697,8 @@ const ApplyScholarShipCard = () => {
             />
             <label className="form-check-label" htmlFor="termsAccepted">
               I have read and agree to the{" "}
-              <span className="fw-bold">Terms & Conditions</span>{" "}
-              of the Hunarmand Punjab Scholarship Card program.
+              <span className="fw-bold">Terms & Conditions</span> of the
+              Hunarmand Punjab Scholarship Card program.
               <span className="text-danger">*</span>
             </label>
             {errors.termsAccepted && (
@@ -622,24 +712,24 @@ const ApplyScholarShipCard = () => {
         <div className="text-center mt-4">
           <div className="row">
             <div className="col-md-8">
-          <button
-            type="submit"
-            className="btn btn-success fw-bold hbtn text-white p-3 w-100"
-            disabled={loading}
-          >
-            {loading ? (
-              <>
-                <span
-                  className="spinner-border spinner-border-sm me-2"
-                  role="status"
-                  aria-hidden="true"
-                ></span>
-                Submitting...
-              </>
-            ) : (
-              "Submit Application"
-            )}
-          </button>
+              <button
+                type="submit"
+                className="btn btn-success fw-bold hbtn text-white p-3 w-100"
+                disabled={loading}
+              >
+                {loading ? (
+                  <>
+                    <span
+                      className="spinner-border spinner-border-sm me-2"
+                      role="status"
+                      aria-hidden="true"
+                    ></span>
+                    Submitting...
+                  </>
+                ) : (
+                  "Submit Application"
+                )}
+              </button>
             </div>
             <div className="col-md-4">
               <button
