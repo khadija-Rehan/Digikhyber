@@ -31,11 +31,15 @@ const ApplicationSteps = () => {
               </div>
               <div className="step-card text-center">
                 <p className="num">02</p>
-                <i class="fa-regular fa-envelope green fs-2 mb-4"></i>
-
-                <p className="font-16 mb-1 fw-bold green">Verify Email</p>
+                {/* <i class="fa-regular fa-envelope green fs-2 mb-4"></i> */}
+                <i className="fa-solid fa-lock green fs-2 mb-4"></i>
+                <p className="font-16 mb-1 fw-bold green">
+                  {/* Verify Email */}
+                  Login Candidate Portal
+                </p>
                 <p className="font-14 fw-medium">
-                  Confirm your email to activate your account
+                  {/* Confirm your email to activate your account */}
+                  Login Your Candidate Portal with Registered Email & Password
                 </p>
               </div>
               <div className="step-card text-center">
@@ -73,7 +77,8 @@ const ApplicationSteps = () => {
 
                 <p className="font-16 mb-1 fw-bold green">Scholarship Card</p>
                 <p className="font-14 fw-medium">
-                  Receive confirmation and get scholarship card{" "}
+                  {/* Receive confirmation and get scholarship card{" "} */}
+                  Receive Confirmation & Get Scholarship Card on Merit Based
                 </p>
               </div>
               <style jsx>{`

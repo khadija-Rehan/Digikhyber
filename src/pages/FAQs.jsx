@@ -41,7 +41,16 @@ const FAQs = () => {
             </Accordion.Header>
             <Accordion.Body>
               <div className="p-3">
-                Hunarmand Punjab initiative launched by the
+                Hunarmand Punjab initiative Supported by the{" "}
+                <strong>
+                  {" "}
+                  Minister of School & Higher Education Rana Sikandar Hayat
+                </strong>{" "}
+                that offers free Advanced IT Courses, Laptop Scheme, Solar
+                Scheme, Study Abroad Consultancy, Taleem Finance under the
+                Scholarship Card to empower the youth of Punjab under the policy
+                of hunarmand punjab.
+                {/* Hunarmand Punjab initiative launched by the
                 <strong>
                   {" "}
                   Education Minister Rana Sikandar Hayat Government of Punjab
@@ -49,7 +58,7 @@ const FAQs = () => {
                 that offers free Advanced IT Courses, Laptop Scheme, Solar
                 Scheme, Study Abroad Consultancy, Taleem Finance under the{" "}
                 <strong>Scholarship Card</strong> to empower the youth of
-                Punjab.
+                Punjab. */}
                 {/* Hunarmand Punjab is a government-supported training initiative
                                 under the{" "}
                                 <strong>
@@ -98,10 +107,11 @@ const FAQs = () => {
                 fee is charged per course. After enrollment you will be eligible
                 for All Benefit Schemes i.e Scholarship Card, Laptop Scheme,
                 Solar Scheme, Taleem Finance & Taleem Abroad. */}
-                All the courses under Hunarmand Punjab Scholarship Card are
-                completely free of cost. Only processing charges will be paid by
-                students & will be reimbursed after the completion of final
-                evaluation test according to the policy of Hunarmand Punjab.
+                All the courses under Hunarmand Punjab {/* Scholarship Card  */}{" "}
+                are completely free of cost. Only processing charges will be
+                paid by students & will be reimbursed after the completion of
+                final evaluation test according to the policy of Hunarmand
+                Punjab.
               </div>
             </Accordion.Body>
           </Accordion.Item>
@@ -133,12 +143,19 @@ const FAQs = () => {
             <Accordion.Body>
               <div className="p-3">
                 After successful completion, you'll get an{" "}
+                <strong>authorized e-certification</strong> by Hunarmand Punjab
+                which will be verifiable online on{" "}
+                <strong>Hunarmand Punjab </strong>Website. Furthermore, you'll
+                be able to join our Internships based on your performance &
+                other benefits under Hunarmand Punjab Program after completing
+                any course.
+                {/* After successful completion, you'll get an{" "}
                 <strong>authorized e-certification</strong> which will be
                 verifiable online & also will be authorized and accredited with
                 Government Appreciated Institutions. Furthermore, you'll be able
                 to join our{" "}
                 <b> Internships & other benefits under Hunarmand Punjab </b>{" "}
-                Program after completing any course.
+                Program after completing any course. */}
               </div>
             </Accordion.Body>
           </Accordion.Item>
@@ -149,10 +166,22 @@ const FAQs = () => {
             </Accordion.Header>
             <Accordion.Body>
               <div className="p-3">
-                The Scholarship Card is a digital or physical card issued to
+                As part of its commitment to promoting excellence in IT
+                education, <strong>Hunarmand Punjab</strong> is introducing a{" "}
+                <strong>merit-based Scholarship Card</strong> to encourage and
+                reward outstanding students. This policy states that only those
+                students who successfully complete their enrolled IT training
+                courses and achieve a minimum of 85% marks will be eligible for
+                the Scholarship Card. Recipients of this card will have the
+                opportunity to be considered for high-value merit-based rewards
+                such as laptops, solar panels, and e-bikes. These incentives aim
+                to motivate students to perform at their best and equip them
+                with the tools needed to further their skills and career
+                development in the digital age.
+                {/* The Scholarship Card is a digital or physical card issued to
                 eligible trainees enrolled in Hunarmand Punjab training
                 programs. It serves as proof of enrollment and may be used to
-                access certain benefits.
+                access certain benefits. */}
               </div>
             </Accordion.Body>
           </Accordion.Item>
@@ -165,9 +194,15 @@ const FAQs = () => {
             </Accordion.Header>
             <Accordion.Body>
               <div className="p-3">
-                Only those trainees who have successfully completed the
+                Students who successfully complete their enrolled IT training
+                courses under the Hunarmand Punjab program and achieve at least
+                85% marks will be eligible to receive the merit-based
+                Scholarship Card. This card will qualify them for additional
+                rewards such as laptops, solar panels, and e-bikes, based
+                strictly on performance and merit.
+                {/* Only those trainees who have successfully completed the
                 registration and verification process for Hunarmand Punjab’s
-                training programs.
+                training programs. */}
               </div>
             </Accordion.Body>
           </Accordion.Item>
@@ -181,7 +216,6 @@ const FAQs = () => {
             <Accordion.Body>
               <div className="p-3">
                 <ul>
-                  <li>Proof of active enrollment in the program</li>
                   <li>Eligible for Laptop Scheme</li>
                   <li>Eligible for Solar Scheme</li>
                   <li>Eligible for Taleem Finance</li>
@@ -191,12 +225,28 @@ const FAQs = () => {
                   <li>
                     Eligibility for internship/job placement opportunities
                   </li>
+                  <li>
+                    Note: Students who successfully complete their enrolled IT
+                    training courses under the Hunarmand Punjab program and
+                    achieve at least 85% marks will be eligible to receive the
+                    merit-based Scholarship Card Terms & Conditions Apply.
+                  </li>
+                  {/* <li>Proof of active enrollment in the program</li>
+                  <li>Eligible for Laptop Scheme</li>
+                  <li>Eligible for Solar Scheme</li>
+                  <li>Eligible for Taleem Finance</li>
+                  <li>Eligible for Taleem Abroad</li>
+                  <li>Upcoming Advanced Course’s access</li>
+                  <li>Access to learning materials and assessments</li>
+                  <li>
+                    Eligibility for internship/job placement opportunities
+                  </li> */}
                 </ul>
               </div>
             </Accordion.Body>
           </Accordion.Item>
 
-          <Accordion.Item eventKey="8">
+          {/* <Accordion.Item eventKey="8">
             <Accordion.Header>
               <div className="p-3 fw-medium">
                 How will I receive my Scholarship Card?
@@ -210,35 +260,35 @@ const FAQs = () => {
                 </ul>
               </div>
             </Accordion.Body>
-          </Accordion.Item>
+          </Accordion.Item> */}
 
-          <Accordion.Item eventKey="9">
+          {/* <Accordion.Item eventKey="9">
             <Accordion.Header>
               <div className="p-3 fw-medium">
                 Is there any fee for the Scholarship Card?
               </div>
             </Accordion.Header>
             <Accordion.Body>
-              <div className="p-3">
-                {/* No, the Scholarship Card is provided{" "}
+              <div className="p-3"> */}
+          {/* No, the Scholarship Card is provided{" "}
                 <b>completely free of charge</b>
                 to all eligible trainees. One time processing fee is charged per
                 course. After enrollment you will be eligible for All Benefit
                 Schemes i.e Scholarship Card, Laptop Scheme, Solar Scheme,
                 Taleem Finance & Taleem Abroad. */}
-                Hunarmand Punjab <strong>Scholarship Card</strong> is completely
+          {/* Hunarmand Punjab <strong>Scholarship Card</strong> is completely
                 free of cost to eligible trainees. Only processing charges will
                 be paid by students & will be reimbursed after the completion of
                 final evaluation test according to the policy of{" "}
-                <strong>Hunarmand Punjab.</strong>{" "}
-                Under <strong>Scholarship card</strong> students can avail
-                Laptop Scheme, Solar Scheme, Taleem Finance & Taleem Abroad
-                Consultancy opportunities.
+                <strong>Hunarmand Punjab.</strong> Under{" "}
+                <strong>Scholarship card</strong> students can avail Laptop
+                Scheme, Solar Scheme, Taleem Finance & Taleem Abroad Consultancy
+                opportunities.
               </div>
             </Accordion.Body>
-          </Accordion.Item>
+          </Accordion.Item> */}
 
-          <Accordion.Item eventKey="10">
+          {/* <Accordion.Item eventKey="10">
             <Accordion.Header>
               <div className="p-3 fw-medium">
                 What should I do if I lose my Scholarship Card?
@@ -250,7 +300,7 @@ const FAQs = () => {
                 team to request a re-issuance. ID verification may be required.
               </div>
             </Accordion.Body>
-          </Accordion.Item>
+          </Accordion.Item> */}
 
           <Accordion.Item eventKey="11">
             <Accordion.Header>
@@ -260,9 +310,19 @@ const FAQs = () => {
             </Accordion.Header>
             <Accordion.Body>
               <div className="p-3">
-                The Laptop Scheme is an initiative by <b> Hunarmand Punjab </b>{" "}
+                Hunarmand Punjab Laptop Scheme is a{" "}
+                <strong>merit-based reward program</strong> designed to empower
+                talented students through digital access. Under this scheme,
+                students who complete their <strong>IT training courses</strong>{" "}
+                with a minimum of <strong>85% marks</strong> become eligible for
+                a <strong>Scholarship Card</strong>. This card opens doors to{" "}
+                <strong>high-value rewards</strong> like{" "}
+                <strong>laptops</strong>. The initiative encourages youth to
+                perform exceptionally while equipping them with essential tools
+                to advance their careers in the digital era.{" "}
+                {/* The Laptop Scheme is an initiative by <b> Hunarmand Punjab </b>{" "}
                 to provide eligible trainees with laptops to support their
-                learning in IT and technical courses.
+                learning in IT and technical courses. */}
               </div>
             </Accordion.Body>
           </Accordion.Item>
@@ -278,19 +338,32 @@ const FAQs = () => {
                 Trainees who:
                 <ul>
                   <li>Are enrolled in specific IT or technical programs</li>
+                  <li>Score minimum 85% Marks in Final Evaluation Test</li>
+                  <li>
+                    Show satisfactory performance in assignments, assessments &
+                    Final Project
+                  </li>
+                  <li>
+                    <strong>Note:</strong> Students who successfully complete
+                    their enrolled IT training courses under the Hunarmand
+                    Punjab program and achieve at least 85% marks will be
+                    eligible to receive the merit-based Scholarship Card Terms &
+                    Conditions Apply.
+                  </li>
+                  {/* <li>Are enrolled in specific IT or technical programs</li>
                   <li>
                     Score minimum <b> 85% Marks in Final Evaluation Test</b>
                   </li>
                   <li>
                     Show satisfactory performance in assignments, assessments &
                     Final Project
-                  </li>
+                  </li> */}
                 </ul>
               </div>
             </Accordion.Body>
           </Accordion.Item>
 
-          <Accordion.Item eventKey="13">
+          {/* <Accordion.Item eventKey="13">
             <Accordion.Header>
               <div className="p-3 fw-medium">
                 Is there any cost involved in receiving the laptop?
@@ -303,7 +376,7 @@ const FAQs = () => {
                 is charged per course.
               </div>
             </Accordion.Body>
-          </Accordion.Item>
+          </Accordion.Item> */}
 
           <Accordion.Item eventKey="14">
             <Accordion.Header>
@@ -351,10 +424,20 @@ const FAQs = () => {
             </Accordion.Header>
             <Accordion.Body>
               <div className="p-3">
-                The Solar Scheme is a government-supported initiative by
+                The Hunarmand Punjab Solar Scheme is part of a merit-based
+                reward initiative designed to support high-performing students
+                who complete their IT training with{" "}
+                <strong>85% or above marks</strong>. Eligible students are
+                awarded a <strong>Scholarship Card</strong>, which gives them a
+                chance to win valuable rewards including{" "}
+                <strong>solar panels</strong>. This scheme not only recognizes
+                academic excellence but also promotes clean energy adoption. It
+                empowers students with the tools needed for a sustainable,
+                independent, and tech-enabled future.
+                {/* The Solar Scheme is a government-supported initiative by
                 <b> Hunarmand Punjab </b> aimed at providing solar panels to
                 eligible trainees to support their access to continuous,
-                affordable electricity for learning and home use.
+                affordable electricity for learning and home use. */}
               </div>
             </Accordion.Body>
           </Accordion.Item>
@@ -386,7 +469,7 @@ const FAQs = () => {
             </Accordion.Body>
           </Accordion.Item>
 
-          <Accordion.Item eventKey="18">
+          {/* <Accordion.Item eventKey="18">
             <Accordion.Header>
               <div className="p-3 fw-medium">
                 Is there any cost for the solar panel?
@@ -399,7 +482,7 @@ const FAQs = () => {
                 processing fee is charged.
               </div>
             </Accordion.Body>
-          </Accordion.Item>
+          </Accordion.Item> */}
 
           <Accordion.Item eventKey="19">
             <Accordion.Header>
@@ -412,7 +495,7 @@ const FAQs = () => {
                 Selected candidates will be informed through:
                 <ul>
                   <li>Official SMS or email</li>
-                  <li>Announcement at the training center</li>
+                  {/* <li>Announcement at the training center</li> */}
                   <li>Notification on the Hunarmand Punjab portal</li>
                 </ul>
               </div>
@@ -472,7 +555,7 @@ const FAQs = () => {
             </Accordion.Body>
           </Accordion.Item>
 
-          <Accordion.Item eventKey="23">
+          {/* <Accordion.Item eventKey="23">
             <Accordion.Header>
               <div className="p-3 fw-medium">
                 Is Taleem Finance a loan or a scholarship?
@@ -485,7 +568,7 @@ const FAQs = () => {
                 with easy repayment options.
               </div>
             </Accordion.Body>
-          </Accordion.Item>
+          </Accordion.Item> */}
 
           <Accordion.Item eventKey="24">
             <Accordion.Header>
