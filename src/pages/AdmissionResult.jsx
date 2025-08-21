@@ -1252,7 +1252,7 @@ const AdmissionResult = () => {
         </div>
       </div>
       {/* Modal for editing courses */}
-      {showModal && (
+      {showLoginAlert && (
         // <div style={modalOverlayStyle} tabIndex="-1" role="dialog">
         //   <div style={{ width: "100%", maxWidth: 600 }}>
         //     <div style={modalContentStyle}>
@@ -1336,7 +1336,7 @@ const AdmissionResult = () => {
                   type="button"
                   style={closeBtnStyle}
                   aria-label="Close"
-                  onClick={() => setShowModal(false)}
+                  onClick={() => setShowLoginAlert(false)}
                 >
                   <span aria-hidden="true">&times;</span>
                 </button>
@@ -1360,7 +1360,7 @@ const AdmissionResult = () => {
                 <button
                   type="button"
                   style={cancelBtnStyle}
-                  onClick={() => setShowModal(false)}
+                  onClick={() => setShowLoginAlert(false)}
                 >
                   Close
                 </button>
@@ -1369,7 +1369,7 @@ const AdmissionResult = () => {
           </div>
         </div>
       )}
-      {showLoginAlert && <LoginAlertWrapper />}
+      {/* {showLoginAlert && <LoginAlertWrapper />} */}
     </>
   );
 };
