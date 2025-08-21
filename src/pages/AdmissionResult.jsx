@@ -23,7 +23,7 @@ const AdmissionResult = () => {
 
   const { user, login } = useAuth();
   const { showError } = useModal();
-  const [showModal, setShowModal] = useState(false);
+  const [showModal, setShowModal] = useState(true);
   const [editCourses, setEditCourses] = useState([...userCourses]);
   const [error, setError] = useState("");
   const [totalPrice, setTotalPrice] = useState(0);
@@ -308,7 +308,7 @@ const AdmissionResult = () => {
     borderRadius: "12px",
     boxShadow: "0 8px 32px 0 rgba(0,70,19,0.18)",
     border: "2px solid #079560",
-    minWidth: 420,
+    // minWidth: 420,
     maxWidth: 600,
     width: "100%",
     fontFamily: "Poppins, sans-serif",
@@ -387,8 +387,8 @@ const AdmissionResult = () => {
     background: "#f8f9fa",
     borderBottomLeftRadius: "10px",
     borderBottomRightRadius: "10px",
-    borderTop: "1px solid #e9ecef",
-    padding: "16px 24px",
+    // borderTop: "1px solid #e9ecef",
+    padding: "10px 24px",
     display: "flex",
     justifyContent: "flex-end",
     gap: "10px",
@@ -840,7 +840,7 @@ const AdmissionResult = () => {
                                     width: "24px",
                                     height: "24px",
                                     marginRight: "8px",
-                                    objectFit: "contain"
+                                    objectFit: "contain",
                                   }}
                                 />
                                 JazzCash
@@ -864,7 +864,7 @@ const AdmissionResult = () => {
                                     width: "24px",
                                     height: "24px",
                                     marginRight: "8px",
-                                    objectFit: "contain"
+                                    objectFit: "contain",
                                   }}
                                 />
                                 Easypaisa
@@ -943,7 +943,7 @@ const AdmissionResult = () => {
                                       width: "24px",
                                       height: "24px",
                                       marginRight: "8px",
-                                      objectFit: "contain"
+                                      objectFit: "contain",
                                     }}
                                   />
                                   <h6 className="mb-0">JazzCash Payment</h6>
@@ -991,7 +991,7 @@ const AdmissionResult = () => {
                                       width: "24px",
                                       height: "24px",
                                       marginRight: "8px",
-                                      objectFit: "contain"
+                                      objectFit: "contain",
                                     }}
                                   />
                                   <h6 className="mb-0">Easypaisa Payment</h6>
@@ -1253,11 +1253,85 @@ const AdmissionResult = () => {
       </div>
       {/* Modal for editing courses */}
       {showModal && (
+        // <div style={modalOverlayStyle} tabIndex="-1" role="dialog">
+        //   <div style={{ width: "100%", maxWidth: 600 }}>
+        //     <div style={modalContentStyle}>
+        //       <div style={modalHeaderStyle}>
+        //         <h5 style={modalTitleStyle}>Edit Courses</h5>
+        //         <button
+        //           type="button"
+        //           style={closeBtnStyle}
+        //           aria-label="Close"
+        //           onClick={() => setShowModal(false)}
+        //         >
+        //           <span aria-hidden="true">&times;</span>
+        //         </button>
+        //       </div>
+        //       <div style={modalBodyStyle}>
+        //         {editCourses.map((course, idx) => (
+        //           <div
+        //             key={idx}
+        //             className="d-flex align-items-center mb-2 gap-2"
+        //           >
+        //             <select
+        //               className="form-select"
+        //               style={selectStyle}
+        //               value={course}
+        //               onChange={(e) => handleCourseChange(idx, e.target.value)}
+        //             >
+        //               <option value="">Select Course</option>
+        //               {availableCourses.map((c, i) => (
+        //                 <option
+        //                   key={i}
+        //                   value={c.name}
+        //                   disabled={
+        //                     editCourses.includes(c.name) && c.name !== course
+        //                   }
+        //                 >
+        //                   {c.name}
+        //                 </option>
+        //               ))}
+        //             </select>
+        //             <button
+        //               style={deleteBtnStyle}
+        //               onClick={() => handleDeleteCourse(idx)}
+        //               disabled={editCourses.length === 1}
+        //             >
+        //               Delete
+        //             </button>
+        //           </div>
+        //         ))}
+        //         {editCourses.length < 3 && (
+        //           <button style={addBtnStyle} onClick={handleAddCourse}>
+        //             Add Course
+        //           </button>
+        //         )}
+        //         {error && (
+        //           <div className="text-danger mt-2" style={{ fontWeight: 500 }}>
+        //             {error}
+        //           </div>
+        //         )}
+        //       </div>
+        //       <div style={modalFooterStyle}>
+        //         <button
+        //           type="button"
+        //           style={cancelBtnStyle}
+        //           onClick={() => setShowModal(false)}
+        //         >
+        //           Cancel
+        //         </button>
+        //         <button type="button" style={saveBtnStyle} onClick={handleSave}>
+        //           Save
+        //         </button>
+        //       </div>
+        //     </div>
+        //   </div>
+        // </div>
         <div style={modalOverlayStyle} tabIndex="-1" role="dialog">
-          <div style={{ width: "100%", maxWidth: 600 /* was 440 */ }}>
+          <div style={{ width: "100%", maxWidth: 600, minWidth: "auto" }}>
             <div style={modalContentStyle}>
               <div style={modalHeaderStyle}>
-                <h5 style={modalTitleStyle}>Edit Courses</h5>
+                <h5 style={modalTitleStyle}>Official Notice – Hunarmand Punjab</h5>
                 <button
                   type="button"
                   style={closeBtnStyle}
@@ -1268,49 +1342,19 @@ const AdmissionResult = () => {
                 </button>
               </div>
               <div style={modalBodyStyle}>
-                {editCourses.map((course, idx) => (
-                  <div
-                    key={idx}
-                    className="d-flex align-items-center mb-2 gap-2"
-                  >
-                    <select
-                      className="form-select"
-                      style={selectStyle}
-                      value={course}
-                      onChange={(e) => handleCourseChange(idx, e.target.value)}
-                    >
-                      <option value="">Select Course</option>
-                      {availableCourses.map((c, i) => (
-                        <option
-                          key={i}
-                          value={c.name}
-                          disabled={
-                            editCourses.includes(c.name) && c.name !== course
-                          }
-                        >
-                          {c.name}
-                        </option>
-                      ))}
-                    </select>
-                    <button
-                      style={deleteBtnStyle}
-                      onClick={() => handleDeleteCourse(idx)}
-                      disabled={editCourses.length === 1}
-                    >
-                      Delete
-                    </button>
-                  </div>
-                ))}
-                {editCourses.length < 3 && (
-                  <button style={addBtnStyle} onClick={handleAddCourse}>
-                    Add Course
-                  </button>
-                )}
-                {error && (
-                  <div className="text-danger mt-2" style={{ fontWeight: 500 }}>
-                    {error}
-                  </div>
-                )}
+                <div style={{ padding: '24px', lineHeight: '1.6' }}>
+                  <p style={{ marginBottom: '20px', color: '#333', fontSize: '15px' }}>
+                    As earlier communicated, the tentative date for LMS access was to be shared after <strong>20th August</strong>.
+                  </p>
+                  
+                  <p style={{ marginBottom: '20px', color: '#333', fontSize: '15px' }}>
+                    We are pleased to officially announce that the <strong style={{ color: '#079560' }}>final date for LMS access is 1st September 2025</strong>.
+                  </p>
+                  
+                  <p style={{ marginBottom: '20px', color: '#333', fontSize: '15px' }}>
+                    All students are advised to check their <strong>Candidate Portal</strong> regularly. Please note that all official notifications regarding Classes and LMS will only be available on the <strong>Candidate Portal</strong>. There is no need to rely on <strong>SMS or Emails</strong> for updates.
+                  </p>
+                </div>
               </div>
               <div style={modalFooterStyle}>
                 <button
@@ -1318,10 +1362,7 @@ const AdmissionResult = () => {
                   style={cancelBtnStyle}
                   onClick={() => setShowModal(false)}
                 >
-                  Cancel
-                </button>
-                <button type="button" style={saveBtnStyle} onClick={handleSave}>
-                  Save
+                  Close
                 </button>
               </div>
             </div>
