@@ -639,7 +639,7 @@ const AdmissionResult = () => {
               } else {
                 // Show today + 7 days
                 const today = new Date();
-                today.setDate(today.getDate() + 7);
+                today.setDate(today.getDate() + 3);
                 return today.toLocaleDateString("en-US", options);
               }
             })()}
