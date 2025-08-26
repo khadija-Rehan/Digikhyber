@@ -42,7 +42,15 @@ const Header = () => {
             </Navbar.Brand>
           </div>
 
-          <div className="d-flex align-items-center">
+          <div className="d-flex align-items-center gap-1 gap-xl-0">
+            <Button
+              variant="outline-green"
+              as={Link}
+              // to="/lms-portal"
+              className="btn-outline-green lms-btn mobile"
+            >
+              LMS Portal
+            </Button>
             <Button
               variant="success"
               as={Link}
@@ -150,6 +158,14 @@ const Header = () => {
                       className="btn-black bg-none login-btn p-0"
                     >
                       <i className="fas fa-sign-in-alt me-1"></i>CANDIDATE LOGIN
+                    </Button>
+                    <Button
+                      variant="outline-green"
+                      as={Link}
+                      // to="/lms-portal"
+                      className="btn-outline-green lms-btn desktop"
+                    >
+                      LMS Portal
                     </Button>
                     <Button
                       variant="success"

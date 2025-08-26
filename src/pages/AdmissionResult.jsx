@@ -1354,7 +1354,7 @@ const AdmissionResult = () => {
                   <p style={{ marginBottom: '20px', color: '#333', fontSize: '15px' }}>
                     All students are advised to check their <strong>Candidate Portal</strong> regularly. Please note that all official notifications regarding Classes and LMS will only be available on the <strong>Candidate Portal</strong>. There is no need to rely on <strong>SMS or Emails</strong> for updates.
                   </p>
-                </div>
+                  </div>
               </div>
               <div style={modalFooterStyle}>
                 <button

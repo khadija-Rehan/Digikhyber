@@ -646,6 +646,23 @@ a:hover {
   align-items: center;
 }
 
+.btn-outline-green {
+  position: relative;
+  overflow: hidden;
+  font-size: 16px;
+  color: #079560;
+  padding: 12px 30px;
+  background-color: #1a1e1d00;
+  border-radius: 100px;
+  border: 1px solid #079560;
+  font-weight: 600;
+}
+
+.btn-outline-green:hover {
+  background-color: #079560;
+  color: white;
+}
+
 .btn-green {
   position: relative;
   overflow: hidden;
@@ -1951,9 +1968,19 @@ ul li {
   }
 
   .btn-green {
-    font-size: 13px;
+    font-size: 10px;
     color: rgba(255, 255, 255, 0.918);
-    padding: 7px 16px;
+    padding: 7px 12px;
+    background-color: #079560;
+    border-radius: 100px;
+    border: 1px solid #079560;
+    font-weight: 600;
+    transition: 0.3s ease;
+  }
+  .btn-outline-green {
+    font-size: 10px;
+    color: rgba(255, 255, 255, 0.918);
+    padding: 7px 12px;
     background-color: #079560;
     border-radius: 100px;
     border: 1px solid #079560;
