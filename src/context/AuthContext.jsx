@@ -12,6 +12,7 @@ export const AuthProvider = ({ children }) => {
   const [user, setUser] = useState(null);
   const [loading, setLoading] = useState(true);
   const [showLoginAlert, setShowLoginAlert] = useState(false);
+  const [paidUser, setPaidUser] = useState(false);
 
   const verifyToken = (token) => {
     try {
@@ -68,6 +69,7 @@ export const AuthProvider = ({ children }) => {
     isAuthenticated,
     showLoginAlert,
     setShowLoginAlert,
+    setPaidUser, paidUser
   };
 
   return (

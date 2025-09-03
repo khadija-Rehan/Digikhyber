@@ -21,7 +21,7 @@ const AdmissionResult = () => {
   const { userCourses, availableCourses, setUserCourses, getTotalPrice } =
     useCourses();
 
-  const { user, login } = useAuth();
+  const { user, login, setPaidUser } = useAuth();
   const { showError } = useModal();
   const [showModal, setShowModal] = useState(true);
   const [editCourses, setEditCourses] = useState([...userCourses]);
@@ -49,19 +49,9 @@ const AdmissionResult = () => {
     testScore !== null && !isNaN(testScore)
       ? Math.round((testScore / 100) * totalMcqs)
       : "-";
-  const incorrectAnswers =
-    testScore !== null && !isNaN(testScore)
-      ? totalMcqs - Math.round((testScore / 100) * totalMcqs)
-      : "-";
-  const marksObtained = correctAnswers;
   const percentage =
     testScore !== null && !isNaN(testScore) ? `${testScore}%` : "-";
 
-  const isPassed = testScore !== null && !isNaN(testScore) && testScore >= 50;
-
-  // --- FIX: Prevent profile API call loop ---
-  // We'll only fetch the profile once on mount, and on tab focus, but not on every user/login change.
-  // We'll use a ref to prevent multiple fetches on mount.
   const hasFetchedProfile = useRef(false);
 
   const fetchUserProfile = async () => {
@@ -169,40 +159,6 @@ const AdmissionResult = () => {
     setTotalPrice(price);
   }, [userCourses, setUserCourses, user]);
 
-  const handleEditClick = () => {
-    setEditCourses([...userCourses]);
-    setShowModal(true);
-    setError("");
-  };
-
-  const handleCourseChange = (index, selectedName) => {
-    const updated = [...editCourses];
-    updated[index] = selectedName;
-    setEditCourses(updated);
-  };
-
-  const handleAddCourse = () => {
-    setEditCourses([...editCourses, ""]);
-  };
-
-  const handleDeleteCourse = (index) => {
-    const updated = [...editCourses];
-    updated.splice(index, 1);
-    setEditCourses(updated);
-  };
-
-  const handleSave = () => {
-    // Remove empty and duplicate courses
-    const filtered = editCourses.filter(Boolean);
-    const unique = Array.from(new Set(filtered));
-    if (unique.length > 3) {
-      setError("You can enroll in up to 3 courses only.");
-      return;
-    }
-    setUserCourses(unique);
-    setShowModal(false);
-  };
-
   const handleGeneratePdf = async () => {
     try {
       if (totalPrice === 0) {
@@ -282,6 +238,7 @@ const AdmissionResult = () => {
   useEffect(() => {
     if (hasChallan && challanStatus === "Paid") {
       setShowLoginAlert(true);
+      setPaidUser(true)
     }
   }, [hasChallan, challanStatus]);
 
@@ -1252,7 +1209,7 @@ const AdmissionResult = () => {
         </div>
       </div>
       {/* Modal for editing courses */}
-      {showLoginAlert && (
+      {false && (
         // <div style={modalOverlayStyle} tabIndex="-1" role="dialog">
         //   <div style={{ width: "100%", maxWidth: 600 }}>
         //     <div style={modalContentStyle}>
@@ -1331,7 +1288,9 @@ const AdmissionResult = () => {
           <div style={{ width: "100%", maxWidth: 600, minWidth: "auto" }}>
             <div style={modalContentStyle}>
               <div style={modalHeaderStyle}>
-                <h5 style={modalTitleStyle}>Official Notice – Hunarmand Punjab</h5>
+                <h5 style={modalTitleStyle}>
+                  Official Notice – Hunarmand Punjab
+                </h5>
                 <button
                   type="button"
                   style={closeBtnStyle}
@@ -1342,19 +1301,47 @@ const AdmissionResult = () => {
                 </button>
               </div>
               <div style={modalBodyStyle}>
-                <div style={{ padding: '24px', lineHeight: '1.6' }}>
-                  <p style={{ marginBottom: '20px', color: '#333', fontSize: '15px' }}>
-                    As earlier communicated, the tentative date for LMS access was to be shared after <strong>20th August</strong>.
+                <div style={{ padding: "24px", lineHeight: "1.6" }}>
+                  <p
+                    style={{
+                      marginBottom: "20px",
+                      color: "#333",
+                      fontSize: "15px",
+                    }}
+                  >
+                    As earlier communicated, the tentative date for LMS access
+                    was to be shared after <strong>20th August</strong>.
                   </p>
-                  
-                  <p style={{ marginBottom: '20px', color: '#333', fontSize: '15px' }}>
-                    We are pleased to officially announce that the <strong style={{ color: '#079560' }}>final date for LMS access is 1st September 2025</strong>.
+
+                  <p
+                    style={{
+                      marginBottom: "20px",
+                      color: "#333",
+                      fontSize: "15px",
+                    }}
+                  >
+                    We are pleased to officially announce that the{" "}
+                    <strong style={{ color: "#079560" }}>
+                      final date for LMS access is 1st September 2025
+                    </strong>
+                    .
                   </p>
-                  
-                  <p style={{ marginBottom: '20px', color: '#333', fontSize: '15px' }}>
-                    All students are advised to check their <strong>Candidate Portal</strong> regularly. Please note that all official notifications regarding Classes and LMS will only be available on the <strong>Candidate Portal</strong>. There is no need to rely on <strong>SMS or Emails</strong> for updates.
+
+                  <p
+                    style={{
+                      marginBottom: "20px",
+                      color: "#333",
+                      fontSize: "15px",
+                    }}
+                  >
+                    All students are advised to check their{" "}
+                    <strong>Candidate Portal</strong> regularly. Please note
+                    that all official notifications regarding Classes and LMS
+                    will only be available on the{" "}
+                    <strong>Candidate Portal</strong>. There is no need to rely
+                    on <strong>SMS or Emails</strong> for updates.
                   </p>
-                  </div>
+                </div>
               </div>
               <div style={modalFooterStyle}>
                 <button
