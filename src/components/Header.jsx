@@ -81,7 +81,6 @@ const Header = () => {
                 <Nav.Link as={NavLink} to="/courses" onClick={handleClose}>
                   Courses
                 </Nav.Link>{" "}
-                
                 <Nav.Link as={NavLink} to="/free-laptops" onClick={handleClose}>
                   Laptop Scheme
                 </Nav.Link>{" "}
@@ -127,7 +126,6 @@ const Header = () => {
                   >
                     Contact Us
                   </NavDropdown.Item>
-                
                   <NavDropdown.Item
                     as={NavLink}
                     to="/news"
@@ -141,30 +139,32 @@ const Header = () => {
                 {user ? (
                   <>
                     <span className="me-3">Welcome, {user.user.fullName}</span>
-                    <span className="me-3">Roll No: {user.user.rollNumber}</span>
-                    <Button
-                      variant="outline-green"
-                      as={Link}
-                      // to="/lms-portal"
-                      className="btn-outline-green lms-btn desktop"
-                    >
-                      LMS Portal
-                    </Button>
+                    <span className="me-3">
+                      Roll No: {user.user.rollNumber}
+                    </span>
                     {paidUser && (
-
                       <Button
+                        variant="outline-green"
+                        as={Link}
+                        // to="/lms-portal"
+                        className="btn-outline-green lms-btn desktop"
+                      >
+                        LMS Portal
+                      </Button>
+                    )}
+
+                    <Button
                       onClick={handleLogout}
                       className="btn-black bg-none login-btn p-0"
-                      >
+                    >
                       <i className="fas fa-sign-out-alt me-1"></i>LOGOUT
                     </Button>
-                    )}
                   </>
                 ) : (
                   <>
                     <Button
                       as={Link}
-                    onClick={handleClose}
+                      onClick={handleClose}
                       to="/login"
                       className="btn-black bg-none login-btn p-0"
                     >
