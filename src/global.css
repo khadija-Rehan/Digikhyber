@@ -646,6 +646,23 @@ a:hover {
   align-items: center;
 }
 
+.btn-outline-green {
+  position: relative;
+  overflow: hidden;
+  font-size: 16px;
+  color: #079560;
+  padding: 12px 30px;
+  background-color: #1a1e1d00;
+  border-radius: 100px;
+  border: 1px solid #079560;
+  font-weight: 600;
+}
+
+.btn-outline-green:hover {
+  background-color: #079560;
+  color: white;
+}
+
 .btn-green {
   position: relative;
   overflow: hidden;
@@ -660,7 +677,7 @@ a:hover {
   z-index: 1;
 }
 
-.modal-btn{
+.modal-btn {
   padding: 10px 20px !important;
   font-size: 14px !important;
 }
@@ -1951,9 +1968,19 @@ ul li {
   }
 
   .btn-green {
-    font-size: 13px;
+    font-size: 10px;
     color: rgba(255, 255, 255, 0.918);
-    padding: 7px 16px;
+    padding: 7px 12px;
+    background-color: #079560;
+    border-radius: 100px;
+    border: 1px solid #079560;
+    font-weight: 600;
+    transition: 0.3s ease;
+  }
+  .btn-outline-green {
+    font-size: 10px;
+    color: rgba(255, 255, 255, 0.918);
+    padding: 7px 12px;
     background-color: #079560;
     border-radius: 100px;
     border: 1px solid #079560;
@@ -1964,9 +1991,9 @@ ul li {
 
 /* Scholarship Modal Responsive Styles */
 @media (max-width: 768px) {
-    .scholarship-card {
-        width: 60% !important;
-    }
+  .scholarship-card {
+    width: 60% !important;
+  }
   .modal-content {
     margin: 10px;
     max-height: 95vh;
@@ -1999,52 +2026,122 @@ ul li {
   background-color: white;
 }
 
-        /* Login Alert Modal Responsive Styles */
-        @media (max-width: 768px) {
-          .login-alert-modal .modal-content {
-            margin: 10px;
-            max-height: 95vh;
-            max-width: 95vw;
-          }
+/* Login Alert Modal Responsive Styles */
+@media (max-width: 768px) {
+  .login-alert-modal .modal-content {
+    margin: 10px;
+    max-height: 95vh;
+    max-width: 95vw;
+  }
 
-          .login-alert-modal .modal-content h3 {
-            font-size: 1rem !important;
-          }
+  .login-alert-modal .modal-content h3 {
+    font-size: 1rem !important;
+  }
 
-          .login-alert-modal .modal-content h5 {
-            font-size: 0.8rem !important;
-          }
+  .login-alert-modal .modal-content h5 {
+    font-size: 0.8rem !important;
+  }
 
-          .login-alert-modal .modal-content p {
-            font-size: 0.75rem !important;
-          }
+  .login-alert-modal .modal-content p {
+    font-size: 0.75rem !important;
+  }
 
-          .login-alert-modal .modal-content button {
-            font-size: 0.8rem !important;
-            padding: 8px 18px !important;
-          }
-        }
+  .login-alert-modal .modal-content button {
+    font-size: 0.8rem !important;
+    padding: 6px 16px !important;
+  }
+}
 
-        @media (max-width: 480px) {
-          .login-alert-modal .modal-content {
-            margin: 5px;
-            max-height: 98vh;
-          }
+@media (max-width: 480px) {
+  .login-alert-modal .modal-content {
+    margin: 5px;
+    max-height: 98vh;
+  }
 
-          .login-alert-modal .modal-content h3 {
-            font-size: 0.9rem !important;
-          }
+  .login-alert-modal .modal-content h3 {
+    font-size: 0.9rem !important;
+  }
 
-          .login-alert-modal .modal-content h5 {
-            font-size: 0.75rem !important;
-          }
+  .login-alert-modal .modal-content h5 {
+    font-size: 0.75rem !important;
+  }
 
-          .login-alert-modal .modal-content p {
-            font-size: 0.7rem !important;
-          }
+  .login-alert-modal .modal-content p {
+    font-size: 0.7rem !important;
+  }
 
-          .login-alert-modal .modal-content button {
-            font-size: 0.75rem !important;
-            padding: 6px 14px !important;
-          }
-        }
+  .login-alert-modal .modal-content button {
+    font-size: 0.75rem !important;
+    padding: 6px 16px !important;
+  }
+}
+
+/* Terms and Conditions Section Styles */
+.terms-content {
+  font-family: "Poppins", sans-serif;
+}
+
+.terms-content h6 {
+  font-weight: 600;
+  border-bottom: 1px solid #e9ecef;
+  padding-bottom: 8px;
+  margin-bottom: 15px;
+}
+
+.terms-content ul li {
+  margin-bottom: 8px;
+  padding-left: 5px;
+}
+
+
+
+/* Checkbox styling for terms acceptance */
+.form-check-input:checked {
+  background-color: #079560;
+  border-color: #079560;
+}
+
+.form-check-input:focus {
+  border-color: #079560;
+  box-shadow: 0 0 0 0.2rem rgba(7, 149, 96, 0.25);
+}
+
+.form-check-label {
+  font-weight: 500;
+  color: #495057;
+}
+
+/* Responsive styles for Terms and Conditions */
+@media (max-width: 768px) {
+  .terms-content {
+    font-size: 0.85rem !important;
+    line-height: 1.5 !important;
+  }
+
+  .terms-content h6 {
+    font-size: 1rem;
+    margin-bottom: 12px;
+  }
+
+  .terms-content ul li {
+    margin-bottom: 6px;
+    padding-left: 3px;
+  }
+}
+
+@media (max-width: 480px) {
+  .terms-content {
+    font-size: 0.8rem !important;
+    line-height: 1.4 !important;
+  }
+
+  .terms-content h6 {
+    font-size: 0.95rem;
+    margin-bottom: 10px;
+  }
+
+  .terms-content ul li {
+    margin-bottom: 5px;
+    padding-left: 2px;
+  }
+}

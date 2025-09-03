@@ -21,9 +21,9 @@ const AdmissionResult = () => {
   const { userCourses, availableCourses, setUserCourses, getTotalPrice } =
     useCourses();
 
-  const { user, login } = useAuth();
+  const { user, login, setPaidUser } = useAuth();
   const { showError } = useModal();
-  const [showModal, setShowModal] = useState(false);
+  const [showModal, setShowModal] = useState(true);
   const [editCourses, setEditCourses] = useState([...userCourses]);
   const [error, setError] = useState("");
   const [totalPrice, setTotalPrice] = useState(0);
@@ -49,19 +49,9 @@ const AdmissionResult = () => {
     testScore !== null && !isNaN(testScore)
       ? Math.round((testScore / 100) * totalMcqs)
       : "-";
-  const incorrectAnswers =
-    testScore !== null && !isNaN(testScore)
-      ? totalMcqs - Math.round((testScore / 100) * totalMcqs)
-      : "-";
-  const marksObtained = correctAnswers;
   const percentage =
     testScore !== null && !isNaN(testScore) ? `${testScore}%` : "-";
 
-  const isPassed = testScore !== null && !isNaN(testScore) && testScore >= 50;
-
-  // --- FIX: Prevent profile API call loop ---
-  // We'll only fetch the profile once on mount, and on tab focus, but not on every user/login change.
-  // We'll use a ref to prevent multiple fetches on mount.
   const hasFetchedProfile = useRef(false);
 
   const fetchUserProfile = async () => {
@@ -169,40 +159,6 @@ const AdmissionResult = () => {
     setTotalPrice(price);
   }, [userCourses, setUserCourses, user]);
 
-  const handleEditClick = () => {
-    setEditCourses([...userCourses]);
-    setShowModal(true);
-    setError("");
-  };
-
-  const handleCourseChange = (index, selectedName) => {
-    const updated = [...editCourses];
-    updated[index] = selectedName;
-    setEditCourses(updated);
-  };
-
-  const handleAddCourse = () => {
-    setEditCourses([...editCourses, ""]);
-  };
-
-  const handleDeleteCourse = (index) => {
-    const updated = [...editCourses];
-    updated.splice(index, 1);
-    setEditCourses(updated);
-  };
-
-  const handleSave = () => {
-    // Remove empty and duplicate courses
-    const filtered = editCourses.filter(Boolean);
-    const unique = Array.from(new Set(filtered));
-    if (unique.length > 3) {
-      setError("You can enroll in up to 3 courses only.");
-      return;
-    }
-    setUserCourses(unique);
-    setShowModal(false);
-  };
-
   const handleGeneratePdf = async () => {
     try {
       if (totalPrice === 0) {
@@ -282,6 +238,7 @@ const AdmissionResult = () => {
   useEffect(() => {
     if (hasChallan && challanStatus === "Paid") {
       setShowLoginAlert(true);
+      setPaidUser(true)
     }
   }, [hasChallan, challanStatus]);
 
@@ -308,7 +265,7 @@ const AdmissionResult = () => {
     borderRadius: "12px",
     boxShadow: "0 8px 32px 0 rgba(0,70,19,0.18)",
     border: "2px solid #079560",
-    minWidth: 420,
+    // minWidth: 420,
     maxWidth: 600,
     width: "100%",
     fontFamily: "Poppins, sans-serif",
@@ -387,8 +344,8 @@ const AdmissionResult = () => {
     background: "#f8f9fa",
     borderBottomLeftRadius: "10px",
     borderBottomRightRadius: "10px",
-    borderTop: "1px solid #e9ecef",
-    padding: "16px 24px",
+    // borderTop: "1px solid #e9ecef",
+    padding: "10px 24px",
     display: "flex",
     justifyContent: "flex-end",
     gap: "10px",
@@ -639,7 +596,7 @@ const AdmissionResult = () => {
               } else {
                 // Show today + 7 days
                 const today = new Date();
-                today.setDate(today.getDate() + 7);
+                today.setDate(today.getDate() + 3);
                 return today.toLocaleDateString("en-US", options);
               }
             })()}
@@ -840,7 +797,7 @@ const AdmissionResult = () => {
                                     width: "24px",
                                     height: "24px",
                                     marginRight: "8px",
-                                    objectFit: "contain"
+                                    objectFit: "contain",
                                   }}
                                 />
                                 JazzCash
@@ -864,7 +821,7 @@ const AdmissionResult = () => {
                                     width: "24px",
                                     height: "24px",
                                     marginRight: "8px",
-                                    objectFit: "contain"
+                                    objectFit: "contain",
                                   }}
                                 />
                                 Easypaisa
@@ -943,7 +900,7 @@ const AdmissionResult = () => {
                                       width: "24px",
                                       height: "24px",
                                       marginRight: "8px",
-                                      objectFit: "contain"
+                                      objectFit: "contain",
                                     }}
                                   />
                                   <h6 className="mb-0">JazzCash Payment</h6>
@@ -991,7 +948,7 @@ const AdmissionResult = () => {
                                       width: "24px",
                                       height: "24px",
                                       marginRight: "8px",
-                                      objectFit: "contain"
+                                      objectFit: "contain",
                                     }}
                                   />
                                   <h6 className="mb-0">Easypaisa Payment</h6>
@@ -1252,83 +1209,154 @@ const AdmissionResult = () => {
         </div>
       </div>
       {/* Modal for editing courses */}
-      {showModal && (
+      {false && (
+        // <div style={modalOverlayStyle} tabIndex="-1" role="dialog">
+        //   <div style={{ width: "100%", maxWidth: 600 }}>
+        //     <div style={modalContentStyle}>
+        //       <div style={modalHeaderStyle}>
+        //         <h5 style={modalTitleStyle}>Edit Courses</h5>
+        //         <button
+        //           type="button"
+        //           style={closeBtnStyle}
+        //           aria-label="Close"
+        //           onClick={() => setShowModal(false)}
+        //         >
+        //           <span aria-hidden="true">&times;</span>
+        //         </button>
+        //       </div>
+        //       <div style={modalBodyStyle}>
+        //         {editCourses.map((course, idx) => (
+        //           <div
+        //             key={idx}
+        //             className="d-flex align-items-center mb-2 gap-2"
+        //           >
+        //             <select
+        //               className="form-select"
+        //               style={selectStyle}
+        //               value={course}
+        //               onChange={(e) => handleCourseChange(idx, e.target.value)}
+        //             >
+        //               <option value="">Select Course</option>
+        //               {availableCourses.map((c, i) => (
+        //                 <option
+        //                   key={i}
+        //                   value={c.name}
+        //                   disabled={
+        //                     editCourses.includes(c.name) && c.name !== course
+        //                   }
+        //                 >
+        //                   {c.name}
+        //                 </option>
+        //               ))}
+        //             </select>
+        //             <button
+        //               style={deleteBtnStyle}
+        //               onClick={() => handleDeleteCourse(idx)}
+        //               disabled={editCourses.length === 1}
+        //             >
+        //               Delete
+        //             </button>
+        //           </div>
+        //         ))}
+        //         {editCourses.length < 3 && (
+        //           <button style={addBtnStyle} onClick={handleAddCourse}>
+        //             Add Course
+        //           </button>
+        //         )}
+        //         {error && (
+        //           <div className="text-danger mt-2" style={{ fontWeight: 500 }}>
+        //             {error}
+        //           </div>
+        //         )}
+        //       </div>
+        //       <div style={modalFooterStyle}>
+        //         <button
+        //           type="button"
+        //           style={cancelBtnStyle}
+        //           onClick={() => setShowModal(false)}
+        //         >
+        //           Cancel
+        //         </button>
+        //         <button type="button" style={saveBtnStyle} onClick={handleSave}>
+        //           Save
+        //         </button>
+        //       </div>
+        //     </div>
+        //   </div>
+        // </div>
         <div style={modalOverlayStyle} tabIndex="-1" role="dialog">
-          <div style={{ width: "100%", maxWidth: 600 /* was 440 */ }}>
+          <div style={{ width: "100%", maxWidth: 600, minWidth: "auto" }}>
             <div style={modalContentStyle}>
               <div style={modalHeaderStyle}>
-                <h5 style={modalTitleStyle}>Edit Courses</h5>
+                <h5 style={modalTitleStyle}>
+                  Official Notice – Hunarmand Punjab
+                </h5>
                 <button
                   type="button"
                   style={closeBtnStyle}
                   aria-label="Close"
-                  onClick={() => setShowModal(false)}
+                  onClick={() => setShowLoginAlert(false)}
                 >
                   <span aria-hidden="true">&times;</span>
                 </button>
               </div>
               <div style={modalBodyStyle}>
-                {editCourses.map((course, idx) => (
-                  <div
-                    key={idx}
-                    className="d-flex align-items-center mb-2 gap-2"
+                <div style={{ padding: "24px", lineHeight: "1.6" }}>
+                  <p
+                    style={{
+                      marginBottom: "20px",
+                      color: "#333",
+                      fontSize: "15px",
+                    }}
                   >
-                    <select
-                      className="form-select"
-                      style={selectStyle}
-                      value={course}
-                      onChange={(e) => handleCourseChange(idx, e.target.value)}
-                    >
-                      <option value="">Select Course</option>
-                      {availableCourses.map((c, i) => (
-                        <option
-                          key={i}
-                          value={c.name}
-                          disabled={
-                            editCourses.includes(c.name) && c.name !== course
-                          }
-                        >
-                          {c.name}
-                        </option>
-                      ))}
-                    </select>
-                    <button
-                      style={deleteBtnStyle}
-                      onClick={() => handleDeleteCourse(idx)}
-                      disabled={editCourses.length === 1}
-                    >
-                      Delete
-                    </button>
-                  </div>
-                ))}
-                {editCourses.length < 3 && (
-                  <button style={addBtnStyle} onClick={handleAddCourse}>
-                    Add Course
-                  </button>
-                )}
-                {error && (
-                  <div className="text-danger mt-2" style={{ fontWeight: 500 }}>
-                    {error}
-                  </div>
-                )}
+                    As earlier communicated, the tentative date for LMS access
+                    was to be shared after <strong>20th August</strong>.
+                  </p>
+
+                  <p
+                    style={{
+                      marginBottom: "20px",
+                      color: "#333",
+                      fontSize: "15px",
+                    }}
+                  >
+                    We are pleased to officially announce that the{" "}
+                    <strong style={{ color: "#079560" }}>
+                      final date for LMS access is 1st September 2025
+                    </strong>
+                    .
+                  </p>
+
+                  <p
+                    style={{
+                      marginBottom: "20px",
+                      color: "#333",
+                      fontSize: "15px",
+                    }}
+                  >
+                    All students are advised to check their{" "}
+                    <strong>Candidate Portal</strong> regularly. Please note
+                    that all official notifications regarding Classes and LMS
+                    will only be available on the{" "}
+                    <strong>Candidate Portal</strong>. There is no need to rely
+                    on <strong>SMS or Emails</strong> for updates.
+                  </p>
+                </div>
               </div>
               <div style={modalFooterStyle}>
                 <button
                   type="button"
                   style={cancelBtnStyle}
-                  onClick={() => setShowModal(false)}
+                  onClick={() => setShowLoginAlert(false)}
                 >
-                  Cancel
-                </button>
-                <button type="button" style={saveBtnStyle} onClick={handleSave}>
-                  Save
+                  Close
                 </button>
               </div>
             </div>
           </div>
         </div>
       )}
-      {showLoginAlert && <LoginAlertWrapper />}
+      {/* {showLoginAlert && <LoginAlertWrapper />} */}
     </>
   );
 };

@@ -13,7 +13,7 @@ import { useAuth } from "../context/AuthContext";
 
 const Header = () => {
   const [showOffcanvas, setShowOffcanvas] = useState(false);
-  const { user, logout } = useAuth();
+  const { user, logout, paidUser } = useAuth();
   const navigate = useNavigate();
 
   const handleClose = () => setShowOffcanvas(false);
@@ -42,7 +42,15 @@ const Header = () => {
             </Navbar.Brand>
           </div>
 
-          <div className="d-flex align-items-center">
+          <div className="d-flex align-items-center gap-1 gap-xl-0">
+            <Button
+              variant="outline-green"
+              as={Link}
+              // to="/lms-portal"
+              className="btn-outline-green lms-btn mobile"
+            >
+              LMS Portal
+            </Button>
             <Button
               variant="success"
               as={Link}
@@ -135,11 +143,22 @@ const Header = () => {
                     <span className="me-3">Welcome, {user.user.fullName}</span>
                     <span className="me-3">Roll No: {user.user.rollNumber}</span>
                     <Button
+                      variant="outline-green"
+                      as={Link}
+                      // to="/lms-portal"
+                      className="btn-outline-green lms-btn desktop"
+                    >
+                      LMS Portal
+                    </Button>
+                    {paidUser && (
+
+                      <Button
                       onClick={handleLogout}
                       className="btn-black bg-none login-btn p-0"
-                    >
+                      >
                       <i className="fas fa-sign-out-alt me-1"></i>LOGOUT
                     </Button>
+                    )}
                   </>
                 ) : (
                   <>
@@ -151,6 +170,7 @@ const Header = () => {
                     >
                       <i className="fas fa-sign-in-alt me-1"></i>CANDIDATE LOGIN
                     </Button>
+
                     <Button
                       variant="success"
                       as={Link}
