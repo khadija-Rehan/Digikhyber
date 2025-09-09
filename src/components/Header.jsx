@@ -46,7 +46,7 @@ const Header = () => {
             <Button
               variant="outline-green"
               as={Link}
-              // to="/lms-portal"
+              to=""
               className="btn-outline-green lms-btn mobile"
             >
               LMS Portal
@@ -146,7 +146,8 @@ const Header = () => {
                       <Button
                         variant="outline-green"
                         as={Link}
-                        // to="/lms-portal"
+                        to="https://lms.hunarmandpunjab.pk/"
+                        target="_blank"
                         className="btn-outline-green lms-btn desktop"
                       >
                         LMS Portal
