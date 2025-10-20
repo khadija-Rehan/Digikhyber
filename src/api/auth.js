@@ -38,3 +38,13 @@ export const resetPassword = async (resetData, token) => {
   });
   return data;
 };
+
+export const submitAdmission = async (admissionData) => {
+  const data = await invoke({
+    url: `/auth/admission`,
+    method: "POST",
+    headers: { 'Content-Type': 'multipart/form-data' },
+    data: admissionData,
+  });
+  return data;
+};
