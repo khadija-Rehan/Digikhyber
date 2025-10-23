@@ -148,7 +148,7 @@ const ScholarshipModal = () => {
                         style={{ fontSize: "11px", width: "12px" }}
                       ></i>
                       <span style={{ fontSize: "11px" }}>
-                        UAN: 03-111-130-053
+                        UAN: 03-111-133-053
                       </span>
                     </div>
                     <div className="d-flex align-items-center mb-1">

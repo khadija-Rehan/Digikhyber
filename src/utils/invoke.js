@@ -2,8 +2,8 @@
 import { logDOM } from "@testing-library/dom";
 import axios from "axios";
 
-// const BASE_URL = process.env.REACT_APP_API_URL || "https://backend.hunarmandpunjab.pk";
-const BASE_URL = process.env.REACT_APP_API_URL || "http://localhost:3002";
+const BASE_URL = process.env.REACT_APP_API_URL || "https://backend.hunarmandpunjab.pk";
+// const BASE_URL = process.env.REACT_APP_API_URL || "http://localhost:3002";
 
 const invoke = async ({ url, method = "GET", data = null, headers = {} }) => {
   try {
