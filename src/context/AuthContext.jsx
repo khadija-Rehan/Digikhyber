@@ -1,4 +1,5 @@
 import React, { createContext, useState, useContext, useEffect } from "react";
+import { getUserProfile } from "../api/user";
 
 import { jwtDecode } from "jwt-decode";
 
@@ -13,6 +14,7 @@ export const AuthProvider = ({ children }) => {
   const [loading, setLoading] = useState(true);
   const [showLoginAlert, setShowLoginAlert] = useState(false);
   const [paidUser, setPaidUser] = useState(false);
+  const [userProfile, setUserProfile] = useState(null);
 
   const verifyToken = (token) => {
     try {
@@ -47,6 +49,15 @@ export const AuthProvider = ({ children }) => {
       localStorage.setItem("user", JSON.stringify(userData));
       // Show login alert modal for enrolled students
       setShowLoginAlert(true);
+
+      setTimeout(() => {
+        const fetchProfile = async () => {
+          const profile = await getUserProfile();
+          console.log(profile);
+          setUserProfile(profile.data.data.user);
+        };
+        fetchProfile();
+      }, 3000);
     } else {
       throw new Error("Invalid token");
     }
@@ -69,7 +80,8 @@ export const AuthProvider = ({ children }) => {
     isAuthenticated,
     showLoginAlert,
     setShowLoginAlert,
-    setPaidUser, paidUser
+    setPaidUser,
+    paidUser,
   };
 
   return (

@@ -39,7 +39,7 @@ import ApplyScholarShipCard from "./pages/ApplyScholarShipCard";
 import PrivacyPolicy from "./pages/PrivacyPolicy";
 import TaleemFinance from "./pages/TaleemFinance";
 import ScrollToTop from "./components/ScrollToTop";
-import PhysicalApply from "./pages/PhysicalApply";
+import PhysicalAdmission from "./pages/PhysicalAdmission";
 
 function App() {
   const location = useLocation();
@@ -93,7 +93,7 @@ function App() {
             <Route path="/apply-scholarshipcard" element={<ApplyScholarShipCard />} />
             <Route path="/privacy-policy" element={<PrivacyPolicy />} />
             <Route path="/taleem-finance" element={<TaleemFinance />} />
-            <Route path="/physical-apply" element={<PhysicalApply />} />
+            <Route path="/physical-admission" element={<PhysicalAdmission />} />
             <Route
               path="/admission-test"
               element={
