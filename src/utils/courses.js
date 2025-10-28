@@ -49,7 +49,7 @@ export const AVAILABLE_COURSES = [
   { name: "Architectural Visualization with Blender 3D", price: COURSE_PRICE, image: ArchVizBlender },
   { name: "Textile Designing", price: COURSE_PRICE, image: TextileDesign },
   { name: "Digital Embroidery", price: COURSE_PRICE, image: DigitalEmbroidery },
-  { name: "CGI Ads", price: COURSE_PRICE, image: CGIAds },
+  // { name: "CGI Ads", price: COURSE_PRICE, image: CGIAds },
   { name: "Cross platform Flutter App Development", price: COURSE_PRICE, image: FlutterDev },
   { name: "BlockChain Development", price: COURSE_PRICE, image: BlockchainDev },
   { name: "Forex Trading", price: COURSE_PRICE, image: ForexTrading },
