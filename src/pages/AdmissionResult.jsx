@@ -7,6 +7,8 @@ import { useAuth } from "../context/AuthContext";
 import { useModal } from "../context/ModalContext";
 import { getUserProfile } from "../api/user";
 import LoginAlertWrapper from "../components/LoginAlertWrapper";
+import { faTruckField } from "@fortawesome/free-solid-svg-icons";
+import { AVAILABLE_COURSES } from "../utils/courses";
 
 const getOrCreateFormNumber = () => {
   let formNumber = localStorage.getItem("formNumber");
@@ -32,6 +34,10 @@ const AdmissionResult = () => {
   const [psid, setPsid] = useState("");
   // Add loading state for challan generation
   const [isGeneratingChallan, setIsGeneratingChallan] = useState(false);
+  const [hasChallan, setHasChallan] = useState(false);
+  const [firstChallan, setFirstChallan] = useState(null);
+  const [challanStatus, setChallanStatus] = useState(null);
+  const [showLoginAlert, setShowLoginAlert] = useState(false);
 
   // Track if PSID was just generated (for showing in UI)
   const [psidJustGenerated, setPsidJustGenerated] = useState(false);
@@ -79,7 +85,12 @@ const AdmissionResult = () => {
   const admissionTypes = user?.user?.data?.user?.admissionType || [];
   const hasPhysical = admissionTypes.includes("physical");
   const hasOnline = admissionTypes.includes("online");
-  const showTabs = hasPhysical && hasOnline;
+  
+  // Check if challan is paid for 2nd enrolment tab
+  const isChallanPaid = challanStatus === "Paid";
+  
+  // Show tabs if we have online admission or if challan is paid (for 2nd enrolment)
+  const showTabs = hasOnline || isChallanPaid;
 
   useEffect(() => {
     if (psidJustGenerated) {
@@ -209,10 +220,7 @@ const AdmissionResult = () => {
     }
   };
 
-  const [hasChallan, setHasChallan] = useState(false);
-  const [firstChallan, setFirstChallan] = useState(null);
-  const [challanStatus, setChallanStatus] = useState(null);
-  const [showLoginAlert, setShowLoginAlert] = useState(false);
+
 
   useEffect(() => {
     // Check if user has a challan
@@ -229,12 +237,17 @@ const AdmissionResult = () => {
     const challanObj = user?.user?.data?.challans?.challans[0];
     setFirstChallan(challanObj);
 
+
+
     // Only show challan status if there is a challan object
     if (challanObj && typeof challanObj.paid !== "undefined") {
       setChallanStatus(challanObj.paid ? "Paid" : "Pending");
     } else {
       setChallanStatus(null);
     }
+
+
+    console.log("challanStatus", challanStatus);
 
     // Get createdAt date from challanObj if available
     if (challanObj && challanObj.createdAt) {
@@ -405,6 +418,45 @@ const AdmissionResult = () => {
     }
   };
 
+  // 2nd Enrolment course selection
+  const [secondEnrolmentCourses, setSecondEnrolmentCourses] = useState(["", ""]);
+  
+  // Get user's existing courses to exclude
+  const existingCourses = user?.user?.data?.user?.courses || [];
+  let existingCoursesArray = [];
+  
+  if (Array.isArray(existingCourses)) {
+    existingCoursesArray = existingCourses;
+  } else if (typeof existingCourses === 'string') {
+    try {
+      existingCoursesArray = JSON.parse(existingCourses || '[]');
+    } catch (e) {
+      // If parsing fails, treat as single course name
+      existingCoursesArray = existingCourses ? [existingCourses] : [];
+    }
+  }
+  
+  // Normalize course names for comparison (trim and case-insensitive)
+  const normalizedExistingCourses = existingCoursesArray.map(course => 
+    typeof course === 'string' ? course.trim() : course
+  ).filter(Boolean);
+  
+  // Filter available courses to exclude already enrolled courses
+  const availableCoursesFor2ndEnrolment = AVAILABLE_COURSES.filter(course => {
+    const courseName = course.name.trim();
+    return !normalizedExistingCourses.some(existingCourse => {
+      const existingName = typeof existingCourse === 'string' ? existingCourse.trim() : existingCourse;
+      // Case-insensitive comparison
+      return courseName.toLowerCase() === existingName.toLowerCase();
+    });
+  });
+
+  const handleSecondEnrolmentCourseChange = (index, courseName) => {
+    const newCourses = [...secondEnrolmentCourses];
+    newCourses[index] = courseName;
+    setSecondEnrolmentCourses(newCourses);
+  };
+
   return (
     <>
       {showTabs && (
@@ -424,7 +476,8 @@ const AdmissionResult = () => {
                     Online Admission
                   </button>
                 </li>
-                <li className="nav-item" role="presentation">
+                {/* Physical Admission Tab - Commented out for now */}
+                {/* <li className="nav-item" role="presentation">
                   <button
                     className={`nav-link ${
                       activeTab === "physical" ? "active" : ""
@@ -435,7 +488,22 @@ const AdmissionResult = () => {
                   >
                     Physical Admission
                   </button>
-                </li>
+                </li> */}
+                {/* 2nd Enrolment Tab - Only show if challan is paid */}
+                {isChallanPaid && (
+                  <li className="nav-item" role="presentation">
+                    <button
+                      className={`nav-link ${
+                        activeTab === "2nd-enrolment" ? "active" : ""
+                      }`}
+                      onClick={() => setActiveTab("2nd-enrolment")}
+                      type="button"
+                      role="tab"
+                    >
+                      2nd Enrolment
+                    </button>
+                  </li>
+                )}
               </ul>
             </div>
           </div>
@@ -1433,7 +1501,8 @@ const AdmissionResult = () => {
         )}
       </div>
 
-      {showTabs && activeTab === "physical" && (
+      {/* Physical Admission Content - Commented out for now */}
+      {/* {showTabs && activeTab === "physical" && (
         <div className="container  pb-5 mt-4">
           <div className="payment">
             <h2 className="text-center">Your admission details</h2>
@@ -1511,6 +1580,551 @@ const AdmissionResult = () => {
                     </>
                   )}
                 </button>
+              </div>
+            </div>
+          </div>
+        </div>
+      )} */}
+
+      {/* 2nd Enrolment Content - Only show if challan is paid */}
+      {isChallanPaid && activeTab === "2nd-enrolment" && (
+        <div
+          className={`container ${
+            !showTabs || activeTab === "2nd-enrolment" ? "d-block" : "d-none"
+          }`}
+        >
+          <div className="row pt-4 pb-4">
+            <div className="d-flex align-items-center text-black gap-2 mb-2">
+              <i className="fas fa-check-square"></i>
+              <h5 className="fw-bold mb-0">Select Courses for 2nd Enrolment</h5>
+            </div>
+            <p>
+              You can select up to 2 courses for your second enrolment. Please note that courses you have already enrolled in are not available for selection.
+            </p>
+            <div className="col-12">
+              <div className="mb-3">
+                <label className="mb-2" htmlFor="secondEnrolmentCourse1">
+                  First Course <span className="text-danger">*</span>
+                </label>
+                <select
+                  className="form-select p-3"
+                  id="secondEnrolmentCourse1"
+                  value={secondEnrolmentCourses[0]}
+                  onChange={(e) => handleSecondEnrolmentCourseChange(0, e.target.value)}
+                >
+                  <option value="">Choose your Course</option>
+                  {availableCoursesFor2ndEnrolment
+                    .filter(course => course.name !== secondEnrolmentCourses[1])
+                    .map((course) => (
+                      <option key={course.name} value={course.name}>
+                        {course.name}
+                      </option>
+                    ))}
+                </select>
+              </div>
+              <div className="mb-3">
+                <label className="mb-2" htmlFor="secondEnrolmentCourse2">
+                  Second Course (Optional)
+                </label>
+                <select
+                  className="form-select p-3"
+                  id="secondEnrolmentCourse2"
+                  value={secondEnrolmentCourses[1]}
+                  onChange={(e) => handleSecondEnrolmentCourseChange(1, e.target.value)}
+                >
+                  <option value="">Choose your Course (Optional)</option>
+                  {availableCoursesFor2ndEnrolment
+                    .filter(course => course.name !== secondEnrolmentCourses[0])
+                    .map((course) => (
+                      <option key={course.name} value={course.name}>
+                        {course.name}
+                      </option>
+                    ))}
+                </select>
+              </div>
+              {secondEnrolmentCourses.filter(c => c).length > 0 && (
+                <div className="alert alert-info mt-3">
+                  <strong>Selected Courses:</strong>
+                  <ul className="mb-0 mt-2">
+                    {secondEnrolmentCourses.filter(c => c).map((course, idx) => (
+                      <li key={idx}>{course}</li>
+                    ))}
+                  </ul>
+                </div>
+              )}
+            </div>
+          </div>
+          <div className="d-flex align-items-center gap-1 alert alert-warning text-black">
+            <h4 className="fw-bold mb-0 text-black">
+              Last Date to pay Application Processing Fee:
+            </h4>
+            <p className="mb-0 text-black" style={{ marginRight: 12 }}>
+              {(() => {
+                const options = {
+                  year: "numeric",
+                  month: "long",
+                  day: "numeric",
+                };
+                if (challanCreatedAt) {
+                  const challanDate = new Date(challanCreatedAt);
+                  challanDate.setDate(challanDate.getDate() + 3);
+                  return challanDate.toLocaleDateString("en-US", options);
+                } else {
+                  const today = new Date();
+                  today.setDate(today.getDate() + 3);
+                  return today.toLocaleDateString("en-US", options);
+                }
+              })()}
+            </p>
+            {challanStatus && (
+              <span
+                className={`badge px-3 py-2 ms-2 fw-bold ${
+                  challanStatus === "Paid"
+                    ? "bg-success text-white"
+                    : "bg-warning text-dark"
+                }`}
+                style={{
+                  fontSize: "1rem",
+                  borderRadius: "6px",
+                  letterSpacing: "0.5px",
+                  textAlign: "center",
+                }}
+              >
+                {challanStatus}
+              </span>
+            )}
+          </div>
+          <div
+            style={{
+              color: "#000",
+              padding: "50px 0 80px",
+            }}
+          >
+            <div className="container">
+              <div className="payment">
+                <h2 className="text-center">Pay Application Processing Fee!</h2>
+                <p>
+                  Now, you're just one step away from confirming your Scholarship
+                  Card . Please follow the instructions below to submit the
+                  processing fee through the given payment methods.
+                </p>
+              </div>
+              <div className="row">
+                <div className="col-md-12">
+                  <div className="text-center p-2 payment-header">
+                    Payment Options
+                  </div>
+                </div>
+              </div>
+              <div className="row payment-options">
+                <div className="col-md-12">
+                  <div className="bg-white p-3 payment-options-container shadow-sm">
+                    <div
+                      className="row nav nav-pills mb-3"
+                      id="pills-tab-2nd"
+                      role="tablist"
+                    >
+                      <div
+                        className="nav-item col-md-6 mb-3 mb-lg-0"
+                        role="presentation"
+                      >
+                        <button
+                          className="nav-link active w-100 h-100 p-3"
+                          id="pills-home-tab-2nd"
+                          data-bs-toggle="pill"
+                          data-bs-target="#pills-home-2nd"
+                          type="button"
+                          role="tab"
+                          aria-controls="pills-home-2nd"
+                          aria-selected="true"
+                          onClick={() => {
+                            setPaymentMethod("psid");
+                          }}
+                        >
+                          <div className="d-flex align-items-start gap-2">
+                            <div className="icon">
+                              <i className="fa-solid fa-wallet"></i>
+                            </div>
+                            <div className="ms-3 text-start">
+                              <h4>Consumer Number / PSID</h4>
+                              <p>
+                                Pay using Online Mobile Banking or mobile wallet
+                                using 1 Biller
+                              </p>
+                            </div>
+                          </div>
+                        </button>
+                      </div>
+                      <div className="nav-item col-md-6" role="presentation">
+                        <button
+                          className="nav-link w-100 h-100 p-3"
+                          id="pills-profile-tab-2nd"
+                          data-bs-toggle="pill"
+                          data-bs-target="#pills-profile-2nd"
+                          type="button"
+                          role="tab"
+                          aria-controls="pills-profile-2nd"
+                          aria-selected="false"
+                          onClick={() => {
+                            setPaymentMethod("challan");
+                          }}
+                        >
+                          <div className="d-flex align-items-start gap-2">
+                            <div className="icon">
+                              <i className="fa-solid fa-building-columns"></i>
+                            </div>
+                            <div className="ms-3 text-start">
+                              <h4>CLICK HERE FOR BANK CHALLAN </h4>
+                              <p>
+                                Pay at any BOP Branch Using Hunarmand Punjab
+                                Challan
+                              </p>
+                            </div>
+                          </div>
+                        </button>
+                      </div>
+                    </div>
+                    <div className="row">
+                      <div className="col-md-12">
+                        <div
+                          className="tab-content bg-white p-3 rounded-2 shadow-sm"
+                          id="pills-tabContent-2nd"
+                        >
+                          <div
+                            className="tab-pane fade show active"
+                            id="pills-home-2nd"
+                            role="tabpanel"
+                            aria-labelledby="pills-home-tab-2nd"
+                            tabIndex="0"
+                          >
+                            <h5>Instructions How to Pay:</h5>
+                            <div className="mt-4">
+                              <ul
+                                className="nav nav-tabs border-0"
+                                id="paymentTabs-2nd"
+                                role="tablist"
+                                style={{ borderBottom: "1px solid #dee2e6" }}
+                              >
+                                <li className="nav-item" role="presentation">
+                                  <button
+                                    className="nav-link active border-0"
+                                    id="banking-tab-2nd"
+                                    data-bs-toggle="tab"
+                                    data-bs-target="#banking-2nd"
+                                    type="button"
+                                    role="tab"
+                                    aria-controls="banking-2nd"
+                                    aria-selected="true"
+                                    style={{ borderBottom: "2px solid #007bff" }}
+                                  >
+                                    <i className="fas fa-university me-2"></i>
+                                    Banking App
+                                  </button>
+                                </li>
+                                <li className="nav-item" role="presentation">
+                                  <button
+                                    className="nav-link border-0 d-flex align-items-center"
+                                    id="jazzcash-tab-2nd"
+                                    data-bs-toggle="tab"
+                                    data-bs-target="#jazzcash-2nd"
+                                    type="button"
+                                    role="tab"
+                                    aria-controls="jazzcash-2nd"
+                                    aria-selected="false"
+                                  >
+                                    <img
+                                      src="/images/jazzcash.png"
+                                      alt="JazzCash"
+                                      style={{
+                                        width: "24px",
+                                        height: "24px",
+                                        marginRight: "8px",
+                                        objectFit: "contain",
+                                      }}
+                                    />
+                                    JazzCash
+                                  </button>
+                                </li>
+                                <li className="nav-item" role="presentation">
+                                  <button
+                                    className="nav-link border-0 d-flex align-items-center"
+                                    id="easypaisa-tab-2nd"
+                                    data-bs-toggle="tab"
+                                    data-bs-target="#easypaisa-2nd"
+                                    type="button"
+                                    role="tab"
+                                    aria-controls="easypaisa-2nd"
+                                    aria-selected="false"
+                                  >
+                                    <img
+                                      src="/images/Easypaisa.png"
+                                      alt="Easypaisa"
+                                      style={{
+                                        width: "24px",
+                                        height: "24px",
+                                        marginRight: "8px",
+                                        objectFit: "contain",
+                                      }}
+                                    />
+                                    Easypaisa
+                                  </button>
+                                </li>
+                              </ul>
+
+                              <div
+                                className="tab-content my-3"
+                                id="paymentTabContent-2nd"
+                              >
+                                <div
+                                  className="tab-pane fade show active"
+                                  id="banking-2nd"
+                                  role="tabpanel"
+                                  aria-labelledby="banking-tab-2nd"
+                                >
+                                  <div className="card border-0">
+                                    <div className="card-header bg-light border-0">
+                                      <h6 className="mb-0">
+                                        <i className="fas fa-university me-2"></i>
+                                        Banking App Payment
+                                      </h6>
+                                      <small className="text-muted">
+                                        (HBL, Meezan, UBL, Bank Alfalah, etc.)
+                                      </small>
+                                    </div>
+                                    <div className="card-body">
+                                      <ol className="ps-3">
+                                        <li>Open your bank's mobile app</li>
+                                        <li>
+                                          Log in with your credentials (MPIN,
+                                          fingerprint, or face ID)
+                                        </li>
+                                        <li>
+                                          Go to "Bill Payments" or "Payments"
+                                        </li>
+                                        <li>
+                                          Select "1Bill" (some banks list it under
+                                          "Add Biller" or "Pay Bill")
+                                        </li>
+                                        <li>
+                                          Enter the 1Bill Consumer/Invoice Number
+                                          (usually 12–15 digits)
+                                        </li>
+                                        <li>
+                                          The system will fetch and display the
+                                          bill details
+                                        </li>
+                                        <li>
+                                          Verify the name, amount, and service
+                                        </li>
+                                        <li>Tap "Pay" or "Confirm"</li>
+                                        <li>
+                                          Enter your PIN/OTP to authorize the
+                                          transaction
+                                        </li>
+                                        <li>Receive confirmation receipt/SMS</li>
+                                      </ol>
+                                    </div>
+                                  </div>
+                                </div>
+
+                                <div
+                                  className="tab-pane fade"
+                                  id="jazzcash-2nd"
+                                  role="tabpanel"
+                                  aria-labelledby="jazzcash-tab-2nd"
+                                >
+                                  <div className="card border-0">
+                                    <div className="card-header bg-light border-0 d-flex align-items-center">
+                                      <img
+                                        src="/images/jazzcash.png"
+                                        alt="JazzCash"
+                                        style={{
+                                          width: "24px",
+                                          height: "24px",
+                                          marginRight: "8px",
+                                          objectFit: "contain",
+                                        }}
+                                      />
+                                      <h6 className="mb-0">JazzCash Payment</h6>
+                                    </div>
+                                    <div className="card-body">
+                                      <ol className="ps-3">
+                                        <li>Open your JazzCash App</li>
+                                        <li>Tap on "Pay Bills"</li>
+                                        <li>Scroll to and select "1Bill"</li>
+                                        <li>
+                                          Enter the 1Bill invoice/consumer number
+                                        </li>
+                                        <li>
+                                          Tap "Fetch Bill" — details will appear
+                                        </li>
+                                        <li>
+                                          Confirm the amount and service provider
+                                        </li>
+                                        <li>Tap "Pay Now"</li>
+                                        <li>
+                                          Enter your MPIN to complete the payment
+                                        </li>
+                                        <li>
+                                          You'll receive a confirmation
+                                          SMS/notification
+                                        </li>
+                                      </ol>
+                                    </div>
+                                  </div>
+                                </div>
+
+                                <div
+                                  className="tab-pane fade"
+                                  id="easypaisa-2nd"
+                                  role="tabpanel"
+                                  aria-labelledby="easypaisa-tab-2nd"
+                                >
+                                  <div className="card border-0">
+                                    <div className="card-header bg-light border-0 d-flex align-items-center">
+                                      <img
+                                        src="/images/Easypaisa.png"
+                                        alt="Easypaisa"
+                                        style={{
+                                          width: "24px",
+                                          height: "24px",
+                                          marginRight: "8px",
+                                          objectFit: "contain",
+                                        }}
+                                      />
+                                      <h6 className="mb-0">Easypaisa Payment</h6>
+                                    </div>
+                                    <div className="card-body">
+                                      <ol className="ps-3">
+                                        <li>Open your Easypaisa App</li>
+                                        <li>Go to "Pay Bills"</li>
+                                        <li>Select the category "1Bill"</li>
+                                        <li>Enter the 1Bill invoice number</li>
+                                        <li>Tap "Proceed" or "Fetch Bill"</li>
+                                        <li>
+                                          Verify bill amount and merchant details
+                                        </li>
+                                        <li>Tap "Confirm & Pay"</li>
+                                        <li>Enter your Easypaisa PIN</li>
+                                        <li>
+                                          You will get a payment confirmation
+                                        </li>
+                                      </ol>
+                                    </div>
+                                  </div>
+                                </div>
+                              </div>
+                            </div>
+                            <div>
+                              {psid && (
+                                <div
+                                  className="alert alert-info d-flex align-items-center justify-content-between"
+                                  style={{ marginBottom: 16 }}
+                                >
+                                  <div>
+                                    <strong>Your PSID:</strong>{" "}
+                                    <span
+                                      style={{
+                                        fontFamily: "monospace",
+                                        fontSize: "1.1em",
+                                      }}
+                                    >
+                                      {psid}
+                                    </span>
+                                  </div>
+                                  <button
+                                    className="btn btn-sm btn-outline-success ms-3"
+                                    onClick={handleCopyPsid}
+                                    title="Copy PSID"
+                                  >
+                                    <i className="fa fa-copy"></i>
+                                  </button>
+                                </div>
+                              )}
+                            </div>
+                            <button
+                              className="btn-green btn-success btn rounded-2"
+                              onClick={handleGeneratePdf}
+                              disabled={hasChallan || isGeneratingChallan}
+                            >
+                              {isGeneratingChallan ? (
+                                <>
+                                  <span
+                                    className="spinner-border spinner-border-sm me-2"
+                                    role="status"
+                                    aria-hidden="true"
+                                  ></span>
+                                  Generating...
+                                </>
+                              ) : (
+                                <>
+                                  <i className="fas fa-download"></i>{" "}
+                                  {hasChallan
+                                    ? "PSID Already Generated"
+                                    : "Generate PSID"}
+                                </>
+                              )}
+                            </button>
+                          </div>
+                          <div
+                            className="tab-pane fade "
+                            id="pills-profile-2nd"
+                            role="tabpanel"
+                            aria-labelledby="pills-profile-tab-2nd"
+                            tabIndex="0"
+                          >
+                            <h5>Follow these steps to complete your payment:</h5>
+                            <h5>For Bank Challan Payment:</h5>
+                            <ol>
+                              <li>
+                                <span className="fw-bold">
+                                  Click on "Generate Challan"
+                                </span>{" "}
+                                to generate your unique Bank Challan.
+                              </li>
+                              <li>
+                                <span className="fw-bold">
+                                  Download the generated challan
+                                </span>{" "}
+                                by clicking the download button.
+                              </li>
+                              <li>
+                                <span className="fw-bold">
+                                  Pay the challan at any nearest BOP Bank Branch
+                                </span>{" "}
+                                to complete your payment, confirm your Enrollment
+                                & Get a chance to avail Scholarship Card.
+                              </li>
+                            </ol>
+                            <button
+                              className="btn-green btn-success btn rounded-2"
+                              onClick={handleGeneratePdf}
+                              disabled={hasChallan || isGeneratingChallan}
+                            >
+                              {isGeneratingChallan ? (
+                                <>
+                                  <span
+                                    className="spinner-border spinner-border-sm me-2"
+                                    role="status"
+                                    aria-hidden="true"
+                                  ></span>
+                                  Generating...
+                                </>
+                              ) : (
+                                <>
+                                  <i className="fas fa-download"></i>{" "}
+                                  {hasChallan
+                                    ? "Challan Already Submitted"
+                                    : "Generate Challan"}
+                                </>
+                              )}
+                            </button>
+                          </div>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                </div>
               </div>
             </div>
           </div>
