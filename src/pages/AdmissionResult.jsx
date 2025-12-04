@@ -605,7 +605,7 @@ const AdmissionResult = () => {
             options. */}
             You can enroll in up to 2 courses at once. All courses are
             completely free, but a one-time application processing fee of PKR
-            2850 is required, regardless of the number of courses you select.
+            3250 is required, regardless of the number of courses you select.
           </p>
           <div className="table-responsive">
             <table className="table table-hover table-bordered">
