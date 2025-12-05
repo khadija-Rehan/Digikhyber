@@ -1,8 +1,8 @@
 import invoke from "../utils/invoke";
 
-export const generatePdf = async (amount, userCourses) => {
+export const generatePdf = async (amount, userCourses, isSecondEnrolment = false) => {
   const data = await invoke({
-    url: `/users/generate-pdf`,
+    url: `/users/generate-pdf/${isSecondEnrolment}`,
     method: "POST",
     data: {amount, userCourses},
   });
@@ -40,6 +40,15 @@ export const submitContactForm = async (contactData) => {
     method: "POST",
     headers: { "x-api-key": "12345678" },
     data: contactData,
+  });
+  return data;
+};
+
+export const submitSecondEnrolledCourses = async (courses) => {
+  const data = await invoke({
+    url: `/users/second-enrolled-courses`,
+    method: "POST",
+    data: { courses },
   });
   return data;
 };
