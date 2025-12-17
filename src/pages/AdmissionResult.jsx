@@ -270,10 +270,8 @@ const AdmissionResult = () => {
       (challan) => challan.secondEnrollChallan === true
     );
 
-
     console.log("onlineChallanObj", onlineChallanObj);
     console.log("secondEnrolmentChallanObj", secondEnrolmentChallanObj);
-    
 
     // Online Admission Challan
     if (onlineChallanObj) {
@@ -664,7 +662,7 @@ const AdmissionResult = () => {
                   </button>
                 </li> */}
               {/* 2nd Enrolment Tab - Only show if challan is paid */}
-              { onlineChallan && onlineChallan.paid === true && (
+              {onlineChallan && onlineChallan.paid === true && (
                 <li className="nav-item" role="presentation">
                   <button
                     className={`nav-link ${
@@ -674,7 +672,7 @@ const AdmissionResult = () => {
                     type="button"
                     role="tab"
                   >
-                    2nd Enrolment
+                    ENROLL IN BATCH 2
                   </button>
                 </li>
               )}
@@ -1787,9 +1785,7 @@ const AdmissionResult = () => {
                   <>
                     <div className="d-flex align-items-center text-black gap-2 mb-2">
                       <i className="fas fa-check-square"></i>
-                      <h5 className="fw-bold mb-0">
-                        Your 2nd Enrolment Courses
-                      </h5>
+                      <h5 className="fw-bold mb-0">Your 2nd Batch Courses</h5>
                     </div>
                     <div className="col-12">
                       <div className="card">
