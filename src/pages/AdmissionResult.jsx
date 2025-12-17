@@ -1763,14 +1763,14 @@ const AdmissionResult = () => {
         </div>
       )} */}
 
-      {/* 2nd Enrolment Content - Only show if challan is paid */}
-      {onlineChallan && activeTab === "2nd-enrolment" && (
-        <div
-          className={`container ${
-            !showTabs || activeTab === "2nd-enrolment" ? "d-block" : "d-none"
-          }`}
-        >
-          <div className="row pt-4 pb-4">
+      {/* 2nd Enrolment Content */}
+      <div
+        className={`container ${
+          activeTab === "2nd-enrolment" ? "d-block" : "d-none"
+        }`}
+        style={{ paddingBottom: "100px" }}
+      >
+        <div className="row pt-4 pb-4">
             {/* Check if user already has second enrolled courses */}
             {(() => {
               const secondEnrolledCourses =
@@ -2483,8 +2483,7 @@ const AdmissionResult = () => {
               </div>
             </div>
           </div>
-        </div>
-      )}
+      </div>
 
       {/* Physical Admission Content */}
 
