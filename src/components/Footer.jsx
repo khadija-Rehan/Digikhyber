@@ -22,8 +22,8 @@ const Footer = () => {
           <div className="row">
             <div
               className="col-md-12 col-lg-5  px-2"
-              data-aos="fade"
-              data-aos-duration="800"
+              // data-aos="fade"
+              // data-aos-duration="800"
             >
               <img src={Logo} alt="logo" className="logo-white" />
               <p className="font-16 weight-400 w-75">
@@ -70,8 +70,8 @@ const Footer = () => {
             </div>
             <div
               className="col-md-12 col-lg-7 "
-              data-aos="fade"
-              data-aos-duration="500"
+              // data-aos="fade"
+              // data-aos-duration="500"
             >
               <div className="row ">
                 <div className="col-lg-3 col-sm-6  ">
