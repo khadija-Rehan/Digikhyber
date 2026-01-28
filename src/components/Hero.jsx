@@ -24,6 +24,18 @@ const Hero = () => {
             >
                 <SwiperSlide>
                     <img
+                        src="/images/Hunarmand Punjab hero banner 1.jpeg"
+                        alt="Hero 1"
+                    />
+                </SwiperSlide>
+                <SwiperSlide>
+                    <img
+                        src="/images/Hunarmand Punjab hero banner.jpeg"
+                        alt="Hero 1"
+                    />
+                </SwiperSlide>
+                <SwiperSlide>
+                    <img
                         src="/images/Slider1.jpg"
                         alt="Hero 1"
                     />

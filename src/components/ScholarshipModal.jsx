@@ -12,7 +12,7 @@ const ScholarshipModal = () => {
     const timer = setTimeout(() => {
       setShow(true);
       const modal = new window.bootstrap.Modal(
-        document.getElementById("scholarshipModal")
+        document.getElementById("scholarshipModal"),
       );
       modal.show();
     }, 1000);
@@ -22,7 +22,7 @@ const ScholarshipModal = () => {
   const handleClose = () => {
     setShow(false);
     const modal = window.bootstrap.Modal.getInstance(
-      document.getElementById("scholarshipModal")
+      document.getElementById("scholarshipModal"),
     );
     modal.hide();
   };
@@ -65,33 +65,43 @@ const ScholarshipModal = () => {
             {/* Modal Body */}
             <div className="modal-body" style={{ padding: "15px" }}>
               {/* Scholarship Information */}
+
+              <div className="mb-2">
+                <img
+                  className="w-100 rounded-3"
+                  src="/images/Hunarmand Punjab hero banner 1.jpeg"
+                  alt=""
+                  style={{ objectFit: "cover" }}
+                />
+              </div>
               <div
-                className="d-flex align-items-start mb-3"
+                className="d-flex align-items-start mb-2"
                 style={{
                   fontSize: "14px",
-                  background: "#ffe6e6",
+                  background: "#fbededff",
                   borderRadius: "6px",
-                  border: "1px solid #ffcccc",
+                  borderLeft: "2px solid #a60505ff",
                   overflow: "hidden",
                 }}
               >
                 <div
-                  className="d-flex align-items-start p-3"
+                  className="d-flex align-items-start p-3 pt-1"
                   style={{ gap: "12px" }}
                 >
-                  <i
+                  {/* <i
                     className="fas fa-graduation-cap text-danger"
                     style={{ fontSize: "16px", marginTop: "2px" }}
-                  ></i>
+                  ></i> */}
                   <div>
                     <div
-                      className="fw-bold text-danger mb-1"
-                      style={{ fontSize: "15px" }}
+                      className="fw-semibold mb-1"
+                      style={{ fontSize: "15px", fontFamily: "auto", color: "#a50303" }}
                     >
-                      50,000 SCHOLARSHIP CARDS
+                      {/* 50,000 SCHOLARSHIP CARDS */}
+                      APPLICATIONS FOR NEW BATCH OPEN
                     </div>
                     <div
-                      className="text-danger urdu-font"
+                      className="text-black urdu-font"
                       style={{
                         fontSize: "10px",
                         direction: "rtl",
@@ -108,7 +118,7 @@ const ScholarshipModal = () => {
               </div>
 
               {/* Scholarship Card */}
-              <div className="scholarship-card mb-3 w-80">
+              <div className="scholarship-card mb-2 w-80">
                 <img
                   className="w-100 rounded-3 shadow"
                   src="/scholarship card.jpg"
@@ -117,65 +127,74 @@ const ScholarshipModal = () => {
                 />
               </div>
 
-              <p className="text-center text-cont" style={{ fontSize: "14px" }}>
+              <p
+                className="text-center text-black"
+                style={{ fontSize: "12px" }}
+              >
                 <strong>25,000 </strong> Scholarship cards reserved for{" "}
                 <strong>Punjab</strong> and <strong>25,000</strong> Scholarship
                 cards reserved for{" "}
-                <strong>KPK, Sindh, Balochistan & AJK</strong>
+                <strong>KPK, Sindh, Balochistan & AJK.</strong>
               </p>
 
               {/* Information Desk */}
               <div
                 style={{
-                  background: "#f8f9fa",
+                  background: "#e5f9f2ff",
                   borderRadius: "6px",
                   padding: "10px",
                   marginBottom: "15px",
-                  border: "1px solid #dee2e6",
+                  border: "2px solid #6fcfacff",
                 }}
               >
-                <h6
-                  className="text-uppercase fw-bold mb-2"
-                  style={{ fontSize: "12px", color: "#079560" }}
-                >
-                  Helpline Center
-                </h6>
+                <div className="d-flex justify-content-between align-items-start">
+                  <h6
+                    className="text-uppercase fw-semibold mb-2"
+                    style={{ fontSize: "12px", color: "black", fontFamily: "Poppins,sans-serif" }}
+                  >
+                    {/* Helpline Center */}
+                    Information Desk
+                  </h6>
+                  <small style={{ fontSize: "12px", color: "#079560", fontFamily: "Poppins,sans-serif" }}>
+                    Monday to Friday, 9:00am to 5:00pm
+                  </small>
+                </div>
+
                 <div className="row g-1">
                   <div className="col-12">
-                    <div className="d-flex align-items-center mb-1">
-                      <i
-                        className="fas fa-phone text-success me-2"
-                        style={{ fontSize: "11px", width: "12px" }}
-                      ></i>
-                      <span style={{ fontSize: "11px" }}>
-                        UAN: 03-111-133-053
-                      </span>
+                    <div className="d-flex gap-2 justify-content-between">
+                      <div className="d-flex align-items-center mb-1">
+                        <i
+                          className="fas fa-phone text-success me-2"
+                          style={{ fontSize: "12px", width: "12px" }}
+                        ></i>
+                        <span style={{ fontSize: "12px" }}>
+                          UAN: 03-111-130-053
+                        </span>
+                      </div>
+                      <div className="d-flex align-items-center mb-1">
+                        <i
+                          className="fas fa-envelope text-success me-2"
+                          style={{ fontSize: "12px", width: "12px" }}
+                        ></i>
+                        <span
+                          style={{ fontSize: "12px", wordBreak: "break-all" }}
+                        >
+                          support@hunarmandpunjab.org.pk
+                        </span>
+                      </div>
                     </div>
-                    <div className="d-flex align-items-center mb-1">
-                      <i
-                        className="fas fa-envelope text-success me-2"
-                        style={{ fontSize: "11px", width: "12px" }}
-                      ></i>
-                      <span
-                        style={{ fontSize: "11px", wordBreak: "break-all" }}
-                      >
-                        support@hunarmandpunjab.pk
-                      </span>
-                    </div>
-                    <div className="d-flex align-items-center mb-1">
+                    <div className="d-flex align-items-center">
                       <i
                         className="fas fa-globe text-success me-2"
-                        style={{ fontSize: "11px", width: "12px" }}
+                        style={{ fontSize: "12px", width: "12px" }}
                       ></i>
                       <span
-                        style={{ fontSize: "11px", wordBreak: "break-all" }}
+                        style={{ fontSize: "12px", wordBreak: "break-all" }}
                       >
-                        www.hunarmandpunjab.pk
+                        www.hunarmandpunjab.org.pk
                       </span>
                     </div>
-                    <small className="text-muted" style={{ fontSize: "10px" }}>
-                      Monday to Friday, 9:00am to 5:00pm
-                    </small>
                   </div>
                 </div>
               </div>
@@ -184,7 +203,7 @@ const ScholarshipModal = () => {
               <p
                 dir="rtl"
                 lang="ur"
-                className="text-end fw-bold urdu-font text-danger"
+                className="text-end fw-bold urdu-font mb-2 text-red"
                 style={{ fontSize: "10px" }}
               >
                 نامکمل یا غلط اندراج کی گئی درخواستیں مسترد کر دی جائیں گی۔

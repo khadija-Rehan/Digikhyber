@@ -902,9 +902,13 @@ a:hover {
 }
 
 .scholarship-card {
-  width: 450px;
+  width: 270px;
   height: auto;
   margin: 0 auto;
+}
+
+.text-red {
+  color: #a50303 !important;
 }
 .course {
   flex: 0 1 calc(33.333% - 20px);
