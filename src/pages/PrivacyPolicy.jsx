@@ -65,8 +65,8 @@ const PrivacyPolicy = () => {
       </ul>
       <p>
         For any such requests, feel free to contact us at{" "}
-        <a href="mailto:support@hunarmandpunjab.pk">
-          support@hunarmandpunjab.pk
+        <a href="mailto:support@hunarmandpunjab.org.pk">
+          support@hunarmandpunjab.org.pk
         </a>
         .
       </p>

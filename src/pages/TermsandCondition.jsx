@@ -16,7 +16,7 @@ const TermsandCondition = () => {
       <div className="container terms my-5">
         <h1 className="mb-4 text-black text-center">Terms and Conditions</h1>
         <p>
-          Welcome to <strong>www.hunarmandpunjab.pk</strong>, the official
+          Welcome to <strong>www.hunarmandpunjab.org.pk</strong>, the official
           website for Hunarmand Punjab. These Terms and Conditions govern your
           access to and use of this website. By accessing or using this website,
           you agree to be bound by these Terms.
@@ -75,7 +75,7 @@ const TermsandCondition = () => {
           <button
             onClick={openDisclaimerModal}
             className="text-primary fw-bold text-decoration-underline text-black border-0 bg-transparent"
-            style={{ cursor: 'pointer' }}
+            style={{ cursor: "pointer" }}
           >
             disclaimer
           </button>{" "}
@@ -101,7 +101,7 @@ const TermsandCondition = () => {
 
         <h5 className="mt-4 text-black">14. Contact Information</h5>
         <ul>
-          <li>Email: support@hunarmandpunjab.pk</li>
+          <li>Email: support@hunarmandpunjab.org.pk</li>
           <li>UAN: 03-111-133-053 </li>
           {/* <li>Address: E-Library, Lahore</li> */}
           <li>
@@ -177,7 +177,7 @@ const TermsandCondition = () => {
 
         <h5 className="mt-4 text-black">11. Contact Us</h5>
         <ul>
-          <li>Email: support@hunarmandpunjab.pk</li>
+          <li>Email: support@</li>
           <li>UAN: 03-111-133-053 </li>
           {/* <li>Address: E-Library, Lahore</li> */}
           <li>
@@ -196,7 +196,7 @@ const TermsandCondition = () => {
 
       {/* Disclaimer Modal */}
       {showDisclaimerModal && (
-        <div 
+        <div
           className="modal-overlay"
           style={{
             position: "fixed",
@@ -293,60 +293,106 @@ const TermsandCondition = () => {
             </div>
 
             {/* Modal Body */}
-            <div 
+            <div
               style={{
                 padding: "25px",
                 fontFamily: "Poppins, sans-serif",
                 lineHeight: "1.6",
               }}
             >
-              <p style={{ marginBottom: "15px", fontSize: "14px", color: "#1a1e1d" }}>
-                Hunarmand Punjab is a private initiative launched to empower students
-                through high-quality IT training and career-oriented skill
-                development. While it is not a government-run program, it has received
-                full moral and advisory support from the Ministry of School Education
-                and Higher Education, under the guidance of Mr. Rana Sikandar Hayat
-                (Minister for School and Higher Education, Punjab).
+              <p
+                style={{
+                  marginBottom: "15px",
+                  fontSize: "14px",
+                  color: "#1a1e1d",
+                }}
+              >
+                Hunarmand Punjab is a private initiative launched to empower
+                students through high-quality IT training and career-oriented
+                skill development. While it is not a government-run program, it
+                has received full moral and advisory support from the Ministry
+                of School Education and Higher Education, under the guidance of
+                Mr. Rana Sikandar Hayat (Minister for School and Higher
+                Education, Punjab).
               </p>
-              
-              <p style={{ marginBottom: "15px", fontSize: "14px", color: "#1a1e1d" }}>
+
+              <p
+                style={{
+                  marginBottom: "15px",
+                  fontSize: "14px",
+                  color: "#1a1e1d",
+                }}
+              >
                 All training programs, course structures, and the concept of the
-                Merit-Based Scholarship Card have been reviewed, acknowledged, and
-                encouraged by the Minister himself. The Scholarship Card, along with
-                associated merit-based rewards such as laptops, solar panels, and
-                e-bikes, has also been formally approved by the Minister in principle.
+                Merit-Based Scholarship Card have been reviewed, acknowledged,
+                and encouraged by the Minister himself. The Scholarship Card,
+                along with associated merit-based rewards such as laptops, solar
+                panels, and e-bikes, has also been formally approved by the
+                Minister in principle.
               </p>
-              
-              <p style={{ marginBottom: "10px", fontSize: "14px", fontWeight: "600", color: "#1a1e1d" }}>
+
+              <p
+                style={{
+                  marginBottom: "10px",
+                  fontSize: "14px",
+                  fontWeight: "600",
+                  color: "#1a1e1d",
+                }}
+              >
                 However, it is important to clarify that:
               </p>
-              
+
               <ul style={{ marginBottom: "15px", paddingLeft: "20px" }}>
-                <li style={{ marginBottom: "8px", fontSize: "14px", color: "#1a1e1d" }}>
-                  Hunarmand Punjab is not directly managed, funded, or operated by any
-                  government body or department.
+                <li
+                  style={{
+                    marginBottom: "8px",
+                    fontSize: "14px",
+                    color: "#1a1e1d",
+                  }}
+                >
+                  Hunarmand Punjab is not directly managed, funded, or operated
+                  by any government body or department.
                 </li>
-                <li style={{ marginBottom: "8px", fontSize: "14px", color: "#1a1e1d" }}>
-                  It operates independently as a public-benefit private initiative,
-                  with the goal of uplifting youth through digital skills and modern
-                  education tools.
+                <li
+                  style={{
+                    marginBottom: "8px",
+                    fontSize: "14px",
+                    color: "#1a1e1d",
+                  }}
+                >
+                  It operates independently as a public-benefit private
+                  initiative, with the goal of uplifting youth through digital
+                  skills and modern education tools.
                 </li>
               </ul>
-              
-              <p style={{ marginBottom: "15px", fontSize: "14px", color: "#1a1e1d" }}>
-                The inclusion of government figures in the advisory process does not
-                imply a formal or financial affiliation with the Government of Punjab.
-                The program's branding, content, and execution are managed entirely by
-                the private team behind Hunarmand Punjab.
+
+              <p
+                style={{
+                  marginBottom: "15px",
+                  fontSize: "14px",
+                  color: "#1a1e1d",
+                }}
+              >
+                The inclusion of government figures in the advisory process does
+                not imply a formal or financial affiliation with the Government
+                of Punjab. The program's branding, content, and execution are
+                managed entirely by the private team behind Hunarmand Punjab.
               </p>
-              
-              <p style={{ marginBottom: "0", fontSize: "14px", color: "#1a1e1d" }}>
+
+              <p
+                style={{
+                  marginBottom: "0",
+                  fontSize: "14px",
+                  color: "#1a1e1d",
+                }}
+              >
                 By participating in this program, students and stakeholders
                 acknowledge the above and agree that no claims of government
-                employment, quota benefits, or state-issued certifications should be
-                associated with this initiative. This clear distinction is made to
-                ensure transparency, public trust, and protection of all parties
-                involved from misinformation or legal misunderstanding.
+                employment, quota benefits, or state-issued certifications
+                should be associated with this initiative. This clear
+                distinction is made to ensure transparency, public trust, and
+                protection of all parties involved from misinformation or legal
+                misunderstanding.
               </p>
             </div>
 

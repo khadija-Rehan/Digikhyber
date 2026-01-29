@@ -213,11 +213,11 @@ const ScholarshipCard = () => {
               <li className=" ">
                 <strong>Online Registration:</strong> Visit{" "}
                 <a
-                  href="https://www.hunarmandpunjab.pk"
+                  href="https://www.hunarmandpunjab.org.pk"
                   target="_blank"
                   rel="noopener noreferrer"
                 >
-                  www.hunarmandpunjab.pk
+                  www.hunarmandpunjab.org.pk
                 </a>
                 <br />
                 Click on "Scholarship Card Menu – then click on the bottom Apply
@@ -405,8 +405,8 @@ const ScholarshipCard = () => {
             <h4>Helpline & Contact</h4>
             <p>
               Email:{" "}
-              <a href="mailto:scholarshipcard@hunarmandpunjab.pk">
-                scholarshipcard@hunarmandpunjab.pk
+              <a href="mailto:scholarshipcard@hunarmandpunjab.org.pk">
+                scholarshipcard@hunarmandpunjab.org.pk
               </a>
             </p>
             <p>
@@ -416,11 +416,11 @@ const ScholarshipCard = () => {
             <p>
               Website:{" "}
               <a
-                href="https://www.hunarmandpunjab.pk"
+                href="https://www.hunarmandpunjab.org.pk"
                 target="_blank"
                 rel="noopener noreferrer"
               >
-                www.hunarmandpunjab.pk
+                www.hunarmandpunjab.org.pk
               </a>
             </p>
           </div>

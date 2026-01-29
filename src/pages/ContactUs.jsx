@@ -78,7 +78,7 @@ const ContactUs = () => {
 
                                 <a
                                     // href="mailto:admissions@hunarmandpunjab.pk"
-                                    href="mailto:contact@hunarmandpunjab.pk"
+                                    href="mailto:contact@hunarmandpunjab.org.pk"
                                     className="btn-green register-btn btn btn-success w-100 mt-3 rounded-2"
                                 >
                                     <i className="fas fa-envelope me-1"></i>

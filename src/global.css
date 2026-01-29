@@ -909,6 +909,17 @@ a:hover {
   margin: 0 auto;
 }
 
+.green-bar-inner {
+  content: "";
+  position: absolute;
+  left: 0;
+  width: 100%;
+  z-index: 0;
+  height: 60px;
+  top: 50%;
+  transform: translateY(-50%);
+  background-color: #079560;
+}
 .text-red {
   color: #a50303 !important;
 }

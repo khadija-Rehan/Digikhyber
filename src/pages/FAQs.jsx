@@ -124,11 +124,11 @@ const FAQs = () => {
               <div className="p-3">
                 Apply online at:{" "}
                 <a
-                  href="https://www.hunarmandpunjab.pk"
+                  href="https://www.hunarmandpunjab.org.pk"
                   target="_blank"
                   rel="noreferrer"
                 >
-                  www.hunarmandpunjab.pk
+                  www.hunarmandpunjab.org.pk
                 </a>
               </div>
             </Accordion.Body>
@@ -621,16 +621,16 @@ const FAQs = () => {
                 <ul>
                   <li>
                     {" "}
-                    <b>Email:</b> info@hunarmandpunjab.pk
+                    <b>Email:</b> info@hunarmandpunjab.org.pk
                   </li>
                   <li>
                     <b> Website:</b>{" "}
                     <a
-                      href="https://www.hunarmandpunjab.pk"
+                      href="https://www.hunarmandpunjab.org.pk"
                       target="_blank"
                       rel="noreferrer"
                     >
-                      www.hunarmandpunjab.pk
+                      www.hunarmandpunjab.org.pk
                     </a>
                   </li>
                   <li>

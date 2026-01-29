@@ -49,7 +49,7 @@ const ScholarshipModal = () => {
             {/* Close Button */}
             <button
               type="button"
-              className="btn-close position-absolute top-0 end-0 m-2 z-1"
+              className="btn-close position-absolute top-0 end-0 m-2 z-2"
               aria-label="Close"
               onClick={handleClose}
             ></button>
@@ -61,12 +61,9 @@ const ScholarshipModal = () => {
               className="img-fluid w-100"
               style={{ maxHeight: "120px", objectFit: "cover" }}
             /> */}
-
-            {/* Modal Body */}
-            <div className="modal-body" style={{ padding: "15px" }}>
-              {/* Scholarship Information */}
-
-              <div className="mb-2">
+            <div className="mb-2 green-bar-bg position-relative">
+              <div className="green-bar-inner position-absolute"></div>
+              <div className="p-2 position-relative z-1">
                 <img
                   className="w-100 rounded-3"
                   src="/images/Hunarmand Punjab hero banner 1.jpeg"
@@ -74,6 +71,11 @@ const ScholarshipModal = () => {
                   style={{ objectFit: "cover" }}
                 />
               </div>
+            </div>
+
+            {/* Modal Body */}
+            <div className="modal-body" style={{ padding: "15px" }}>
+              {/* Scholarship Information */}
               <div
                 className="d-flex align-items-start mb-2"
                 style={{
@@ -95,7 +97,11 @@ const ScholarshipModal = () => {
                   <div>
                     <div
                       className="fw-semibold mb-1"
-                      style={{ fontSize: "15px", fontFamily: "auto", color: "#a50303" }}
+                      style={{
+                        fontSize: "15px",
+                        fontFamily: "auto",
+                        color: "#a50303",
+                      }}
                     >
                       {/* 50,000 SCHOLARSHIP CARDS */}
                       APPLICATIONS FOR NEW BATCH OPEN
@@ -150,12 +156,22 @@ const ScholarshipModal = () => {
                 <div className="d-flex justify-content-between align-items-start">
                   <h6
                     className="text-uppercase fw-semibold mb-2"
-                    style={{ fontSize: "12px", color: "black", fontFamily: "Poppins,sans-serif" }}
+                    style={{
+                      fontSize: "12px",
+                      color: "black",
+                      fontFamily: "Poppins,sans-serif",
+                    }}
                   >
                     {/* Helpline Center */}
                     Information Desk
                   </h6>
-                  <small style={{ fontSize: "12px", color: "#079560", fontFamily: "Poppins,sans-serif" }}>
+                  <small
+                    style={{
+                      fontSize: "12px",
+                      color: "#079560",
+                      fontFamily: "Poppins,sans-serif",
+                    }}
+                  >
                     Monday to Friday, 9:00am to 5:00pm
                   </small>
                 </div>

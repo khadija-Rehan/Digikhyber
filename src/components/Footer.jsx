@@ -156,7 +156,7 @@ const Footer = () => {
                   </p>
                   <p className="links">
                     <a href="#">
-                      <FaEnvelope /> &nbsp; &nbsp; support@hunarmandpunjab.pk
+                      <FaEnvelope /> &nbsp; &nbsp; support@hunarmandpunjab.org.pk
                     </a>
                   </p>
                 </div>

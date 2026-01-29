@@ -146,7 +146,7 @@ const Header = () => {
                       <Button
                         variant="outline-green"
                         as={Link}
-                        to="https://lms.hunarmandpunjab.pk/"
+                        to="https://lms.hunarmandpunjab.org.pk/"
                         target="_blank"
                         className="btn-outline-green lms-btn desktop"
                       >
