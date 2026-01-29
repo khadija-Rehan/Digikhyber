@@ -49,18 +49,18 @@ const ScholarshipModal = () => {
             {/* Close Button */}
             <button
               type="button"
-              className="btn-close position-absolute top-0 end-0 m-2"
+              className="btn-close position-absolute top-0 end-0 m-2 z-1"
               aria-label="Close"
               onClick={handleClose}
             ></button>
 
             {/* Modal Header Image */}
-            <img
+            {/* <img
               src={Header}
               alt="Header"
               className="img-fluid w-100"
               style={{ maxHeight: "120px", objectFit: "cover" }}
-            />
+            /> */}
 
             {/* Modal Body */}
             <div className="modal-body" style={{ padding: "15px" }}>

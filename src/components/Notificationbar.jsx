@@ -193,22 +193,21 @@ const Notificationbar = () => {
               />
               25+ Hands on Practical Courses
             </div>
-
           </div>
         </div>
 
         {/* Add CSS for white icons */}
         <style jsx>{`
-        .white-icon {
-          filter: brightness(0) invert(1);
-          vertical-align: middle;
-          margin-right: 8px;
-        }
-        .cmn-textslide {
-          display: flex;
-          align-items: center;
-        }
-      `}</style>
+          .white-icon {
+            filter: brightness(0) invert(1);
+            vertical-align: middle;
+            margin-right: 8px;
+          }
+          .cmn-textslide {
+            display: flex;
+            align-items: center;
+          }
+        `}</style>
       </div>
     </div>
   );
