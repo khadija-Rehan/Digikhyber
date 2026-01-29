@@ -1,8 +1,8 @@
-
 import { logDOM } from "@testing-library/dom";
 import axios from "axios";
 
-const BASE_URL = process.env.REACT_APP_API_URL || "https://backend.hunarmandpunjab.pk";
+const BASE_URL =
+  process.env.REACT_APP_API_URL || "https://backend.hunarmandpunjab.org.pk";
 // const BASE_URL = process.env.REACT_APP_API_URL || "http://localhost:3001";
 
 const invoke = async ({ url, method = "GET", data = null, headers = {} }) => {
@@ -34,4 +34,3 @@ const invoke = async ({ url, method = "GET", data = null, headers = {} }) => {
 };
 
 export default invoke;
-
