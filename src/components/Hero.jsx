@@ -22,13 +22,21 @@ const Hero = () => {
         pagination={{ clickable: false }}
         navigation={false}
       >
+
+
         <SwiperSlide>
-          <img src="/images/Hunarmand Punjab hero banner 1.jpeg" alt="Hero 6" />
+          <img src="/images/Hunarmand Punjab hero banner 1.jpeg" alt="Hero 1" />
         </SwiperSlide>
         <SwiperSlide>
-          <img src="/images/Hunarmand Punjab hero banner.jpeg" alt="Hero 7" />
+          <img src="/images/Hunarmand Punjab hero banner.jpeg" alt="Hero 2" />
         </SwiperSlide>
-        <SwiperSlide>
+         <SwiperSlide>
+          <img src="/images/Hunarmand Punjab hero banner 3.jpeg" alt="Hero 3" />
+        </SwiperSlide>
+         <SwiperSlide>
+          <img src="/images/Hunarmand Punjab hero banner 4.jpeg" alt="Hero 4" />
+        </SwiperSlide>
+    {/* <SwiperSlide>
           <img src="/images/Slider1-02.jpeg" alt="Hero 1" />
         </SwiperSlide>
         <SwiperSlide>
@@ -42,7 +50,7 @@ const Hero = () => {
         </SwiperSlide>
         <SwiperSlide>
           <img src="/images/Slider5-02.jpeg" alt="Hero 5" />
-        </SwiperSlide>
+        </SwiperSlide> */}
       </Swiper>
     </section>
   );

@@ -728,9 +728,9 @@ a:hover {
   height: auto;
 }
 
-.build {
-  /* padding: 30px; */
-}
+/* .build {
+  padding: 30px;
+} */
 
 .build-b-i,
 .course-cat {
@@ -1524,12 +1524,12 @@ p {
   margin: auto !important;
 }
 
-.text-reveal {
-  /* display: flex;
-    flex-wrap: wrap;
-    line-height: 1.7; */
-  /* justify-content: center; */
-}
+/* .text-reveal {
+  display: flex;
+  flex-wrap: wrap;
+  line-height: 1.7;
+  justify-content: center;
+} */
 
 .text-reveal .word {
   opacity: 0.2;
