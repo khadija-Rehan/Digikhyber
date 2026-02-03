@@ -54,6 +54,7 @@ const AdmissionResult = () => {
   const [secondEnrolmentChallanStatus, setSecondEnrolmentChallanStatus] =
     useState(null);
   const [secondEnrolmentPsid, setSecondEnrolmentPsid] = useState("");
+  const [hasSecondEnroll, setHasSecondEnroll] = useState(false);
   const [hasSecondEnrolmentChallan, setHasSecondEnrolmentChallan] =
     useState(false);
 
@@ -107,12 +108,8 @@ const AdmissionResult = () => {
   // Check if 2nd enrolment challan is paid for 2nd enrolment tab
   const isChallanPaid = secondEnrolmentChallanStatus === "Paid";
 
-  console.log("secondEnrolmentChallanStatus", secondEnrolmentChallanStatus);
-
   // Show tabs if we have online admission or if 2nd enrolment challan is paid
   const showTabs = hasOnline || isChallanPaid;
-
-  console.log("isChallanPaid", isChallanPaid);
 
   // Effect removed as we call fetchUserProfile directly in handleGeneratePdf
   // useEffect(() => {
@@ -281,6 +278,17 @@ const AdmissionResult = () => {
     // Get all challans from user data
     const allChallans = user?.user?.data?.challans?.challans || [];
     const challanTotal = user?.user?.data?.challans?.total || 0;
+    const secondEnroll = user?.user?.data?.user?.secondEnrolledCourses || 0;
+
+    const hasSecondEnroll = secondEnroll.length === 0;
+
+    console.log("hasSecondEnroll", hasSecondEnroll);
+
+    // console.log("secondEnroll", secondEnroll);
+
+    if (hasSecondEnroll) {
+      setHasSecondEnroll(true);
+    }
 
     // Separate challans based on secondEnrollChallan field
     const onlineChallanObj = allChallans.find(
@@ -290,8 +298,8 @@ const AdmissionResult = () => {
       (challan) => challan.secondEnrollChallan === true
     );
 
-    console.log("onlineChallanObj", onlineChallanObj);
-    console.log("secondEnrolmentChallanObj", secondEnrolmentChallanObj);
+    // console.log("onlineChallanObj", onlineChallanObj);
+    // console.log("secondEnrolmentChallanObj", secondEnrolmentChallanObj);
 
     // Online Admission Challan
     if (onlineChallanObj) {
@@ -2398,7 +2406,9 @@ const AdmissionResult = () => {
                             className="btn-green btn-success btn rounded-2"
                             onClick={handleGeneratePdf}
                             disabled={
-                              hasSecondEnrolmentChallan || isGeneratingChallan
+                              hasSecondEnrolmentChallan ||
+                              isGeneratingChallan ||
+                              hasSecondEnroll
                             }
                           >
                             {isGeneratingChallan ? (
@@ -2454,7 +2464,9 @@ const AdmissionResult = () => {
                             className="btn-green btn-success btn rounded-2"
                             onClick={handleGeneratePdf}
                             disabled={
-                              hasSecondEnrolmentChallan || isGeneratingChallan
+                              hasSecondEnrolmentChallan ||
+                              isGeneratingChallan ||
+                              hasSecondEnroll
                             }
                           >
                             {isGeneratingChallan ? (
