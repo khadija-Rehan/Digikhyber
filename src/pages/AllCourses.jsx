@@ -71,7 +71,7 @@ const AllCourses = () => {
                                 </p>
                             </div>
                             <div className="col-lg-4 col-md-12">
-                                <img src="/images/Advanced IT Courses -2.jpg" alt="Course" className="w-100 banner-image" />
+                                <img src="/images/courses-img.jpeg" alt="Course" className="w-100 banner-image" />
                                 <div className="cube"> </div>
                             </div>
                         </div>

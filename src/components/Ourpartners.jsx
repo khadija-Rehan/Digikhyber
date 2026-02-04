@@ -50,11 +50,11 @@ const OurPartners = () => {
       logo: "https://crystalpng.com/wp-content/uploads/2025/05/lenovo-logo.png",
     },
     { name: "Electric Bike", logo: "/images/Icon-1.png" },
-    {
-      name: "Ministry of School & Higher Education",
-      // name: "Gov. of Punjab",
-      logo: "https://seeklogo.com/images/G/government-of-punjab-logo-DD4D1CC9C4-seeklogo.com.png",
-    },
+    // {
+    //   name: "Ministry of School & Higher Education",
+    //   // name: "Gov. of Punjab",
+    //   logo: "https://seeklogo.com/images/G/government-of-punjab-logo-DD4D1CC9C4-seeklogo.com.png",
+    // },
     {
       name: "Taleem Finance",
       logo: "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSL0TQwO2v6lvKYL3d7qvmHD6yKA8gUn14-Uw&s",
@@ -95,7 +95,8 @@ const OurPartners = () => {
     <div className="container  ">
       <div style={{ padding: "50px 0px" }}>
         <h2 style={{ textAlign: "center", marginBottom: "30px" }}>
-          Our Supporting Partners
+          {/* Our Supporting Partners */}
+          Our Collaborations & Endorsement
         </h2>
         <Slider {...settings}>
           {partners.map((partner, index) => (

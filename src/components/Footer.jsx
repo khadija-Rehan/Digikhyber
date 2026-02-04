@@ -143,9 +143,10 @@ const Footer = () => {
                       </div>
                       <div className="ms-2 d-flex flex-column">
                         {/* E-Library, Lahore */}
-                        Head Office: Sabzazar, Lahore
-                        <br />
-                        Test Venue: E-Library, Lahore
+                        {/* Head Office: Sabzazar, Lahore */}
+                        {/* <br /> */}
+                        {/* Test Venue: E-Library, Lahore */}
+                        Test Venue: Punjab University, Lahore
                       </div>
                     </a>
                   </p>

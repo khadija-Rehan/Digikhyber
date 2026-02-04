@@ -109,7 +109,10 @@ const FreeLaptops = () => {
                                     ⚡ What the Laptop Scheme Delivers:
                                 </p>
                                 <ul className="  mt-2">
-                                    <li> A Brand-New Laptop — Absolutely Free</li>
+                                    <li> 
+                                        {/* A Brand-New Laptop — Absolutely Free */}
+                                        A Laptop/Chromebook — Absolutely Free
+                                    </li>
                                     <li> Unlimited Access to Online Classes & Tools</li>
                                     <li> Empowerment to Learn, Create & Earn from Anywhere</li>
                                     <li>Fuel for Freelancing, Tech Startups & Career Growth</li>

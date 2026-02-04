@@ -66,7 +66,8 @@ const ScholarshipModal = () => {
               <div className="p-2 position-relative z-1">
                 <img
                   className="w-100 rounded-3"
-                  src="/images/Hunarmand Punjab hero banner 1.jpeg"
+                  // src="/images/Hunarmand Punjab hero banner 1.jpeg"
+                  src="/images/Hunarmand Punjab hero banner 1-02.jpeg"
                   alt=""
                   style={{ objectFit: "cover" }}
                 />

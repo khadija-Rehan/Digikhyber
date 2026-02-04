@@ -105,9 +105,10 @@ const TermsandCondition = () => {
           <li>UAN: 03-111-133-053 </li>
           {/* <li>Address: E-Library, Lahore</li> */}
           <li>
-            Head Office: Sabzazar, Lahore
-            <br />
-            Test Venue: E-Library, Lahore
+            {/* Head Office: Sabzazar, Lahore
+            <br /> 
+            Test Venue: E-Library, Lahore */}
+            Test Venue: Punjab University, Lahore
           </li>
         </ul>
 
@@ -181,9 +182,10 @@ const TermsandCondition = () => {
           <li>UAN: 03-111-133-053 </li>
           {/* <li>Address: E-Library, Lahore</li> */}
           <li>
-            Head Office: Sabzazar, Lahore
+            {/* Head Office: Sabzazar, Lahore
             <br />
-            Test Venue: E-Library, Lahore
+            Test Venue: E-Library, Lahore */}
+            Test Venue: Punjab University, Lahore
           </li>
         </ul>
 

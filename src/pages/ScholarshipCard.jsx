@@ -217,7 +217,7 @@ const ScholarshipCard = () => {
                   target="_blank"
                   rel="noopener noreferrer"
                 >
-                  www.hunarmandpunjab.org.pk
+                  hunarmandpunjab.org.pk
                 </a>
                 <br />
                 Click on "Scholarship Card Menu – then click on the bottom Apply
@@ -420,7 +420,7 @@ const ScholarshipCard = () => {
                 target="_blank"
                 rel="noopener noreferrer"
               >
-                www.hunarmandpunjab.org.pk
+                hunarmandpunjab.org.pk
               </a>
             </p>
           </div>

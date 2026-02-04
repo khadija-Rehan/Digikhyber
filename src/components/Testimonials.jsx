@@ -9,7 +9,8 @@ const Testimonials = () => {
         <div className="row pt-5 pb-5">
           <div className="col-lg-6 col-md-12  mb-3 mb-lg-0 ">
             <img
-              src="/Abstract-Profile-Photo-Instagram-Post.webp"
+              // src="/Abstract-Profile-Photo-Instagram-Post.webp"
+              src="/images/illustrations.jpeg"
               alt="empowering"
               className="w-100"
             />

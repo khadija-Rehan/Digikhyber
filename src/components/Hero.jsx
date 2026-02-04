@@ -25,16 +25,16 @@ const Hero = () => {
 
 
         <SwiperSlide>
-          <img src="/images/Hunarmand Punjab hero banner 1.jpeg" alt="Hero 1" />
+          <img src="/images/Hunarmand Punjab hero banner-02.jpeg" alt="Hero 1" />
         </SwiperSlide>
         <SwiperSlide>
-          <img src="/images/Hunarmand Punjab hero banner.jpeg" alt="Hero 2" />
+          <img src="/images/Hunarmand Punjab hero banner 1-02.jpeg" alt="Hero 2" />
         </SwiperSlide>
          <SwiperSlide>
-          <img src="/images/Hunarmand Punjab hero banner 3.jpeg" alt="Hero 3" />
+          <img src="/images/Hunarmand Punjab hero banner 3-02.jpeg" alt="Hero 3" />
         </SwiperSlide>
          <SwiperSlide>
-          <img src="/images/Hunarmand Punjab hero banner 4.jpeg" alt="Hero 4" />
+          <img src="/images/Hunarmand Punjab hero banner 4-02.jpeg" alt="Hero 4" />
         </SwiperSlide>
     {/* <SwiperSlide>
           <img src="/images/Slider1-02.jpeg" alt="Hero 1" />

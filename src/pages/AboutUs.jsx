@@ -63,7 +63,7 @@ const AboutUs = () => {
               </div>
               <div className="col-lg-4 col-md-12">
                 <img
-                  src="/images/About-us.jpeg"
+                  src="/images/About.jpeg"
                   alt="Course"
                   className="w-100 banner-image"
                 />
