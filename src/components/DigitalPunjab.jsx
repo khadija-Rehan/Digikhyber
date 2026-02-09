@@ -12,63 +12,73 @@ const DigitalPunjab = () => {
       thumbnail: `https://img.youtube.com/vi/ZtQAQGyUxkQ/mqdefault.jpg`,
     },
     {
-      id: "Ss0cuzczCMM",
+      id: "As5DtBHLlDY",
       title: "Hunarmand Punjab Video 2",
+      thumbnail: `https://img.youtube.com/vi/As5DtBHLlDY/mqdefault.jpg`,
+    },
+    {
+      id: "9AnOeOdlG1c",
+      title: "Hunarmand Punjab Video 3",
+      thumbnail: `https://img.youtube.com/vi/9AnOeOdlG1c/mqdefault.jpg`,
+    },
+    {
+      id: "Ss0cuzczCMM",
+      title: "Hunarmand Punjab Video 4",
       thumbnail: `https://img.youtube.com/vi/Ss0cuzczCMM/mqdefault.jpg`,
     },
     {
       id: "9dgJMrVYouo",
-      title: "Hunarmand Punjab Video 3",
+      title: "Hunarmand Punjab Video 5",
       thumbnail: `https://img.youtube.com/vi/9dgJMrVYouo/mqdefault.jpg`,
     },
     {
       id: "C1PEgg0x2iE",
-      title: "Hunarmand Punjab Video 4",
+      title: "Hunarmand Punjab Video 6",
       thumbnail: `https://img.youtube.com/vi/C1PEgg0x2iE/mqdefault.jpg`,
     },
     {
       id: "_3hRDF_FQqQ",
-      title: "Hunarmand Punjab Video 5",
+      title: "Hunarmand Punjab Video 7",
       thumbnail: `https://img.youtube.com/vi/_3hRDF_FQqQ/mqdefault.jpg`,
     },
     {
       id: "N5OYV3PkDXo",
-      title: "Hunarmand Punjab Video 6",
+      title: "Hunarmand Punjab Video 8",
       thumbnail: `https://img.youtube.com/vi/N5OYV3PkDXo/mqdefault.jpg`,
     },
     {
       id: "eisQK3Nv03g",
-      title: "Hunarmand Punjab Video 7",
+      title: "Hunarmand Punjab Video 9",
       thumbnail: `https://img.youtube.com/vi/eisQK3Nv03g/mqdefault.jpg`,
     },
     {
       id: "Prb2SI-2wtQ",
-      title: "Hunarmand Punjab Video 8 (Upcoming)",
+      title: "Hunarmand Punjab Video 10 (Upcoming)",
       thumbnail: `https://img.youtube.com/vi/Prb2SI-2wtQ/mqdefault.jpg`,
     },
     {
       id: "49Xr-WHgGGA",
-      title: "Hunarmand Punjab Video 9",
+      title: "Hunarmand Punjab Video 11",
       thumbnail: `https://img.youtube.com/vi/49Xr-WHgGGA/mqdefault.jpg`,
     },
     {
       id: "MwaXTW0_jc8",
-      title: "Hunarmand Punjab Video 10",
+      title: "Hunarmand Punjab Video 12",
       thumbnail: `https://img.youtube.com/vi/MwaXTW0_jc8/mqdefault.jpg`,
     },
     // {
     //   id: "Prb2SI-2wtQ",
-    //   title: "Hunarmand Punjab Video 11",
+    //   title: "Hunarmand Punjab Video 13",
     //   thumbnail: `https://img.youtube.com/vi/Prb2SI-2wtQ/mqdefault.jpg`
     // },
     // {
     //   id: "JWXBm9v2QyY",
-    //   title: "Hunarmand Punjab Video 12",
+    //   title: "Hunarmand Punjab Video 14",
     //   thumbnail: `https://img.youtube.com/vi/JWXBm9v2QyY/mqdefault.jpg`
     // },
     // {
     //   id: "DgXT0twJJFI",
-    //   title: "Hunarmand Punjab Video 13",
+    //   title: "Hunarmand Punjab Video 15",
     //   thumbnail: `https://img.youtube.com/vi/DgXT0twJJFI/mqdefault.jpg`
     // }
   ];

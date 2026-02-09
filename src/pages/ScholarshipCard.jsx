@@ -96,7 +96,7 @@ const ScholarshipCard = () => {
             </p>
             <div className="mt-4">
               <p className="fw-semibold" style={{ color: "#079560" }}>
-                ⚡ Benefits of the Scholarship Card:
+                Benefits of the Scholarship Card:
               </p>
               <ul className="  mt-2 list-unstyled">
                 <li> Advanced IT Training with real-world skills</li>
@@ -125,7 +125,7 @@ const ScholarshipCard = () => {
           <div className="col-lg-6" data-aos="fade-right">
             <img
               className="w-100 rounded-4"
-              src="/scholarship card.jpg"
+              src="/images/scholarship card.jpeg"
               alt=""
             />
             <div className="d-flex align-items-center gap-3 flex-wrap flex-md-nowrap mt-4 d-block d-lg-none">

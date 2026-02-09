@@ -128,7 +128,7 @@ const ScholarshipModal = () => {
               <div className="scholarship-card mb-2 w-80">
                 <img
                   className="w-100 rounded-3 shadow"
-                  src="/scholarship card.jpg"
+                  src="/images/scholarship card.jpeg"
                   alt=""
                   style={{ objectFit: "cover" }}
                 />
