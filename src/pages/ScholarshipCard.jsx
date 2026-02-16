@@ -125,7 +125,7 @@ const ScholarshipCard = () => {
           <div className="col-lg-6" data-aos="fade-right">
             <img
               className="w-100 rounded-4"
-              src="/images/scholarship card.jpeg"
+              src="/images/scholarship card.jpg"
               alt=""
             />
             <div className="d-flex align-items-center gap-3 flex-wrap flex-md-nowrap mt-4 d-block d-lg-none">
@@ -279,7 +279,7 @@ const ScholarshipCard = () => {
           {/* Terms and Conditions Section */}
           <div className="mb-4">
             <h4>Hunarmand Punjab Scholarship Card – Terms & Conditions</h4>
-            
+
             {/* Eligibility Criteria */}
             <div className="mb-3">
               <h5>1. Eligibility Criteria</h5>
@@ -290,8 +290,8 @@ const ScholarshipCard = () => {
                   Scholarship Card.
                 </li>
                 <li className=" ">
-                  Students must successfully complete their course and obtain
-                  a minimum of 85% marks in their final evaluation to qualify.
+                  Students must successfully complete their course and obtain a
+                  minimum of 85% marks in their final evaluation to qualify.
                 </li>
               </ul>
             </div>
@@ -368,8 +368,7 @@ const ScholarshipCard = () => {
               <ul className=" ">
                 <li className=" ">
                   The Scholarship Card and associated rewards are
-                  non-transferable and may only be used by the selected
-                  student.
+                  non-transferable and may only be used by the selected student.
                 </li>
               </ul>
             </div>
@@ -391,8 +390,8 @@ const ScholarshipCard = () => {
               <ul className=" ">
                 <li className=" ">
                   All decisions made by the Hunarmand Punjab management
-                  regarding eligibility, merit ranking, and reward
-                  distribution shall be considered final and binding.
+                  regarding eligibility, merit ranking, and reward distribution
+                  shall be considered final and binding.
                 </li>
               </ul>
             </div>

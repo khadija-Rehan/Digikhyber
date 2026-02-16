@@ -12,7 +12,7 @@ const ScholarshipModal = () => {
     const timer = setTimeout(() => {
       setShow(true);
       const modal = new window.bootstrap.Modal(
-        document.getElementById("scholarshipModal"),
+        document.getElementById("scholarshipModal")
       );
       modal.show();
     }, 1000);
@@ -22,7 +22,7 @@ const ScholarshipModal = () => {
   const handleClose = () => {
     setShow(false);
     const modal = window.bootstrap.Modal.getInstance(
-      document.getElementById("scholarshipModal"),
+      document.getElementById("scholarshipModal")
     );
     modal.hide();
   };
@@ -128,7 +128,7 @@ const ScholarshipModal = () => {
               <div className="scholarship-card mb-2 w-80">
                 <img
                   className="w-100 rounded-3 shadow"
-                  src="/images/scholarship card.jpeg"
+                  src="/images/scholarship card.jpg"
                   alt=""
                   style={{ objectFit: "cover" }}
                 />
