@@ -1,0 +1,213 @@
+/* ContactUs.css */
+
+.contact-page {
+    background-color: #f8fafc;
+    padding-bottom: 100px;
+}
+
+/* Contact Info Cards */
+.contact-info-grid {
+    margin-top: -60px;
+    position: relative;
+    z-index: 10;
+}
+
+.contact-info-card {
+    background: #ffffff;
+    border-radius: 20px;
+    padding: 40px 30px;
+    text-align: center;
+    box-shadow: 0 15px 45px rgba(0,0,0,0.06);
+    border: 1px solid rgba(11, 93, 59, 0.05);
+    transition: all 0.4s cubic-bezier(0.165, 0.84, 0.44, 1);
+    height: 100%;
+}
+
+.contact-info-card:hover {
+    transform: translateY(-10px);
+    box-shadow: 0 25px 60px rgba(11, 93, 59, 0.1);
+}
+
+.contact-icon-wrapper {
+    width: 70px;
+    height: 70px;
+    background: rgba(11, 93, 59, 0.05);
+    color: #0B5D3B;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin: 0 auto 25px;
+    font-size: 1.8rem;
+    transition: all 0.3s ease;
+}
+
+.contact-info-card:hover .contact-icon-wrapper {
+    background: #0B5D3B;
+    color: #ffffff;
+    transform: rotateY(180deg);
+}
+
+.contact-info-card h4 {
+    font-size: 1.3rem;
+    font-weight: 700;
+    color: #333;
+    margin-bottom: 15px;
+    font-family: 'Raleway', sans-serif;
+}
+
+.contact-info-card p {
+    color: #666;
+    font-size: 1rem;
+    line-height: 1.6;
+    margin-bottom: 20px;
+}
+
+.contact-link {
+    color: #0B5D3B;
+    font-weight: 700;
+    text-decoration: none;
+    font-size: 1.05rem;
+    display: inline-block;
+    transition: color 0.3s ease;
+}
+
+.contact-link:hover {
+    color: #C9A227;
+}
+
+/* Form Section */
+.contact-form-wrapper {
+    margin-top: 80px;
+    background: #ffffff;
+    border-radius: 30px;
+    overflow: hidden;
+    box-shadow: 0 30px 70px rgba(0,0,0,0.08);
+    border: 1px solid rgba(11, 93, 59, 0.03);
+}
+
+.contact-form-left {
+    background: #0B5D3B;
+    color: #ffffff;
+    padding: 60px;
+    position: relative;
+    overflow: hidden;
+}
+
+.contact-form-left::before {
+    content: '';
+    position: absolute;
+    top: -50px;
+    right: -50px;
+    width: 200px;
+    height: 200px;
+    background: rgba(255,255,255,0.05);
+    border-radius: 50%;
+}
+
+.contact-form-left h2 {
+    font-weight: 800;
+    font-size: 2.2rem;
+    margin-bottom: 25px;
+    font-family: 'Raleway', sans-serif;
+}
+
+.contact-form-left p {
+    font-size: 1.1rem;
+    opacity: 1;
+    color: #ffffff !important;
+    line-height: 1.8;
+}
+
+.contact-form-right {
+    padding: 60px;
+}
+
+.form-floating-custom {
+    margin-bottom: 25px;
+}
+
+.form-floating-custom label {
+    display: block;
+    font-weight: 600;
+    color: #444;
+    margin-bottom: 8px;
+    font-size: 0.9rem;
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+}
+
+.form-floating-custom .form-control {
+    border-radius: 12px;
+    border: 1px solid rgba(0,0,0,0.1);
+    padding: 15px 20px;
+    font-size: 1rem;
+    transition: all 0.3s ease;
+    background: #fbfcfb;
+}
+
+.form-floating-custom .form-control:focus {
+    border-color: #0B5D3B;
+    box-shadow: 0 5px 15px rgba(11, 93, 59, 0.05);
+    background: #ffffff;
+    outline: none;
+}
+
+.submit-btn-elite {
+    background: #0B5D3B;
+    color: #ffffff;
+    border: none;
+    padding: 18px 40px;
+    border-radius: 50px;
+    font-weight: 700;
+    font-size: 1.1rem;
+    width: 100%;
+    transition: all 0.3s ease;
+    box-shadow: 0 10px 30px rgba(11, 93, 59, 0.2);
+    margin-top: 10px;
+}
+
+.submit-btn-elite:hover {
+    background: #08432a;
+    transform: translateY(-3px);
+    box-shadow: 0 15px 40px rgba(11, 93, 59, 0.3);
+}
+
+.submit-btn-elite:disabled {
+    background: #ccc;
+    cursor: not-allowed;
+    transform: none;
+    box-shadow: none;
+}
+
+/* Map Section */
+.map-container {
+    margin-top: 80px;
+    border-radius: 30px;
+    overflow: hidden;
+    box-shadow: 0 20px 50px rgba(0,0,0,0.1);
+    border: 5px solid #ffffff;
+}
+
+/* Reveal Animation */
+.contact-reveal {
+    animation: contactFadeUp 0.8s cubic-bezier(0.19, 1, 0.22, 1) forwards;
+    opacity: 0;
+}
+
+@keyframes contactFadeUp {
+    from { opacity: 0; transform: translateY(30px); }
+    to { opacity: 1; transform: translateY(0); }
+}
+
+@media (max-width: 991px) {
+    .contact-info-grid {
+        margin-top: 30px;
+    }
+    .contact-form-left, .contact-form-right {
+        padding: 40px 30px;
+    }
+    .contact-form-left h2 {
+        font-size: 1.8rem;
+    }
+}

@@ -1,0 +1,187 @@
+/* FAQs.css */
+
+.faq-page {
+    background-color: #f8fafc;
+    padding-bottom: 120px;
+}
+
+/* Search Section */
+.faq-search-wrapper {
+    max-width: 700px;
+    margin: -40px auto 60px;
+    position: relative;
+    z-index: 10;
+}
+
+.faq-search-input {
+    width: 100%;
+    padding: 20px 30px 20px 60px;
+    border-radius: 20px;
+    border: 1px solid rgba(11, 93, 59, 0.1);
+    background: #ffffff;
+    box-shadow: 0 15px 40px rgba(0,0,0,0.06);
+    font-size: 1.1rem;
+    color: #333;
+    transition: all 0.3s ease;
+}
+
+.faq-search-input:focus {
+    outline: none;
+    border-color: #0B5D3B;
+    box-shadow: 0 20px 50px rgba(11, 93, 59, 0.1);
+}
+
+.faq-search-icon {
+    position: absolute;
+    left: 25px;
+    top: 50%;
+    transform: translateY(-50%);
+    color: #0B5D3B;
+    font-size: 1.2rem;
+}
+
+/* Category Filters */
+.faq-categories {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    gap: 8px;
+    margin-top: 50px;
+    margin-bottom: 40px;
+}
+
+.faq-cat-btn {
+    padding: 10px 20px;
+    border-radius: 50px;
+    background: #ffffff;
+    border: 1px solid rgba(11, 93, 59, 0.1);
+    color: #555;
+    font-weight: 600;
+    font-size: 0.9rem;
+    white-space: nowrap;
+    transition: all 0.3s ease;
+    cursor: pointer;
+}
+
+.faq-cat-btn:hover {
+    background: rgba(11, 93, 59, 0.05);
+    color: #0B5D3B;
+    border-color: #0B5D3B;
+}
+
+.faq-cat-btn.active {
+    background: #0B5D3B;
+    color: #ffffff;
+    border-color: #0B5D3B;
+    box-shadow: 0 8px 20px rgba(11, 93, 59, 0.2);
+}
+
+/* Accordion Styling */
+.faq-accordion .accordion-item {
+    background: #ffffff;
+    border: 1px solid rgba(11, 93, 59, 0.08);
+    border-radius: 20px !important;
+    margin-bottom: 20px;
+    overflow: hidden;
+    box-shadow: 0 5px 15px rgba(0,0,0,0.02);
+    transition: all 0.4s cubic-bezier(0.165, 0.84, 0.44, 1);
+}
+
+.faq-accordion .accordion-item:hover {
+    transform: translateY(-3px);
+    box-shadow: 0 15px 35px rgba(0,0,0,0.05);
+}
+
+.faq-accordion .accordion-button {
+    padding: 25px 30px;
+    background: transparent !important;
+    color: #333 !important;
+    font-weight: 700;
+    font-size: 1.15rem;
+    box-shadow: none !important;
+    border: none;
+    position: relative;
+    font-family: 'Raleway', sans-serif;
+}
+
+.faq-accordion .accordion-button::after {
+    background-image: none;
+    content: "\f078";
+    font-family: "Font Awesome 5 Free";
+    font-weight: 900;
+    font-size: 1rem;
+    color: #0B5D3B;
+    transition: all 0.3s ease;
+}
+
+.faq-accordion .accordion-button:not(.collapsed) {
+    color: #0B5D3B !important;
+}
+
+.faq-accordion .accordion-button:not(.collapsed)::after {
+    transform: rotate(180deg);
+}
+
+.faq-accordion .accordion-button:not(.collapsed)::before {
+    content: "";
+    position: absolute;
+    left: 0;
+    top: 50%;
+    transform: translateY(-50%);
+    width: 5px;
+    height: 60%;
+    background: #C9A227;
+    border-radius: 0 5px 5px 0;
+}
+
+.faq-accordion .accordion-body {
+    padding: 10px 30px 30px;
+    color: #555;
+    font-size: 1.05rem;
+    line-height: 1.8;
+}
+
+.faq-accordion .accordion-body strong {
+    color: #0B5D3B;
+}
+
+.faq-accordion .accordion-body ul {
+    padding-left: 20px;
+    margin-top: 15px;
+}
+
+.faq-accordion .accordion-body li {
+    margin-bottom: 10px;
+}
+
+/* Reveal Animation */
+.faq-reveal {
+    animation: faqFadeUp 0.8s cubic-bezier(0.19, 1, 0.22, 1) forwards;
+    opacity: 0;
+}
+
+@keyframes faqFadeUp {
+    from { opacity: 0; transform: translateY(30px); }
+    to { opacity: 1; transform: translateY(0); }
+}
+
+/* Mobile Responsive */
+@media (max-width: 991px) {
+    .faq-search-wrapper {
+        margin: -30px 15px 40px;
+    }
+    .faq-categories {
+        justify-content: flex-start;
+        padding: 0 15px;
+        overflow-x: auto;
+        flex-wrap: nowrap;
+        padding-bottom: 10px;
+    }
+    .faq-cat-btn {
+        white-space: nowrap;
+    }
+    .faq-accordion .accordion-button {
+        font-size: 1rem;
+        padding: 20px;
+    }
+}

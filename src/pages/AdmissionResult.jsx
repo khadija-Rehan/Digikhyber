@@ -65,7 +65,7 @@ const AdmissionResult = () => {
 
   const testScore =
     user?.user?.data?.user?.testScore !== undefined &&
-    user?.user?.data?.user?.testScore !== null
+      user?.user?.data?.user?.testScore !== null
       ? Number(user.user.data.user.testScore)
       : null;
 
@@ -256,7 +256,7 @@ const AdmissionResult = () => {
       }
 
       // const fileUrl = `http://localhost:3001/uploads/${fileName}`;
-      const fileUrl = `https://backend.hunarmandpunjab.org.pk/uploads/${fileName}`;
+      const fileUrl = `https://backend.digikhyber.org.pk/uploads/${fileName}`;
       const a = document.createElement("a");
       a.href = fileUrl;
       a.download = fileName;
@@ -396,7 +396,7 @@ const AdmissionResult = () => {
     background: "#fff",
     borderRadius: "12px",
     boxShadow: "0 8px 32px 0 rgba(0,70,19,0.18)",
-    border: "2px solid #079560",
+    border: "2px solid #0B5D3B",
     // minWidth: 420,
     maxWidth: 600,
     width: "100%",
@@ -405,7 +405,7 @@ const AdmissionResult = () => {
   };
 
   const modalHeaderStyle = {
-    background: "#079560",
+    background: "#0B5D3B",
     color: "#fff",
     borderTopLeftRadius: "10px",
     borderTopRightRadius: "10px",
@@ -439,7 +439,7 @@ const AdmissionResult = () => {
   };
 
   const selectStyle = {
-    border: "1.5px solid #079560",
+    border: "1.5px solid #0B5D3B",
     borderRadius: "6px",
     fontFamily: "Poppins, sans-serif",
     fontSize: "1rem",
@@ -494,7 +494,7 @@ const AdmissionResult = () => {
   };
 
   const saveBtnStyle = {
-    background: "#079560",
+    background: "#0B5D3B",
     color: "#fff",
     border: "none",
     borderRadius: "4px",
@@ -624,8 +624,8 @@ const AdmissionResult = () => {
         Array.isArray(secondEnrolledCourses) && secondEnrolledCourses.length > 0
           ? secondEnrolledCourses
           : secondEnrolmentCourses.filter(
-              (course) => course && course.trim() !== ""
-            );
+            (course) => course && course.trim() !== ""
+          );
 
       if (coursesForPdf.length === 0) {
         showError("No courses available to generate PDF.");
@@ -643,7 +643,7 @@ const AdmissionResult = () => {
         return;
       }
 
-      const fileUrl = `https://backend.hunarmandpunjab.org.pk/uploads/${fileName}`;
+      const fileUrl = `https://backend.digikhyber.org.pk/uploads/${fileName}`;
       const a = document.createElement("a");
       a.href = fileUrl;
       a.download = fileName;
@@ -666,9 +666,8 @@ const AdmissionResult = () => {
             <ul className="nav nav-tabs" role="tablist">
               <li className="nav-item" role="presentation">
                 <button
-                  className={`nav-link ${
-                    activeTab === "online" ? "active" : ""
-                  }`}
+                  className={`nav-link ${activeTab === "online" ? "active" : ""
+                    }`}
                   onClick={() => setActiveTab("online")}
                   type="button"
                   role="tab"
@@ -693,9 +692,8 @@ const AdmissionResult = () => {
               {onlineChallan && onlineChallan.paid === true && (
                 <li className="nav-item" role="presentation">
                   <button
-                    className={`nav-link ${
-                      activeTab === "2nd-enrolment" ? "active" : ""
-                    }`}
+                    className={`nav-link ${activeTab === "2nd-enrolment" ? "active" : ""
+                      }`}
                     onClick={() => setActiveTab("2nd-enrolment")}
                     type="button"
                     role="tab"
@@ -711,9 +709,8 @@ const AdmissionResult = () => {
       {/* )} */}
 
       <div
-        className={`container ${
-          !showTabs || activeTab === "online" ? "d-block" : "d-none"
-        }`}
+        className={`container ${!showTabs || activeTab === "online" ? "d-block" : "d-none"
+          }`}
       >
         <center className="pt-5">
           <img style={{ width: "100px" }} src={GIF} alt={GIF} />
@@ -721,9 +718,8 @@ const AdmissionResult = () => {
 
         {/* Online Admission Content */}
         <div
-          className={`row pb-5 ${
-            !showTabs || activeTab === "online" ? "d-block" : "d-none"
-          }`}
+          className={`row pb-5 ${!showTabs || activeTab === "online" ? "d-block" : "d-none"
+            }`}
         >
           <h2 className="text-center">
             Congratulations! You've Successfully Passed the Admission Test
@@ -738,13 +734,13 @@ const AdmissionResult = () => {
               Congratulations! You’ve Successfully Passed the Admission Test
             </strong>{" "}
             We are thrilled to inform you that you have successfully cleared the
-            Hunarmand Punjab Admission Test. Now you are eligible for a
+            Digikhyber Admission Test. Now you are eligible for a
             Scholarship Card. To confirm your seat & proceed with your enrolled
-            course. All the courses under the Hunarmand scholarship card are
+            course. All the courses under the digikhyber scholarship card are
             100% free, but the application processing fee is necessary to
             complete your application. Your processing fee will be reimbursed if
             you achieve above 85% Marks in the final evaluation test under the
-            policy of Hunarmand Punjab. <br />
+            policy of Digikhyber. <br />
             You’re just one step away from receiving your Scholarship Card!
             <div className="mt-4">
               <p className="fw-semibold ">
@@ -791,7 +787,7 @@ const AdmissionResult = () => {
           <table className="table rwd-table">
             <thead
               className="thead-light"
-              style={{ backgroundColor: "#079560", color: "#fff" }}
+              style={{ backgroundColor: "#0B5D3B", color: "#fff" }}
             >
               <tr>
                 <th
@@ -800,7 +796,7 @@ const AdmissionResult = () => {
                   style={{
                     textAlign: "center",
                     color: "white",
-                    backgroundColor: "#079560",
+                    backgroundColor: "#0B5D3B",
                     fontWeight: "bold",
                   }}
                 >
@@ -944,11 +940,10 @@ const AdmissionResult = () => {
           </p>
           {onlineChallanStatus && (
             <span
-              className={`badge px-3 py-2 ms-2 fw-bold ${
-                onlineChallanStatus === "Paid"
-                  ? "bg-success text-white"
-                  : "bg-warning text-dark"
-              }`}
+              className={`badge px-3 py-2 ms-2 fw-bold ${onlineChallanStatus === "Paid"
+                ? "bg-success text-white"
+                : "bg-warning text-dark"
+                }`}
               style={{
                 fontSize: "1rem",
                 borderRadius: "6px",
@@ -1049,7 +1044,7 @@ const AdmissionResult = () => {
                             {/* <h4>Bank Challan</h4> */}
                             <h4>CLICK HERE FOR BANK CHALLAN </h4>
                             <p>
-                              Pay at any BOP Branch Using Hunarmand Punjab
+                              Pay at any BOP Branch Using Digikhyber
                               Challan
                             </p>
                           </div>
@@ -1470,7 +1465,7 @@ const AdmissionResult = () => {
                   </div>
                   <p className="fw-bold">Instructions:</p>
                   <p>
-                    Hunarmand also provides the option to deposit your
+                    digikhyber also provides the option to deposit your
                     application processing fee conveniently via Bank Challan.
                     This method is simple and accessible for all applicants
                     across Pakistan. Follow the steps below to deposit your
@@ -1505,7 +1500,7 @@ const AdmissionResult = () => {
                       <strong>Notification of Payment:</strong> Once your
                       application processing fee is deposited, you will receive
                       an instant notification confirming the application
-                      processing fee from Hunarmand Initiative.
+                      processing fee from digikhyber Initiative.
                     </li>
                     <li>
                       <strong>Application Status:</strong>
@@ -1543,14 +1538,14 @@ const AdmissionResult = () => {
                   </button>
 
                   <div className="alert alert-success mt-4 border">
-                    <b> Note: </b>After paying your Hunarmand application
+                    <b> Note: </b>After paying your digikhyber application
                     processing fee, you don't need to do anything further.
                     Please allow up to 30 minutes for processing. Within this
                     period, you should receive a confirmation email. If you do
                     not receive the confirmation within 30 minutes , click on
                     the below Check Status button to resolve the issue. If the
                     confirmation is still not available, contact our support
-                    team at admissions@Hunarmand.pk for any kind of assistance.
+                    team at admissions@digikhyber.pk for any kind of assistance.
                   </div>
                 </Accordion.Body>
               </Accordion.Item>
@@ -1637,7 +1632,7 @@ const AdmissionResult = () => {
               <div style={modalContentStyle}>
                 <div style={modalHeaderStyle}>
                   <h5 style={modalTitleStyle}>
-                    Official Notice – Hunarmand Punjab
+                    Official Notice – Digikhyber
                   </h5>
                   <button
                     type="button"
@@ -1669,7 +1664,7 @@ const AdmissionResult = () => {
                       }}
                     >
                       We are pleased to officially announce that the{" "}
-                      <strong style={{ color: "#079560" }}>
+                      <strong style={{ color: "#0B5D3B" }}>
                         final date for LMS access is 1st September 2025
                       </strong>
                       .
@@ -1793,9 +1788,8 @@ const AdmissionResult = () => {
 
       {/* 2nd Enrolment Content */}
       <div
-        className={`container ${
-          activeTab === "2nd-enrolment" ? "d-block" : "d-none"
-        }`}
+        className={`container ${activeTab === "2nd-enrolment" ? "d-block" : "d-none"
+          }`}
         style={{ paddingBottom: "100px" }}
       >
         <div className="row pt-4 pb-4">
@@ -2030,11 +2024,10 @@ const AdmissionResult = () => {
           </p>
           {secondEnrolmentChallanStatus && (
             <span
-              className={`badge px-3 py-2 ms-2 fw-bold ${
-                secondEnrolmentChallanStatus === "Paid"
-                  ? "bg-success text-white"
-                  : "bg-warning text-dark"
-              }`}
+              className={`badge px-3 py-2 ms-2 fw-bold ${secondEnrolmentChallanStatus === "Paid"
+                ? "bg-success text-white"
+                : "bg-warning text-dark"
+                }`}
               style={{
                 fontSize: "1rem",
                 borderRadius: "6px",
@@ -2128,7 +2121,7 @@ const AdmissionResult = () => {
                           <div className="ms-3 text-start">
                             <h4>CLICK HERE FOR BANK CHALLAN </h4>
                             <p>
-                              Pay at any BOP Branch Using Hunarmand Punjab
+                              Pay at any BOP Branch Using Digikhyber
                               Challan
                             </p>
                           </div>

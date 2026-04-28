@@ -1,12 +1,17 @@
-import React, { useState } from "react";
-import News from "../assets/news.png";
-import ParticleBackground from "../components/ParticleBackground";
+import React, { useState, useEffect } from "react";
+import PageBanner from "../components/PageBanner";
 import NewsModal from "../components/NewsModal";
+import "./NewsEvents.css";
 
 const NewsEvents = () => {
   const [selectedNews, setSelectedNews] = useState(null);
   const [isModalOpen, setIsModalOpen] = useState(false);
   const [playingVideoId, setPlayingVideoId] = useState(null);
+  const [inlineVideoId, setInlineVideoId] = useState(null);
+
+  useEffect(() => {
+    window.scrollTo(0, 0);
+  }, []);
 
   const newsData = [
     {
@@ -142,12 +147,12 @@ His appreciation motivates us to continue empowering students across Punjab with
     //     {
     //       id: 6,
     //       title:
-    //         "Hunarmand Punjab Scholarship Cards Are Now OPEN! (Only 50,000 Available)",
+    //         "Digikhyber Scholarship Cards Are Now OPEN! (Only 50,000 Available)",
     //       videoUrl: "",
     //       shortDescription:
-    //         "We are thrilled to announce that the distribution of Hunarmand Punjab Scholarship Cards has officially begun!",
-    //       fullDescription: `🎉 Hunarmand Punjab Scholarship Cards Are Now OPEN!
-    // We are thrilled to announce that the distribution of Hunarmand Punjab Scholarship Cards has officially begun! A total of 50,000 Scholarship Cards will be awarded to selected applicants across Pakistan. 25,000 Scholarship Cards are exclusively reserved for students from Punjab. The remaining 25,000 Cards will be distributed among students from other provinces. These cards grant access to completely free, advanced IT and digital skills training under the Hunarmand Punjab initiative. Don't miss your chance — Apply Now and be part of the digital transformation!`,
+    //         "We are thrilled to announce that the distribution of Digikhyber Scholarship Cards has officially begun!",
+    //       fullDescription: `🎉 Digikhyber Scholarship Cards Are Now OPEN!
+    // We are thrilled to announce that the distribution of Digikhyber Scholarship Cards has officially begun! A total of 50,000 Scholarship Cards will be awarded to selected applicants across Pakistan. 25,000 Scholarship Cards are exclusively reserved for students from Punjab. The remaining 25,000 Cards will be distributed among students from other provinces. These cards grant access to completely free, advanced IT and digital skills training under the Digikhyber initiative. Don't miss your chance — Apply Now and be part of the digital transformation!`,
     //     },
   ];
 
@@ -162,65 +167,75 @@ His appreciation motivates us to continue empowering students across Punjab with
     setPlayingVideoId(null); // Stops any playing video
   };
 
-  return (
-    <>
-      <div className="breadcrums position-relative ">
-        <ParticleBackground />
-        <h2>News & Events</h2>
-      </div>
-      <div className="news pt-5 pb-5 text-center">
-        <h2 className="mb-3">Latest News & Events</h2>
-        <p>
-          Stay up-to-date with all the latest developments at Hunarmand. From
-          new course launches to special <br /> events, find out what's
-          happening and how you can get involved in shaping the future of
-          Hunarmand Punjab
-          <br /> skilled workforce. Keep an eye on this space for exciting
-          announcements and opportunities!
-        </p>
-        <div className="container">
-          <div className="row justify-content-center px-4 pt-5">
-            {newsData.map((news) => (
-              <div key={news.id} className="col-lg-4 col-md-6 mb-4">
-                <div className="course h-100 p-0">
-                  <div className="course-card-details h-100 d-flex flex-column gap-2 justify-content-between align-items-start">
-                    {/* Title First */}
-                    <h6 className="mb-2 font-18 text-start">{news.title}</h6>
+  const getYoutubeThumbnail = (url) => {
+    if (!url) return '';
+    const videoIdMatch = url.match(/embed\/([^?]+)/);
+    if (videoIdMatch && videoIdMatch[1]) {
+      return `https://img.youtube.com/vi/${videoIdMatch[1]}/hqdefault.jpg`;
+    }
+    return '';
+  };
 
-                    <div className="video-wrapper w-100">
-                      <div className="vid-container">
+  return (
+    <div className="news-hub-page">
+      <PageBanner 
+          title="News & Events"
+          description="Stay up-to-date with all the latest developments at Digikhyber. From new course launches to special events, find out what's happening and how you can get involved in shaping the future of a skilled workforce. Keep an eye on this space for exciting announcements and opportunities!"
+      />
+
+      <div className="news-section">
+        <div className="container">
+          <div className="row justify-content-center">
+            {newsData.map((news, index) => (
+              <div key={news.id} className="col-lg-4 col-md-6 mb-5">
+                <div 
+                    className="news-elite-card news-reveal" 
+                    style={{ animationDelay: `${index * 0.1}s` }}
+                >
+                    <div className="news-video-wrapper">
+                      {inlineVideoId === news.id ? (
                         <iframe
-                          src={news.videoUrl}
-                          title="YouTube video player"
-                          frameBorder="0"
+                          src={`${news.videoUrl}?autoplay=1`}
+                          title={news.title}
                           allow="autoplay; fullscreen; picture-in-picture"
                           allowFullScreen
                         ></iframe>
-                      </div>
+                      ) : (
+                        <div 
+                          style={{ width: '100%', height: '100%', position: 'absolute', top: 0, left: 0, cursor: 'pointer' }}
+                          onClick={(e) => {
+                            e.stopPropagation();
+                            setInlineVideoId(news.id);
+                          }}
+                        >
+                          {getYoutubeThumbnail(news.videoUrl) ? (
+                            <>
+                              <img 
+                                src={getYoutubeThumbnail(news.videoUrl)} 
+                                alt={news.title} 
+                                className="news-thumbnail-img"
+                              />
+                              <div className="news-play-overlay">
+                                <div className="news-play-btn">
+                                  <i className="fas fa-play"></i>
+                                </div>
+                              </div>
+                            </>
+                          ) : (
+                            <div className="news-placeholder">
+                              <i className="fas fa-newspaper"></i>
+                            </div>
+                          )}
+                        </div>
+                      )}
                     </div>
 
-                    {/* Category Badge */}
-                    {/* <div
-                      className="text-start d-flex align-items-center gap-2 text-success px-2 p-1 rounded-2 mb-3"
-                      style={{
-                        background: "rgb(25 135 84 / 24%)",
-                        width: "fit-content",
-                      }}
-                    >
-                      <div className="fa fa-list-alt text-success"></div>
-                      {news.videoUrl ? "Video" : "Announcement"}
-                    </div> */}
-
-                    {/* <hr /> */}
-
-                    {/* Read More Button */}
-                    <button
-                      className="btn-green-sq"
-                      onClick={() => handleReadMore(news)}
-                    >
-                      Read More <i className="fas fa-arrow-right"></i>
-                    </button>
-                  </div>
+                    <div className="news-card-body" onClick={() => handleReadMore(news)} style={{ cursor: 'pointer' }}>
+                      <h3 className="news-card-title">{news.title}</h3>
+                      <div className="news-read-link">
+                        Watch Full Video <i className="fas fa-arrow-right"></i>
+                      </div>
+                    </div>
                 </div>
               </div>
             ))}
@@ -233,7 +248,7 @@ His appreciation motivates us to continue empowering students across Punjab with
         onClose={closeModal}
         content={selectedNews}
       />
-    </>
+    </div>
   );
 };
 

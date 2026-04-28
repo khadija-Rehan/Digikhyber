@@ -1,649 +1,190 @@
-import React from "react";
-import ParticleBackground from "../components/ParticleBackground";
+import React, { useState, useEffect } from "react";
+import PageBanner from "../components/PageBanner";
 import Accordion from "react-bootstrap/Accordion";
-import View from "../assets/top-view-of-young-and-old-architects-sitting-and-w-2023-11-27-05-26-00-utc.jpg";
+import "./FAQs.css";
+
 const FAQs = () => {
-  return (
-    <>
-      <div className="banner">
-        <ParticleBackground />
-        <div className="banner-content  ">
-          <div className="container">
-            <div className="row">
-              <div className="col-lg-8 col-md-12">
-                <h1 className="font-48">FAQs</h1>
-                <p className="font-18 light-grey l-h-1 weight-400">
-                  Got questions? We’ve got answers! Check out our Frequently
-                  Asked Questions to find what you’re looking for.
-                </p>
-              </div>
-              <div className="col-lg-4 col-md-12">
-                <img
-                  src="/images/FAQ's.jpg"
-                  alt="View"
-                  className="w-100 banner-image"
-                />
-                <div className="cube"> </div>
-              </div>
+    const [searchQuery, setSearchQuery] = useState("");
+    const [activeCategory, setActiveCategory] = useState("All");
+
+    useEffect(() => {
+        window.scrollTo(0, 0);
+    }, []);
+
+    const faqCategories = [
+        "All",
+        "General",
+        "Admission",
+        "Scholarship Card",
+        "Laptop Scheme",
+        "Solar Scheme",
+        "Taleem Finance",
+        "Support"
+    ];
+
+    const faqData = [
+        {
+            category: "General",
+            question: "What is the Digikhyber Program?",
+            answer: "Digikhyber initiative Supported by the Minister of School & Higher Education Rana Sikandar Hayat that offers free Advanced IT Courses, Laptop Scheme, Solar Scheme, Study Abroad Consultancy, Taleem Finance under the Scholarship Card to empower the youth of Punjab under the policy of Digikhyber."
+        },
+        {
+            category: "General",
+            question: "Who can apply for the program?",
+            answer: "Anyone who: is a resident of Punjab or Pakistani, has a valid CNIC or B-Form, and meets the basic education criteria of the selected course. There is no age limit required."
+        },
+        {
+            category: "Admission",
+            question: "Is there any fee for the courses?",
+            answer: "All the courses under Digikhyber are completely free of cost. Only processing charges will be paid by students & will be reimbursed after the completion of final evaluation test according to the policy of Digikhyber."
+        },
+        {
+            category: "Admission",
+            question: "How do I apply?",
+            answer: "You can apply online at the official portal: www.digikhyber.org.pk"
+        },
+        {
+            category: "Support",
+            question: "Will I get a certificate after completing the course?",
+            answer: "After successful completion, you'll get an authorized e-certification by Digikhyber which will be verifiable online on our website. Furthermore, you'll be able to join our Internships based on your performance & other benefits."
+        },
+        {
+            category: "Scholarship Card",
+            question: "What is the Scholarship Card?",
+            answer: "Digikhyber is introducing a merit-based Scholarship Card to encourage and reward outstanding students. Students who achieve a minimum of 85% marks will be eligible for the card, opening doors to high-value rewards like laptops, solar panels, and e-bikes."
+        },
+        {
+            category: "Scholarship Card",
+            question: "Who is eligible to receive the Scholarship Card?",
+            answer: "Students who successfully complete their enrolled IT training courses under the Digikhyber program and achieve at least 85% marks will be eligible to receive the merit-based Scholarship Card."
+        },
+        {
+            category: "Scholarship Card",
+            question: "What benefits does the Scholarship Card offer?",
+            answer: "Benefits include: Eligibility for Laptop Scheme, Solar Scheme, Taleem Finance, Taleem Abroad, access to upcoming advanced courses, and internship/job placement opportunities."
+        },
+        {
+            category: "Laptop Scheme",
+            question: "What is the Digikhyber Laptop Scheme?",
+            answer: "A merit-based reward program designed to empower talented students. Students scoring 85% or above in their IT training become eligible for a Scholarship Card, which qualifies them for high-value rewards like laptops."
+        },
+        {
+            category: "Laptop Scheme",
+            question: "Who is eligible to receive a laptop?",
+            answer: "Trainees enrolled in specific IT/technical programs who score a minimum of 85% Marks in the Final Evaluation Test and show satisfactory performance in assignments and projects."
+        },
+        {
+            category: "Laptop Scheme",
+            question: "How will I know if I’ve been selected?",
+            answer: "Selected candidates will be notified through SMS or email on their registered contact details, and announcements will be made at the training centers or official portal."
+        },
+        {
+            category: "Laptop Scheme",
+            question: "What documents are required to receive the laptop?",
+            answer: "You will need: Original CNIC/B-Form, Enrollment proof, Verification of Processing Fee, and any official notification or SMS received."
+        },
+        {
+            category: "Solar Scheme",
+            question: "What is the Digikhyber Solar Scheme?",
+            answer: "Part of our merit-based reward initiative for high-performing students (85%+ marks). Eligible students receive a Scholarship Card, giving them a chance to win solar panels, recognizing academic excellence and promoting clean energy."
+        },
+        {
+            category: "Solar Scheme",
+            question: "Who is eligible to receive a solar Panel?",
+            answer: "Trainees must score 85% or above in the Final Evaluation Test, show satisfactory performance in projects, and ideally belong to an area with limited electricity access."
+        },
+        {
+            category: "Solar Scheme",
+            question: "How will I know if I’ve been selected for the solar scheme?",
+            answer: "Selected candidates will be informed through official SMS, email, or notifications on the Digikhyber portal."
+        },
+        {
+            category: "Taleem Finance",
+            question: "What is Taleem Finance?",
+            answer: "Taleem Finance is a financial support program by Digikhyber designed to assist trainees who may face financial challenges in accessing quality Higher Education."
+        },
+        {
+            category: "Taleem Finance",
+            question: "Who can apply for Taleem Finance?",
+            answer: "You are eligible if you are enrolled in a Digikhyber course, belong to a low-income household, and can provide basic income and residence proof."
+        },
+        {
+            category: "Taleem Finance",
+            question: "What type of support is provided?",
+            answer: "It may cover Higher Education-related expenses (Fees, Laptop, etc.) and potentially flexible loan or installment options for certain certifications."
+        },
+        {
+            category: "Taleem Finance",
+            question: "How can I apply for Taleem Finance?",
+            answer: "Submit your application under Digikhyber by filling out the Taleem Finance Application Form and providing required documents (CNIC, income proof, etc.)."
+        },
+        {
+            category: "Taleem Finance",
+            question: "How will I know if my application is approved?",
+            answer: "Approved candidates will be notified via SMS, email, or a direct call from the center or finance department after verification."
+        },
+        {
+            category: "Support",
+            question: "How can I contact for questions about Digikhyber?",
+            answer: "Email: info@digikhyber.org.pk | Website: www.digikhyber.org.pk | Helpline: 03-111-133-053"
+        }
+    ];
+
+    const filteredFAQs = faqData.filter(item => {
+        const matchesSearch = item.question.toLowerCase().includes(searchQuery.toLowerCase()) || 
+                             item.answer.toLowerCase().includes(searchQuery.toLowerCase());
+        const matchesCategory = activeCategory === "All" || item.category === activeCategory;
+        return matchesSearch && matchesCategory;
+    });
+
+    return (
+        <div className="faq-page">
+            <PageBanner 
+                title="FAQ Hub"
+                description="Find answers to common questions about our courses, scholarship card, laptop schemes, and financial support."
+            />
+
+            <div className="container">
+                {/* Category Filters */}
+                <div className="faq-categories faq-reveal" style={{ animationDelay: '0.1s' }}>
+                    {faqCategories.map(cat => (
+                        <button 
+                            key={cat}
+                            className={`faq-cat-btn ${activeCategory === cat ? 'active' : ''}`}
+                            onClick={() => setActiveCategory(cat)}
+                        >
+                            {cat}
+                        </button>
+                    ))}
+                </div>
+
+                {/* FAQ Accordion */}
+                <div className="row justify-content-center">
+                    <div className="col-lg-10">
+                        {filteredFAQs.length > 0 ? (
+                            <Accordion className="faq-accordion faq-reveal" style={{ animationDelay: '0.2s' }}>
+                                {filteredFAQs.map((faq, index) => (
+                                    <Accordion.Item key={index} eventKey={index.toString()}>
+                                        <Accordion.Header>
+                                            {faq.question}
+                                        </Accordion.Header>
+                                        <Accordion.Body>
+                                            {faq.answer}
+                                        </Accordion.Body>
+                                    </Accordion.Item>
+                                ))}
+                            </Accordion>
+                        ) : (
+                            <div className="text-center py-5 faq-reveal">
+                                <i className="fas fa-search-minus fa-3x mb-3 text-muted"></i>
+                                <h4 className="text-muted">No questions found matching your search.</h4>
+                            </div>
+                        )}
+                    </div>
+                </div>
             </div>
-          </div>
         </div>
-      </div>
-      <div className="container faq pt-5 pb-5">
-        <p className="white font-14 d-p">FAQ</p>
-        <h2 className="text-center pb-5">Frequently asked questions</h2>
-        <Accordion defaultActiveKey="0">
-          <Accordion.Item eventKey="0">
-            <Accordion.Header>
-              <div className="p-3 fw-medium">
-                What is the Hunarmand Punjab Program?
-              </div>
-            </Accordion.Header>
-            <Accordion.Body>
-              <div className="p-3">
-                Hunarmand Punjab initiative Supported by the{" "}
-                <strong>
-                  {" "}
-                  Minister of School & Higher Education Rana Sikandar Hayat
-                </strong>{" "}
-                that offers free Advanced IT Courses, Laptop Scheme, Solar
-                Scheme, Study Abroad Consultancy, Taleem Finance under the
-                Scholarship Card to empower the youth of Punjab under the policy
-                of hunarmand punjab.
-                {/* Hunarmand Punjab initiative launched by the
-                <strong>
-                  {" "}
-                  Education Minister Rana Sikandar Hayat Government of Punjab
-                </strong>{" "}
-                that offers free Advanced IT Courses, Laptop Scheme, Solar
-                Scheme, Study Abroad Consultancy, Taleem Finance under the{" "}
-                <strong>Scholarship Card</strong> to empower the youth of
-                Punjab. */}
-                {/* Hunarmand Punjab is a government-supported training initiative
-                                under the{" "}
-                                <strong>
-                                    Government of Punjab Education Minister Rana Sikandar Hayat
-                                </strong>{" "}
-                                that offers <strong>free Courses</strong> in IT, engineering,
-                                digital skills, and other trades to empower the youth of Punjab. */}
-              </div>
-            </Accordion.Body>
-          </Accordion.Item>
-
-          <Accordion.Item eventKey="1">
-            <Accordion.Header>
-              <div className="p-3 fw-medium">
-                Who can apply for the program?
-              </div>
-            </Accordion.Header>
-            <Accordion.Body>
-              <div className="p-3">
-                Anyone who:
-                <ul>
-                  <li>Is a resident of Punjab or Pakistani</li>
-                  <li>
-                    {/* Is aged between <strong>15 to 35 years</strong> */}
-                    No Age Limit is Required
-                  </li>
-                  <li>Has a valid CNIC or B-Form</li>
-                  <li>
-                    Meets the basic education criteria of the selected course
-                  </li>
-                </ul>
-              </div>
-            </Accordion.Body>
-          </Accordion.Item>
-
-          <Accordion.Item eventKey="2">
-            <Accordion.Header>
-              <div className="p-3 fw-medium">
-                Is there any fee for the courses?
-              </div>
-            </Accordion.Header>
-            <Accordion.Body>
-              <div className="p-3">
-                {/* All training under Hunarmand Punjab is{" "}
-                <strong>completely free of cost.</strong> One time processing
-                fee is charged per course. After enrollment you will be eligible
-                for All Benefit Schemes i.e Scholarship Card, Laptop Scheme,
-                Solar Scheme, Taleem Finance & Taleem Abroad. */}
-                All the courses under Hunarmand Punjab {/* Scholarship Card  */}{" "}
-                are completely free of cost. Only processing charges will be
-                paid by students & will be reimbursed after the completion of
-                final evaluation test according to the policy of Hunarmand
-                Punjab.
-              </div>
-            </Accordion.Body>
-          </Accordion.Item>
-
-          <Accordion.Item eventKey="3">
-            <Accordion.Header>
-              <div className="p-3 fw-medium">How do I apply?</div>
-            </Accordion.Header>
-            <Accordion.Body>
-              <div className="p-3">
-                Apply online at:{" "}
-                <a
-                  href="https://www.hunarmandpunjab.org.pk"
-                  target="_blank"
-                  rel="noreferrer"
-                >
-                  www.hunarmandpunjab.org.pk
-                </a>
-              </div>
-            </Accordion.Body>
-          </Accordion.Item>
-
-          <Accordion.Item eventKey="4">
-            <Accordion.Header>
-              <div className="p-3 fw-medium">
-                Will I get a certificate after completing the course?
-              </div>
-            </Accordion.Header>
-            <Accordion.Body>
-              <div className="p-3">
-                After successful completion, you'll get an{" "}
-                <strong>authorized e-certification</strong> by Hunarmand Punjab
-                which will be verifiable online on{" "}
-                <strong>Hunarmand Punjab </strong>Website. Furthermore, you'll
-                be able to join our Internships based on your performance &
-                other benefits under Hunarmand Punjab Program after completing
-                any course.
-                {/* After successful completion, you'll get an{" "}
-                <strong>authorized e-certification</strong> which will be
-                verifiable online & also will be authorized and accredited with
-                Government Appreciated Institutions. Furthermore, you'll be able
-                to join our{" "}
-                <b> Internships & other benefits under Hunarmand Punjab </b>{" "}
-                Program after completing any course. */}
-              </div>
-            </Accordion.Body>
-          </Accordion.Item>
-
-          <Accordion.Item eventKey="5">
-            <Accordion.Header>
-              <div className="p-3 fw-medium">What is the Scholarship Card?</div>
-            </Accordion.Header>
-            <Accordion.Body>
-              <div className="p-3">
-                As part of its commitment to promoting excellence in IT
-                education, <strong>Hunarmand Punjab</strong> is introducing a{" "}
-                <strong>merit-based Scholarship Card</strong> to encourage and
-                reward outstanding students. This policy states that only those
-                students who successfully complete their enrolled IT training
-                courses and achieve a minimum of 85% marks will be eligible for
-                the Scholarship Card. Recipients of this card will have the
-                opportunity to be considered for high-value merit-based rewards
-                such as laptops, solar panels, and e-bikes. These incentives aim
-                to motivate students to perform at their best and equip them
-                with the tools needed to further their skills and career
-                development in the digital age.
-                {/* The Scholarship Card is a digital or physical card issued to
-                eligible trainees enrolled in Hunarmand Punjab training
-                programs. It serves as proof of enrollment and may be used to
-                access certain benefits. */}
-              </div>
-            </Accordion.Body>
-          </Accordion.Item>
-
-          <Accordion.Item eventKey="6">
-            <Accordion.Header>
-              <div className="p-3 fw-medium">
-                Who is eligible to receive the Scholarship Card?
-              </div>
-            </Accordion.Header>
-            <Accordion.Body>
-              <div className="p-3">
-                Students who successfully complete their enrolled IT training
-                courses under the Hunarmand Punjab program and achieve at least
-                85% marks will be eligible to receive the merit-based
-                Scholarship Card. This card will qualify them for additional
-                rewards such as laptops, solar panels, and e-bikes, based
-                strictly on performance and merit.
-                {/* Only those trainees who have successfully completed the
-                registration and verification process for Hunarmand Punjab’s
-                training programs. */}
-              </div>
-            </Accordion.Body>
-          </Accordion.Item>
-
-          <Accordion.Item eventKey="7">
-            <Accordion.Header>
-              <div className="p-3 fw-medium">
-                What benefits does the Scholarship Card offer?
-              </div>
-            </Accordion.Header>
-            <Accordion.Body>
-              <div className="p-3">
-                <ul>
-                  <li>Eligible for Laptop Scheme</li>
-                  <li>Eligible for Solar Scheme</li>
-                  <li>Eligible for Taleem Finance</li>
-                  <li>Eligible for Taleem Abroad</li>
-                  <li>Upcoming Advanced Course’s access</li>
-                  <li>Access to learning materials and assessments</li>
-                  <li>
-                    Eligibility for internship/job placement opportunities
-                  </li>
-                  <li>
-                    Note: Students who successfully complete their enrolled IT
-                    training courses under the Hunarmand Punjab program and
-                    achieve at least 85% marks will be eligible to receive the
-                    merit-based Scholarship Card Terms & Conditions Apply.
-                  </li>
-                  {/* <li>Proof of active enrollment in the program</li>
-                  <li>Eligible for Laptop Scheme</li>
-                  <li>Eligible for Solar Scheme</li>
-                  <li>Eligible for Taleem Finance</li>
-                  <li>Eligible for Taleem Abroad</li>
-                  <li>Upcoming Advanced Course’s access</li>
-                  <li>Access to learning materials and assessments</li>
-                  <li>
-                    Eligibility for internship/job placement opportunities
-                  </li> */}
-                </ul>
-              </div>
-            </Accordion.Body>
-          </Accordion.Item>
-
-          {/* <Accordion.Item eventKey="8">
-            <Accordion.Header>
-              <div className="p-3 fw-medium">
-                How will I receive my Scholarship Card?
-              </div>
-            </Accordion.Header>
-            <Accordion.Body>
-              <div className="p-3">
-                <ul>
-                  <li>Physically from their training center</li>
-                  <li>Digitally via the registered email or portal login</li>
-                </ul>
-              </div>
-            </Accordion.Body>
-          </Accordion.Item> */}
-
-          {/* <Accordion.Item eventKey="9">
-            <Accordion.Header>
-              <div className="p-3 fw-medium">
-                Is there any fee for the Scholarship Card?
-              </div>
-            </Accordion.Header>
-            <Accordion.Body>
-              <div className="p-3"> */}
-          {/* No, the Scholarship Card is provided{" "}
-                <b>completely free of charge</b>
-                to all eligible trainees. One time processing fee is charged per
-                course. After enrollment you will be eligible for All Benefit
-                Schemes i.e Scholarship Card, Laptop Scheme, Solar Scheme,
-                Taleem Finance & Taleem Abroad. */}
-          {/* Hunarmand Punjab <strong>Scholarship Card</strong> is completely
-                free of cost to eligible trainees. Only processing charges will
-                be paid by students & will be reimbursed after the completion of
-                final evaluation test according to the policy of{" "}
-                <strong>Hunarmand Punjab.</strong> Under{" "}
-                <strong>Scholarship card</strong> students can avail Laptop
-                Scheme, Solar Scheme, Taleem Finance & Taleem Abroad Consultancy
-                opportunities.
-              </div>
-            </Accordion.Body>
-          </Accordion.Item> */}
-
-          {/* <Accordion.Item eventKey="10">
-            <Accordion.Header>
-              <div className="p-3 fw-medium">
-                What should I do if I lose my Scholarship Card?
-              </div>
-            </Accordion.Header>
-            <Accordion.Body>
-              <div className="p-3">
-                Immediately inform your training center or contact the support
-                team to request a re-issuance. ID verification may be required.
-              </div>
-            </Accordion.Body>
-          </Accordion.Item> */}
-
-          <Accordion.Item eventKey="11">
-            <Accordion.Header>
-              <div className="p-3 fw-medium">
-                What is the Hunarmand Punjab Laptop Scheme?
-              </div>
-            </Accordion.Header>
-            <Accordion.Body>
-              <div className="p-3">
-                Hunarmand Punjab Laptop Scheme is a{" "}
-                <strong>merit-based reward program</strong> designed to empower
-                talented students through digital access. Under this scheme,
-                students who complete their <strong>IT training courses</strong>{" "}
-                with a minimum of <strong>85% marks</strong> become eligible for
-                a <strong>Scholarship Card</strong>. This card opens doors to{" "}
-                <strong>high-value rewards</strong> like{" "}
-                <strong>laptops</strong>. The initiative encourages youth to
-                perform exceptionally while equipping them with essential tools
-                to advance their careers in the digital era.{" "}
-                {/* The Laptop Scheme is an initiative by <b> Hunarmand Punjab </b>{" "}
-                to provide eligible trainees with laptops to support their
-                learning in IT and technical courses. */}
-              </div>
-            </Accordion.Body>
-          </Accordion.Item>
-
-          <Accordion.Item eventKey="12">
-            <Accordion.Header>
-              <div className="p-3 fw-medium">
-                Who is eligible to receive a laptop?
-              </div>
-            </Accordion.Header>
-            <Accordion.Body>
-              <div className="p-3">
-                Trainees who:
-                <ul>
-                  <li>Are enrolled in specific IT or technical programs</li>
-                  <li>Score minimum 85% Marks in Final Evaluation Test</li>
-                  <li>
-                    Show satisfactory performance in assignments, assessments &
-                    Final Project
-                  </li>
-                  <li>
-                    <strong>Note:</strong> Students who successfully complete
-                    their enrolled IT training courses under the Hunarmand
-                    Punjab program and achieve at least 85% marks will be
-                    eligible to receive the merit-based Scholarship Card Terms &
-                    Conditions Apply.
-                  </li>
-                  {/* <li>Are enrolled in specific IT or technical programs</li>
-                  <li>
-                    Score minimum <b> 85% Marks in Final Evaluation Test</b>
-                  </li>
-                  <li>
-                    Show satisfactory performance in assignments, assessments &
-                    Final Project
-                  </li> */}
-                </ul>
-              </div>
-            </Accordion.Body>
-          </Accordion.Item>
-
-          {/* <Accordion.Item eventKey="13">
-            <Accordion.Header>
-              <div className="p-3 fw-medium">
-                Is there any cost involved in receiving the laptop?
-              </div>
-            </Accordion.Header>
-            <Accordion.Body>
-              <div className="p-3">
-                Laptops are distributed <b> free of cost</b> to selected,
-                eligible students who meet the criteria. One time processing fee
-                is charged per course.
-              </div>
-            </Accordion.Body>
-          </Accordion.Item> */}
-
-          <Accordion.Item eventKey="14">
-            <Accordion.Header>
-              <div className="p-3 fw-medium">
-                How will I know if I’ve been selected?
-              </div>
-            </Accordion.Header>
-            <Accordion.Body>
-              <div className="p-3">
-                Selected candidates will be notified through:
-                <ul>
-                  <li>SMS or email on their registered contact details</li>
-                  <li>
-                    Announcement at the training center or official portal
-                  </li>
-                </ul>
-              </div>
-            </Accordion.Body>
-          </Accordion.Item>
-
-          <Accordion.Item eventKey="15">
-            <Accordion.Header>
-              <div className="p-3 fw-medium">
-                What documents are required to receive the laptop?
-              </div>
-            </Accordion.Header>
-            <Accordion.Body>
-              <div className="p-3">
-                You’ll need to bring:
-                <ul>
-                  <li>Original CNIC/B-Form</li>
-                  <li>Enrollment proof</li>
-                  <li>Verification of Processing Fee</li>
-                  <li>Any official notification or SMS received</li>
-                </ul>
-              </div>
-            </Accordion.Body>
-          </Accordion.Item>
-
-          <Accordion.Item eventKey="16">
-            <Accordion.Header>
-              <div className="p-3 fw-medium">
-                What is the Hunarmand Punjab Solar Scheme?
-              </div>
-            </Accordion.Header>
-            <Accordion.Body>
-              <div className="p-3">
-                The Hunarmand Punjab Solar Scheme is part of a merit-based
-                reward initiative designed to support high-performing students
-                who complete their IT training with{" "}
-                <strong>85% or above marks</strong>. Eligible students are
-                awarded a <strong>Scholarship Card</strong>, which gives them a
-                chance to win valuable rewards including{" "}
-                <strong>solar panels</strong>. This scheme not only recognizes
-                academic excellence but also promotes clean energy adoption. It
-                empowers students with the tools needed for a sustainable,
-                independent, and tech-enabled future.
-                {/* The Solar Scheme is a government-supported initiative by
-                <b> Hunarmand Punjab </b> aimed at providing solar panels to
-                eligible trainees to support their access to continuous,
-                affordable electricity for learning and home use. */}
-              </div>
-            </Accordion.Body>
-          </Accordion.Item>
-
-          <Accordion.Item eventKey="17">
-            <Accordion.Header>
-              <div className="p-3 fw-medium">
-                Who is eligible to receive a solar Panel?
-              </div>
-            </Accordion.Header>
-            <Accordion.Body>
-              <div className="p-3">
-                To qualify, a trainee must:
-                <ul>
-                  <li>
-                    Be enrolled in a current{" "}
-                    <b> Hunarmand Punjab training program</b>
-                  </li>
-                  <li>
-                    Score minimum <b> 85% Marks in Final Evaluation Test</b>
-                  </li>
-                  <li>
-                    Show satisfactory performance in assignments, assessments &
-                    Final Project
-                  </li>
-                  <li>Belong to an area with limited electricity access</li>
-                </ul>
-              </div>
-            </Accordion.Body>
-          </Accordion.Item>
-
-          {/* <Accordion.Item eventKey="18">
-            <Accordion.Header>
-              <div className="p-3 fw-medium">
-                Is there any cost for the solar panel?
-              </div>
-            </Accordion.Header>
-            <Accordion.Body>
-              <div className="p-3">
-                The solar panel is provided <b> completely free of cost </b>to
-                eligible and selected trainees who meet the criteria. One time
-                processing fee is charged.
-              </div>
-            </Accordion.Body>
-          </Accordion.Item> */}
-
-          <Accordion.Item eventKey="19">
-            <Accordion.Header>
-              <div className="p-3 fw-medium">
-                How will I know if I’ve been selected for the scheme?
-              </div>
-            </Accordion.Header>
-            <Accordion.Body>
-              <div className="p-3">
-                Selected candidates will be informed through:
-                <ul>
-                  <li>Official SMS or email</li>
-                  {/* <li>Announcement at the training center</li> */}
-                  <li>Notification on the Hunarmand Punjab portal</li>
-                </ul>
-              </div>
-            </Accordion.Body>
-          </Accordion.Item>
-
-          <Accordion.Item eventKey="20">
-            <Accordion.Header>
-              <div className="p-3 fw-medium">What is Taleem Finance?</div>
-            </Accordion.Header>
-            <Accordion.Body>
-              <div className="p-3">
-                Taleem Finance is a financial support program by{" "}
-                <b> Hunarmand Punjab </b> designed to assist trainees who may
-                face financial challenges in accessing quality Higher Education.
-              </div>
-            </Accordion.Body>
-          </Accordion.Item>
-
-          <Accordion.Item eventKey="21">
-            <Accordion.Header>
-              <div className="p-3 fw-medium">
-                Who can apply for Taleem Finance?
-              </div>
-            </Accordion.Header>
-            <Accordion.Body>
-              <div className="p-3">
-                You are eligible if you:
-                <ul>
-                  <li>Are enrolled in a Hunarmand Punjab course</li>
-                  <li>Belong to a low-income household</li>
-                  <li>Can provide basic income and residence proof</li>
-                </ul>
-              </div>
-            </Accordion.Body>
-          </Accordion.Item>
-
-          <Accordion.Item eventKey="22">
-            <Accordion.Header>
-              <div className="p-3 fw-medium">
-                What type of support is provided?
-              </div>
-            </Accordion.Header>
-            <Accordion.Body>
-              <div className="p-3">
-                Taleem Finance may cover:
-                <ul>
-                  <li>
-                    Higher Education - related expenses (Fee, Laptop etc.)
-                  </li>
-                  <li>
-                    Flexible loan or installment options for certain
-                    certifications (if applicable)
-                  </li>
-                </ul>
-              </div>
-            </Accordion.Body>
-          </Accordion.Item>
-
-          {/* <Accordion.Item eventKey="23">
-            <Accordion.Header>
-              <div className="p-3 fw-medium">
-                Is Taleem Finance a loan or a scholarship?
-              </div>
-            </Accordion.Header>
-            <Accordion.Body>
-              <div className="p-3">
-                In most cases, it is a <b> scholarship or grant</b> . In some
-                advanced certification programs,<b> loans</b> may be offered
-                with easy repayment options.
-              </div>
-            </Accordion.Body>
-          </Accordion.Item> */}
-
-          <Accordion.Item eventKey="24">
-            <Accordion.Header>
-              <div className="p-3 fw-medium">
-                How can I apply for Taleem Finance?
-              </div>
-            </Accordion.Header>
-            <Accordion.Body>
-              <div className="p-3">
-                You can apply by:
-                <ul>
-                  <li>Submit your application under Hunarmand Punjab</li>
-                  <li>
-                    Filling the <b> Taleem Finance Application Form</b>
-                  </li>
-                  <li>
-                    Submitting required documents (CNIC, income proof, etc.)
-                  </li>
-                </ul>
-              </div>
-            </Accordion.Body>
-          </Accordion.Item>
-
-          <Accordion.Item eventKey="25">
-            <Accordion.Header>
-              <div className="p-3 fw-medium">
-                How will I know if my application is approved?
-              </div>
-            </Accordion.Header>
-            <Accordion.Body>
-              <div className="p-3">
-                Approved candidates will be notified via:
-                <ul>
-                  <li>SMS or email</li>
-                  <li>Direct call from the center or finance department</li>
-                  <li>Verification of Processing Fee</li>
-                </ul>
-              </div>
-            </Accordion.Body>
-          </Accordion.Item>
-
-          <Accordion.Item eventKey="26">
-            <Accordion.Header>
-              <div className="p-3 fw-medium">
-                How can I contact for questions about Hunarmand Punjab?
-              </div>
-            </Accordion.Header>
-            <Accordion.Body>
-              <div className="p-3">
-                <ul>
-                  <li>
-                    {" "}
-                    <b>Email:</b> info@hunarmandpunjab.org.pk
-                  </li>
-                  <li>
-                    <b> Website:</b>{" "}
-                    <a
-                      href="https://www.hunarmandpunjab.org.pk"
-                      target="_blank"
-                      rel="noreferrer"
-                    >
-                      www.hunarmandpunjab.org.pk
-                    </a>
-                  </li>
-                  <li>
-                    <b>Helpline:</b> 03-111-133-053{" "}
-                  </li>
-                </ul>
-              </div>
-            </Accordion.Body>
-          </Accordion.Item>
-        </Accordion>
-      </div>
-    </>
-  );
+    );
 };
 
 export default FAQs;

@@ -386,8 +386,8 @@ const ApplyScholarShipCard = () => {
         >
           To Become eligible for scholarship card (Free laptop, Solar scheme,
           Taleem Finance, Taleem Abroad, Advance Courses) you must be enrolled
-          in one or more programs under Hunarmand Punjab.
-          Hunarmand Punjab is introducing a merit-based Scholarship Card to
+          in one or more programs under Digikhyber.
+          Digikhyber is introducing a merit-based Scholarship Card to
           encourage and reward outstanding students. This policy states that
           only those students who successfully complete their enrolled IT
           training courses and achieve a minimum of 85% marks will be eligible
@@ -698,7 +698,7 @@ const ApplyScholarShipCard = () => {
             <label className="form-check-label" htmlFor="termsAccepted">
               I have read and agree to the{" "}
               <span className="fw-bold">Terms & Conditions</span> of the
-              Hunarmand Punjab Scholarship Card program.
+              Digikhyber Scholarship Card program.
               <span className="text-danger">*</span>
             </label>
             {errors.termsAccepted && (

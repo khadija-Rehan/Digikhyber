@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from "react";
-import ParticleBackground from "../components/ParticleBackground";
+import PageBanner from "../components/PageBanner";
 import { Link, useNavigate, useSearchParams } from "react-router-dom";
 import { useAuth } from "../context/AuthContext";
 import { useCourses } from "../context/CoursesContext";
@@ -114,33 +114,19 @@ const ViewCourse = () => {
 
   return (
     <>
-      <div className="banner">
-        <ParticleBackground />
-        <div className="banner-content  ">
-          <div className="container">
-            <div className="row">
-              <div className="col-lg-8 col-md-12">
-                <h5>{courseContent.category}</h5>
-                <h1 className="font-48">{courseName}</h1>
-                <p className="font-18 light-grey l-h-1 weight-400">
-                  {courseContent.description}
-                </p>
-                <div
-                  className="bg-white text-black d-flex  gap-4 p-2 px-4 w-fitcontent rounded-5 "
-                  style={{ width: "fit-content" }}
-                >
-                  <div>Classes: Recorded</div>
-                  <div>Duration: 3 Months
-                     {/* {courseContent.duration} */}
-                  </div>
-                  {/* <div>Level: {courseContent.level}</div> */}
-                  <div>Level: Beginner to Advanced</div>
-                </div>
-              </div>
-            </div>
-          </div>
+      <PageBanner 
+        title={courseName}
+        description={courseContent.description}
+      >
+        <div
+          className="bg-white text-black d-flex gap-4 p-2 px-4 w-fitcontent rounded-5"
+          style={{ width: "fit-content" }}
+        >
+          <div>Classes: Recorded</div>
+          <div>Duration: 3 Months</div>
+          <div>Level: Beginner to Advanced</div>
         </div>
-      </div>
+      </PageBanner>
       <div className="container">
         <div className="row pt-5 pb-5 about-course">
           <div className="col-lg-7">
@@ -219,7 +205,7 @@ const ViewCourse = () => {
                         <p>
                           <FaCheckCircle
                             className="icon"
-                            style={{ color: "#079560", marginRight: "5px" }}
+                            style={{ color: "#0B5D3B", marginRight: "5px" }}
                           />{" "}
                           Completion Certificate:{" "}
                         </p>
@@ -229,7 +215,7 @@ const ViewCourse = () => {
                         <p>
                           <FaLaptop
                             className="icon"
-                            style={{ color: "#079560", marginRight: "5px" }}
+                            style={{ color: "#0B5D3B", marginRight: "5px" }}
                           />{" "}
                           Training Evaluation: 
                         </p>
@@ -239,7 +225,7 @@ const ViewCourse = () => {
                         <p>
                           <FaGlobe
                             className="icon"
-                            style={{ color: "#079560", marginRight: "5px" }}
+                            style={{ color: "#0B5D3B", marginRight: "5px" }}
                           />{" "}
                           Language: 
                         </p>
@@ -249,7 +235,7 @@ const ViewCourse = () => {
                         <p>
                           <FaConnectdevelop
                             className="icon"
-                            style={{ color: "#079560", marginRight: "5px" }}
+                            style={{ color: "#0B5D3B", marginRight: "5px" }}
                           />{" "}
                           Who can Join: 
                         </p>
@@ -259,7 +245,7 @@ const ViewCourse = () => {
                         <p>
                           <FaCoins
                             className="icon"
-                            style={{ color: "#079560", marginRight: "5px" }}
+                            style={{ color: "#0B5D3B", marginRight: "5px" }}
                           />{" "}
                           Fee:
                         </p>
@@ -269,7 +255,7 @@ const ViewCourse = () => {
                         <p>
                           <IoCardOutline
                             className="icon"
-                            style={{ color: "#079560", marginRight: "5px" }}
+                            style={{ color: "#0B5D3B", marginRight: "5px" }}
                           />{" "}
                           Scholarship Card Opportunity: 
                         </p>

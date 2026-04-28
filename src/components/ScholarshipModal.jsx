@@ -1,30 +1,68 @@
-import React, { useEffect, useState } from "react";
+import React, { useEffect, useState, useRef } from "react";
 import Logo from "../assets/logo.png";
 import Education from "../assets/higher-education.png";
 import Header from "../assets/modal-banner.png";
 import { useNavigate } from "react-router-dom";
+ 
 
 const ScholarshipModal = () => {
   const [show, setShow] = useState(false);
   const navigate = useNavigate();
+  const modalRef = useRef(null);
 
   useEffect(() => {
     const timer = setTimeout(() => {
       setShow(true);
-      const modal = new window.bootstrap.Modal(
-        document.getElementById("scholarshipModal")
-      );
-      modal.show();
+      const modalElement = document.getElementById("scholarshipModal");
+      if (modalElement && window.bootstrap) {
+        modalRef.current = new window.bootstrap.Modal(modalElement);
+        modalRef.current.show();
+      }
     }, 1000);
-    return () => clearTimeout(timer);
+    
+    return () => {
+      clearTimeout(timer);
+      if (modalRef.current) {
+        modalRef.current.hide();
+      }
+      // Force cleanup for React Hot Reload stuck backdrops
+      document.querySelectorAll('.modal-backdrop').forEach(el => el.remove());
+      document.body.classList.remove('modal-open');
+      document.body.style.overflow = '';
+      document.body.style.paddingRight = '';
+    };
   }, []);
+
+  useEffect(() => {
+    if (show) {
+      document.body.style.setProperty('overflow', 'hidden', 'important');
+      document.documentElement.style.setProperty('overflow', 'hidden', 'important');
+    } else {
+      document.body.style.overflow = '';
+      document.documentElement.style.overflow = '';
+    }
+    return () => {
+      document.body.style.overflow = '';
+      document.documentElement.style.overflow = '';
+    };
+  }, [show]);
 
   const handleClose = () => {
     setShow(false);
-    const modal = window.bootstrap.Modal.getInstance(
-      document.getElementById("scholarshipModal")
-    );
-    modal.hide();
+    if (modalRef.current) {
+      modalRef.current.hide();
+    } else {
+      const modalElement = document.getElementById("scholarshipModal");
+      if (modalElement && window.bootstrap) {
+        const modal = window.bootstrap.Modal.getInstance(modalElement);
+        if (modal) modal.hide();
+      }
+    }
+    // Force cleanup
+    document.body.classList.remove('modal-open');
+    document.body.style.overflow = '';
+    document.body.style.paddingRight = '';
+    document.querySelectorAll('.modal-backdrop').forEach(el => el.remove());
   };
 
   const handleApplyNow = (e) => {
@@ -66,8 +104,8 @@ const ScholarshipModal = () => {
               <div className="p-2 position-relative z-1">
                 <img
                   className="w-100 rounded-3"
-                  // src="/images/Hunarmand Punjab hero banner 1.jpeg"
-                  src="/images/Hunarmand Punjab hero banner 1-02.jpeg"
+                  // src="/images/Digikhyber hero banner 1.jpeg"
+                  src="/images/Digikhyber hero banner 1-02.jpeg"
                   alt=""
                   style={{ objectFit: "cover" }}
                 />
@@ -147,11 +185,11 @@ const ScholarshipModal = () => {
               {/* Information Desk */}
               <div
                 style={{
-                  background: "#e5f9f2ff",
+                  background: "#f0f7f4",
                   borderRadius: "6px",
                   padding: "10px",
                   marginBottom: "15px",
-                  border: "2px solid #6fcfacff",
+                  border: "2px solid #0B5D3B",
                 }}
               >
                 <div className="d-flex justify-content-between align-items-start">
@@ -169,7 +207,7 @@ const ScholarshipModal = () => {
                   <small
                     style={{
                       fontSize: "12px",
-                      color: "#079560",
+                      color: "#0B5D3B",
                       fontFamily: "Poppins,sans-serif",
                     }}
                   >
@@ -197,7 +235,7 @@ const ScholarshipModal = () => {
                         <span
                           style={{ fontSize: "12px", wordBreak: "break-all" }}
                         >
-                          support@hunarmandpunjab.org.pk
+                          support@digikhyber.org.pk
                         </span>
                       </div>
                     </div>
@@ -209,7 +247,7 @@ const ScholarshipModal = () => {
                       <span
                         style={{ fontSize: "12px", wordBreak: "break-all" }}
                       >
-                        www.hunarmandpunjab.org.pk
+                        www.digikhyber.org.pk
                       </span>
                     </div>
                   </div>
@@ -218,8 +256,6 @@ const ScholarshipModal = () => {
 
               {/* Application Instructions */}
               <p
-                dir="rtl"
-                lang="ur"
                 className="text-end fw-bold urdu-font mb-2 text-red"
                 style={{ fontSize: "10px" }}
               >
@@ -247,6 +283,14 @@ const ScholarshipModal = () => {
           </div>
         </div>
       </div>
+      <style>{`
+        body.modal-open {
+          padding-right: 0 !important;
+        }
+        .modal-open {
+          padding-right: 0 !important;
+        }
+      `}</style>
     </>
   );
 };

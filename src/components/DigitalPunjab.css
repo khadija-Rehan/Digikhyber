@@ -1,14 +1,116 @@
-.video-slider-container {
-  display: flex;
-  gap: 2rem;
-  padding: 2rem;
-  /* margin-top: 2rem; */
-  align-items: flex-start;
+/* =============================================================
+   Digikhyber Section
+   ============================================================= */
+
+.digital-punjab {
+  padding-bottom: 2rem;
 }
 
+/* ── Banner ── */
+.digital.breadcrums {
+  border-radius: 12px;
+  overflow: hidden;
+  margin-bottom: 2rem;
+  background: linear-gradient(135deg, #033622 0%, #0B5D3B 45%, #C9A227 100%);
+  border: 1px solid #a07010;
+  box-shadow: 0 4px 18px rgba(11, 93, 59, 0.15), 0 1px 4px rgba(0, 0, 0, 0.08);
+  position: relative;
+}
+
+/* Decorative green corner block (top-left) */
+.digital.breadcrums::before {
+  content: "";
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 60px;
+  height: 60px;
+  background: #0B5D3B;
+  clip-path: polygon(0 0, 100% 0, 0 100%);
+  opacity: 0.85;
+  pointer-events: none;
+  z-index: 1;
+}
+
+.digital.breadcrums>canvas,
+.digital.breadcrums>div:first-child {
+  display: none !important;
+}
+
+/* Content */
+.digital.breadcrums .px-lg-5 {
+  padding: 0.9rem 1.5rem !important;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  text-align: center;
+  gap: 0.4rem;
+  position: relative;
+  z-index: 2;
+}
+
+/* Badge */
+.d-p {
+  display: inline-flex !important;
+  align-items: center !important;
+  gap: 6px !important;
+  background: rgba(255, 255, 255, 0.15) !important;
+  color: #fff !important;
+  border: 1px solid rgba(255, 255, 255, 0.35) !important;
+  padding: 0.2rem 0.75rem !important;
+  border-radius: 100px !important;
+  font-size: 0.7rem !important;
+  font-weight: 700 !important;
+  letter-spacing: 1px !important;
+  text-transform: uppercase !important;
+  width: fit-content !important;
+  margin-bottom: 0 !important;
+}
+
+.d-p::before {
+  content: "";
+  width: 5px;
+  height: 5px;
+  background: #fff;
+  border-radius: 50%;
+  flex-shrink: 0;
+  display: inline-block;
+}
+
+/* Description */
+.d-content {
+  font-size: 0.88rem !important;
+  line-height: 1.6 !important;
+  color: #fff !important;
+  margin: 0 !important;
+}
+
+.d-content .fw-bold {
+  color: #C9A227 !important;
+  font-weight: 600 !important;
+}
+
+
+/* ================================================================
+   VIDEO SECTION  →  .video-slider-container
+   ================================================================ */
+.video-slider-container {
+  display: flex;
+  gap: 1.75rem;
+  padding: 1.75rem;
+  align-items: flex-start;
+  background: #ffffff;
+  border-radius: 20px;
+  box-shadow:
+    0 1px 3px rgba(0, 0, 0, 0.06),
+    0 12px 35px rgba(0, 0, 0, 0.07);
+  border: 1px solid #e8edf0;
+}
+
+/* ── Main video column ── */
 .main-video-section {
   flex: 4;
-  height: 600px;
+  height: 540px;
   display: flex;
   flex-direction: column;
 }
@@ -18,79 +120,127 @@
   position: relative;
   width: 100%;
   background: #000;
-  border-radius: 8px;
+  border-radius: 14px;
   overflow: hidden;
   min-height: 0;
+  box-shadow:
+    0 4px 8px rgba(0, 0, 0, 0.08),
+    0 16px 40px rgba(0, 0, 0, 0.14);
 }
 
 .main-video-wrapper iframe {
   position: absolute;
-  top: 0;
-  left: 0;
+  inset: 0;
   width: 100%;
   height: 100%;
-  border-radius: 8px;
+  border: none;
 }
 
-.video-title {
-  color: #333;
-  font-size: 1.2rem;
-  font-weight: 600;
-  margin: 0;
-}
-
+/* ── Playlist column ── */
 .video-playlist-section {
   flex: 1;
-  max-width: 320px;
-  height: 600px;
+  min-width: 280px;
+  max-width: 310px;
+  height: 540px;
   display: flex;
   flex-direction: column;
 }
 
+/* Playlist heading */
 .playlist-title {
-  color: #333;
-  font-size: 1.1rem;
-  font-weight: 600;
-  border-bottom: 2px solid #079560;
-  padding-bottom: 0.5rem;
-  margin-bottom: 1rem;
+  font-size: 1rem !important;
+  font-weight: 700 !important;
+  color: #111827 !important;
+  margin: 0 0 1rem !important;
+  padding: 0 0 0.85rem !important;
+  border-bottom: 2px solid #f0f0f0 !important;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
+.playlist-title::before {
+  content: "";
+  display: inline-block;
+  width: 4px;
+  height: 18px;
+  background: #0B5D3B;
+  border-radius: 3px;
   flex-shrink: 0;
 }
 
+/* Scrollable list */
 .video-playlist {
   flex: 1;
   overflow-y: auto;
   display: flex;
   flex-direction: column;
-  gap: 0.75rem;
-  padding-right: 8px;
+  gap: 0.6rem;
+  padding-right: 6px;
   min-height: 0;
+  scroll-behavior: smooth;
 }
 
+/* Custom scrollbar */
+.video-playlist::-webkit-scrollbar {
+  width: 5px;
+}
+
+.video-playlist::-webkit-scrollbar-track {
+  background: transparent;
+}
+
+.video-playlist::-webkit-scrollbar-thumb {
+  background: #d1d5db;
+  border-radius: 10px;
+}
+
+.video-playlist::-webkit-scrollbar-thumb:hover {
+  background: #0B5D3B;
+}
+
+/* ── Each thumbnail card ── */
 .video-thumbnail {
   cursor: pointer;
-  border-radius: 8px;
+  border-radius: 10px;
   overflow: hidden;
-  transition: all 0.3s ease;
-  border: 2px solid transparent;
-  background: white;
-  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
-  height: 120px;
+  transition: all 0.22s cubic-bezier(0.4, 0, 0.2, 1);
+  border: 1.5px solid #e5e7eb;
+  background: #fafafa;
+  height: 80px;
   flex-shrink: 0;
+  position: relative;
 }
 
 .video-thumbnail:hover {
   transform: translateY(-2px);
-  box-shadow: 0 6px 16px rgba(0, 0, 0, 0.15);
-  border-color: #079560;
+  border-color: #0B5D3B;
+  box-shadow: 0 6px 20px rgba(11, 93, 59, 0.15);
+  background: #fff;
 }
 
 .video-thumbnail.active {
-  border-color: #079560;
-  box-shadow: 0 0 0 3px rgba(0, 123, 255, 0.25);
-  background: #f8f9ff;
+  border-color: #0B5D3B;
+  background: #f0fdf6;
+  box-shadow:
+    0 0 0 2px rgba(11, 93, 59, 0.2),
+    0 4px 14px rgba(11, 93, 59, 0.15);
 }
 
+/* Active left accent stripe */
+.video-thumbnail.active::before {
+  content: "";
+  position: absolute;
+  left: 0;
+  top: 0;
+  bottom: 0;
+  width: 3px;
+  background: #0B5D3B;
+  border-radius: 3px 0 0 3px;
+  z-index: 1;
+}
+
+/* Thumbnail image wrapper */
 .thumbnail-image {
   position: relative;
   width: 100%;
@@ -103,134 +253,134 @@
   width: 100%;
   height: 100%;
   object-fit: cover;
+  transition: transform 0.35s ease, opacity 0.25s ease;
+  opacity: 0.85;
 }
 
+.video-thumbnail:hover .thumbnail-image img,
+.video-thumbnail.active .thumbnail-image img {
+  opacity: 1;
+  transform: scale(1.04);
+}
+
+/* Play overlay */
 .play-overlay {
   position: absolute;
-  top: 0;
-  left: 0;
-  width: 100%;
-  height: 100%;
-  background: rgba(0, 0, 0, 0.4);
+  inset: 0;
+  background: linear-gradient(135deg,
+      rgba(0, 0, 0, 0.45) 0%,
+      rgba(0, 0, 0, 0.15) 100%);
   display: flex;
   align-items: center;
   justify-content: center;
   opacity: 0;
-  transition: opacity 0.3s ease;
+  transition: opacity 0.22s ease;
 }
 
 .video-thumbnail:hover .play-overlay {
   opacity: 1;
 }
 
+.video-thumbnail.active .play-overlay {
+  opacity: 1;
+  background: linear-gradient(135deg,
+      rgba(11, 93, 59, 0.55) 0%,
+      rgba(11, 93, 59, 0.2) 100%);
+}
+
+/* Play button */
 .play-button {
-  width: 32px;
-  height: 32px;
-  background: #ff0000;
+  width: 34px;
+  height: 34px;
+  background: rgba(255, 255, 255, 0.95);
   border-radius: 50%;
   display: flex;
   align-items: center;
   justify-content: center;
-  color: white;
-  font-size: 14px;
+  color: #0B5D3B;
+  font-size: 13px;
   font-weight: bold;
-  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.3);
+  box-shadow: 0 3px 10px rgba(0, 0, 0, 0.25);
+  transform: scale(0.75);
+  transition: transform 0.22s ease;
+  padding-left: 2px;
+  /* optical center for ▶ */
 }
 
-/* Custom scrollbar for playlist - Modern Design */
-.video-playlist::-webkit-scrollbar {
-  width: 8px;
+.video-thumbnail:hover .play-button {
+  transform: scale(1);
 }
 
-.video-playlist::-webkit-scrollbar-track {
-  background: #f1f3f4;
-  border-radius: 10px;
-  margin: 4px 0;
+.video-thumbnail.active .play-button {
+  transform: scale(1);
+  background: #0B5D3B;
+  color: #fff;
 }
 
-.video-playlist::-webkit-scrollbar-thumb {
-  background: linear-gradient(135deg, #007bff, #0056b3);
-  border-radius: 10px;
-  border: 1px solid #e9ecef;
-}
-
-.video-playlist::-webkit-scrollbar-thumb:hover {
-  background: linear-gradient(135deg, #0056b3, #004085);
-}
-
-.video-playlist::-webkit-scrollbar-corner {
-  background: transparent;
-}
-
-/* Firefox scrollbar */
-.video-playlist {
-  scrollbar-width: thin;
-  scrollbar-color: #079560 #f1f3f4;
-}
-
-/* Responsive design */
+/* ================================================================
+   RESPONSIVE
+   ================================================================ */
 @media (max-width: 1024px) {
   .video-slider-container {
-    gap: 1.5rem;
-    padding: 1.5rem;
+    gap: 1.25rem;
+    padding: 1.25rem;
   }
-  
+
   .main-video-section,
   .video-playlist-section {
-    height: 500px;
+    height: 480px;
   }
 }
 
 @media (max-width: 768px) {
-  .video-slider-container {
-    flex-direction: column;
-    gap: 1rem;
-    padding: 1rem;
-    align-items: stretch;
+  .digital.breadcrums {
+    border-radius: 16px;
   }
 
-  .main-video-section,
-  .video-playlist-section {
-    height: auto;
-    max-width: 100%;
+  .digital.breadcrums .px-lg-5 {
+    padding-top: 2.25rem !important;
+    padding-bottom: 2.25rem !important;
+  }
+
+  .d-content {
+    font-size: 0.97rem !important;
+  }
+
+  .video-slider-container {
+    flex-direction: column;
+    padding: 1rem;
+    gap: 1.25rem;
+    border-radius: 16px;
   }
 
   .main-video-section {
-    height: 300px;
+    height: 260px;
+    flex: none;
+    width: 100%;
   }
 
   .video-playlist-section {
-    height: 350px;
-  }
-
-  .video-playlist {
-    max-height: 300px;
+    max-width: 100%;
+    width: 100%;
+    height: 300px;
+    flex: none;
   }
 
   .video-thumbnail {
-    height: 70px;
+    height: 72px;
   }
 }
 
 @media (max-width: 480px) {
-  .video-slider-container {
-    padding: 0.75rem;
-  }
-  
   .main-video-section {
-    height: 250px;
+    height: 220px;
   }
-  
+
   .video-playlist-section {
-    height: 300px;
+    height: 260px;
   }
-  
-  .video-playlist {
-    max-height: 250px;
-    flex-direction: row;
-  }
-  
+
   .video-thumbnail {
-    height: 60px;
+    height: 64px;
   }
-} 
+}

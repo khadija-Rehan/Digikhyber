@@ -1,54 +1,67 @@
 import React from "react";
-import Logo from "../assets/logo.png";
-import { Button } from "react-bootstrap";
 import { Link } from "react-router-dom";
-import ParticleBackground from "../components/ParticleBackground";
+import AuthBanner from "../components/AuthBanner";
 
 const ApplyNow = () => {
-
     return (
-        <div style={{ backgroundColor: " #079560", height: "100vh" }}>
-            <ParticleBackground />
+        <AuthBanner 
+            title="Admission Portal" 
+            description="Welcome to Digikhyber. Select your path to begin your professional journey."
+        >
+            <div className="auth-form-box px-3">
+                <div className="text-center mb-5">
+                    <h2 className="auth-title mb-1">Select Action</h2>
+                    <p className="auth-subtitle">Choose how you want to proceed today</p>
+                </div>
 
-            <div className="container">
-                <div className="row pt-5 pb-5">
-                    <div className="col-lg-12">
-                        <div className="applynow" style={{ position: "relative", zIndex: "1" }}>
-                            <img
-                                className="  mb-4"
-                                style={{
-                                    width: "200px",
-                                }}
-                                src={Logo}
-                                alt="logo"
-                            />
-                            <h2 className="mb-4">Welcome to the Hunarmand Punjab Admission Portal!</h2>
-                            <p>
-                                Start by registering as a new applicant. Once registered. Use your email and password to log in to the Candidate Portal <br /> and continue your application journey.
-
-                            </p>
-                            <div className="auth-buttons d-flex align-items-center justify-content-center">
-                                <Link to="/register">
-                                    <Button variant="success" className="btn-green register-btn">
-                                        New Registration
-                                    </Button>
-                                </Link>
-                                <Link to="/login">
-                                    <Button variant="success" className="btn-green register-btn">
-                                        Candidate Login
-                                    </Button>
-                                </Link>
-                                <Link to="/howitswork">
-                                    <Button variant="success" className="btn-green register-btn">
-                                        How It Works
-                                    </Button>
-                                </Link>
-                            </div>
+                <div className="admission-grid-unique">
+                    <Link to="/register" className="admission-pill-btn">
+                        <div className="pill-icon-glow">
+                            <i className="fas fa-user-plus"></i>
                         </div>
-                    </div>
+                        <div className="pill-content">
+                            <h3>New Registration</h3>
+                            <span className="pill-tag">For new applicants</span>
+                        </div>
+                        <div className="pill-action">
+                            <i className="fas fa-arrow-right"></i>
+                        </div>
+                    </Link>
+
+                    <Link to="/login" className="admission-pill-btn">
+                        <div className="pill-icon-glow">
+                            <i className="fas fa-sign-in-alt"></i>
+                        </div>
+                        <div className="pill-content">
+                            <h3>Candidate Login</h3>
+                            <span className="pill-tag">Access your portal</span>
+                        </div>
+                        <div className="pill-action">
+                            <i className="fas fa-arrow-right"></i>
+                        </div>
+                    </Link>
+
+                    <Link to="/howitswork" className="admission-pill-btn">
+                        <div className="pill-icon-glow">
+                            <i className="fas fa-lightbulb"></i>
+                        </div>
+                        <div className="pill-content">
+                            <h3>How It Works</h3>
+                            <span className="pill-tag">Learn the process</span>
+                        </div>
+                        <div className="pill-action">
+                            <i className="fas fa-arrow-right"></i>
+                        </div>
+                    </Link>
+                </div>
+
+                <div className="mt-5 text-center">
+                    <p className="text-muted small mb-0">
+                        Need technical support? <Link to="/contact-us" className="text-success fw-bold">Contact us</Link>
+                    </p>
                 </div>
             </div>
-        </div>
+        </AuthBanner>
     );
 };
 

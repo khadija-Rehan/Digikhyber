@@ -6,7 +6,7 @@ import { useInView } from "react-intersection-observer";
 import FS from "../assets/Solar-Panel.webp";
 import GS from "../assets/Solar-Penal.webp";
 import Team from "../assets/team.png";
-import ParticleBackground from "../components/ParticleBackground";
+import PageBanner from "../components/PageBanner";
 import StatCounter from "../components/StatsCounter";
 import { Link } from "react-router-dom";
 
@@ -29,11 +29,12 @@ const FreeSolarPanel = () => {
         window.addEventListener("resize", updateCardsPerRow);
 
         AOS.init({
-            duration: 800,
-            offset: 300,
-            once: false,
+            duration: 400,
+            offset: 0,
+            once: true,
+            easing: 'ease-out',
         });
-
+        
         return () => {
             window.removeEventListener("resize", updateCardsPerRow);
         };
@@ -45,83 +46,92 @@ const FreeSolarPanel = () => {
 
     return (
         <>
-            <div className="banner">
-                <ParticleBackground />
+            <PageBanner 
+                title="digikhyber Solar Scheme"
+                description="In a world where digital learning is the future, uninterrupted power is a necessity, not a luxury. Digikhyber Solar Scheme, Digikhyber provides solar energy systems to eligible students who meet our criteria as per policy of Digikhyber — so your learning never stops, no matter the power cuts."
+                image="/images/Solar Scheme.jpg"
+            />
+            <section className="py-4" style={{ background: 'linear-gradient(135deg, #f8f9fa 0%, #e9ecef 100%)' }}>
+                <div className="container">
+                    <div className="row align-items-stretch bg-white rounded-4 shadow overflow-hidden border-0">
+                        {/* Left Side - Solar Image */}
+                        <div className="col-lg-5 p-0 solar-reveal" style={{ minHeight: '380px' }}>
+                            <img
+                                className="w-100 h-100"
+                                src="/images/Solar Scheme Page Image (2).jpeg"
+                                alt="Free Solar Panel Scheme"
+                                style={{ objectFit: 'cover' }}
+                            />
+                        </div>
 
-                <div className="banner-content">
-                    <div className="container">
-                        <div className="row">
-                            <div className="col-lg-8 col-md-12">
-                                <h1 className="font-48">Hunarmand Solar Scheme</h1>
-                                <p className="font-18 light-grey l-h-1 weight-400">
-                                    In a world where digital learning is the future, uninterrupted
-                                    power is a necessity, not a luxury. Hunarmand Punjab Solar
-                                    Scheme, Hunarmand Punjab provides solar energy systems to
-                                    eligible students who meet our criteria as per policy of
-                                    Hunarmand Punjab — so your learning never stops, no matter the
-                                    power cuts.
+                        {/* Right Side - Compact Content */}
+                        <div className="col-lg-7 p-4 d-flex flex-column justify-content-center solar-reveal" style={{ animationDelay: '0.1s' }}>
+                            <h4 className="fw-semibold text-dark mb-3 lh-sm">
+                                Powering Your Dreams — <span style={{ color: '#C9A227' }}>Even When the Lights</span> Go Out!
+                            </h4>
+
+                            <div className="text-secondary mb-3" style={{ fontSize: '0.88rem', lineHeight: '1.65' }}>
+                                <p className="mb-2">
+                                    In a world where digital learning is the future, uninterrupted power is a necessity, not a luxury. <strong className="text-success">Digikhyber</strong> provides solar energy systems to eligible students who meet our criteria as per policy — so your learning never stops, no matter the power cuts.
                                 </p>
+                                <div className="px-3 py-2 bg-success bg-opacity-10 rounded-3 border-start border-3 border-success">
+                                    <p className="mb-0 text-dark" style={{ fontSize: '0.87rem' }}>
+                                        This initiative removes a major barrier for students across underserved areas, ensuring reliable electricity to support online classes, skill development, and a brighter academic future — literally and figuratively.
+                                    </p>
+                                </div>
                             </div>
-                            <div className="col-lg-4 col-md-12">
-                                <img src="/images/Solar Scheme.jpg" alt="Course" className="w-100 banner-image" />
-                                <div className="cube"> </div>
+
+                            <div className="mb-3">
+                                <p className="fw-semibold text-dark mb-2" style={{ fontSize: '0.9rem' }}>
+                                    <span style={{ color: '#C9A227' }}>⚡</span> Key Benefits of the Solar Scheme:
+                                </p>
+                                <ul className="list-unstyled mb-0 d-flex flex-column gap-2">
+                                    {[
+                                        "Free Solar Panels",
+                                        "Uninterrupted Power for Devices & Learning",
+                                        "No More Load-Shedding Interruptions",
+                                        "Eco-Friendly, Sustainable Energy Solution",
+                                        "Perfect for Online Learning, Freelancing & IT Training"
+                                    ].map((item, idx) => (
+                                        <li key={idx} className="d-flex align-items-start">
+                                            <div className="bg-success bg-opacity-10 rounded-circle d-flex align-items-center justify-content-center mt-1 me-2 flex-shrink-0" style={{ width: '18px', height: '18px' }}>
+                                                <i className="fa-solid fa-check text-success" style={{ fontSize: '9px' }}></i>
+                                            </div>
+                                            <span className="text-secondary" style={{ fontSize: '0.87rem' }}>{item}</span>
+                                        </li>
+                                    ))}
+                                </ul>
+                            </div>
+
+                            <div className="d-flex flex-column flex-sm-row align-items-sm-center justify-content-between pt-3 border-top">
+                                <p className="mb-2 mb-sm-0 text-muted" style={{ fontSize: '0.85rem', maxWidth: '340px' }}>
+                                    Don't let power cuts hold you back. With the Solar Scheme, your <span className="fw-semibold text-dark">future stays fully charged</span> — no matter where you live.
+                                </p>
+                                <Link
+                                    to="/apply-scholarshipcard"
+                                    className="btn btn-green px-3 py-2 rounded-pill fw-semibold shadow-sm flex-shrink-0"
+                                    style={{ fontSize: '0.85rem' }}
+                                >
+                                    Apply Now
+                                </Link>
                             </div>
                         </div>
                     </div>
                 </div>
-            </div>
-            <div className="container pt-5">
-                <div className="row pt-5 pb-5  ">
-                    <div className="col-lg-6" data-aos="fade-right">
-                        <img className="w-100" src="/images/Solar Scheme Page Image (2).jpeg" alt="" />
-                    </div>
-                    <div className="col-lg-6" data-aos="fade-left">
-                        <h2 className="fw-semibold">
-                            Powering Your Dreams — Even When the Lights Go Out!
-                        </h2>
-                        <p>
-                            In a world where digital learning is the future, uninterrupted
-                            power is a necessity, not a luxury. Hunarmand Punjab Solar Scheme,
-                            Hunarmand Punjab provides solar energy systems to eligible
-                            students who meet our criteria as per policy of Hunarmand Punjab —
-                            so your learning never stops, no matter the power cuts.
-                        </p>
-                        <p>
-                            This initiative removes a major barrier for students across
-                            underserved areas, ensuring reliable electricity to support online
-                            classes, skill development, and a brighter academic future —
-                            literally and figuratively.
-                        </p>
-                        <div className="mt-4">
-                            <p className="fw-semibold ">
-                                ⚡ Key Benefits of the Solar Scheme:
-                            </p>
-                            <ul className="  mt-2">
-                                <li> Free Solar panels </li>
-                                <li> Uninterrupted Power for Devices & Learning</li>
-                                <li> No More Load-Shedding Interruptions</li>
-                                <li>Eco-Friendly, Sustainable Energy Solution</li>
-                                <li> Perfect for Online Learning, Freelancing & IT Training</li>
-                            </ul>
-                        </div>
-                        <p className="fw-bold">Light Up Your Learning — Apply Now!</p>
-                        <p>
-                            Don’t let power cuts hold you back. With the Solar Scheme, your
-                            future stays fully charged — no matter where you live.
-                        </p>
-                        <div className="mt-4  ">
-                            <Link
-                                to="/apply-scholarshipcard"
-                                className="btn-green register-btn btn btn-success"
-                            >
-                                Apply Now
-                            </Link>
-                        </div>
-                    </div>
-                </div>
-            </div>
+            </section>
 
             <StatCounter />
+            <style>{`
+                .solar-reveal {
+                    animation: solarRevealAnim 0.6s cubic-bezier(0.19, 1, 0.22, 1) forwards;
+                    opacity: 0;
+                }
+
+                @keyframes solarRevealAnim {
+                    from { opacity: 0; transform: translateY(20px); }
+                    to { opacity: 1; transform: translateY(0); }
+                }
+            `}</style>
         </>
     );
 };

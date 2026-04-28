@@ -38,7 +38,7 @@ const LoginAlertModal = ({ isOpen, onClose }) => {
         {/* Header */}
         <div
           style={{
-            background: "#079560",
+            background: "#0B5D3B",
             color: "white",
             padding: "15px 20px",
             borderRadius: "15px 15px 0 0",
@@ -77,7 +77,7 @@ const LoginAlertModal = ({ isOpen, onClose }) => {
                   fontSize: "0.8rem",
                 }}
               >
-                Hunarmand Punjab Program
+                Digikhyber Program
               </p>
             </div>
           </div>
@@ -138,7 +138,7 @@ const LoginAlertModal = ({ isOpen, onClose }) => {
                 fontWeight: "500",
               }}
             >
-              All students enrolled in the Hunarmand Punjab Program will receive
+              All students enrolled in the Digikhyber Program will receive
               their LMS credentials after <strong>20th August 2025</strong>.
             </p>
           </div>
@@ -304,7 +304,7 @@ const LoginAlertModal = ({ isOpen, onClose }) => {
           <button
             onClick={onClose}
             style={{
-              background: "#079560",
+              background: "#0B5D3B",
               color: "white",
               border: "none",
               borderRadius: "20px",

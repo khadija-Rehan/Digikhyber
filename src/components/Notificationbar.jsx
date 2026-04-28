@@ -1,88 +1,47 @@
 import React from "react";
-import Clip from "../assets/mortarboard-svgrepo-com.svg";
 
 const Notificationbar = () => {
     return (
         <div className="marquee-section style-header">
-            <div className="mycustom-marque header-marque theme-blue-bg">
+            <div className="mycustom-marque header-marque" style={{ background: '#0B5D3B', borderBottom: '2px solid #C9A227' }}>
                 <div className="scrolling-wrap">
                     <div className="comm">
                         <div></div>
                         <div className="cmn-textslide">
-                            <img className="white-icon" width="30" height="30" src="https://img.icons8.com/windows/32/admission.png" alt="admission" />
-                            Admissions Are Closing Soon
+                            <img className="white-icon" width="18" height="18" src="https://img.icons8.com/windows/32/admission.png" alt="admission" />
+                            <span className="gov-text highlight">Applications Are Closing Soon</span>
                         </div>
                         <div className="cmn-textslide">
-                            <img className="white-icon" width="30" height="30" src="https://img.icons8.com/ios/50/parliament.png" alt="parliament" />
-                            Endorsed By Government
+                            <img className="white-icon" width="18" height="18" src="https://img.icons8.com/ios/50/parliament.png" alt="parliament" />
+                            <span className="gov-text">Endorsed By Government</span>
                         </div>
                         <div className="cmn-textslide">
-                            <img className="white-icon" width="30" height="30" src="https://img.icons8.com/ios-glyphs/30/laptop.png" alt="laptop" />
-                            Laptop Opportunities
+                            <img className="white-icon" width="18" height="18" src="https://img.icons8.com/ios-glyphs/30/laptop.png" alt="laptop" />
+                            <span className="gov-text">Laptop Opportunities</span>
                         </div>
                         <div className="cmn-textslide">
-                            <img className="white-icon" width="30" height="30" src="https://img.icons8.com/windows/32/solar-panel.png" alt="solar-panel" />
-                            Solar Panel Opportunities
+                            <img className="white-icon" width="18" height="18" src="https://img.icons8.com/windows/32/solar-panel.png" alt="solar-panel" />
+                            <span className="gov-text highlight">Solar Panel Opportunities</span>
                         </div>
                         <div className="cmn-textslide">
-                            <img className="white-icon" width="30" height="30" src="https://img.icons8.com/ios-glyphs/30/scholarship.png" alt="scholarship" />
-                            Scholarship Card Opportunities
+                            <img className="white-icon" width="18" height="18" src="https://img.icons8.com/ios-glyphs/30/scholarship.png" alt="scholarship" />
+                            <span className="gov-text">Scholarship Card Opportunities</span>
                         </div>
                         <div className="cmn-textslide">
-                            <img className="white-icon" width="30" height="30" src="https://img.icons8.com/ios/50/add-dollar.png" alt="add-dollar" />
-                            Taleem Finance Opportunities
+                            <img className="white-icon" width="18" height="18" src="https://img.icons8.com/ios/50/add-dollar.png" alt="add-dollar" />
+                            <span className="gov-text">Taleem Finance Opportunities</span>
                         </div>
                         <div className="cmn-textslide">
-                            <img className="white-icon" width="30" height="30" src="https://img.icons8.com/external-filled-color-icons-papa-vector/78/external-Study-Abroad-expats-filled-color-icons-papa-vector.png" alt="external-Study-Abroad-expats-filled-color-icons-papa-vector" />
-                            Study Abroad Opportunities
+                            <img className="white-icon" width="18" height="18" src="https://img.icons8.com/external-filled-color-icons-papa-vector/78/external-Study-Abroad-expats-filled-color-icons-papa-vector.png" alt="abroad" />
+                            <span className="gov-text highlight">Study Abroad Consultancy Opportunities</span>
                         </div>
                         <div className="cmn-textslide">
-                            <img className="white-icon" width="30" height="30" src="https://img.icons8.com/ios-glyphs/30/internship.png" alt="internship" />
-                            National & Global Internship Opportunities
+                            <img className="white-icon" width="18" height="18" src="https://img.icons8.com/ios-glyphs/30/internship.png" alt="internship" />
+                            <span className="gov-text">National & Global Internship Opportunities</span>
                         </div>
                         <div className="cmn-textslide">
-                            <img className="white-icon" width="30" height="30" src="https://img.icons8.com/external-others-phat-plus/64/external-courses-online-courses-outline-others-phat-plus-30.png" alt="external-courses-online-courses-outline-others-phat-plus-30" />
-                            25+ Hands on Practical Courses
-                        </div>
-                    </div>
-                    <div className="comm">
-                        {/* Duplicate content with white icons */}
-                        <div></div>
-                        <div className="cmn-textslide">
-                            <img className="white-icon" width="30" height="30" src="https://img.icons8.com/windows/32/admission.png" alt="admission" />
-                            Admissions Are Closing Soon
-                        </div>
-                        <div className="cmn-textslide">
-                            <img className="white-icon" width="30" height="30" src="https://img.icons8.com/ios/50/parliament.png" alt="parliament" />
-                            Endorsed By Government
-                        </div>
-                        <div className="cmn-textslide">
-                            <img className="white-icon" width="30" height="30" src="https://img.icons8.com/ios-glyphs/30/laptop.png" alt="laptop" />
-                            Laptop Opportunities
-                        </div>
-                        <div className="cmn-textslide">
-                            <img className="white-icon" width="30" height="30" src="https://img.icons8.com/windows/32/solar-panel.png" alt="solar-panel" />
-                            Solar Panel Opportunities
-                        </div>
-                        <div className="cmn-textslide">
-                            <img className="white-icon" width="30" height="30" src="https://img.icons8.com/ios-glyphs/30/scholarship.png" alt="scholarship" />
-                            Scholarship Card Opportunities
-                        </div>
-                        <div className="cmn-textslide">
-                            <img className="white-icon" width="30" height="30" src="https://img.icons8.com/ios/50/add-dollar.png" alt="add-dollar" />
-                            Taleem Finance Opportunities
-                        </div>
-                        <div className="cmn-textslide">
-                            <img className="white-icon" width="30" height="30" src="https://img.icons8.com/external-filled-color-icons-papa-vector/78/external-Study-Abroad-expats-filled-color-icons-papa-vector.png" alt="external-Study-Abroad-expats-filled-color-icons-papa-vector" />
-                            Taleem Abroad Opportunities
-                        </div>
-                        <div className="cmn-textslide">
-                            <img className="white-icon" width="30" height="30" src="https://img.icons8.com/ios-glyphs/30/internship.png" alt="internship" />
-                            National & Global Internship Opportunities
-                        </div>
-                        <div className="cmn-textslide">
-                            <img className="white-icon" width="30" height="30" src="https://img.icons8.com/external-others-phat-plus/64/external-courses-online-courses-outline-others-phat-plus-30.png" alt="external-courses-online-courses-outline-others-phat-plus-30" />
-                            25+ Hands on Practical Courses
+                            <img className="white-icon" width="18" height="18" src="https://img.icons8.com/external-others-phat-plus/64/external-courses-online-courses-outline-others-phat-plus-30.png" alt="courses" />
+                            <span className="gov-text">25+ Hands on Practical Courses</span>
                         </div>
                     </div>
                 </div>
@@ -90,14 +49,36 @@ const Notificationbar = () => {
             
             {/* Add CSS for white icons */}
             <style jsx>{`
+                .marquee-section {
+                    position: relative;
+                    z-index: 100;
+                }
+                .mycustom-marque {
+                    padding: 4px 0;
+                    display: flex;
+                    align-items: center;
+                }
                 .white-icon {
                     filter: brightness(0) invert(1);
-                    vertical-align: middle;
+                    opacity: 0.9;
                     margin-right: 8px;
                 }
                 .cmn-textslide {
                     display: flex;
                     align-items: center;
+                    padding-right: 35px;
+                }
+                .gov-text {
+                    color: white;
+                    font-family: 'Jost', sans-serif;
+                    font-size: 11.5px;
+                    font-weight: 500;
+                    letter-spacing: 0.5px;
+                    text-transform: uppercase;
+                }
+                .highlight {
+                    color: #C9A227;
+                    font-weight: 600;
                 }
             `}</style>
         </div>

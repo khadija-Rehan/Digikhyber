@@ -4,7 +4,7 @@ import "aos/dist/aos.css";
 import CountUp from "react-countup";
 import { useInView } from "react-intersection-observer";
 import FS from "../assets/scholar.webp";
-import ParticleBackground from "../components/ParticleBackground";
+import PageBanner from "../components/PageBanner";
 import { Link } from "react-router-dom";
 import StatCounter from "../components/StatsCounter";
 
@@ -27,9 +27,9 @@ const ScholarshipCard = () => {
     window.addEventListener("resize", updateCardsPerRow);
 
     AOS.init({
-      duration: 800,
-      offset: 300,
-      once: false,
+      duration: 350,
+      offset: 0,
+      once: true,
     });
 
     return () => {
@@ -43,387 +43,381 @@ const ScholarshipCard = () => {
 
   return (
     <>
-      <div className="banner">
-        <ParticleBackground />
+      <PageBanner 
+        title="Scholarship Cards"
+        description="The Scholarship Card is your all-in-one pass to unlock a world of digital learning and career-building opportunities. Digikhyber is the biggest E-Learning Platform launched by Minister of School & Higher Education Rana Sikandar Hayat, this initiative is designed to empower youth with access to high-quality training programs, hands-on practical learning, and an internationally recognized curriculum."
+        image="/images/scholarship-card.jpg"
+      />
+      
+      <div className="scholarship-main-section">
+        <div className="container py-5 position-relative z-1">
+          {/* Redesigned Floating Hero Card */}
+          <div className="digikhyber-premium-hero mb-5 elite-instant-reveal">
+            <div className="row g-0 align-items-center">
+              <div className="col-lg-7 p-4 p-md-5">
+                <div className="hero-content-wrapper">
+                  <h2 className="digikhyber-heading mb-4">
+                    Unlock Your Future with <br/>
+                    <span className="accent-text">Our Scholarship Cards</span>
+                  </h2>
+                  <div className="digikhyber-body-text mb-4">
+                    <p className="text-secondary" style={{ lineHeight: '1.9', fontSize: '1.1rem' }}>
+                      The <b>Scholarship Card</b> is your all-in-one pass to unlock a world of digital learning and career-building opportunities. 
+                      <b> Digikhyber</b> is the biggest E-Learning Platform launched by 
+                      <b> Minister of School & Higher Education Rana Sikandar Hayat</b>, this initiative is designed to empower youth with 
+                      access to high-quality training programs, hands-on practical learning, and an internationally recognized curriculum.
+                    </p>
+                    <p className="text-secondary" style={{ fontSize: '0.95rem' }}>
+                      Whether you're looking to build IT skills, receive a free laptop, or benefit from educational financing and solar support, 
+                      your Scholarship Card is the key to it all.
+                    </p>
+                  </div>
 
-        <div className="banner-content">
-          <div className="container">
-            <div className="row">
-              <div className="col-lg-8 col-md-12">
-                <h1 className="font-48">Scholarship Cards</h1>
-                <p className="font-18 light-grey l-h-1 weight-400">
-                  The Scholarship Card is your all-in-one pass to unlock a world
-                  of digital learning and career-building opportunities.
-                  Hunarmand Punjab is the biggest E-Learning Platform launched
-                  by Minister of School & Higher Education Rana Sikandar Hayat,
-                  this initiative is designed to empower youth with access to
-                  high-quality training programs, hands-on practical learning,
-                  and an internationally recognized curriculum.
-                </p>
+                  <div className="benefits-grid-modern mb-5">
+                    {[
+                      { icon: 'fa-laptop-code', text: 'Advanced IT Training' },
+                      { icon: 'fa-solar-panel', text: 'Laptop & Solar Support' },
+                      { icon: 'fa-graduation-cap', text: 'Global Curriculum' },
+                      { icon: 'fa-briefcase', text: 'Career Guidance' }
+                    ].map((benefit, i) => (
+                      <div key={i} className="modern-benefit-pill">
+                        <i className={`fa-solid ${benefit.icon}`}></i>
+                        <span>{benefit.text}</span>
+                      </div>
+                    ))}
+                  </div>
+
+                  <div className="d-flex flex-wrap gap-3">
+                    <Link to="/apply-scholarshipcard" className="elite-action-btn">
+                      Apply Now <i className="fa-solid fa-arrow-right-long ms-2"></i>
+                    </Link>
+                  </div>
+                </div>
               </div>
-              <div className="col-lg-4 col-md-12">
-                <img
-                  src="/images/scholarship-card.jpg"
-                  alt="Course"
-                  className="w-100 banner-image"
-                />
-                <div className="cube"> </div>
+              <div className="col-lg-5 p-4 text-center">
+                <div className="floating-image-container">
+                  <div className="image-card-frame">
+                    <img src="/images/scholarship-card.jpg" alt="Scholarship Card" className="img-fluid rounded-4 shadow-xl" />
+                    <div className="frame-decoration"></div>
+                  </div>
+                  {/* Decorative Elements */}
+                  <div className="floating-blob blob-1"></div>
+                  <div className="floating-blob blob-2"></div>
+                </div>
               </div>
             </div>
           </div>
-        </div>
-      </div>
-      <div className="container pt-5">
-        <div className="row pt-5 pb-5  ">
-          <div className="col-lg-6" data-aos="fade-left">
-            <h2 className="fw-semibold">
-              Unlock Your Future with Our Scholarship Cards
-            </h2>
-            <p>
-              The <b> Scholarship Card </b> is your all-in-one pass to unlock a
-              world of digital learning and career-building opportunities.{" "}
-              <b> Hunarmand Punjab </b> is the biggest E-Learning Platform
-              launched by{" "}
-              <b> Minister of School & Higher Education Rana Sikandar Hayat </b>
-              , this initiative is designed to empower youth with access to
-              high-quality training programs, hands-on practical learning, and
-              an internationally recognized curriculum.
-            </p>
-            <p>
-              Whether you're looking to build IT skills, receive a free laptop,
-              or benefit from educational financing and solar support, your
-              Scholarship Card is the key to it all.
-            </p>
-            <div className="mt-4">
-              <p className="fw-semibold" style={{ color: "#079560" }}>
-                Benefits of the Scholarship Card:
-              </p>
-              <ul className="  mt-2 list-unstyled">
-                <li> Advanced IT Training with real-world skills</li>
-                <li> Laptop, Solar & Education Finance Support</li>
-                <li> Hands-On Learning with Global Curriculum</li>
-                <li>Eco-Friendly, Sustainable Energy Solution</li>
-                <li> Career Guidance & Freelancing Support</li>
-              </ul>
-            </div>
-            <p className="fw-bold">
-              Apply today and take the first step toward a skilled, self-reliant
-              future.
-            </p>
-            <div className="d-flex align-items-center gap-3 flex-wrap flex-md-nowrap d-none d-lg-block">
-              <Link to={"/apply-scholarshipcard"}>
-                <button
-                  className="btn-green register-btn  btn btn-success "
-                  style={{ fontFamily: "Poppins" }}
-                >
-                  {" "}
-                  Apply Now{" "}
-                </button>
-              </Link>
-            </div>
-          </div>
-          <div className="col-lg-6" data-aos="fade-right">
-            <img
-              className="w-100 rounded-4"
-              src="/images/scholarship-card.jpg"
-              alt=""
-            />
-            <div className="d-flex align-items-center gap-3 flex-wrap flex-md-nowrap mt-4 d-block d-lg-none">
-              <Link to={"/apply-scholarshipcard"}>
-                <button
-                  className="btn-green register-btn  btn btn-success "
-                  style={{ fontFamily: "Poppins" }}
-                >
-                  {" "}
-                  Apply Now{" "}
-                </button>
-              </Link>
-            </div>
-          </div>
-        </div>
-      </div>
-      <div className="container my-3">
-        <div className="  p-4">
-          <h2 className="card-title text-success mb-4 text-center">
-            Hunarmand Punjab – Scholarship Card Initiative
-          </h2>
 
-          <div className="mb-4">
-            <h4>Overview</h4>
-            <p>
-              The Hunarmand Punjab Scholarship Card is a revolutionary
-              initiative launched under the Hunarmand Punjab Program with the
-              appreciation of our Honourable Minister of Education, Punjab Rana
-              Sikandar Hayat, aimed at providing IT-Skills to youth enrolled in
-              the training program. This card enables eligible trainees to
-              access training-related LMS, laptop scheme, solar scheme, taleem
-              finance, taleem abroad & more in a transparent, secure, and
-              efficient manner & ensure that every learner receives skill-based
-              training.
-            </p>
-          </div>
-
-          {/* Key Features */}
-          <div className="mb-4">
-            <h4>Key Features</h4>
-            <ul className="   ">
-              <li className=" ">Scholarship Value: Eligible for</li>
-              <li className=" ">Laptop Scheme</li>
-              <li className=" ">Solar Scheme</li>
-              <li className=" ">Taleem Finance</li>
-              <li className=" ">Taleem Abroad</li>
-              <li className=" ">E-Bikes</li>
-              <li className=" ">
-                Coverage: Includes access to advanced courses, learning
-                materials, discount vouchers, and other opportunities.
-              </li>
-              <li className=" ">
-                Card Type: E-Card and Physical Card powered by Hunarmand Punjab.
-              </li>
-              <li className=" ">
-                Usage Limitations: Designed for training-related usage only.
-              </li>
-              <li className=" ">
-                Validity: Valid for the duration of the course (up to 6 months
-                per phase).
-              </li>
-            </ul>
-          </div>
-
-          {/* Eligibility Criteria */}
-          <div className="mb-4">
-            <h4>Eligibility Criteria</h4>
-            <ul className=" ">
-              <li className=" ">Be a resident of Pakistan</li>
-              <li className=" ">Be aged between 15 to 40 years</li>
-              <li className=" ">Hold a valid CNIC/B-Form</li>
-              <li className=" ">
-                Be enrolled in a registered course under Hunarmand Punjab
-              </li>
-              <li className=" ">
-                Have no previous record of Hunarmand scholarship card
-              </li>
-            </ul>
-          </div>
-
-          {/* How to Apply */}
-          <div className="mb-4">
-            <h4>How to Apply for Scholarship Card?</h4>
-            <ol className="   " style={{ fontFamily: "Poppins" }}>
-              <li className=" ">
-                <strong>Online Registration:</strong> Visit{" "}
-                <a
-                  href="https://www.hunarmandpunjab.org.pk"
-                  target="_blank"
-                  rel="noopener noreferrer"
-                >
-                  hunarmandpunjab.org.pk
-                </a>
-                <br />
-                Click on "Scholarship Card Menu – then click on the bottom Apply
-                button"
-              </li>
-              <li className=" ">
-                <strong>Application Form:</strong> Fill the application form
-                carefully, provide correct information & upload the paid challan
-                slip.
-              </li>
-              <li className=" ">
-                <strong>Verification & Approval:</strong>
-                <br />
-                • Application verification conducted by Hunarmand Team.
-                <br />• Upon approval, the Scholarship Card is issued and
-                activated.
-              </li>
-            </ol>
-          </div>
-
-          {/* Charges */}
-          <div className="mb-4">
-            <h4>Charges / Fees</h4>
-            <ul className=" ">
-              <li className=" ">
-                Card Issuance Fee: <strong>Free of cost</strong>
-              </li>
-              <li className=" ">
-                SMS/Email Alerts: <strong>Free real-time alerts</strong> on
-                disbursement & promotions
-              </li>
-            </ul>
-          </div>
-
-          {/* Key Conditions */}
-          <div className="mb-4">
-            <h4>Key Conditions</h4>
-            <ul className=" ">
-              <li className=" ">Access Advance IT Courses</li>
-              <li className=" ">Eligible for Laptop Scheme</li>
-              <li className=" ">Eligible for Solar Scheme</li>
-              <li className=" ">Eligible for Taleem Finance</li>
-              <li className=" ">Eligible for Taleem Abroad</li>
-              <li className=" ">
-                Eligible for National & International Internship Opportunities
-              </li>
-              <li className=" ">
-                Misuse (e.g. selling the card or using it for illegal
-                activities) may lead to termination and blacklisting.
-              </li>
-              <li className=" ">
-                Students must achieve above 85% marks in the evaluation test and
-                pass periodic assessments to remain eligible.
-              </li>
-              <li className=" ">Terms & Conditions apply</li>
-            </ul>
-          </div>
-
-          {/* Terms and Conditions Section */}
-          <div className="mb-4">
-            <h4>Hunarmand Punjab Scholarship Card – Terms & Conditions</h4>
-
-            {/* Eligibility Criteria */}
-            <div className="mb-3">
-              <h5>1. Eligibility Criteria</h5>
-              <ul className=" ">
-                <li className=" ">
-                  Only students enrolled in IT training courses under the
-                  Hunarmand Punjab program are eligible to apply for the
-                  Scholarship Card.
-                </li>
-                <li className=" ">
-                  Students must successfully complete their course and obtain a
-                  minimum of 85% marks in their final evaluation to qualify.
-                </li>
-              </ul>
+          {/* Mosaic Data Grid - Data Preserved */}
+          <div className="row g-4 mb-5 card-reveal">
+            <div className="col-12">
+              <div className="digikhyber-info-card text-center p-4 p-md-5">
+                <h3 className="digikhyber-heading-sub mb-4">Digikhyber – Scholarship Card Initiative</h3>
+                <div className="row justify-content-center">
+                  <div className="col-lg-10">
+                    <h5 className="fw-bold text-dark mb-3">Overview</h5>
+                    <p className="text-secondary mb-0" style={{ lineHeight: '1.8', fontSize: '0.95rem' }}>
+                      The Digikhyber Scholarship Card is a revolutionary initiative launched under the Digikhyber Program 
+                      with the appreciation of our Honourable Minister of Education, Punjab Rana Sikandar Hayat, aimed at providing IT-Skills 
+                      to youth enrolled in the training program. This card enables eligible trainees to access training-related LMS, 
+                      laptop scheme, solar scheme, taleem finance, taleem abroad & more in a transparent, secure, and efficient manner & 
+                      ensure that every learner receives skill-based training.
+                    </p>
+                  </div>
+                </div>
+              </div>
             </div>
 
-            {/* Merit-Based Selection */}
-            <div className="mb-3">
-              <h5>2. Merit-Based Selection</h5>
-              <ul className=" ">
-                <li className=" ">
-                  Scholarship Cards and associated rewards (laptops, solar
-                  panels, e-bikes, etc.) will be awarded strictly on a merit
-                  basis.
-                </li>
-                <li className=" ">
-                  Meeting the minimum criteria does not guarantee selection;
-                  final recipients will be chosen based on top performance
-                  rankings.
-                </li>
-              </ul>
+            {/* Key Features Card */}
+            <div className="col-lg-4 card-reveal" style={{ animationDelay: '0.1s' }}>
+              <div className="digikhyber-info-card h-100 p-4 border-top border-4 border-warning">
+                <h5 className="digikhyber-card-title mb-4">
+                  <i className="fa-solid fa-list-check text-warning me-2"></i> Key Features
+                </h5>
+                <ul className="digikhyber-list small list-unstyled">
+                  {[
+                    'Scholarship Value: Eligible for',
+                    'Laptop Scheme',
+                    'Solar Scheme',
+                    'Taleem Finance',
+                    'Taleem Abroad',
+                    'E-Bikes',
+                    'Coverage: Includes access to advanced courses, materials, discount vouchers.',
+                    'Card Type: E-Card and Physical Card powered by HP.',
+                    'Usage Limitations: Training-related usage only.',
+                    'Validity: Duration of the course (up to 6 months).'
+                  ].map((item, i) => (
+                    <li key={i} className="mb-2 d-flex align-items-start gap-2">
+                      <i className="fa-solid fa-circle-chevron-right text-warning mt-1" style={{ fontSize: '0.8rem' }}></i>
+                      <span>{item}</span>
+                    </li>
+                  ))}
+                </ul>
+              </div>
             </div>
 
-            {/* Course Completion */}
-            <div className="mb-3">
-              <h5>3. Course Completion</h5>
-              <ul className=" ">
-                <li className=" ">
-                  Students must attend all required classes and fulfill the
-                  attendance and assignment criteria set by the training
-                  provider.
-                </li>
-                <li className=" ">
-                  Any incomplete coursework or failure to appear in the final
-                  assessment will result in disqualification from scholarship
-                  eligibility.
-                </li>
-              </ul>
+            {/* Eligibility & Application Card */}
+            <div className="col-lg-4 card-reveal" style={{ animationDelay: '0.2s' }}>
+              <div className="digikhyber-info-card h-100 p-4 border-top border-4 border-success">
+                <h5 className="digikhyber-card-title mb-4">
+                  <i className="fa-solid fa-user-check text-success me-2"></i> Eligibility & Application
+                </h5>
+                <div className="mb-4">
+                  <p className="fw-bold small mb-2 text-dark">Criteria:</p>
+                  <ul className="list-unstyled small mb-0">
+                    {[
+                      'Resident of Pakistan',
+                      'Age between 15 to 40 years',
+                      'Valid CNIC/B-Form',
+                      'Enrolled in HP courses',
+                      'No previous scholarship card'
+                    ].map((item, i) => (
+                      <li key={i} className="mb-2 d-flex align-items-center gap-2">
+                        <i className="fa-solid fa-check text-success"></i>
+                        <span>{item}</span>
+                      </li>
+                    ))}
+                  </ul>
+                </div>
+                <hr className="opacity-10 my-4" />
+                <p className="fw-bold small mb-2 text-dark">Application Flow:</p>
+                <div className="mini-steps small">
+                  <div className="m-step"><span>1</span> Register at digikhyber.org.pk</div>
+                  <div className="m-step"><span>2</span> Fill form & upload challan slip</div>
+                  <div className="m-step"><span>3</span> Verification by HP Team & Issuance</div>
+                </div>
+              </div>
             </div>
 
-            {/* Verification Process */}
-            <div className="mb-3">
-              <h5>4. Verification Process</h5>
-              <ul className=" ">
-                <li className=" ">
-                  All academic records, attendance, and marks will be verified
-                  by the program management before awarding the Scholarship
-                  Card.
-                </li>
-                <li className=" ">
-                  Misrepresentation of information or cheating during
-                  assessments will lead to immediate disqualification.
-                </li>
-              </ul>
-            </div>
-
-            {/* Distribution of Rewards */}
-            <div className="mb-3">
-              <h5>5. Distribution of Rewards</h5>
-              <ul className=" ">
-                <li className=" ">
-                  Rewards under this program (e.g., laptops, solar panels,
-                  e-bikes) are subject to availability and will be distributed
-                  in phases.
-                </li>
-                <li className=" ">
-                  The program reserves the right to change, replace, or cancel
-                  any reward without prior notice.
-                </li>
-              </ul>
-            </div>
-
-            {/* Non-Transferable */}
-            <div className="mb-3">
-              <h5>6. Non-Transferable</h5>
-              <ul className=" ">
-                <li className=" ">
-                  The Scholarship Card and associated rewards are
-                  non-transferable and may only be used by the selected student.
-                </li>
-              </ul>
-            </div>
-
-            {/* Right to Amend */}
-            <div className="mb-3">
-              <h5>7. Right to Amend</h5>
-              <ul className=" ">
-                <li className=" ">
-                  Hunarmand Punjab reserves the right to amend or update these
-                  terms and conditions at any time without prior notice.
-                </li>
-              </ul>
-            </div>
-
-            {/* Final Decision */}
-            <div className="mb-3">
-              <h5>8. Final Decision</h5>
-              <ul className=" ">
-                <li className=" ">
-                  All decisions made by the Hunarmand Punjab management
-                  regarding eligibility, merit ranking, and reward distribution
-                  shall be considered final and binding.
-                </li>
-              </ul>
+            {/* Charges & Conditions Card */}
+            <div className="col-lg-4 card-reveal" style={{ animationDelay: '0.3s' }}>
+              <div className="digikhyber-info-card h-100 p-4 border-top border-4 border-warning">
+                <h5 className="digikhyber-card-title mb-4">
+                  <i className="fa-solid fa-money-bill-wave text-warning me-2"></i> Fees & Conditions
+                </h5>
+                <div className="charges-box mb-4 bg-white p-3 rounded-3 border border-light shadow-sm">
+                  <div className="d-flex justify-content-between mb-2 small">
+                    <span>Card Issuance:</span> <span className="fw-bold text-success">FREE</span>
+                  </div>
+                  <div className="d-flex justify-content-between small">
+                    <span>SMS Alerts:</span> <span className="fw-bold text-success">FREE</span>
+                  </div>
+                </div>
+                <hr className="opacity-10 my-4" />
+                <p className="fw-bold small mb-2 text-dark">Key Conditions:</p>
+                <ul className="list-unstyled small mb-0">
+                  {[
+                    'Access Advance IT Courses',
+                    'Eligibility for Reward Schemes',
+                    'Internship Opportunities',
+                    'Misuse leads to blacklisting',
+                    '85% marks required in test'
+                  ].map((item, i) => (
+                    <li key={i} className="mb-2 d-flex align-items-start gap-2">
+                      <i className="fa-solid fa-info-circle text-secondary mt-1"></i>
+                      <span>{item}</span>
+                    </li>
+                  ))}
+                </ul>
+              </div>
             </div>
           </div>
 
-          {/* Terms and Conditions Acceptance */}
+          <div className="row mt-5 card-reveal" style={{ animationDelay: '0.4s' }}>
+            <div className="col-12">
+              <div className="digikhyber-info-card p-4 p-md-5">
+                <h4 className="digikhyber-card-title text-center mb-5">Terms & Conditions</h4>
+                <div className="row g-4">
+                  {[
+                    { h: '1. Eligibility', p: 'Only enrolled HP students are eligible. 85% marks required.' },
+                    { h: '2. Merit Basis', p: 'Rewards awarded strictly on merit. Ranking determines selection.' },
+                    { h: '3. Completion', p: 'Mandatory attendance and assignment completion required.' },
+                    { h: '4. Verification', p: 'Academic records & marks verified by management team.' },
+                    { h: '5. Rewards', p: 'Subject to availability and phase cycles. Changes may occur.' },
+                    { h: '6. Ownership', p: 'Non-transferable. Only for the selected student use.' },
+                    { h: '7. Amendments', p: 'HP reserves right to update terms at any time.' },
+                    { h: '8. Finality', p: 'Management decisions are final and binding for all.' }
+                  ].map((term, i) => (
+                    <div key={i} className="col-md-3">
+                      <div className="p-3 border rounded-3 h-100 hover-lift bg-white">
+                        <h6 className="fw-bold text-success mb-2 small">{term.h}</h6>
+                        <p className="x-small text-secondary mb-0">{term.p}</p>
+                      </div>
+                    </div>
+                  ))}
+                </div>
+              </div>
+            </div>
+          </div>
 
-          {/* Contact Info */}
-          <div>
-            <h4>Helpline & Contact</h4>
-            <p>
-              Email:{" "}
-              <a href="mailto:scholarshipcard@hunarmandpunjab.org.pk">
-                scholarshipcard@hunarmandpunjab.org.pk
+          {/* Institutional Footer */}
+          <div className="mt-5 text-center card-reveal" style={{ animationDelay: '0.5s' }}>
+            <div className="d-inline-flex flex-wrap justify-content-center gap-4 bg-white p-3 px-md-5 rounded-pill shadow-sm border border-light">
+              <a href="mailto:scholarshipcard@digikhyber.org.pk" className="small text-dark text-decoration-none fw-semibold">
+                <i className="fa-solid fa-envelope text-success me-2"></i> scholarshipcard@digikhyber.org.pk
               </a>
-            </p>
-            <p>
-              Helpline: <strong>03-111-133-053</strong> (Monday–Friday, 9 AM to
-              5 PM)
-            </p>
-            <p>
-              Website:{" "}
-              <a
-                href="https://www.hunarmandpunjab.org.pk"
-                target="_blank"
-                rel="noopener noreferrer"
-              >
-                hunarmandpunjab.org.pk
-              </a>
-            </p>
+              <span className="small text-dark fw-semibold border-start ps-4 border-light d-none d-md-block">
+                <i className="fa-solid fa-phone text-success me-2"></i> 03-111-133-053
+              </span>
+            </div>
           </div>
         </div>
+
+        <style>{`
+          .scholarship-main-section {
+            background: linear-gradient(-45deg, #f8fafc, #f1f5f9, #ffffff, #f8fafc);
+            background-size: 400% 400%;
+            animation: gradientFlow 15s ease infinite;
+            position: relative;
+            overflow: hidden;
+            font-family: 'Jost', sans-serif;
+          }
+
+          .scholarship-main-section::before {
+            content: '';
+            position: absolute;
+            inset: 0;
+            background-image: radial-gradient(#cbd5e1 1.5px, transparent 1.5px);
+            background-size: 26px 26px;
+            animation: dotsFlow 15s linear infinite;
+            pointer-events: none;
+            z-index: 0;
+            opacity: 0.8;
+          }
+
+          @keyframes gradientFlow {
+            0% { background-position: 0% 50%; }
+            50% { background-position: 100% 50%; }
+            100% { background-position: 0% 50%; }
+          }
+
+          @keyframes dotsFlow {
+            from { background-position: 0px 0px; }
+            to { background-position: 26px 26px; }
+          }
+
+          .digikhyber-heading {
+            font-family: 'Raleway', sans-serif;
+            font-weight: 800;
+            color: #0b5d3b;
+            font-size: 2.5rem;
+            line-height: 1.1;
+            letter-spacing: -1px;
+            animation: headingReveal 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+          }
+
+          @keyframes headingReveal {
+            from { opacity: 0; transform: translateY(20px); clip-path: inset(100% 0 0 0); }
+            to { opacity: 1; transform: translateY(0); clip-path: inset(0 0 0 0); }
+          }
+
+          .accent-text { color: #C9A227; }
+
+          .digikhyber-heading-sub {
+            font-family: 'Raleway', sans-serif;
+            font-weight: 700;
+            color: #0b5d3b;
+          }
+
+          .digikhyber-elite-card {
+            background: #ffffff;
+            border-radius: 24px;
+            border: 1px solid #f1f5f9;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.04);
+            overflow: hidden;
+          }
+
+          .digikhyber-info-card {
+            background: rgba(255, 255, 255, 0.9);
+            backdrop-filter: blur(10px);
+            border-radius: 24px;
+            border: 1px solid #f1f5f9;
+            box-shadow: 0 4px 20px rgba(0,0,0,0.03);
+            transition: all 0.3s ease;
+          }
+
+          .digikhyber-info-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 15px 35px rgba(0,0,0,0.07);
+          }
+
+          .digikhyber-card-title {
+            font-family: 'Raleway', sans-serif;
+            font-weight: 700;
+            color: #1e293b;
+            font-size: 1.25rem;
+          }
+
+          .digikhyber-list li {
+            margin-bottom: 10px;
+            padding-left: 15px;
+            position: relative;
+          }
+          .digikhyber-list li::before {
+            content: '→';
+            position: absolute;
+            left: 0;
+            color: #C9A227;
+            font-weight: bold;
+          }
+
+          .benefit-item-elite {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            font-size: 0.9rem;
+            margin-bottom: 10px;
+            color: #475569;
+          }
+
+          .m-step {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            margin-bottom: 12px;
+            color: #475569;
+          }
+
+          .m-step span {
+            width: 22px;
+            height: 22px;
+            background: #0b5d3b;
+            color: white;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-weight: bold;
+            font-size: 0.75rem;
+          }
+
+          .digikhyber-btn-primary {
+            background: #0b5d3b;
+            transition: all 0.3s ease;
+            border: none;
+          }
+
+          .digikhyber-btn-primary:hover {
+            background: #08432a;
+            transform: translateY(-2px);
+            box-shadow: 0 10px 20px rgba(11, 93, 59, 0.2) !important;
+          }
+
+          .hover-lift:hover { transform: translateY(-5px); }
+          .x-small { font-size: 0.75rem; }
+          .elite-instant-reveal {
+            animation: eliteReveal 0.3s cubic-bezier(0.19, 1, 0.22, 1) forwards;
+          }
+
+          @keyframes eliteReveal {
+            from { opacity: 0; transform: translateY(20px); }
+            to { opacity: 1; transform: translateY(0); }
+          }
+
+          @media (max-width: 768px) {
+            .digikhyber-heading { font-size: 1.8rem; }
+          }
+        `}</style>
       </div>
       <StatCounter />
     </>

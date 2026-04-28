@@ -16,15 +16,15 @@ const TermsandCondition = () => {
       <div className="container terms my-5">
         <h1 className="mb-4 text-black text-center">Terms and Conditions</h1>
         <p>
-          Welcome to <strong>www.hunarmandpunjab.org.pk</strong>, the official
-          website for Hunarmand Punjab. These Terms and Conditions govern your
+          Welcome to <strong>www.digikhyber.org.pk</strong>, the official
+          website for Digikhyber. These Terms and Conditions govern your
           access to and use of this website. By accessing or using this website,
           you agree to be bound by these Terms.
         </p>
 
         <h5 className="mt-4 text-black">1. Program Overview</h5>
         <p>
-          Hunarmand Punjab empowers youth with skills, training opportunities,
+          Digikhyber empowers youth with skills, training opportunities,
           job assistance, and other services.
         </p>
 
@@ -84,13 +84,13 @@ const TermsandCondition = () => {
 
         <h5 className="mt-4 text-black">10. Limitation of Liability</h5>
         <p>
-          Hunarmand Punjab is not liable for any indirect or consequential
+          Digikhyber is not liable for any indirect or consequential
           damages.
         </p>
 
         <h5 className="mt-4 text-black">11. Intellectual Property</h5>
         <p>
-          All logos, content, and materials are property of Hunarmand Punjab.
+          All logos, content, and materials are property of Digikhyber.
         </p>
 
         <h5 className="mt-4 text-black">12. Termination</h5>
@@ -101,7 +101,7 @@ const TermsandCondition = () => {
 
         <h5 className="mt-4 text-black">14. Contact Information</h5>
         <ul>
-          <li>Email: support@hunarmandpunjab.org.pk</li>
+          <li>Email: support@digikhyber.org.pk</li>
           <li>UAN: 03-111-133-053 </li>
           {/* <li>Address: E-Library, Lahore</li> */}
           <li>
@@ -115,7 +115,7 @@ const TermsandCondition = () => {
         <h1 className="mb-4 text-black">Privacy Policy</h1>
 
         <p>
-          This Privacy Policy explains how Hunarmand Punjab collects, uses, and
+          This Privacy Policy explains how Digikhyber collects, uses, and
           protects your data.
         </p>
 
@@ -231,7 +231,7 @@ const TermsandCondition = () => {
             {/* Modal Header */}
             <div
               style={{
-                background: "#079560",
+                background: "#0B5D3B",
                 color: "white",
                 padding: "20px 25px",
                 borderRadius: "15px 15px 0 0",
@@ -257,7 +257,7 @@ const TermsandCondition = () => {
                     fontFamily: "Poppins, sans-serif",
                   }}
                 >
-                  Hunarmand Punjab Program
+                  Digikhyber Program
                 </p>
               </div>
 
@@ -309,7 +309,7 @@ const TermsandCondition = () => {
                   color: "#1a1e1d",
                 }}
               >
-                Hunarmand Punjab is a private initiative launched to empower
+                Digikhyber is a private initiative launched to empower
                 students through high-quality IT training and career-oriented
                 skill development. While it is not a government-run program, it
                 has received full moral and advisory support from the Ministry
@@ -352,7 +352,7 @@ const TermsandCondition = () => {
                     color: "#1a1e1d",
                   }}
                 >
-                  Hunarmand Punjab is not directly managed, funded, or operated
+                  Digikhyber is not directly managed, funded, or operated
                   by any government body or department.
                 </li>
                 <li
@@ -378,7 +378,7 @@ const TermsandCondition = () => {
                 The inclusion of government figures in the advisory process does
                 not imply a formal or financial affiliation with the Government
                 of Punjab. The program's branding, content, and execution are
-                managed entirely by the private team behind Hunarmand Punjab.
+                managed entirely by the private team behind Digikhyber.
               </p>
 
               <p

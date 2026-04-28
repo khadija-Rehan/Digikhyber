@@ -4,7 +4,7 @@ const PrivacyPolicy = () => {
   return (
     <div className="container py-5">
       <h1 className="mb-4">Privacy Policy</h1>
-      <p>Welcome to Hunarmand Punjab.</p>
+      <p>Welcome to Digikhyber.</p>
       <p>
         This Privacy Policy explains how we collect, use, and protect your
         personal information when you register for our training programs.
@@ -42,7 +42,7 @@ const PrivacyPolicy = () => {
       </p>
 
       <h4 className="mt-4">3. Data Protection</h4>
-      <p>Hunarmand Punjab follows strict data protection protocols:</p>
+      <p>Digikhyber follows strict data protection protocols:</p>
       <ul>
         <li>
           Your personal information is stored securely using industry-standard
@@ -65,8 +65,8 @@ const PrivacyPolicy = () => {
       </ul>
       <p>
         For any such requests, feel free to contact us at{" "}
-        <a href="mailto:support@hunarmandpunjab.org.pk">
-          support@hunarmandpunjab.org.pk
+        <a href="mailto:support@digikhyber.org.pk">
+          support@digikhyber.org.pk
         </a>
         .
       </p>
@@ -76,7 +76,7 @@ const PrivacyPolicy = () => {
 
       <h4 className="mt-4">5. Program Affiliation</h4>
       <p>
-        Hunarmand Punjab{" "}
+        Digikhyber{" "}
         {/* is a Government of Punjab initiative  */}
         focused on youth empowerment through IT-Training Program.
       </p>

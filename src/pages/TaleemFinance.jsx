@@ -4,7 +4,7 @@ import "aos/dist/aos.css";
 import CountUp from "react-countup";
 import { useInView } from "react-intersection-observer";
 import FS from "../assets/scholar.webp";
-import ParticleBackground from "../components/ParticleBackground";
+import PageBanner from "../components/PageBanner";
 import { Link } from "react-router-dom";
 import StatCounter from "../components/StatsCounter";
 
@@ -43,35 +43,11 @@ const TaleemFinance = () => {
 
     return (
         <>
-            <div className="banner">
-                <ParticleBackground />
-
-                <div className="banner-content">
-                    <div className="container">
-                        <div className="row">
-                            <div className="col-lg-8 col-md-12">
-                                <h1 className="font-48">Taleem Finance Scheme</h1>
-                                <p className="font-18 light-grey l-h-1 weight-400">
-                                    Education is a right — not a privilege limited by
-                                    affordability. That’s why Hunarmand Punjab has launched the
-                                    Taleem Finance Scheme — a groundbreaking support system
-                                    designed to help students overcome financial hurdles and
-                                    continue their journey toward digital and professional
-                                    success.
-                                </p>
-                            </div>
-                            <div className="col-lg-4 col-md-12">
-                                <img
-                                    src="/images/Hunarmand Punjab banner19-min.jpg"
-                                    alt="Course"
-                                    className="w-100 banner-image"
-                                />
-                                <div className="cube"> </div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </div>
+            <PageBanner 
+                title="Taleem Finance Scheme"
+                description="Education is a right — not a privilege limited by affordability. That’s why Digikhyber has launched the Taleem Finance Scheme — a groundbreaking support system designed to help students overcome financial hurdles and continue their journey toward digital and professional success."
+                image="/images/Digikhyber banner19-min.jpg"
+            />
             <div className="container pt-5">
                 <div className="row pt-5 pb-5  ">
                     <div className="col-lg-6" data-aos="fade-left">
@@ -80,7 +56,7 @@ const TaleemFinance = () => {
                         </h2>
                         <p>
                             Education is a right — not a privilege limited by affordability.
-                            That’s why Hunarmand Punjab has launched the Taleem Finance Scheme
+                            That’s why Digikhyber has launched the Taleem Finance Scheme
                             — a groundbreaking support system designed to help students
                             overcome financial hurdles and continue their journey toward
                             digital and professional success.
@@ -128,7 +104,7 @@ const TaleemFinance = () => {
             {/* <div className="container my-3">
                 <div className="  p-4">
                     <h2 className="card-title text-success mb-4 text-center">
-                        Hunarmand Punjab – Taleem Finance Initiative
+                        Digikhyber – Taleem Finance Initiative
                     </h2>
 
                      

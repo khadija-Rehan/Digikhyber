@@ -7,7 +7,12 @@ const AOSWrapper = ({ children }) => {
     const location = useLocation();
 
     useEffect(() => {
-        AOS.init({ duration: 800, once: false });
+        AOS.init({ 
+            duration: 400, 
+            once: true,
+            offset: 0,
+            easing: 'ease-out'
+        });
     }, []);
 
     useEffect(() => {

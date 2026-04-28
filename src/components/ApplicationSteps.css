@@ -1,0 +1,206 @@
+/* ApplicationSteps.css */
+
+.steps-section {
+  padding: 80px 0;
+  background: transparent;
+}
+
+.steps-title-wrapper {
+  text-align: center;
+  margin-bottom: 60px;
+}
+
+.steps-title-wrapper h2 {
+  font-size: 2.5rem !important;
+  color: #000;
+  font-weight: 500 !important;
+  margin-bottom: 10px;
+}
+
+.steps-title-wrapper .sub-text {
+  color: #1a1e1d;
+  font-size: 1.1rem;
+  font-weight: 500;
+}
+
+.steps-title-wrapper .process-label {
+  color: #0B5D3B;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 3px;
+  font-size: 0.85rem;
+  display: block;
+  margin-top: 15px;
+}
+
+/* Row Layout */
+.steps-row {
+  display: flex;
+  justify-content: space-between;
+  align-items: stretch;
+  gap: 12px;
+  position: relative;
+  padding: 20px 0;
+}
+
+/* Arrow/Chevron Design */
+.step-item {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  background: white;
+  border-radius: 12px;
+  padding: 25px 15px;
+  border: 1px solid #eef2f1;
+  box-shadow: 0 4px 15px rgba(0, 0, 0, 0.03);
+  transition: all 0.4s ease;
+  position: relative;
+}
+
+/* The Arrow connecting the cards */
+.step-item:not(:last-child)::after {
+  content: "\f105";
+  /* FontAwesome Chevron Right */
+  font-family: "Font Awesome 6 Free";
+  font-weight: 900;
+  position: absolute;
+  top: 50%;
+  right: -13px;
+  transform: translateY(-50%);
+  background: #C9A227;
+  color: #fff;
+  width: 26px;
+  height: 26px;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 12px;
+  z-index: 100;
+  border: 3px solid #fff;
+  box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+  animation: arrowPulse 2s infinite;
+}
+
+@keyframes arrowPulse {
+  0% {
+    transform: translateY(-50%) scale(1);
+    box-shadow: 0 0 0 0 rgba(201, 162, 39, 0.4);
+  }
+
+  70% {
+    transform: translateY(-50%) scale(1.1);
+    box-shadow: 0 0 0 10px rgba(201, 162, 39, 0);
+  }
+
+  100% {
+    transform: translateY(-50%) scale(1);
+    box-shadow: 0 0 0 0 rgba(201, 162, 39, 0);
+  }
+}
+
+/* Top Accent */
+.step-item::before {
+  content: "";
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  height: 6px;
+  background: #0B5D3B;
+  border-radius: 12px 12px 0 0;
+  transition: all 0.3s ease;
+}
+
+.step-item:hover {
+  transform: translateY(-10px);
+  box-shadow: 0 20px 40px rgba(11, 93, 59, 0.1);
+  border-color: #0B5D3B;
+}
+
+.step-item:hover::before {
+  height: 10px;
+  background: #C9A227;
+}
+
+/* Icon Styling */
+.step-icon-box {
+  width: 70px;
+  height: 70px;
+  background: #f0f7f4;
+  border-radius: 18px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin: 0 auto 20px;
+  color: #0B5D3B;
+  font-size: 2rem;
+  transition: all 0.3s ease;
+}
+
+.step-item:hover .step-icon-box {
+  background: #0B5D3B;
+  color: #fff;
+  transform: scale(0.9) rotate(5deg);
+}
+
+/* Text Content */
+.step-content {
+  text-align: center;
+}
+
+.step-content h4 {
+  font-size: 1.1rem !important;
+  color: #000 !important;
+  font-weight: 600 !important;
+  margin-bottom: 10px !important;
+  min-height: 2.4em;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.step-content p {
+  font-size: 0.85rem !important;
+  color: #444 !important;
+  line-height: 1.5 !important;
+}
+
+/* RESPONSIVE - TIGHT PADDING FIX */
+@media (max-width: 1200px) {
+  .steps-row {
+    flex-wrap: wrap;
+    justify-content: center;
+    gap: 20px;
+  }
+
+  .step-item {
+    flex: 0 0 calc(33.333% - 20px);
+  }
+
+  .step-item:not(:last-child)::after {
+    display: none;
+  }
+}
+
+@media (max-width: 768px) {
+  .steps-section {
+    padding: 40px 0;
+  }
+
+  /* Tighter mobile padding */
+  .steps-title-wrapper {
+    margin-bottom: 30px;
+  }
+
+  .step-item {
+    flex: 0 0 calc(50% - 15px);
+    padding: 20px 10px;
+  }
+}
+
+@media (max-width: 480px) {
+  .step-item {
+    flex: 0 0 100%;
+  }
+}

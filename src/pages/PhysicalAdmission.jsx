@@ -403,7 +403,7 @@ const PhysicalAdmission = () => {
           <p className="text-center text-danger">
             To Become eligible for scholarship card (free laptops, Solar scheme,
             Taleem Finance, Taleem Abroad, Advance Courses) you must be enrolled
-            in one or more programs under Hunarmand Punjab.
+            in one or more programs under Digikhyber.
           </p>
           
           {/* Full Name */}
@@ -752,7 +752,7 @@ const PhysicalAdmission = () => {
               <label className="form-check-label" htmlFor="agreement">
                 I declare that all the information provided is correct to the
                 best of my knowledge, and I agree to the terms and conditions of
-                the Hunarmand program. <span className="text-danger">*</span>
+                the digikhyber program. <span className="text-danger">*</span>
               </label>
               {errors.agreement && (
                 <div className="invalid-feedback">{errors.agreement}</div>
