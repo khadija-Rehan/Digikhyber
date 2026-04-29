@@ -1,10 +1,17 @@
-import React, { useEffect, useState } from "react";
+import React, { useEffect } from "react";
 import PageBanner from "../components/PageBanner";
+import AOS from "aos";
+import "aos/dist/aos.css";
 import "./Howitswork.css";
 
 const HowItsWork = () => {
     useEffect(() => {
         window.scrollTo(0, 0);
+        AOS.init({
+            duration: 1000,
+            once: true,
+            easing: 'ease-out-quad'
+        });
     }, []);
 
     const stepsData = [
@@ -79,11 +86,9 @@ const HowItsWork = () => {
 
             <div className="container">
                 {/* Video Tutorial Section */}
-                <div className="row justify-content-center pt-5 pb-5">
-                    <div className="col-lg-10">
-                        <div className="premium-video-box shadow" style={{ borderRadius: '15px', overflow: 'hidden', border: '1px solid #ddd', position: 'relative', background: '#fff' }}>
-                            <div style={{ position: 'absolute', bottom: '0', left: '0', right: '0', height: '6px', background: '#0B5D3B', zIndex: '10' }}></div>
-                            
+                <div className="row justify-content-center pt-5 pb-5 premium-video-wrapper">
+                    <div className="col-lg-10" data-aos="fade-up">
+                        <div className="premium-video-box">
                             <div style={{ position: "relative", paddingBottom: "56.25%", height: 0 }}>
                                 <iframe
                                     src="https://www.youtube.com/embed/MwaXTW0_jc8"
@@ -98,28 +103,41 @@ const HowItsWork = () => {
                     </div>
                 </div>
 
-                {/* Signature Sketch Flow Section (Minimalist Excellence) */}
-                <div className="sketch-flow-section">
-                    <div className="sketch-flow-container">
+                {/* Premium Process Flow Section */}
+                <div className="premium-process-section">
+                    <div className="process-timeline-container">
                         {stepsData.map((step, index) => (
-                            <div key={index} className="sketch-item">
-                                <div className="sketch-card">
-                                    <span className="sketch-num">Step {step.number}</span>
-                                    <div className="sketch-header">
-                                        <div className="sketch-icon-circle">
+                            <div 
+                                key={index} 
+                                className="process-item"
+                                data-aos={index % 2 === 0 ? "fade-right" : "fade-left"}
+                                data-aos-delay={index * 100}
+                                data-aos-duration="1200"
+                            >
+                                <div className="process-node">
+                                    {step.number}
+                                </div>
+                                
+                                <div className="process-content">
+                                    <div className="process-card">
+                                        <div className="process-bg-num">{step.number}</div>
+                                        <div className="process-icon-wrapper">
                                             <i className={step.icon}></i>
                                         </div>
                                         <h4>{step.title}</h4>
+                                        <p>{step.desc}</p>
+                                        
+                                        {/* Institutional Phase Tag */}
+                                        {(index === 6 || index === 8 || index === 9) && (
+                                            <div className="verified-tag">
+                                                <i className="fas fa-check-circle"></i> VERIFIED STEP
+                                            </div>
+                                        )}
                                     </div>
-                                    <p>{step.desc}</p>
-                                    
-                                    {/* Institutional Phase Tag */}
-                                    {(index === 6 || index === 8 || index === 9) && (
-                                        <div style={{ marginTop: '10px', fontSize: '0.7rem', fontWeight: 800, color: '#0B5D3B', display: 'flex', alignItems: 'center', gap: '5px' }}>
-                                            <i className="fas fa-check-circle"></i> VERIFIED STEP
-                                        </div>
-                                    )}
                                 </div>
+                                
+                                {/* Spacer for the other side */}
+                                <div className="process-content" style={{ opacity: 0, pointerEvents: 'none' }}></div>
                             </div>
                         ))}
                     </div>
