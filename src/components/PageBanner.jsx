@@ -14,7 +14,8 @@ if (!window.p5) window.p5 = p5;
  * @param {React.ReactNode} children - Extra content like badges or bars (optional)
  */
 const PageBanner = ({ title, description, children }) => {
-    const myRef = useRef(null);
+    const vantaRef = useRef(null);
+    const vantaEffectRef = useRef(null);
 
     useEffect(() => {
         AOS.init({
@@ -24,14 +25,11 @@ const PageBanner = ({ title, description, children }) => {
             easing: 'ease-out',
         });
 
-        let vantaEffect = null;
-
         const initVanta = () => {
-            if (myRef.current && !vantaEffect) {
+            if (vantaRef.current && !vantaEffectRef.current && window.p5) {
                 try {
-                    vantaEffect = TOPOLOGY({
-                        el: myRef.current,
-                        p5: p5,
+                    vantaEffectRef.current = TOPOLOGY({
+                        el: vantaRef.current,
                         mouseControls: true,
                         touchControls: true,
                         gyroControls: false,
@@ -48,19 +46,23 @@ const PageBanner = ({ title, description, children }) => {
             }
         };
 
-        // Delay initialization slightly to ensure container is ready and prevent p5 conflicts
         const timer = setTimeout(initVanta, 100);
 
         return () => {
             clearTimeout(timer);
-            if (vantaEffect) {
-                vantaEffect.destroy();
+            if (vantaEffectRef.current) {
+                try {
+                    vantaEffectRef.current.destroy();
+                } catch (e) {
+                    console.warn("Vanta destroy error:", e);
+                }
+                vantaEffectRef.current = null;
             }
         };
     }, []);
 
     return (
-        <div className="simple-page-banner banner-centered-global" ref={myRef}>
+        <div className="simple-page-banner banner-centered-global" ref={vantaRef}>
             <div className="banner-overlay"></div>
             <div className="container position-relative z-1">
                 <div className="row justify-content-center">
@@ -146,4 +148,4 @@ const PageBanner = ({ title, description, children }) => {
     );
 };
 
-export default PageBanner;
+export default React.memo(PageBanner);

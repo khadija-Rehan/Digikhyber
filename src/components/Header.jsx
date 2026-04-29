@@ -53,7 +53,7 @@ const Header = () => {
               to="/apply-now"
               className="btn-pill-green py-2 px-4 shadow-sm"
               style={{ 
-                fontSize: '13px', 
+                fontSize: '14px', 
                 fontWeight: '800', 
                 background: '#0B5D3B', 
                 border: 'none',
@@ -79,7 +79,7 @@ const Header = () => {
             className="offcanvas-premium"
           >
             <Offcanvas.Header closeButton>
-              <Offcanvas.Title className="fw-bold">MENU</Offcanvas.Title>
+              <Offcanvas.Title className="fw-bold"></Offcanvas.Title>
             </Offcanvas.Header>
             <Offcanvas.Body>
               <Nav className="nav-links-center">
@@ -471,11 +471,40 @@ const Header = () => {
           }
           .header-actions {
             flex-direction: column;
-            align-items: stretch;
+            align-items: flex-start;
             margin-top: 20px;
+            gap: 15px;
           }
           .nav-divider {
             display: none;
+          }
+          .offcanvas-premium .nav-link {
+            font-size: 14px !important;
+            padding: 10px 0 !important;
+            width: 100%;
+            text-align: left;
+            border: none !important;
+            position: relative;
+          }
+          .offcanvas-premium .nav-link::after {
+            display: none !important;
+          }
+          .offcanvas-premium .login-link {
+            font-size: 14px;
+            padding: 15px 0;
+            justify-content: flex-start;
+            width: 100%;
+            border: none !important;
+          }
+          .offcanvas-premium .btn-pill-green {
+            padding: 12px 30px;
+            font-size: 13px;
+            margin-top: 10px;
+            width: fit-content;
+            text-align: center;
+          }
+          .offcanvas-header {
+            border-bottom: none !important;
           }
         }
       `}</style>

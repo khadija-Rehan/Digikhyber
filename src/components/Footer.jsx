@@ -23,11 +23,39 @@ const Footer = () => {
 
             {/* Column 1 - Logo & About */}
             <div className="col-lg-4 col-md-12">
-              <img
-                src={Logo}
-                alt="Digikhyber logo"
-                style={{ maxHeight: '90px', width: 'auto', objectFit: 'contain', marginBottom: '20px' }}
-              />
+              {/* Logo Section */}
+              <div style={{ display: 'flex', alignItems: 'center', gap: '8px', marginBottom: '20px' }}>
+                <img
+                  src={Logo}
+                  alt="Digikhyber"
+                  style={{
+                    height: '70px',
+                    width: 'auto',
+                    objectFit: 'contain',
+                    flexShrink: 0
+                  }}
+                />
+                <div>
+                  <div style={{
+                    color: '#ffffff',
+                    fontFamily: "'Raleway', sans-serif",
+                    fontWeight: '800',
+                    fontSize: '1.4rem',
+                    letterSpacing: '2px',
+                    textTransform: 'uppercase',
+                    lineHeight: '1'
+                  }}>Digikhyber</div>
+                  <div style={{
+                    color: '#C9A227',
+                    fontFamily: "'Raleway', sans-serif",
+                    fontWeight: '500',
+                    fontSize: '0.68rem',
+                    letterSpacing: '2px',
+                    textTransform: 'uppercase',
+                    marginTop: '5px'
+                  }}>Government of Punjab</div>
+                </div>
+              </div>
               <div className="footer-desc">
                 Providing quality IT training to 500,000 students across Punjab, empowering them to become professional earners.
               </div>
@@ -178,7 +206,7 @@ const Footer = () => {
           <div className="row align-items-center py-3">
             <div className="col-md-12 text-center">
               <p className="footer-copy-text">
-                © {new Date().getFullYear()} <span style={{ color: '#C9A227', fontWeight: '600' }}>Digikhyber</span>. All rights reserved. | Government of Punjab Initiative
+                © {new Date().getFullYear()} <span style={{ color: '#C9A227', fontWeight: '600' }}>Digikhyber</span>. All rights reserved.
               </p>
             </div>
           </div>
@@ -287,8 +315,12 @@ const Footer = () => {
 
         @media (max-width: 767px) {
           .footer-cta-container {
-            text-align: center;
+            text-align: left;
             margin-bottom: 30px; /* Space below button on mobile */
+          }
+          .footer-cta-container a {
+            padding: 10px 20px !important;
+            font-size: 11px !important;
           }
         }
       `}</style>

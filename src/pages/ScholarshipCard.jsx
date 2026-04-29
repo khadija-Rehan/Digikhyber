@@ -81,14 +81,14 @@ const ScholarshipCard = () => {
                       { icon: 'fa-briefcase', text: 'Career Guidance' }
                     ].map((benefit, i) => (
                       <div key={i} className="modern-benefit-pill">
-                        <i className={`fa-solid ${benefit.icon}`}></i>
+                        <i className={`fa-solid ${benefit.icon} me-3`}></i>
                         <span>{benefit.text}</span>
                       </div>
                     ))}
                   </div>
 
                   <div className="d-flex flex-wrap gap-3">
-                    <Link to="/apply-scholarshipcard" className="elite-action-btn">
+                    <Link to="/apply-scholarshipcard" className="btn-golden-premium">
                       Apply Now <i className="fa-solid fa-arrow-right-long ms-2"></i>
                     </Link>
                   </div>
@@ -303,12 +303,6 @@ const ScholarshipCard = () => {
             font-size: 2.5rem;
             line-height: 1.1;
             letter-spacing: -1px;
-            animation: headingReveal 0.4s cubic-bezier(0.4, 0, 0.2, 1);
-          }
-
-          @keyframes headingReveal {
-            from { opacity: 0; transform: translateY(20px); clip-path: inset(100% 0 0 0); }
-            to { opacity: 1; transform: translateY(0); clip-path: inset(0 0 0 0); }
           }
 
           .accent-text { color: #C9A227; }
@@ -350,15 +344,8 @@ const ScholarshipCard = () => {
 
           .digikhyber-list li {
             margin-bottom: 10px;
-            padding-left: 15px;
+            padding-left: 0;
             position: relative;
-          }
-          .digikhyber-list li::before {
-            content: '→';
-            position: absolute;
-            left: 0;
-            color: #C9A227;
-            font-weight: bold;
           }
 
           .benefit-item-elite {
@@ -368,6 +355,62 @@ const ScholarshipCard = () => {
             font-size: 0.9rem;
             margin-bottom: 10px;
             color: #475569;
+          }
+
+          .benefits-grid-modern {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 12px;
+          }
+
+          .modern-benefit-pill {
+            background: #f8fafc;
+            padding: 10px 20px;
+            border-radius: 50px;
+            border: 1px solid #e2e8f0;
+            display: flex;
+            align-items: center;
+            font-size: 0.95rem;
+            font-weight: 500;
+            color: #475569;
+            transition: all 0.3s ease;
+          }
+
+          .modern-benefit-pill i {
+            color: #0b5d3b;
+            font-size: 1.1rem;
+          }
+
+          .modern-benefit-pill:hover {
+            background: #ffffff;
+            border-color: #0b5d3b;
+            transform: translateY(-2px);
+            box-shadow: 0 4px 15px rgba(11, 93, 59, 0.1);
+            color: #0b5d3b;
+          }
+
+          .btn-golden-premium {
+            background: linear-gradient(135deg, #C9A227 0%, #a6841b 100%);
+            color: #ffffff !important;
+            padding: 10px 24px;
+            border-radius: 50px;
+            font-weight: 700;
+            font-size: 0.95rem;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            transition: all 0.3s ease;
+            display: inline-flex;
+            align-items: center;
+            box-shadow: 0 6px 15px rgba(201, 162, 39, 0.3);
+            border: none;
+            text-decoration: none;
+          }
+          
+          .btn-golden-premium:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 12px 30px rgba(201, 162, 39, 0.6);
+            color: #ffffff !important;
+            background: linear-gradient(135deg, #dfb42c 0%, #b89320 100%);
           }
 
           .m-step {

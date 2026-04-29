@@ -7,15 +7,13 @@ if (!window.p5) window.p5 = p5;
 
 const AuthBanner = ({ children, title, description, isRegister = false }) => {
   const vantaRef = useRef(null);
-  const effectRef = useRef(null);
+  const vantaEffectRef = useRef(null);
 
   useEffect(() => {
-    let vantaEffect = null;
-
     const initVanta = () => {
-      if (vantaRef.current && !vantaEffect) {
+      if (vantaRef.current && !vantaEffectRef.current) {
         try {
-          vantaEffect = TOPOLOGY({
+          vantaEffectRef.current = TOPOLOGY({
             el: vantaRef.current,
             p5: p5,
             mouseControls: true,
@@ -28,7 +26,6 @@ const AuthBanner = ({ children, title, description, isRegister = false }) => {
             color: 0xc9a227,
             backgroundColor: 0x0b5d3b,
           });
-          effectRef.current = vantaEffect;
         } catch (err) {
           console.error("Vanta initialization failed:", err);
         }
@@ -40,13 +37,13 @@ const AuthBanner = ({ children, title, description, isRegister = false }) => {
 
     return () => {
       clearTimeout(timer);
-      if (vantaEffect) {
+      if (vantaEffectRef.current) {
         try {
-          vantaEffect.destroy();
+          vantaEffectRef.current.destroy();
         } catch (e) {
           console.warn("Vanta destroy error:", e);
         }
-        vantaEffect = null;
+        vantaEffectRef.current = null;
       }
     };
   }, []);
