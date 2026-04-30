@@ -20,7 +20,7 @@ const Certificate = () => {
         <div className="ambient-blur blur-1"></div>
         <div className="ambient-blur blur-2"></div>
         
-        <div className="container py-5 d-flex align-items-center justify-content-center min-vh-100">
+        <div className="container d-flex align-items-center justify-content-center min-vh-100">
           <div className="modern-glass-card p-4 p-md-5 elite-instant-reveal">
             <div className="text-center mb-5">
               <div className="d-inline-flex align-items-center justify-content-center mb-3">
@@ -109,9 +109,9 @@ const Certificate = () => {
             position: relative;
             overflow: hidden;
             font-family: 'Jost', sans-serif;
-            /* Moderate space from top and bottom */
-            padding-top: 60px;
-            padding-bottom: 60px;
+            /* Shifting up on desktop */
+            padding-top: 0;
+            padding-bottom: 20px;
           }
 
           /* Soft Ambient Background */
@@ -142,7 +142,7 @@ const Certificate = () => {
             max-width: 950px; 
             width: 100%;
             z-index: 1;
-            margin: 20px auto; /* Reduced margin */
+            margin: 30px auto; /* Changed to positive margin to move it down */
           }
 
           .accent-line {
