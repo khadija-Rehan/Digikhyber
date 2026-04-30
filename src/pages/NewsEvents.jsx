@@ -20,7 +20,7 @@ const NewsEvents = () => {
         "Honorable Guest Adnan Afzal Chattha, Chairperson of the CM Task Force for Skills Development, addressing in the inauguration of Hunarmand Punjab.",
       videoUrl: "https://www.youtube.com/embed/NC4ExcWTkOE",
       fullDescription: `Hunarmand Punjab was officially inaugurated by Rana Sikandar Hayat, Minister for School & Higher Education, marking a major milestone in Pakistan’s digital transformation.
-          The program aims to equip 500,000 students with free, government-backed IT courses and skill-based training.
+          The program aims to equip 500,000 students with free, industry-recognized IT courses and skill-based training.
           Students will also benefit from the Scholarship Card, Laptop Scheme, and other support initiatives.
           This visionary step opens doors to modern careers and empowers youth across Punjab.
           💻 Join the movement and become part of Pakistan’s digital future!`,

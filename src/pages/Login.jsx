@@ -41,7 +41,7 @@ const Login = () => {
   return (
     <AuthBanner 
       title="Welcome Back" 
-      description="Log in to continue your journey with Digikhyber — unlocking IT training and government scholarship opportunities."
+      description="Log in to continue your journey with Digikhyber — unlocking IT training and premium scholarship opportunities."
     >
       <div className="auth-form-box">
         <h2 className="auth-title">Candidate Login</h2>

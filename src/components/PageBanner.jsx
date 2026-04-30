@@ -1,10 +1,6 @@
 import React, { useEffect, useRef } from "react";
 import AOS from "aos";
 import "aos/dist/aos.css";
-import p5 from "p5";
-import TOPOLOGY from "vanta/dist/vanta.topology.min";
-
-if (!window.p5) window.p5 = p5;
 
 /**
  * PageBanner Component
@@ -15,25 +11,20 @@ if (!window.p5) window.p5 = p5;
  */
 const PageBanner = ({ title, description, children }) => {
     const vantaRef = useRef(null);
-    const vantaEffectRef = useRef(null);
 
     useEffect(() => {
-        AOS.init({
-            duration: 350,
-            offset: 0,
-            once: true,
-            easing: 'ease-out',
-        });
-
+        let vantaEffect = null;
+        let tries = 0;
+        
         const initVanta = () => {
-            if (vantaRef.current && !vantaEffectRef.current && window.p5) {
+            if (vantaRef.current && window.VANTA && window.VANTA.TOPOLOGY && window.p5) {
                 try {
-                    vantaEffectRef.current = TOPOLOGY({
+                    vantaEffect = window.VANTA.TOPOLOGY({
                         el: vantaRef.current,
                         mouseControls: true,
                         touchControls: true,
                         gyroControls: false,
-                        minHeight: 200.00,
+                        minHeight: 350.00,
                         minWidth: 200.00,
                         scale: 1.00,
                         scaleMobile: 1.00,
@@ -43,21 +34,16 @@ const PageBanner = ({ title, description, children }) => {
                 } catch (err) {
                     console.error("Vanta initialization failed:", err);
                 }
+            } else if (tries < 30) {
+                tries++;
+                setTimeout(initVanta, 100);
             }
         };
 
-        const timer = setTimeout(initVanta, 100);
+        initVanta();
 
         return () => {
-            clearTimeout(timer);
-            if (vantaEffectRef.current) {
-                try {
-                    vantaEffectRef.current.destroy();
-                } catch (e) {
-                    console.warn("Vanta destroy error:", e);
-                }
-                vantaEffectRef.current = null;
-            }
+            if (vantaEffect) vantaEffect.destroy();
         };
     }, []);
 
@@ -90,26 +76,26 @@ const PageBanner = ({ title, description, children }) => {
                 }
 
                 .simple-page-banner {
-                    min-height: 300px; 
+                    min-height: 350px; 
                     display: flex;
                     align-items: center;
-                    padding: 60px 0;
+                    padding: 80px 0;
                     position: relative;
                     overflow: hidden;
-                    background: linear-gradient(135deg, #0B5D3B 0%, #063d27 100%);
+                    background-color: #0B5D3B; 
                 }
 
                 .banner-overlay {
                     position: absolute;
                     inset: 0;
-                    background: radial-gradient(circle at center, rgba(11, 93, 59, 0.4) 0%, rgba(6, 61, 39, 0.9) 100%);
+                    background: radial-gradient(circle at center, rgba(11, 93, 59, 0.05) 0%, rgba(6, 61, 39, 0.3) 100%);
                     z-index: 0;
                     pointer-events: none;
                 }
 
                 .banner-title {
                     color: #ffffff !important;
-                    font-size: 2.8rem;
+                    font-size: 3rem;
                     font-weight: 800;
                     margin-bottom: 20px;
                     line-height: 1.2;
@@ -121,10 +107,10 @@ const PageBanner = ({ title, description, children }) => {
 
                 .banner-desc {
                     color: rgba(255, 255, 255, 0.9) !important;
-                    font-size: 1.1rem !important;
+                    font-size: 1.15rem !important;
                     line-height: 1.7;
                     max-width: 850px;
-                    margin-bottom: 0;
+                    margin-bottom: 15px;
                     text-shadow: 0 3px 8px rgba(0,0,0,0.4);
                     position: relative;
                     font-weight: 400;
@@ -133,14 +119,14 @@ const PageBanner = ({ title, description, children }) => {
 
                 @media (max-width: 991px) {
                     .simple-page-banner {
-                        padding: 50px 0;
-                        min-height: 250px;
+                        padding: 60px 0;
+                        min-height: 280px;
                     }
                     .banner-title {
-                        font-size: 2.2rem;
+                        font-size: 2.4rem;
                     }
                     .banner-desc {
-                        font-size: 1rem !important;
+                        font-size: 1.05rem !important;
                     }
                 }
             `}</style>
@@ -148,4 +134,4 @@ const PageBanner = ({ title, description, children }) => {
     );
 };
 
-export default React.memo(PageBanner);
+export default PageBanner;

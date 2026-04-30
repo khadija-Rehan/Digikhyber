@@ -2,7 +2,6 @@ import React, { useEffect } from "react";
 import AOS from "aos";
 import "aos/dist/aos.css";
 import StatCounter from "../components/StatsCounter";
-import Footer from "../components/Footer";
 
 const Certificate = () => {
   useEffect(() => {
@@ -110,6 +109,9 @@ const Certificate = () => {
             position: relative;
             overflow: hidden;
             font-family: 'Jost', sans-serif;
+            /* Moderate space from top and bottom */
+            padding-top: 60px;
+            padding-bottom: 60px;
           }
 
           /* Soft Ambient Background */
@@ -137,9 +139,10 @@ const Certificate = () => {
             border-radius: 40px;
             border: 1px solid rgba(255, 255, 255, 0.8);
             box-shadow: 0 30px 70px rgba(0,0,0,0.06);
-            max-width: 850px;
+            max-width: 950px; 
             width: 100%;
             z-index: 1;
+            margin: 20px auto; /* Reduced margin */
           }
 
           .accent-line {
@@ -225,14 +228,17 @@ const Certificate = () => {
           }
 
           @media (max-width: 768px) {
-            .modern-glass-card { padding: 30px 20px !important; border-radius: 30px; }
+            .elite-certificate-page {
+               padding-top: 50px;
+               padding-bottom: 50px;
+            }
+            .modern-glass-card { padding: 30px 20px !important; border-radius: 30px; margin: 10px auto; }
             .digikhyber-heading-elite { font-size: 1.8rem; }
           }
         `}</style>
       </div>
 
       <StatCounter />
-
     </>
   );
 };

@@ -9,39 +9,39 @@ const Notificationbar = () => {
                         <div></div>
                         <div className="cmn-textslide">
                             <img className="white-icon" width="18" height="18" src="https://img.icons8.com/windows/32/admission.png" alt="admission" />
-                            <span className="gov-text highlight">Applications Are Closing Soon</span>
+                            <span className="marquee-text highlight">Applications Are Closing Soon</span>
                         </div>
                         <div className="cmn-textslide">
                             <img className="white-icon" width="18" height="18" src="https://img.icons8.com/ios/50/parliament.png" alt="parliament" />
-                            <span className="gov-text">Endorsed By Government</span>
+                            <span className="marquee-text">Elite E-Learning Portal</span>
                         </div>
                         <div className="cmn-textslide">
                             <img className="white-icon" width="18" height="18" src="https://img.icons8.com/ios-glyphs/30/laptop.png" alt="laptop" />
-                            <span className="gov-text">Laptop Opportunities</span>
+                            <span className="marquee-text">Laptop Opportunities</span>
                         </div>
                         <div className="cmn-textslide">
                             <img className="white-icon" width="18" height="18" src="https://img.icons8.com/windows/32/solar-panel.png" alt="solar-panel" />
-                            <span className="gov-text highlight">Solar Panel Opportunities</span>
+                            <span className="marquee-text highlight">Solar Panel Opportunities</span>
                         </div>
                         <div className="cmn-textslide">
                             <img className="white-icon" width="18" height="18" src="https://img.icons8.com/ios-glyphs/30/scholarship.png" alt="scholarship" />
-                            <span className="gov-text">Scholarship Card Opportunities</span>
+                            <span className="marquee-text">Scholarship Card Opportunities</span>
                         </div>
                         <div className="cmn-textslide">
                             <img className="white-icon" width="18" height="18" src="https://img.icons8.com/ios/50/add-dollar.png" alt="add-dollar" />
-                            <span className="gov-text">Taleem Finance Opportunities</span>
+                            <span className="marquee-text">Taleem Finance Opportunities</span>
                         </div>
                         <div className="cmn-textslide">
                             <img className="white-icon" width="18" height="18" src="https://img.icons8.com/external-filled-color-icons-papa-vector/78/external-Study-Abroad-expats-filled-color-icons-papa-vector.png" alt="abroad" />
-                            <span className="gov-text highlight">Study Abroad Consultancy Opportunities</span>
+                            <span className="marquee-text highlight">Study Abroad Consultancy Opportunities</span>
                         </div>
                         <div className="cmn-textslide">
                             <img className="white-icon" width="18" height="18" src="https://img.icons8.com/ios-glyphs/30/internship.png" alt="internship" />
-                            <span className="gov-text">National & Global Internship Opportunities</span>
+                            <span className="marquee-text">National & Global Internship Opportunities</span>
                         </div>
                         <div className="cmn-textslide">
                             <img className="white-icon" width="18" height="18" src="https://img.icons8.com/external-others-phat-plus/64/external-courses-online-courses-outline-others-phat-plus-30.png" alt="courses" />
-                            <span className="gov-text">25+ Hands on Practical Courses</span>
+                            <span className="marquee-text">25+ Hands on Practical Courses</span>
                         </div>
                     </div>
                 </div>
@@ -68,7 +68,7 @@ const Notificationbar = () => {
                     align-items: center;
                     padding-right: 35px;
                 }
-                .gov-text {
+                .marquee-text {
                     color: white;
                     font-family: 'Jost', sans-serif;
                     font-size: 11.5px;

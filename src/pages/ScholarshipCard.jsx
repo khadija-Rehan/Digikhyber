@@ -46,70 +46,59 @@ const ScholarshipCard = () => {
       <PageBanner 
         title="Scholarship Cards"
         description="The Scholarship Card is your all-in-one pass to unlock a world of digital learning and career-building opportunities. Digikhyber is the biggest E-Learning Platform launched by Minister of School & Higher Education Rana Sikandar Hayat, this initiative is designed to empower youth with access to high-quality training programs, hands-on practical learning, and an internationally recognized curriculum."
-        image="/images/scholarship-card.jpg"
       />
       
       <div className="scholarship-main-section">
         <div className="container py-5 position-relative z-1">
           {/* Redesigned Floating Hero Card */}
-          <div className="digikhyber-premium-hero mb-5 elite-instant-reveal">
-            <div className="row g-0 align-items-center">
-              <div className="col-lg-7 p-4 p-md-5">
-                <div className="hero-content-wrapper">
-                  <h2 className="digikhyber-heading mb-4">
-                    Unlock Your Future with <br/>
-                    <span className="accent-text">Our Scholarship Cards</span>
-                  </h2>
-                  <div className="digikhyber-body-text mb-4">
-                    <p className="text-secondary" style={{ lineHeight: '1.9', fontSize: '1.1rem' }}>
-                      The <b>Scholarship Card</b> is your all-in-one pass to unlock a world of digital learning and career-building opportunities. 
-                      <b> Digikhyber</b> is the biggest E-Learning Platform launched by 
-                      <b> Minister of School & Higher Education Rana Sikandar Hayat</b>, this initiative is designed to empower youth with 
-                      access to high-quality training programs, hands-on practical learning, and an internationally recognized curriculum.
-                    </p>
-                    <p className="text-secondary" style={{ fontSize: '0.95rem' }}>
-                      Whether you're looking to build IT skills, receive a free laptop, or benefit from educational financing and solar support, 
-                      your Scholarship Card is the key to it all.
-                    </p>
-                  </div>
-
-                  <div className="benefits-grid-modern mb-5">
-                    {[
-                      { icon: 'fa-laptop-code', text: 'Advanced IT Training' },
-                      { icon: 'fa-solar-panel', text: 'Laptop & Solar Support' },
-                      { icon: 'fa-graduation-cap', text: 'Global Curriculum' },
-                      { icon: 'fa-briefcase', text: 'Career Guidance' }
-                    ].map((benefit, i) => (
-                      <div key={i} className="modern-benefit-pill">
-                        <i className={`fa-solid ${benefit.icon} me-3`}></i>
-                        <span>{benefit.text}</span>
-                      </div>
-                    ))}
-                  </div>
-
-                  <div className="d-flex flex-wrap gap-3">
-                    <Link to="/apply-scholarshipcard" className="btn-golden-premium">
-                      Apply Now <i className="fa-solid fa-arrow-right-long ms-2"></i>
-                    </Link>
-                  </div>
+          <div className="row align-items-center mb-5 elite-instant-reveal">
+            <div className="col-lg-6 p-4">
+              <div className="hero-content-wrapper">
+                <h2 className="digikhyber-heading mb-4">
+                  Unlock Your Future with <br/>
+                  <span className="accent-text">Our Scholarship Cards</span>
+                </h2>
+                <div className="digikhyber-body-text mb-4">
+                  <p className="text-secondary" style={{ lineHeight: '1.9', fontSize: '1.1rem' }}>
+                    The <b>Scholarship Card</b> is your all-in-one pass to unlock a world of digital learning and career-building opportunities. 
+                    <b> Digikhyber</b> is the biggest E-Learning Platform launched by 
+                    <b> Minister of School & Higher Education Rana Sikandar Hayat</b>, this initiative is designed to empower youth with 
+                    access to high-quality training programs, hands-on practical learning, and an internationally recognized curriculum.
+                  </p>
                 </div>
-              </div>
-              <div className="col-lg-5 p-4 text-center">
-                <div className="floating-image-container">
-                  <div className="image-card-frame">
-                    <img src="/images/scholarship-card.jpg" alt="Scholarship Card" className="img-fluid rounded-4 shadow-xl" />
-                    <div className="frame-decoration"></div>
-                  </div>
-                  {/* Decorative Elements */}
-                  <div className="floating-blob blob-1"></div>
-                  <div className="floating-blob blob-2"></div>
+
+                <div className="benefits-grid-modern mb-5">
+                  {[
+                    { icon: 'fa-laptop-code', text: 'Advanced IT Training' },
+                    { icon: 'fa-solar-panel', text: 'Laptop & Solar Support' },
+                    { icon: 'fa-graduation-cap', text: 'Global Curriculum' },
+                    { icon: 'fa-briefcase', text: 'Career Guidance' }
+                  ].map((benefit, i) => (
+                    <div key={i} className="modern-benefit-pill">
+                      <i className={`fa-solid ${benefit.icon} me-3`}></i>
+                      <span>{benefit.text}</span>
+                    </div>
+                  ))}
+                </div>
+
+                <div className="d-flex flex-wrap gap-3">
+                  <Link to="/apply-scholarshipcard" className="btn-golden-premium">
+                    Apply Now <i className="fa-solid fa-arrow-right-long ms-2"></i>
+                  </Link>
                 </div>
               </div>
             </div>
+            <div className="col-lg-6 p-4 text-center">
+              <img 
+                src="/images/scholarship-card-main.png" 
+                alt="Digikhyber Scholarship Card" 
+                className="img-fluid premium-image-card" 
+                style={{ width: "100%", maxWidth: "750px", display: "block", margin: "0 auto" }} 
+              />
+            </div>
           </div>
 
-          {/* Mosaic Data Grid - Data Preserved */}
-          <div className="row g-4 mb-5 card-reveal">
+          <div className="row g-4 mb-5">
             <div className="col-12">
               <div className="digikhyber-info-card text-center p-4 p-md-5">
                 <h3 className="digikhyber-heading-sub mb-4">Digikhyber – Scholarship Card Initiative</h3>
@@ -127,9 +116,11 @@ const ScholarshipCard = () => {
                 </div>
               </div>
             </div>
+          </div>
 
+          <div className="row g-4 mb-5">
             {/* Key Features Card */}
-            <div className="col-lg-4 card-reveal" style={{ animationDelay: '0.1s' }}>
+            <div className="col-lg-4" style={{ animationDelay: '0.1s' }}>
               <div className="digikhyber-info-card h-100 p-4 border-top border-4 border-warning">
                 <h5 className="digikhyber-card-title mb-4">
                   <i className="fa-solid fa-list-check text-warning me-2"></i> Key Features
@@ -157,7 +148,7 @@ const ScholarshipCard = () => {
             </div>
 
             {/* Eligibility & Application Card */}
-            <div className="col-lg-4 card-reveal" style={{ animationDelay: '0.2s' }}>
+            <div className="col-lg-4" style={{ animationDelay: '0.2s' }}>
               <div className="digikhyber-info-card h-100 p-4 border-top border-4 border-success">
                 <h5 className="digikhyber-card-title mb-4">
                   <i className="fa-solid fa-user-check text-success me-2"></i> Eligibility & Application
@@ -190,7 +181,7 @@ const ScholarshipCard = () => {
             </div>
 
             {/* Charges & Conditions Card */}
-            <div className="col-lg-4 card-reveal" style={{ animationDelay: '0.3s' }}>
+            <div className="col-lg-4" style={{ animationDelay: '0.3s' }}>
               <div className="digikhyber-info-card h-100 p-4 border-top border-4 border-warning">
                 <h5 className="digikhyber-card-title mb-4">
                   <i className="fa-solid fa-money-bill-wave text-warning me-2"></i> Fees & Conditions
@@ -223,7 +214,7 @@ const ScholarshipCard = () => {
             </div>
           </div>
 
-          <div className="row mt-5 card-reveal" style={{ animationDelay: '0.4s' }}>
+          <div className="row mt-5" style={{ animationDelay: '0.4s' }}>
             <div className="col-12">
               <div className="digikhyber-info-card p-4 p-md-5">
                 <h4 className="digikhyber-card-title text-center mb-5">Terms & Conditions</h4>
@@ -251,7 +242,7 @@ const ScholarshipCard = () => {
           </div>
 
           {/* Institutional Footer */}
-          <div className="mt-5 text-center card-reveal" style={{ animationDelay: '0.5s' }}>
+          <div className="mt-5 text-center" style={{ animationDelay: '0.5s' }}>
             <div className="d-inline-flex flex-wrap justify-content-center gap-4 bg-white p-3 px-md-5 rounded-pill shadow-sm border border-light">
               <a href="mailto:scholarshipcard@digikhyber.org.pk" className="small text-dark text-decoration-none fw-semibold">
                 <i className="fa-solid fa-envelope text-success me-2"></i> scholarshipcard@digikhyber.org.pk

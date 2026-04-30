@@ -1,21 +1,18 @@
 import React, { useEffect, useRef } from "react";
-import p5 from "p5";
-import TOPOLOGY from "vanta/dist/vanta.topology.min";
 import Logo from "../assets/logo.png";
-
-if (!window.p5) window.p5 = p5;
 
 const AuthBanner = ({ children, title, description, isRegister = false }) => {
   const vantaRef = useRef(null);
-  const vantaEffectRef = useRef(null);
 
   useEffect(() => {
+    let vantaEffect = null;
+    let tries = 0;
+
     const initVanta = () => {
-      if (vantaRef.current && !vantaEffectRef.current) {
+      if (vantaRef.current && window.VANTA && window.VANTA.TOPOLOGY && window.p5) {
         try {
-          vantaEffectRef.current = TOPOLOGY({
+          vantaEffect = window.VANTA.TOPOLOGY({
             el: vantaRef.current,
-            p5: p5,
             mouseControls: true,
             touchControls: true,
             gyroControls: false,
@@ -29,22 +26,16 @@ const AuthBanner = ({ children, title, description, isRegister = false }) => {
         } catch (err) {
           console.error("Vanta initialization failed:", err);
         }
+      } else if (tries < 30) {
+        tries++;
+        setTimeout(initVanta, 100);
       }
     };
 
-    // Slight delay to ensure DOM is fully ready and stable
-    const timer = setTimeout(initVanta, 150);
+    initVanta();
 
     return () => {
-      clearTimeout(timer);
-      if (vantaEffectRef.current) {
-        try {
-          vantaEffectRef.current.destroy();
-        } catch (e) {
-          console.warn("Vanta destroy error:", e);
-        }
-        vantaEffectRef.current = null;
-      }
+      if (vantaEffect) vantaEffect.destroy();
     };
   }, []);
 

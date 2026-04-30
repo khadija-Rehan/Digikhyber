@@ -76,16 +76,14 @@ const PrivacyPolicy = () => {
 
       <h4 className="mt-4">5. Program Affiliation</h4>
       <p>
-        Digikhyber{" "}
-        {/* is a Government of Punjab initiative  */}
-        focused on youth empowerment through IT-Training Program.
+        Digikhyber focuses on youth empowerment through IT-Training Program.
       </p>
       <p>
         By enrolling in our programs, you acknowledge and agree to the terms
         outlined in this Privacy Policy.
       </p>
       <p>
-        ہنرمند پنجاب حکومت پنجاب کا فخر ہے، جو نوجوانوں کو ہنر مند بنانے کے لیے
+        ہنرمند پنجاب ہمارا فخر ہے، جو نوجوانوں کو ہنر مند بنانے کے لیے
         کوشاں ہے۔
       </p>
     </div>

@@ -148,7 +148,7 @@ const Register = () => {
   return (
     <AuthBanner 
       title="Join Us Today" 
-      description="Create an account to unlock advanced IT training and government scholarship opportunities in Punjab."
+      description="Create an account to unlock advanced IT training and premium scholarship opportunities."
       isRegister={true}
     >
       <div className="auth-form-box">

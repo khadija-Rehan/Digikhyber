@@ -311,11 +311,9 @@ const TermsandCondition = () => {
               >
                 Digikhyber is a private initiative launched to empower
                 students through high-quality IT training and career-oriented
-                skill development. While it is not a government-run program, it
-                has received full moral and advisory support from the Ministry
-                of School Education and Higher Education, under the guidance of
-                Mr. Rana Sikandar Hayat (Minister for School and Higher
-                Education, Punjab).
+                skill development. While it is not an official public-sector program, it
+                has received full moral and advisory support from educational ministries, 
+                under the guidance of established leadership.
               </p>
 
               <p
@@ -327,10 +325,9 @@ const TermsandCondition = () => {
               >
                 All training programs, course structures, and the concept of the
                 Merit-Based Scholarship Card have been reviewed, acknowledged,
-                and encouraged by the Minister himself. The Scholarship Card,
+                and encouraged by advisory figures. The Scholarship Card,
                 along with associated merit-based rewards such as laptops, solar
-                panels, and e-bikes, has also been formally approved by the
-                Minister in principle.
+                panels, and e-bikes, has also been formally approved in principle.
               </p>
 
               <p
@@ -353,7 +350,7 @@ const TermsandCondition = () => {
                   }}
                 >
                   Digikhyber is not directly managed, funded, or operated
-                  by any government body or department.
+                  by any official public regulatory body or department.
                 </li>
                 <li
                   style={{
@@ -375,9 +372,9 @@ const TermsandCondition = () => {
                   color: "#1a1e1d",
                 }}
               >
-                The inclusion of government figures in the advisory process does
-                not imply a formal or financial affiliation with the Government
-                of Punjab. The program's branding, content, and execution are
+                The inclusion of advisory figures in the process does
+                not imply a formal or financial affiliation with any specific official 
+                entity. The program's branding, content, and execution are
                 managed entirely by the private team behind Digikhyber.
               </p>
 
@@ -389,7 +386,7 @@ const TermsandCondition = () => {
                 }}
               >
                 By participating in this program, students and stakeholders
-                acknowledge the above and agree that no claims of government
+                acknowledge the above and agree that no claims of official 
                 employment, quota benefits, or state-issued certifications
                 should be associated with this initiative. This clear
                 distinction is made to ensure transparency, public trust, and

@@ -1,11 +1,48 @@
-import React, { useState } from "react";
+import React, { useState, useEffect, useRef } from "react";
 import { useNavigate } from "react-router-dom";
 import { useModal } from "../context/ModalContext";
-import Logo from "../assets/logo.png";
+import Logo from "../assets/logo-white.png";
 import { applyForScholarship } from "../api/public";
 import { useCourses } from "../context/CoursesContext";
 
 const ApplyScholarShipCard = () => {
+  const vantaRef = useRef(null);
+
+  useEffect(() => {
+    let vantaEffect = null;
+    let tries = 0;
+
+    const initVanta = () => {
+      if (vantaRef.current && window.VANTA && window.VANTA.TOPOLOGY && window.p5) {
+        try {
+          vantaEffect = window.VANTA.TOPOLOGY({
+            el: vantaRef.current,
+            mouseControls: true,
+            touchControls: true,
+            gyroControls: false,
+            minHeight: 200.0,
+            minWidth: 200.0,
+            scale: 1.0,
+            scaleMobile: 1.0,
+            color: 0xc9a227,
+            backgroundColor: 0x0b5d3b,
+          });
+        } catch (err) {
+          console.error("Vanta initialization failed:", err);
+        }
+      } else if (tries < 30) {
+        tries++;
+        setTimeout(initVanta, 100);
+      }
+    };
+
+    initVanta();
+
+    return () => {
+      if (vantaEffect) vantaEffect.destroy();
+    };
+  }, []);
+
   const navigate = useNavigate();
   const { availableCourses } = useCourses();
   const { showError, showSuccess } = useModal();
@@ -372,378 +409,301 @@ const ApplyScholarShipCard = () => {
   };
 
   return (
-    <div className="container register">
-      <form onSubmit={handleSubmit} className="pb-5 pt-5">
-        <div className="text-center">
-          <img style={{ width: "200px" }} src={Logo} alt="Logo" />
-        </div>
-        <h1 className="fs-5 fw-bold text-black text-center pt-4">
-          Scholarship Card Form
-        </h1>
-        <p
-          className="text-center text-danger"
-          // className="text-center text-black"
-        >
-          To Become eligible for scholarship card (Free laptop, Solar scheme,
-          Taleem Finance, Taleem Abroad, Advance Courses) you must be enrolled
-          in one or more programs under Digikhyber.
-          Digikhyber is introducing a merit-based Scholarship Card to
-          encourage and reward outstanding students. This policy states that
-          only those students who successfully complete their enrolled IT
-          training courses and achieve a minimum of 85% marks will be eligible
-          for the Scholarship Card. Recipients of this card will have the
-          opportunity to be considered for high-value merit-based rewards such
-          as laptops, solar panels, and e-bikes. These incentives aim to
-          motivate students to perform at their best and equip them with the
-          tools needed to further their skills and career development in the
-          digital age.
-        </p>
-
-        {/* Form Progress Indicator */}
-        <div className="mb-4">
-          <div className="d-flex justify-content-between align-items-center mb-2">
-            <small className="text-muted">Form Progress</small>
-            <small className="text-muted">{getFormProgress()}% Complete</small>
-          </div>
-          <div className="progress" style={{ height: "8px" }}>
-            <div
-              className="progress-bar bg-success"
-              role="progressbar"
-              style={{ width: `${getFormProgress()}%` }}
-              aria-valuenow={getFormProgress()}
-              aria-valuemin="0"
-              aria-valuemax="100"
-            ></div>
-          </div>
-        </div>
-
-        <div className="mb-3">
-          <label htmlFor="fullName" className="mb-2">
-            Full Name <span className="text-danger">*</span>
-          </label>
-          <input
-            className={`form-control p-3 ${
-              errors.fullName
-                ? "is-invalid"
-                : formData.fullName.trim() && !errors.fullName
-                ? "is-valid"
-                : ""
-            }`}
-            type="text"
-            name="fullName"
-            value={formData.fullName}
-            onChange={handleChange}
-            placeholder="Enter your full name as per your CNIC/B-Form."
-            maxLength={100}
-            required
-          />
-          {errors.fullName && (
-            <div className="invalid-feedback">{errors.fullName}</div>
-          )}
-          {formData.fullName.trim() && !errors.fullName && (
-            <div className="valid-feedback">Full name looks good!</div>
-          )}
-        </div>
-
-        <div className="mb-3">
-          <label htmlFor="cnic" className="mb-2">
-            CNIC/B-Form No <span className="text-danger">*</span>
-          </label>
-          <input
-            className={`form-control p-3 ${
-              errors.cnic
-                ? "is-invalid"
-                : formData.cnic.trim() && validateCNIC(formData.cnic)
-                ? "is-valid"
-                : ""
-            }`}
-            type="text"
-            name="cnic"
-            value={formData.cnic}
-            onChange={handleChange}
-            placeholder="e.g. 3550112345671"
-            maxLength={13}
-            required
-          />
-          {errors.cnic && <div className="invalid-feedback">{errors.cnic}</div>}
-          {formData.cnic.trim() && validateCNIC(formData.cnic) && (
-            <div className="valid-feedback">CNIC format is correct!</div>
-          )}
-        </div>
-
-        <div className="mb-3">
-          <label htmlFor="rollNumber" className="mb-2">
-            Roll No
-          </label>
-          <input
-            className="form-control p-3"
-            type="text"
-            name="rollNumber"
-            placeholder="Enter your roll number"
-            value={formData.rollNumber}
-            onChange={handleChange}
-            maxLength={20}
-          />
-        </div>
-
-        <div className="mb-3">
-          <label htmlFor="email" className="mb-2">
-            Email <span className="text-danger">*</span>
-          </label>
-          <input
-            className={`form-control p-3 ${
-              errors.email
-                ? "is-invalid"
-                : formData.email.trim() && validateEmail(formData.email)
-                ? "is-valid"
-                : ""
-            }`}
-            type="email"
-            name="email"
-            placeholder="Enter your email address"
-            value={formData.email}
-            onChange={handleChange}
-            maxLength={254}
-            required
-          />
-          {errors.email && (
-            <div className="invalid-feedback">{errors.email}</div>
-          )}
-          {formData.email.trim() && validateEmail(formData.email) && (
-            <div className="valid-feedback">Email format is correct!</div>
-          )}
-        </div>
-
-        <div className="mb-3">
-          <label htmlFor="mobileNumber" className="mb-2">
-            Mobile No <span className="text-danger">*</span>
-          </label>
-          <input
-            className={`form-control p-3 ${
-              errors.mobileNumber
-                ? "is-invalid"
-                : formData.mobileNumber.trim() &&
-                  validateMobile(formData.mobileNumber)
-                ? "is-valid"
-                : ""
-            }`}
-            type="text"
-            name="mobileNumber"
-            value={formData.mobileNumber}
-            onChange={handleChange}
-            placeholder="e.g. 03001234567"
-            maxLength={12}
-            required
-          />
-          {errors.mobileNumber && (
-            <div className="invalid-feedback">{errors.mobileNumber}</div>
-          )}
-          {formData.mobileNumber.trim() &&
-            validateMobile(formData.mobileNumber) && (
-              <div className="valid-feedback">
-                Mobile number format is correct!
+    <div className="scholarship-page-wrapper py-5" style={{ minHeight: "100vh", fontFamily: "'Inter', 'Poppins', sans-serif", position: "relative" }}>
+      <div ref={vantaRef} style={{ position: "fixed", top: 0, left: 0, width: "100%", height: "100%", zIndex: 0 }}></div>
+      <div className="container" style={{ position: "relative", zIndex: 1 }}>
+        <div className="row justify-content-center">
+          <div className="col-lg-10 col-xl-9">
+            
+            {/* Official Application Portal */}
+            <div className="card shadow border-0 overflow-hidden" style={{ borderRadius: "12px", border: "1px solid #e2e8f0" }}>
+              
+              {/* Header Banner */}
+              <div className="card-header border-0 text-center py-4 position-relative" style={{ backgroundColor: "#0B5D3B", overflow: "hidden" }}>
+                <div style={{ position: "absolute", top: 0, left: 0, width: "100%", height: "4px", backgroundColor: "#C9A227" }}></div>
+                <img src={Logo} alt="Official Logo" style={{ width: "140px", filter: "drop-shadow(0 4px 6px rgba(0,0,0,0.3))" }} className="mb-3 mt-2" />
+                <h1 className="h4 fw-bold mb-1 text-white" style={{ letterSpacing: "1px", textShadow: "0 2px 4px rgba(0,0,0,0.2)" }}>SCHOLARSHIP CARD APPLICATION FORM</h1>
+                <p className="mb-0 text-white" style={{ fontWeight: "normal", fontSize: "0.95rem" }}>Digikhyber Initiative</p>
               </div>
-            )}
-        </div>
 
-        <div className="mb-3">
-          <label htmlFor="firstCourse" className="mb-2">
-            In which Course Did you Apply?
-            <span className="text-danger">*</span>
-          </label>
-          <select
-            className={`form-control p-3 ${
-              errors.firstCourse
-                ? "is-invalid"
-                : formData.firstCourse.trim() && !errors.firstCourse
-                ? "is-valid"
-                : ""
-            }`}
-            name="firstCourse"
-            value={formData.firstCourse}
-            onChange={handleChange}
-            required
-          >
-            <option value="">Select Course</option>
-            {availableCourses.map((course, index) => (
-              <option key={index} value={course.name}>
-                {course.name}
-              </option>
-            ))}
-          </select>
-          {errors.firstCourse && (
-            <div className="invalid-feedback">{errors.firstCourse}</div>
-          )}
-          {formData.firstCourse.trim() && !errors.firstCourse && (
-            <div className="valid-feedback">Course selected successfully!</div>
-          )}
-        </div>
+              <div className="card-body p-4 p-md-5 bg-white">
+                
+                {/* Official Notice */}
+                <div className="alert border-start border-4 mb-4" style={{ backgroundColor: "#f0f8f4", borderLeftColor: "#0B5D3B !important", border: "1px solid #e0ede6" }}>
+                  <div className="d-flex align-items-start">
+                    <div className="me-3 mt-1">
+                      <div style={{ width: "32px", height: "32px", borderRadius: "50%", backgroundColor: "#0B5D3B", display: "flex", alignItems: "center", justifyContent: "center", color: "white" }}>
+                        <i className="fas fa-info" style={{ fontSize: "0.9rem" }}></i>
+                      </div>
+                    </div>
+                    <div>
+                      <h6 className="fw-bold mb-1" style={{ color: "#0B5D3B" }}>Official Policy Guidelines</h6>
+                      <p className="mb-0" style={{ fontSize: "0.9rem", color: "#3c4852", lineHeight: "1.6" }}>
+                        To become eligible for the scholarship card (Free Laptop, Solar Scheme, Taleem Finance, Taleem Abroad, Advance Courses), you must be enrolled in one or more programs under Digikhyber. Only students who successfully complete their IT training courses and achieve a minimum of <strong>85% marks</strong> will be eligible for high-value merit-based rewards.
+                      </p>
+                    </div>
+                  </div>
+                </div>
 
-        <div className="mb-3">
-          <label htmlFor="secondCourse" className="mb-2">
-            Second Course (Optional)
-            <small className="text-muted">
-              {" "}
-              - Select if you applied for multiple courses
-            </small>
-          </label>
-          <select
-            className={`form-control p-3 ${
-              errors.secondCourse
-                ? "is-invalid"
-                : formData.secondCourse.trim() && !errors.secondCourse
-                ? "is-valid"
-                : ""
-            }`}
-            name="secondCourse"
-            value={formData.secondCourse}
-            onChange={handleChange}
-          >
-            <option value="">Select Course (Optional)</option>
-            {availableCourses.map((course, index) => (
-              <option key={index} value={course.name}>
-                {course.name}
-              </option>
-            ))}
-          </select>
-          {errors.secondCourse && (
-            <div className="invalid-feedback">{errors.secondCourse}</div>
-          )}
-          {formData.secondCourse.trim() && !errors.secondCourse && (
-            <div className="valid-feedback">
-              Second course selected successfully!
-            </div>
-          )}
-        </div>
+                {/* Progress Bar */}
+                <div className="mb-5 pb-4 border-bottom">
+                  <div className="d-flex justify-content-between align-items-center mb-2">
+                    <span className="fw-bold text-uppercase text-muted" style={{ fontSize: "0.75rem", letterSpacing: "1px" }}>Application Progress</span>
+                    <span className="fw-bold" style={{ color: "#0B5D3B", fontSize: "0.85rem" }}>{getFormProgress()}% Complete</span>
+                  </div>
+                  <div className="progress" style={{ height: "6px", borderRadius: "10px", backgroundColor: "#edf2f0" }}>
+                    <div 
+                      className="progress-bar" 
+                      role="progressbar" 
+                      style={{ width: `${getFormProgress()}%`, backgroundColor: "#0B5D3B", borderRadius: "10px", transition: "width 0.4s ease" }}
+                      aria-valuenow={getFormProgress()}
+                      aria-valuemin="0"
+                      aria-valuemax="100"
+                    ></div>
+                  </div>
+                </div>
 
-        <div className="mb-3">
-          <label htmlFor="challanNo" className="mb-2">
-            Paid Bank Challan No <span className="text-danger">*</span>
-          </label>
-          <input
-            className={`form-control p-3 ${
-              errors.challanNumber
-                ? "is-invalid"
-                : formData.challanNumber.trim() &&
-                  formData.challanNumber.trim().length >= 3
-                ? "is-valid"
-                : ""
-            }`}
-            type="text"
-            placeholder="Enter your challan number"
-            name="challanNumber"
-            value={formData.challanNumber}
-            onChange={handleChange}
-            maxLength={50}
-            required
-          />
-          {errors.challanNumber && (
-            <div className="invalid-feedback">{errors.challanNumber}</div>
-          )}
-          {formData.challanNumber.trim() &&
-            formData.challanNumber.trim().length >= 3 &&
-            !errors.challanNumber && (
-              <div className="valid-feedback">Challan number looks good!</div>
-            )}
-        </div>
+                <form onSubmit={handleSubmit} className="needs-validation">
+                  
+                  {/* Section 1: Personal Details */}
+                  <h5 className="fw-bold mb-4" style={{ color: "#1a1e1d", fontSize: "1.1rem" }}>
+                    <span className="me-2" style={{ color: "#0B5D3B" }}>01.</span> Personal Information
+                  </h5>
+                  
+                  <div className="row gx-4 mb-2">
+                    <div className="col-md-12 mb-4">
+                      <label htmlFor="fullName" className="form-label fw-bold text-dark" style={{ fontSize: "0.9rem" }}>Full Name <span className="text-danger">*</span></label>
+                      <input
+                        className={`form-control p-3 ${errors.fullName ? "is-invalid" : formData.fullName.trim() && !errors.fullName ? "is-valid" : ""}`}
+                        style={{ backgroundColor: "#f8faf9", border: "1px solid #d1d9d6" }}
+                        type="text"
+                        name="fullName"
+                        value={formData.fullName}
+                        onChange={handleChange}
+                        placeholder="Enter full name exactly as per CNIC/B-Form"
+                        maxLength={100}
+                        required
+                      />
+                      {errors.fullName && <div className="invalid-feedback">{errors.fullName}</div>}
+                    </div>
 
-        <div className="mb-4">
-          <label htmlFor="challanFile" className="mb-2">
-            Upload Paid Challan <span className="text-danger">*</span>
-          </label>
-          <input
-            className={`form-control p-3 ${
-              errors.image
-                ? "is-invalid"
-                : formData.image && !errors.image
-                ? "is-valid"
-                : ""
-            }`}
-            type="file"
-            name="image"
-            onChange={handleChange}
-            accept=".jpg,.jpeg,.png,.pdf"
-            required
-          />
-          {errors.image && (
-            <div className="invalid-feedback">{errors.image}</div>
-          )}
-          {formData.image && !errors.image && (
-            <div className="valid-feedback">
-              File selected: {formData.image.name} (
-              {(formData.image.size / 1024 / 1024).toFixed(2)} MB)
-            </div>
-          )}
-          <small className="form-text text-muted">
-            Accepted formats: JPG, PNG, PDF (Max size: 20MB)
-          </small>
-        </div>
-        <div className="mb-4">
-          <div className="form-check">
-            <input
-              className={`form-check-input ${
-                errors.termsAccepted
-                  ? "is-invalid"
-                  : formData.termsAccepted
-                  ? "is-valid"
-                  : ""
-              }`}
-              type="checkbox"
-              id="termsAccepted"
-              name="termsAccepted"
-              checked={formData.termsAccepted || false}
-              onChange={handleChange}
-              required
-            />
-            <label className="form-check-label" htmlFor="termsAccepted">
-              I have read and agree to the{" "}
-              <span className="fw-bold">Terms & Conditions</span> of the
-              Digikhyber Scholarship Card program.
-              <span className="text-danger">*</span>
-            </label>
-            {errors.termsAccepted && (
-              <div className="invalid-feedback d-block">
-                You must accept the terms and conditions to proceed.
+                    <div className="col-md-6 mb-4">
+                      <label htmlFor="cnic" className="form-label fw-bold text-dark" style={{ fontSize: "0.9rem" }}>CNIC / B-Form No <span className="text-danger">*</span></label>
+                      <input
+                        className={`form-control p-3 ${errors.cnic ? "is-invalid" : formData.cnic.trim() && validateCNIC(formData.cnic) ? "is-valid" : ""}`}
+                        style={{ backgroundColor: "#f8faf9", border: "1px solid #d1d9d6" }}
+                        type="text"
+                        name="cnic"
+                        value={formData.cnic}
+                        onChange={handleChange}
+                        placeholder="e.g. 3550112345671"
+                        maxLength={13}
+                        required
+                      />
+                      {errors.cnic && <div className="invalid-feedback">{errors.cnic}</div>}
+                    </div>
+
+                    <div className="col-md-6 mb-4">
+                      <label htmlFor="rollNumber" className="form-label fw-bold text-dark" style={{ fontSize: "0.9rem" }}>Roll Number</label>
+                      <input
+                        className="form-control p-3"
+                        style={{ backgroundColor: "#f8faf9", border: "1px solid #d1d9d6" }}
+                        type="text"
+                        name="rollNumber"
+                        value={formData.rollNumber}
+                        onChange={handleChange}
+                        placeholder="Enter your roll number"
+                        maxLength={20}
+                      />
+                    </div>
+                  </div>
+
+                  {/* Section 2: Contact Details */}
+                  <h5 className="fw-bold mb-4 mt-2" style={{ color: "#1a1e1d", fontSize: "1.1rem" }}>
+                    <span className="me-2" style={{ color: "#0B5D3B" }}>02.</span> Contact Details
+                  </h5>
+
+                  <div className="row gx-4 mb-2">
+                    <div className="col-md-6 mb-4">
+                      <label htmlFor="email" className="form-label fw-bold text-dark" style={{ fontSize: "0.9rem" }}>Email Address <span className="text-danger">*</span></label>
+                      <input
+                        className={`form-control p-3 ${errors.email ? "is-invalid" : formData.email.trim() && validateEmail(formData.email) ? "is-valid" : ""}`}
+                        style={{ backgroundColor: "#f8faf9", border: "1px solid #d1d9d6" }}
+                        type="email"
+                        name="email"
+                        value={formData.email}
+                        onChange={handleChange}
+                        placeholder="Enter active email address"
+                        maxLength={254}
+                        required
+                      />
+                      {errors.email && <div className="invalid-feedback">{errors.email}</div>}
+                    </div>
+
+                    <div className="col-md-6 mb-4">
+                      <label htmlFor="mobileNumber" className="form-label fw-bold text-dark" style={{ fontSize: "0.9rem" }}>Mobile Number <span className="text-danger">*</span></label>
+                      <input
+                        className={`form-control p-3 ${errors.mobileNumber ? "is-invalid" : formData.mobileNumber.trim() && validateMobile(formData.mobileNumber) ? "is-valid" : ""}`}
+                        style={{ backgroundColor: "#f8faf9", border: "1px solid #d1d9d6" }}
+                        type="text"
+                        name="mobileNumber"
+                        value={formData.mobileNumber}
+                        onChange={handleChange}
+                        placeholder="e.g. 03001234567"
+                        maxLength={12}
+                        required
+                      />
+                      {errors.mobileNumber && <div className="invalid-feedback">{errors.mobileNumber}</div>}
+                    </div>
+                  </div>
+
+                  {/* Section 3: Course Details */}
+                  <h5 className="fw-bold mb-4 mt-2" style={{ color: "#1a1e1d", fontSize: "1.1rem" }}>
+                    <span className="me-2" style={{ color: "#0B5D3B" }}>03.</span> Enrollment Details
+                  </h5>
+
+                  <div className="row gx-4 mb-2">
+                    <div className="col-md-6 mb-4">
+                      <label htmlFor="firstCourse" className="form-label fw-bold text-dark" style={{ fontSize: "0.9rem" }}>Primary Course <span className="text-danger">*</span></label>
+                      <select
+                        className={`form-select p-3 ${errors.firstCourse ? "is-invalid" : formData.firstCourse.trim() && !errors.firstCourse ? "is-valid" : ""}`}
+                        style={{ backgroundColor: "#f8faf9", border: "1px solid #d1d9d6", cursor: "pointer" }}
+                        name="firstCourse"
+                        value={formData.firstCourse}
+                        onChange={handleChange}
+                        required
+                      >
+                        <option value="">-- Select Course --</option>
+                        {availableCourses.map((course, index) => (
+                          <option key={index} value={course.name}>{course.name}</option>
+                        ))}
+                      </select>
+                      {errors.firstCourse && <div className="invalid-feedback">{errors.firstCourse}</div>}
+                    </div>
+
+                    <div className="col-md-6 mb-4">
+                      <label htmlFor="secondCourse" className="form-label fw-bold text-dark" style={{ fontSize: "0.9rem" }}>Secondary Course <span className="fw-normal text-muted">(Optional)</span></label>
+                      <select
+                        className={`form-select p-3 ${errors.secondCourse ? "is-invalid" : formData.secondCourse.trim() && !errors.secondCourse ? "is-valid" : ""}`}
+                        style={{ backgroundColor: "#f8faf9", border: "1px solid #d1d9d6", cursor: "pointer" }}
+                        name="secondCourse"
+                        value={formData.secondCourse}
+                        onChange={handleChange}
+                      >
+                        <option value="">-- Select Course (Optional) --</option>
+                        {availableCourses.map((course, index) => (
+                          <option key={index} value={course.name}>{course.name}</option>
+                        ))}
+                      </select>
+                      {errors.secondCourse && <div className="invalid-feedback">{errors.secondCourse}</div>}
+                    </div>
+                  </div>
+
+                  {/* Section 4: Payment Verification */}
+                  <h5 className="fw-bold mb-4 mt-2" style={{ color: "#1a1e1d", fontSize: "1.1rem" }}>
+                    <span className="me-2" style={{ color: "#0B5D3B" }}>04.</span> Payment Verification
+                  </h5>
+
+                  <div className="row gx-4 mb-2">
+                    <div className="col-md-6 mb-4">
+                      <label htmlFor="challanNumber" className="form-label fw-bold text-dark" style={{ fontSize: "0.9rem" }}>Paid Bank Challan No <span className="text-danger">*</span></label>
+                      <input
+                        className={`form-control p-3 ${errors.challanNumber ? "is-invalid" : formData.challanNumber.trim() && formData.challanNumber.trim().length >= 3 ? "is-valid" : ""}`}
+                        style={{ backgroundColor: "#f8faf9", border: "1px solid #d1d9d6" }}
+                        type="text"
+                        name="challanNumber"
+                        value={formData.challanNumber}
+                        onChange={handleChange}
+                        placeholder="Enter challan number"
+                        maxLength={50}
+                        required
+                      />
+                      {errors.challanNumber && <div className="invalid-feedback">{errors.challanNumber}</div>}
+                    </div>
+
+                    <div className="col-md-6 mb-4">
+                      <label htmlFor="image" className="form-label fw-bold text-dark" style={{ fontSize: "0.9rem" }}>Upload Paid Challan <span className="text-danger">*</span></label>
+                      <input
+                        className={`form-control p-3 ${errors.image ? "is-invalid" : formData.image && !errors.image ? "is-valid" : ""}`}
+                        style={{ backgroundColor: "#f8faf9", border: "1px solid #d1d9d6" }}
+                        type="file"
+                        name="image"
+                        onChange={handleChange}
+                        accept=".jpg,.jpeg,.png,.pdf"
+                        required
+                      />
+                      {errors.image && <div className="invalid-feedback">{errors.image}</div>}
+                      <div className="form-text mt-2"><i className="fas fa-info-circle me-1"></i>Accepted formats: JPG, PNG, PDF (Max: 20MB)</div>
+                    </div>
+                  </div>
+
+                  {/* Declaration & Submission */}
+                  <div className="mt-4 p-4 rounded" style={{ backgroundColor: "#f9fafb", border: "1px solid #e2e8f0" }}>
+                    <div className="form-check mb-4">
+                      <input
+                        className={`form-check-input ${errors.termsAccepted ? "is-invalid" : formData.termsAccepted ? "is-valid" : ""}`}
+                        style={{ width: "1.2rem", height: "1.2rem", marginTop: "0.15rem", cursor: "pointer" }}
+                        type="checkbox"
+                        id="termsAccepted"
+                        name="termsAccepted"
+                        checked={formData.termsAccepted || false}
+                        onChange={handleChange}
+                        required
+                      />
+                      <label className="form-check-label ms-2" htmlFor="termsAccepted" style={{ fontSize: "0.9rem", color: "#3c4852", lineHeight: "1.6" }}>
+                        I solemnly declare that the information provided is correct to the best of my knowledge. I have read and agree to the <span className="fw-bold" style={{ color: "#0B5D3B" }}>Terms & Conditions</span> of the Digikhyber Scholarship Card program. <span className="text-danger">*</span>
+                      </label>
+                      {errors.termsAccepted && <div className="invalid-feedback d-block mt-2">You must accept the terms and conditions to proceed.</div>}
+                    </div>
+
+                    <div className="row g-3">
+                      <div className="col-md-8">
+                        <button
+                          type="submit"
+                          className="btn w-100 fw-bold text-white py-3 shadow-sm"
+                          style={{ backgroundColor: "#0B5D3B", border: "none", borderRadius: "8px", letterSpacing: "1px", textTransform: "uppercase", fontSize: "0.95rem", transition: "all 0.3s ease" }}
+                          disabled={loading}
+                          onMouseOver={(e) => { e.currentTarget.style.backgroundColor = "#094a2f"; e.currentTarget.style.transform = "translateY(-2px)"; e.currentTarget.style.boxShadow = "0 6px 12px rgba(11, 93, 59, 0.3)"; }}
+                          onMouseOut={(e) => { e.currentTarget.style.backgroundColor = "#0B5D3B"; e.currentTarget.style.transform = "translateY(0)"; e.currentTarget.style.boxShadow = "0 .125rem .25rem rgba(0,0,0,.075)"; }}
+                        >
+                          {loading ? (
+                            <>
+                              <span className="spinner-border spinner-border-sm me-2" role="status" aria-hidden="true"></span>
+                              Processing...
+                            </>
+                          ) : (
+                            <><i className="fas fa-paper-plane me-2"></i> Submit Application</>
+                          )}
+                        </button>
+                      </div>
+                      <div className="col-md-4">
+                        <button
+                          type="button"
+                          className="btn w-100 fw-bold py-3 text-uppercase"
+                          style={{ backgroundColor: "transparent", border: "2px solid #e2e8f0", borderRadius: "8px", color: "#64748b", letterSpacing: "0.5px", fontSize: "0.95rem", transition: "all 0.3s ease" }}
+                          onClick={resetForm}
+                          disabled={loading}
+                          onMouseOver={(e) => { e.currentTarget.style.backgroundColor = "#f1f5f9"; e.currentTarget.style.borderColor = "#cbd5e1"; e.currentTarget.style.transform = "translateY(-2px)"; }}
+                          onMouseOut={(e) => { e.currentTarget.style.backgroundColor = "transparent"; e.currentTarget.style.borderColor = "#e2e8f0"; e.currentTarget.style.transform = "translateY(0)"; }}
+                        >
+                          Reset Form
+                        </button>
+                      </div>
+                    </div>
+                  </div>
+
+                </form>
               </div>
-            )}
-          </div>
-        </div>
+              
+              {/* Footer Banner */}
+              <div className="card-footer text-center py-3 border-0" style={{ backgroundColor: "#f8faf9" }}>
+                <p className="mb-0 small text-muted"><i className="fas fa-shield-alt me-1 text-success"></i> Secure Official Portal &copy; {new Date().getFullYear()} Digikhyber</p>
+              </div>
 
-        <div className="text-center mt-4">
-          <div className="row">
-            <div className="col-md-8">
-              <button
-                type="submit"
-                className="btn btn-success fw-bold hbtn text-white p-3 w-100"
-                disabled={loading}
-              >
-                {loading ? (
-                  <>
-                    <span
-                      className="spinner-border spinner-border-sm me-2"
-                      role="status"
-                      aria-hidden="true"
-                    ></span>
-                    Submitting...
-                  </>
-                ) : (
-                  "Submit Application"
-                )}
-              </button>
-            </div>
-            <div className="col-md-4">
-              <button
-                type="button"
-                className="btn btn-outline-secondary p-3 w-100"
-                onClick={resetForm}
-                disabled={loading}
-              >
-                Reset Form
-              </button>
             </div>
           </div>
         </div>
-      </form>
+      </div>
     </div>
   );
 };

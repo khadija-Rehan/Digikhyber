@@ -45,15 +45,6 @@ const Footer = () => {
                     textTransform: 'uppercase',
                     lineHeight: '1'
                   }}>Digikhyber</div>
-                  <div style={{
-                    color: '#C9A227',
-                    fontFamily: "'Raleway', sans-serif",
-                    fontWeight: '500',
-                    fontSize: '0.68rem',
-                    letterSpacing: '2px',
-                    textTransform: 'uppercase',
-                    marginTop: '5px'
-                  }}>Government of Punjab</div>
                 </div>
               </div>
               <div className="footer-desc">

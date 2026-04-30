@@ -6,7 +6,7 @@ const opportunities = [
     id: 1,
     title: "Scholarship Card",
     icon: "fas fa-id-card",
-    description: "Get free IT training under the Government of Punjab's Scholarship Card initiative for deserving youth.",
+    description: "Get free IT training under the Digikhyber Scholarship Card initiative for deserving youth.",
     link: "/scholarship-card",
     tag: "Most Popular",
   },
@@ -14,7 +14,7 @@ const opportunities = [
     id: 2,
     title: "Laptop Scheme",
     icon: "fas fa-laptop",
-    description: "Eligible students receive a free laptop to accelerate their digital learning journey under Punjab's scheme.",
+    description: "Eligible students receive a free laptop to accelerate their digital learning journey under our exclusive scheme.",
     link: "/free-laptops",
     tag: "Limited Seats",
   },
@@ -22,7 +22,7 @@ const opportunities = [
     id: 3,
     title: "Solar Scheme",
     icon: "fas fa-solar-panel",
-    description: "Avail free solar panels for your home under the Punjab Government's green energy initiative.",
+    description: "Avail free solar panels for your home under our elite green energy initiative.",
     link: "/free-solarpanels",
     tag: "Green Energy",
   },
@@ -73,13 +73,13 @@ const Opportunities = () => {
 
           {/* Section Header — Centered */}
           <div className="text-center mb-5">
-            <span className="opp-label">GOVERNMENT INITIATIVES</span>
+            <span className="opp-label">PREMIUM INITIATIVES</span>
             <h2 className="opp-heading mt-3">
               Scholarship Card <span className="opp-gold-text">Benefits</span>
             </h2>
             <div className="opp-center-line mx-auto mt-3"></div>
             <p className="opp-sub-text mt-3">
-              Unlock premium government schemes — Scholarship Card, Laptop Scheme, Solar Scheme and Taleem Finance.
+              Unlock premium schemes — Scholarship Card, Laptop Scheme, Solar Scheme and Taleem Finance.
             </p>
           </div>
 
