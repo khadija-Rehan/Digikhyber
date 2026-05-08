@@ -2,7 +2,7 @@ import React, { useState, useEffect } from "react";
 import Logo from "../assets/logo.png";
 import { signUp } from "../api/auth";
 import { useModal } from "../context/ModalContext";
-import { useNavigate, useSearchParams } from "react-router";
+import { useNavigate, useSearchParams } from "react-router-dom";
 import { Link } from "react-router-dom";
 import { AVAILABLE_COURSES } from "../utils/courses";
 import AuthBanner from "../components/AuthBanner";

@@ -44,7 +44,7 @@ const Instructors = () => {
                     <div className={`col-lg-6 col-md-12 mb-4 mb-lg-0 text-center ${isVisible ? 'native-fade-right' : 'opacity-0'}`}>
                         <div className="d-inline-block position-relative">
                             <img 
-                                src="/Abstract-Profile-Photo-Instagram-Post-1.webp" 
+                                src="./images/illustrations.jpg" 
                                 alt="mission" 
                                 className='img-fluid rounded shadow-sm' 
                                 style={{ maxWidth: '90%', position: 'relative', zIndex: 2 }} 

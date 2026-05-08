@@ -17,9 +17,9 @@ const NewsEvents = () => {
     {
       id: 1,
       title:
-        "Honorable Guest Adnan Afzal Chattha, Chairperson of the CM Task Force for Skills Development, addressing in the inauguration of Hunarmand Punjab.",
+        "Honorable Guest Adnan Afzal Chattha, Chairperson of the CM Task Force for Skills Development, addressing in the inauguration of Digikhyber.",
       videoUrl: "https://www.youtube.com/embed/NC4ExcWTkOE",
-      fullDescription: `Hunarmand Punjab was officially inaugurated by Rana Sikandar Hayat, Minister for School & Higher Education, marking a major milestone in Pakistan’s digital transformation.
+      fullDescription: `Digikhyber was officially inaugurated by Rana Sikandar Hayat, Minister for School & Higher Education, marking a major milestone in Pakistan’s digital transformation.
           The program aims to equip 500,000 students with free, industry-recognized IT courses and skill-based training.
           Students will also benefit from the Scholarship Card, Laptop Scheme, and other support initiatives.
           This visionary step opens doors to modern careers and empowers youth across Punjab.
@@ -28,10 +28,10 @@ const NewsEvents = () => {
     {
       id: 2,
       title:
-        "Inauguration of Hunarmand Punjab by Minister of School & Higher Education Rana Sikanadar Hayat",
+        "Inauguration of Digikhyber by Minister of School & Higher Education Rana Sikanadar Hayat",
       videoUrl: "https://www.youtube.com/embed/Ss0cuzczCMM",
-      fullDescription: `🎉 Inauguration of Hunarmand Punjab
-        We proudly announce the official launch of Hunarmand Punjab, inaugurated by Rana Sikandar Hayat, Minister for School & Higher Education, Punjab.
+      fullDescription: `🎉 Inauguration of Digikhyber
+        We proudly announce the official launch of Digikhyber, inaugurated by Rana Sikandar Hayat, Minister for School & Higher Education, Punjab.
         This historic initiative aims to empower 500,000+ youth with free IT courses, modern skills, and digital tools for a brighter future.
         From Cyber Security, Artificial Intelligence to Web Development, the program is designed to meet the needs of Pakistan's growing tech industry.
         Students will also benefit from Scholarship Cards, Laptop & Solar Schemes, and Taleem Finance.
@@ -42,8 +42,8 @@ const NewsEvents = () => {
       id: 3,
       title: "1st Time in Pakistan Launching Laptop Scheme",
       videoUrl: "https://www.youtube.com/embed/49Xr-WHgGGA",
-      fullDescription: `💻 1st Time in Pakistan – Launching the Laptop Scheme under Hunarmand Punjab!
-        In a groundbreaking move, we're providing free laptops to talented students through the Hunarmand Punjab Scholarship Card.
+      fullDescription: `💻 1st Time in Pakistan – Launching the Laptop Scheme under Digikhyber!
+        In a groundbreaking move, we're providing free laptops to talented students through the Digikhyber Scholarship Card.
         Empowering youth with digital tools to support online learning, freelancing, and IT skill development.
         🎓 Enroll in eligible IT courses and get a chance to receive a laptop – absolutely free!
         Limited slots available – apply today and step into your digital future.
@@ -53,7 +53,7 @@ const NewsEvents = () => {
       id: 4,
       title: "Launching Scholarship Card (Only 50,000 Available)",
       videoUrl: "https://www.youtube.com/embed/MwaXTW0_jc8",
-      fullDescription: `🎉 Launching the Hunarmand Punjab Scholarship Card! 💳
+      fullDescription: `🎉 Launching the Digikhyber Scholarship Card! 💳
 We're excited to announce the official launch of the Scholarship Card.
 Only 50,000 cards available for the first phase – apply now before seats run out!
 Unlock access to premium benefits: Free IT courses, Laptop & Solar Schemes, Taleem Finance, and more.
@@ -67,8 +67,8 @@ Apply today and take the first step toward a brighter, skill-powered future!`,
         "500,000 Free IT Courses under the Ministry of School & Higher Education Rana Sikanadar Hayat",
       videoUrl: "https://www.youtube.com/embed/Prb2SI-2wtQ",
       fullDescription: `🎓 500,000 Free IT Courses
-Offered under the visionary leadership of Rana Sikandar Hayat, Minister for School & Higher Education, Punjab — the Hunarmand Punjab Scholarship Card initiative is transforming futures through technology. Gain access to cutting-edge IT training in fields like Artificial Intelligence, Web Development, Cybersecurity, and more.
-Hunarmand Punjab aims to empower youth with in-demand digital skills — completely free of cost.
+Offered under the visionary leadership of Rana Sikandar Hayat, Minister for School & Higher Education, Punjab — the Digikhyber Scholarship Card initiative is transforming futures through technology. Gain access to cutting-edge IT training in fields like Artificial Intelligence, Web Development, Cybersecurity, and more.
+Digikhyber aims to empower youth with in-demand digital skills — completely free of cost.
 ✔ No tuition fee
 ✔ No material charges
 ✔ 100% Scholarship-Based Learning
@@ -77,10 +77,10 @@ Don't miss your chance to be part of Pakistan's largest IT skills revolution.`,
     {
       id: 6,
       title:
-        "Interview with Honorable Guest Prof. Dr. Yasir Ayaz | NCAI Pakistan | Inauguration Hunarmand Punjab",
+        "Interview with Honorable Guest Prof. Dr. Yasir Ayaz | NCAI Pakistan | Inauguration Digikhyber",
       videoUrl: "https://www.youtube.com/embed/9dgJMrVYouo?si=EDkwLoZ5ictyxJnl",
-      fullDescription: `Interview with Prof. Dr. Yasir Ayaz – Inauguration of Hunarmand Punjab
-We had the honor of welcoming Prof. Dr. Yasir Ayaz, Chairman of National Center of Artificial Intelligence - NCAI Pakistan, at the inauguration of the Hunarmand Punjab.
+      fullDescription: `Interview with Prof. Dr. Yasir Ayaz – Inauguration of Digikhyber
+We had the honor of welcoming Prof. Dr. Yasir Ayaz, Chairman of National Center of Artificial Intelligence - NCAI Pakistan, at the inauguration of the Digikhyber.
 Prof. Dr. Yasir Ayaz praised this visionary initiative for empowering youth with advanced IT skills and digital opportunities.
 He highlighted the importance of such programs in shaping Pakistan’s future workforce for the global tech industry.
 His appreciation motivates us to continue building a skilled and technologically empowered Pakistan.
@@ -89,10 +89,10 @@ His appreciation motivates us to continue building a skilled and technologically
     {
       id: 7,
       title:
-        "Interview with Honorable Guest Dr. Wajahat Qazi | Comsats University | Inauguration Hunarmand Punjab",
+        "Interview with Honorable Guest Dr. Wajahat Qazi | Comsats University | Inauguration Digikhyber",
       videoUrl: "https://www.youtube.com/embed/_3hRDF_FQqQ?si=0-0000000000000000",
-      fullDescription: `Interview with Dr. Wajahat Qazi – Inauguration of Hunarmand Punjab
-We were honored to host Dr. Wajahat Qazi from COMSATS University during the inauguration of Hunarmand Punjab.
+      fullDescription: `Interview with Dr. Wajahat Qazi – Inauguration of Digikhyber
+We were honored to host Dr. Wajahat Qazi from COMSATS University during the inauguration of Digikhyber.
 Dr. Wajahat Qazi praised this groundbreaking initiative for providing youth with modern IT skills and career opportunities.
 He emphasized how such programs are vital for building a digitally empowered Pakistan and strengthening the tech ecosystem.
 His words of encouragement inspire us to continue our mission of youth empowerment through modern IT skills.`,
@@ -100,10 +100,10 @@ His words of encouragement inspire us to continue our mission of youth empowerme
     {
       id: 8,
       title:
-        "Interview with Honorable Guest Dr. Yasir Niaz Khan | CTO PSCA | Inauguration Hunarmand Punjab",
+        "Interview with Honorable Guest Dr. Yasir Niaz Khan | CTO PSCA | Inauguration Digikhyber",
       videoUrl: "https://www.youtube.com/embed/N5OYV3PkDXo?si=0-0000000000000000",
-      fullDescription: `Interview with Dr. Yasir Niaz Khan – Inauguration of Hunarmand Punjab
-We had the privilege of hosting Dr. Yasir Niaz Khan, Chief Technology Officer at Punjab Safe City Authority - PSCA, during the inauguration of the Hunarmand Punjab.
+      fullDescription: `Interview with Dr. Yasir Niaz Khan – Inauguration of Digikhyber
+We had the privilege of hosting Dr. Yasir Niaz Khan, Chief Technology Officer at Punjab Safe City Authority - PSCA, during the inauguration of the Digikhyber.
 Dr. Yasir Niaz highly appreciated this initiative for creating opportunities in IT education, innovation, and digital transformation.
 He emphasized the importance of such programs in preparing a skilled workforce for Pakistan’s future tech landscape.
 His valuable insights and encouragement strengthen our commitment to building a digitally empowered youth.`,
@@ -111,22 +111,22 @@ His valuable insights and encouragement strengthen our commitment to building a 
     {
       id: 9,
       title:
-        "Interview with Honorable Guest Dr. Yasir Niaz Khan | CTO PSCA | Inauguration Hunarmand Punjab",
+        "Interview with Honorable Guest Dr. Yasir Niaz Khan | CTO PSCA | Inauguration Digikhyber",
       videoUrl: "https://www.youtube.com/embed/N5OYV3PkDXo?si=0-0000000000000000",
-      fullDescription: `Interview with Mubashir Hussain Chand – Hunarmand Punjab
-We were honored to welcome Mubashir Hussain Chand, CEO of Hum Mashal E Rah Foundation, during the inauguration of Hunarmand Punjab initiative.
+      fullDescription: `Interview with Mubashir Hussain Chand – Digikhyber
+We were honored to welcome Mubashir Hussain Chand, CEO of Hum Mashal E Rah Foundation, during the inauguration of Digikhyber initiative.
 He praised this visionary program for empowering youth through free IT education, scholarships, and digital skill development.
-Mubashir Hussain Chand highlighted the importance of Hunarmand Punjab Vision in creating a strong, skilled workforce for Pakistan’s future.
+Mubashir Hussain Chand highlighted the importance of Digikhyber Vision in creating a strong, skilled workforce for Pakistan’s future.
 His appreciation motivates us to continue building opportunities for thousands of students across Punjab.
 `,
     },
     {
       id: 10,
       title:
-        "Laptop Winner Highlights | Minhal Raza From Sargodha | Inauguration Hunarmand Punjab",
+        "Laptop Winner Highlights | Minhal Raza From Sargodha | Inauguration Digikhyber",
       videoUrl: "https://www.youtube.com/embed/JWXBm9v2QyY?si=0-0000000000000000",
       fullDescription: `Laptop Winner Highlights – Minhal Raza from Sargodha
-We proudly celebrate the success of Minhal Raza, a dedicated student from Sargodha, who received a laptop under the Hunarmand Punjab Scholarship Card Program.
+We proudly celebrate the success of Minhal Raza, a dedicated student from Sargodha, who received a laptop under the Digikhyber Scholarship Card Program.
 Minhal Raza expressed heartfelt appreciation for this initiative, which is empowering students with digital tools for learning, freelancing, and IT skill development.
 He highlighted how the Laptop Scheme is helping students achieve their academic and professional goals.
 His success story inspires thousands of youth to join this mission and transform their future.
@@ -135,10 +135,10 @@ His success story inspires thousands of youth to join this mission and transform
     {
       id: 11,
       title:
-        "Laptop Winner Highlights | Abdul Rehman from Lahore | Inauguration Hunarmand Punjab",
+        "Laptop Winner Highlights | Abdul Rehman from Lahore | Inauguration Digikhyber",
       videoUrl: "https://www.youtube.com/embed/DgXT0twJJFI?si=0-0000000000000000",
       fullDescription: `Laptop Winner Student Review – Abdul Rehman from Lahore
-We are proud to share the success story of Abdul Rehman from Lahore, who received a laptop under the Hunarmand Punjab Scholarship Card Program.
+We are proud to share the success story of Abdul Rehman from Lahore, who received a laptop under the Digikhyber Scholarship Card Program.
 Abdul Rehman expressed deep gratitude for this remarkable initiative that provides students with digital resources and free IT education.
 He acknowledged how the Laptop Scheme is bridging the digital gap and helping youth explore new opportunities in learning and freelancing.
 His appreciation motivates us to continue empowering students across Punjab with technology and skills.

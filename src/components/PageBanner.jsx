@@ -9,7 +9,7 @@ import "aos/dist/aos.css";
  * @param {string} description - The subtext/description
  * @param {React.ReactNode} children - Extra content like badges or bars (optional)
  */
-const PageBanner = ({ title, description, children }) => {
+const PageBanner = ({ title, description, rightImage, children }) => {
     const vantaRef = useRef(null);
 
     useEffect(() => {
@@ -48,19 +48,26 @@ const PageBanner = ({ title, description, children }) => {
     }, []);
 
     return (
-        <div className="simple-page-banner banner-centered-global" ref={vantaRef}>
+        <div className="simple-page-banner" ref={vantaRef}>
             <div className="banner-overlay"></div>
             <div className="container position-relative z-1">
-                <div className="row justify-content-center">
-                    <div className="col-lg-10 text-center banner-reveal">
+                <div className="row align-items-center">
+                    <div className={rightImage ? "col-lg-7 banner-reveal text-start" : "col-lg-10 text-center mx-auto banner-reveal"}>
                         <h1 className="banner-title">{title}</h1>
                         {description && (
-                            <p className="banner-desc mx-auto">
+                            <p className="banner-desc">
                                 {description}
                             </p>
                         )}
                         {children}
                     </div>
+                    {rightImage && (
+                        <div className="col-lg-5 text-center banner-reveal" style={{ animationDelay: '0.2s' }}>
+                            <div className="banner-image-wrapper">
+                                <img src={rightImage} alt={title} className="banner-right-img" />
+                            </div>
+                        </div>
+                    )}
                 </div>
             </div>
             
@@ -76,10 +83,10 @@ const PageBanner = ({ title, description, children }) => {
                 }
 
                 .simple-page-banner {
-                    min-height: 350px; 
+                    min-height: 280px; 
                     display: flex;
                     align-items: center;
-                    padding: 80px 0;
+                    padding: 50px 0;
                     position: relative;
                     overflow: hidden;
                     background-color: #0B5D3B; 
@@ -110,23 +117,52 @@ const PageBanner = ({ title, description, children }) => {
                     font-size: 1.15rem !important;
                     line-height: 1.7;
                     max-width: 850px;
-                    margin-bottom: 15px;
+                    margin-bottom: 25px;
                     text-shadow: 0 3px 8px rgba(0,0,0,0.4);
                     position: relative;
                     font-weight: 400;
                     font-family: 'Raleway', sans-serif !important;
                 }
 
+                .banner-image-wrapper {
+                    background: rgba(255, 255, 255, 0.15);
+                    backdrop-filter: blur(15px);
+                    padding: 10px;
+                    border-radius: 30px;
+                    border: 2px solid rgba(255, 255, 255, 0.3);
+                    display: inline-block;
+                    box-shadow: 0 25px 60px rgba(0,0,0,0.4);
+                    transition: transform 0.3s ease;
+                }
+
+                .banner-image-wrapper:hover {
+                    transform: scale(1.02);
+                }
+
+                .banner-right-img {
+                    max-width: 100%;
+                    height: auto;
+                    border-radius: 22px;
+                    object-fit: contain;
+                    display: block;
+                    box-shadow: 0 10px 30px rgba(0,0,0,0.2);
+                }
+
                 @media (max-width: 991px) {
                     .simple-page-banner {
                         padding: 60px 0;
                         min-height: 280px;
+                        text-align: center !important;
                     }
                     .banner-title {
                         font-size: 2.4rem;
                     }
                     .banner-desc {
                         font-size: 1.05rem !important;
+                    }
+                    .banner-image-wrapper {
+                        margin-top: 40px;
+                        max-width: 320px;
                     }
                 }
             `}</style>

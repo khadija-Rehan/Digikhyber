@@ -1,9 +1,9 @@
-import React from "react";
-import { Link, useNavigate } from "react-router-dom";
-import allTests from "../utils/test.json"
-import { useState, useEffect } from "react";
+import React, { useState, useEffect } from "react";
+import { useNavigate } from "react-router-dom";
+import allTests from "../utils/test.json";
 import { submitTestResults } from "../api/user";
 import { useAuth } from "../context/AuthContext";
+import "./Admissiontest.css";
 
 const Admissiontest = () => {
     const [selectedTest, setSelectedTest] = useState(null);
@@ -13,7 +13,7 @@ const Admissiontest = () => {
     const [loading, setLoading] = useState(false);
     const [error, setError] = useState("");
     const navigate = useNavigate();
-    const { user } = useAuth();
+    const { user, updateUser } = useAuth();
 
     useEffect(() => {
         const randomTest = allTests[Math.floor(Math.random() * allTests.length)];
@@ -33,124 +33,69 @@ const Admissiontest = () => {
         updatedAnswers[currentQuestionIndex] = selectedOption;
         setAnswers(updatedAnswers);
 
-        // Calculate score (not used for API, but for logging)
-        let score = 0;
-        selectedTest.questions.forEach((q, idx) => {
-            if (updatedAnswers[idx] === q.answer) {
-                score += 1;
-            }
-        });
-
-        const totalQuestions = selectedTest.totalQuestions;
-
-        // Generate a random score above 60% (i.e., 61-100)
-        const minScore = 61;
-        const maxScore = 100;
-        const testScore = Math.floor(Math.random() * (maxScore - minScore + 1)) + minScore;
+        // Success logic
+        const testScore = Math.floor(Math.random() * (100 - 65 + 1)) + 65;
         const testPassed = true;
-
-        console.log("User answers:", updatedAnswers);
-        console.log("Score (actual):", score, "/", totalQuestions);
-        console.log("Percentage (random, forced above 60%):", testScore, "%");
-        console.log("Passed (forced):", testPassed);
 
         setLoading(true);
         setError("");
 
         try {
-            const testData = {
-                testScore: testScore,
-                testPassed: testPassed,
-            };
-
-            const { data } = await submitTestResults(testData);
-            console.log("Test results submitted successfully:", data);
-
-            // Navigate to result page
-            navigate("/admission-result", { replace: true });
+            await submitTestResults({ testScore, testPassed });
+            // Update local context so dashboard reflects changes immediately
+            updateUser({ testPassed: true, testScore: testScore });
+            
+            navigate("/dashboard", { replace: true });
         } catch (error) {
             console.error("Error submitting test results:", error);
-            setError(
-                error.response?.data?.message || "Failed to submit test results. Please try again."
-            );
+            setError("Failed to submit results. Please try again.");
             setLoading(false);
         }
     };
 
-    if (!selectedTest) return <div>Loading test...</div>;
+    if (!selectedTest) return <div className="admission-test-page">Loading...</div>;
 
     const currentQuestion = selectedTest.questions[currentQuestionIndex];
+    const isLastQuestion = currentQuestionIndex + 1 === selectedTest.totalQuestions;
 
     return (
-        <div className="breadcrums">
-            <h2>Admission Test</h2>
-            <div className="container">
-                <div style={{ border: "1px solid #fff" }} className="p-3 mt-4">
-                    <p className="white mb-0">
-                        Select the correct option and click "Next" to proceed.
-                    </p>
-                </div>
-                {error && (
-                    <div className="alert alert-danger mt-3">
-                        {error}
-                    </div>
-                )}
-                <div className="test mt-5">
-                    <span>
-                        {currentQuestionIndex + 1} / {selectedTest.totalQuestions}
+        <div className="admission-test-page">
+            <div className="test-container-simple">
+                <header className="test-header-simple">
+                    <h2>Admission Test</h2>
+                    <span className="question-status-simple">
+                        Question {currentQuestionIndex + 1} of {selectedTest.totalQuestions}
                     </span>
-                    <h6 className="d-flex flex-wrap flex-md-nowrap align-items-center justify-content-center gap-1 fs-4 mt-4 mb-4">
-                        Question {currentQuestionIndex + 1}: <h4 className="mb-0">{currentQuestion.question}</h4>
-                    </h6>
-                    {currentQuestion.options.map((option, idx) => (
-                        <center key={idx}>
-                            <div
-                                className={`anwsers ${selectedOption === option ? "selected" : ""}`}
-                                onClick={() => setSelectedOption(option)}
-                                style={{
-                                    cursor: "pointer",
-                                    backgroundColor:
-                                        selectedOption === option ? "#cce5ff" : "#fff",
-                                    padding: "10px",
-                                    border: "1px solid #ccc",
-                                    margin: "5px",
-                                    width: "60%",
-                                }}
-                            >
-                                {option}
-                            </div>
-                        </center>
-                    ))}
+                </header>
 
-                    {currentQuestionIndex + 1 < selectedTest.totalQuestions ? (
-                        <button
-                            onClick={handleNext}
-                            className="btn btn-success mt-4"
-                            disabled={!selectedOption}
-                        >
-                            Next
-                        </button>
-                    ) : (
-                        <button
-                            onClick={handleFinish}
-                            className="btn-green register-btn btn btn-success rounded-2 mt-4"
-                            disabled={!selectedOption || loading}
-                        >
-                            {loading ? (
-                                <>
-                                    <span
-                                        className="spinner-border spinner-border-sm me-2"
-                                        role="status"
-                                        aria-hidden="true"
-                                    ></span>
-                                    Submitting...
-                                </>
-                            ) : (
-                                "Finish"
-                            )}
-                        </button>
-                    )}
+                <div className="test-body-simple">
+                    {error && <div className="alert alert-danger mb-4">{error}</div>}
+                    
+                    <h3 className="question-text-simple">{currentQuestion.question}</h3>
+
+                    <div className="options-list-simple">
+                        {currentQuestion.options.map((option, idx) => (
+                            <button
+                                key={idx}
+                                className={`option-button-simple ${selectedOption === option ? "selected" : ""}`}
+                                onClick={() => setSelectedOption(option)}
+                            >
+                                <div className="radio-dot-simple"></div>
+                                {option}
+                            </button>
+                        ))}
+                    </div>
                 </div>
+
+                <footer className="test-footer-simple">
+                    <button
+                        onClick={isLastQuestion ? handleFinish : handleNext}
+                        className="btn-submit-simple"
+                        disabled={!selectedOption || loading}
+                    >
+                        {loading ? "Submitting..." : isLastQuestion ? "Finish Test" : "Next Question"}
+                    </button>
+                </footer>
             </div>
         </div>
     );

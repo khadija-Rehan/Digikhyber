@@ -3,7 +3,7 @@ import AOS from "aos";
 import "aos/dist/aos.css";
 import CountUp from "react-countup";
 import { useInView } from "react-intersection-observer";
-import FS from "../assets/laptops.webp";
+import FS from "../assets/laptops.jpeg";
 import GS from "../assets/occupation.webp";
 import Team from "../assets/team.png";
 import PageBanner from "../components/PageBanner";
@@ -49,7 +49,7 @@ const FreeLaptops = () => {
             <PageBanner 
                 title="digikhyber Laptop Scheme"
                 description="The digikhyber Laptop Scheme, launched under the visionary leadership of Minister of School & Higher Education Rana Sikandar Hayat, ensures that eligible students who meet our criteria never fall behind due to a lack of digital access"
-                image="/images/Laptop Scheme.jpg"
+                rightImage="/images/Laptop Scheme.jpg"
             />
             <section className="py-4" style={{ background: 'linear-gradient(135deg, #f8f9fa 0%, #e9ecef 100%)' }}>
                 <div className="container">
@@ -58,8 +58,8 @@ const FreeLaptops = () => {
                         <div className="col-lg-5 p-0 laptop-reveal" style={{ minHeight: '380px' }}>
                             <img
                                 className="w-100 h-100"
-                                src="/images/Laptop Scheme Page Image (3).jpeg"
-                                alt="Free Laptops Scheme"
+                                src={FS}
+                                alt="Free Laptop Scheme"
                                 style={{ objectFit: 'cover' }}
                             />
                         </div>

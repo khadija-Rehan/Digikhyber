@@ -72,10 +72,33 @@ export const AuthProvider = ({ children }) => {
     return user !== null && user.token && verifyToken(user.token);
   };
 
+  const updateUser = (newData) => {
+    setUser(prev => {
+      let updated;
+      if (prev && prev.user) {
+        // Handle nested structure { user: { ... }, token: ... }
+        updated = { 
+          ...prev, 
+          user: { ...prev.user, ...newData } 
+        };
+      } else {
+        // Handle flat structure
+        updated = { ...prev, ...newData };
+      }
+      localStorage.setItem("user", JSON.stringify(updated));
+      return updated;
+    });
+    
+    if (userProfile) {
+      setUserProfile(prev => ({ ...prev, ...newData }));
+    }
+  };
+
   const value = {
     user,
     login,
     logout,
+    updateUser,
     loading,
     isAuthenticated,
     showLoginAlert,

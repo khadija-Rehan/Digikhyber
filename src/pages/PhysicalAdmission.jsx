@@ -2,7 +2,7 @@ import React, { useState } from "react";
 import Logo from "../assets/logo.png";
 import { signUp, submitPhysicalAdmission } from "../api/auth";
 import { useModal } from "../context/ModalContext";
-import { useNavigate } from "react-router";
+import { useNavigate } from "react-router-dom";
 
 const PhysicalAdmission = () => {
   const navigate = useNavigate();
@@ -282,7 +282,7 @@ const PhysicalAdmission = () => {
         }
       });
 
-      const { data } = await signUp(formDataToSubmit);
+      const { data } = await submitPhysicalAdmission(formDataToSubmit);
       console.log("Physical admission successful:", data);
       showSuccess("Physical admission application submitted successfully!");
       navigate("/login");

@@ -27,11 +27,7 @@ const Login = () => {
       const { data } = await logIn(formData);
       login({ user: data.user, token: data.token });
       setLoading(false);
-      if (data.user.testPassed === false) {
-        navigate("/admission-test", { replace: true });
-      } else {
-        navigate("/admission-result", { replace: true });
-      }
+      navigate("/dashboard", { replace: true });
     } catch (err) {
       setError(err.response?.data?.message || "Login failed. Please try again.");
       setLoading(false);

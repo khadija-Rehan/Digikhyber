@@ -31,6 +31,7 @@ import TaleemFinance from './pages/TaleemFinance';
 import PhysicalAdmission from './pages/PhysicalAdmission';
 import Admissiontest from './pages/Admissiontest';
 import AdmissionResult from './pages/AdmissionResult';
+import CandidateDashboard from './pages/CandidateDashboard';
 import ProtectedRoute from './components/ProtectedRoute';
 import Header from './components/Header';
 import Footer from './components/Footer';
@@ -40,16 +41,18 @@ import ScrollToTop from './components/ScrollToTop';
 function App() {
   const location = useLocation();
 
-  // Define routes where footer/notification should be hidden
-  const hideFooterRoutes = [
+  // Route conditions
+  const isDashboard = location.pathname === "/dashboard";
+  
+  const authRoutes = [
     "/login",
     "/register",
     "/forgot-password",
     "/reset-password",
-    "/apply-now",
+    "/apply-now"
   ];
-
-  const shouldHideHeaderFooter = hideFooterRoutes.some(route => 
+  
+  const isAuthPage = authRoutes.some(route => 
     location.pathname === route || location.pathname.startsWith("/reset-password/")
   );
 
@@ -59,8 +62,12 @@ function App() {
         <AuthProvider>
           <CoursesProvider>
             <ScrollToTop />
-            {!shouldHideHeaderFooter && <Notificationbar />}
-            <Header />
+            
+            {/* Show Notification Bar and Header everywhere EXCEPT Dashboard */}
+            {/* On Auth pages, we show Header but hide Notification Bar to keep it clean */}
+            {!isDashboard && !isAuthPage && <Notificationbar />}
+            {!isDashboard && <Header />}
+            
             <Routes>
               <Route path="/" element={<Home />} />
               <Route path="/register" element={<Register />} />
@@ -94,6 +101,14 @@ function App() {
                 }
               />
               <Route
+                path="/dashboard"
+                element={
+                  <ProtectedRoute>
+                    <CandidateDashboard />
+                  </ProtectedRoute>
+                }
+              />
+              <Route
                 path="/admission-result"
                 element={
                   <ProtectedRoute>
@@ -102,7 +117,10 @@ function App() {
                 }
               />
             </Routes>
-            {!shouldHideHeaderFooter && <Footer />}
+
+            {/* Hide Footer on Dashboard and Auth Pages */}
+            {!isDashboard && !isAuthPage && <Footer />}
+            
           </CoursesProvider>
         </AuthProvider>
       </ModalProvider>

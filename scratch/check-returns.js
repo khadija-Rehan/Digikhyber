@@ -16,7 +16,7 @@ function walkDir(dir) {
     return results;
 }
 
-const files = walkDir('d:/Desktop/hunarmand-punjab/src');
+const files = walkDir('d:/Desktop/digikhyber/src');
 let found = false;
 files.forEach(file => {
     const content = fs.readFileSync(file, 'utf8');

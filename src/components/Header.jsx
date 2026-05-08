@@ -123,7 +123,7 @@ const Header = () => {
               <div className="header-actions">
                 {user ? (
                   <>
-                    <div className="user-profile-pill d-none d-xl-flex">
+                    <Link to="/dashboard" className="user-profile-pill d-none d-xl-flex" style={{ textDecoration: 'none' }}>
                       <div className="user-initials">
                         {(user?.user?.fullName || user?.fullName || "U").charAt(0)}
                       </div>
@@ -131,7 +131,7 @@ const Header = () => {
                         <span className="user-name">{user?.user?.fullName || user?.fullName}</span>
                         <span className="user-meta">Roll: {user?.user?.rollNumber || '...'}</span>
                       </div>
-                    </div>
+                    </Link>
                     {paidUser && (
                       <Button
                         as={Link}

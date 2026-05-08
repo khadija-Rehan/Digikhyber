@@ -856,9 +856,29 @@ a:hover {
 }
 
 .hero img {
-  cursor: grab;
   width: 100%;
-  height: auto;
+  height: 512px;
+  object-fit: cover;
+  display: block;
+  cursor: grab;
+}
+
+@media (max-width: 992px) {
+  .hero img {
+    height: 360px;
+  }
+}
+
+@media (max-width: 768px) {
+  .hero img {
+    height: 260px;
+  }
+}
+
+@media (max-width: 480px) {
+  .hero img {
+    height: 180px;
+  }
 }
 
 /* .build {

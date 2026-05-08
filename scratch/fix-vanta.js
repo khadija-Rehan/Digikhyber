@@ -1,7 +1,7 @@
 const fs = require('fs');
 
 // 1. REVERT ViewCourse.jsx
-const viewCoursePath = 'd:/Desktop/hunarmand-punjab/src/pages/ViewCourse.jsx';
+const viewCoursePath = 'd:/Desktop/digikhyber/src/pages/ViewCourse.jsx';
 let vcContent = fs.readFileSync(viewCoursePath, 'utf8');
 
 // Remove vanta/p5 imports
@@ -22,7 +22,7 @@ fs.writeFileSync(viewCoursePath, vcContent);
 
 
 // 2. FIX PageBanner.jsx Vanta Visibility
-const pageBannerPath = 'd:/Desktop/hunarmand-punjab/src/components/PageBanner.jsx';
+const pageBannerPath = 'd:/Desktop/digikhyber/src/components/PageBanner.jsx';
 let pbContent = fs.readFileSync(pageBannerPath, 'utf8');
 
 // The Vanta canvas is likely being obscured by the solid CSS background or the overlay.

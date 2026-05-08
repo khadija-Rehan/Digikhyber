@@ -104,8 +104,8 @@ const ScholarshipModal = () => {
               <div className="p-2 position-relative z-1">
                 <img
                   className="w-100 rounded-3"
-                  // src="/images/Digikhyber hero banner 1.jpeg"
-                  src="/images/Digikhyber hero banner 1-02.jpeg"
+                  // src="/images/Digikhyber hero banner 1.jpg"
+                  src="/images/Digikhyber hero banner 1-02.jpg"
                   alt=""
                   style={{ objectFit: "cover" }}
                 />

@@ -21,7 +21,7 @@ function checkHistory() {
         if (fs.existsSync(entriesPath)) {
             try {
                 const data = JSON.parse(fs.readFileSync(entriesPath, 'utf8'));
-                if (data.resource && data.resource.toLowerCase().includes('hunarmand-punjab/src/components/')) {
+                if (data.resource && data.resource.toLowerCase().includes('digikhyber/src/components/')) {
                     let bestEntry = null;
                     let bestTime = 0;
                     

@@ -3,7 +3,7 @@ import AOS from "aos";
 import "aos/dist/aos.css";
 import CountUp from "react-countup";
 import { useInView } from "react-intersection-observer";
-import FS from "../assets/Solar-Panel.webp";
+import FS from "../assets/grow.jpg";
 import GS from "../assets/Solar-Penal.webp";
 import Team from "../assets/team.png";
 import PageBanner from "../components/PageBanner";
@@ -49,7 +49,7 @@ const FreeSolarPanel = () => {
             <PageBanner 
                 title="digikhyber Solar Scheme"
                 description="In a world where digital learning is the future, uninterrupted power is a necessity, not a luxury. Digikhyber Solar Scheme, Digikhyber provides solar energy systems to eligible students who meet our criteria as per policy of Digikhyber — so your learning never stops, no matter the power cuts."
-                image="/images/Solar Scheme.jpg"
+                rightImage="/images/Solar Scheme.jpg"
             />
             <section className="py-4" style={{ background: 'linear-gradient(135deg, #f8f9fa 0%, #e9ecef 100%)' }}>
                 <div className="container">
@@ -58,7 +58,7 @@ const FreeSolarPanel = () => {
                         <div className="col-lg-5 p-0 solar-reveal" style={{ minHeight: '380px' }}>
                             <img
                                 className="w-100 h-100"
-                                src="/images/Solar Scheme Page Image (2).jpeg"
+                                src={FS}
                                 alt="Free Solar Panel Scheme"
                                 style={{ objectFit: 'cover' }}
                             />

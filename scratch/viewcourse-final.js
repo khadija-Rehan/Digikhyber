@@ -1,5 +1,5 @@
 const fs = require('fs');
-const path = 'd:/Desktop/hunarmand-punjab/src/pages/ViewCourse.jsx';
+const path = 'd:/Desktop/digikhyber/src/pages/ViewCourse.jsx';
 let content = fs.readFileSync(path, 'utf8');
 
 const returnIndex = content.indexOf('  return (');

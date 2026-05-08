@@ -1,4 +1,5 @@
 import React, { useState, useEffect, useRef } from "react";
+import { Link } from "react-router-dom";
 import { Accordion } from "react-bootstrap";
 import GIF from "../assets/approved.gif";
 import { generatePdf } from "../api/user";
@@ -755,6 +756,15 @@ const AdmissionResult = () => {
                 <li> Hands-On Learning with Global Curriculum</li>
                 <li> Career Guidance & Freelancing Support</li>
               </ul>
+            </div>
+            <div className="mt-4 mb-2">
+              <Link 
+                to="/dashboard" 
+                className="btn btn-success p-3 fw-bold w-100 text-decoration-none" 
+                style={{ background: '#0B5D3B', border: 'none', borderRadius: '8px', fontSize: '1.1rem', display: 'block', textAlign: 'center' }}
+              >
+                <i className="fas fa-th-large me-2"></i> OPEN YOUR PROFESSIONAL CANDIDATE DASHBOARD
+              </Link>
             </div>
           </div>
         </div>

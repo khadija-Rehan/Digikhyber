@@ -14,7 +14,7 @@ const AboutUs = () => {
             <PageBanner 
                 title="About Us"
                 description="Empowering the youth of Punjab with world-class digital skills. Our mission is to bridge the gap between education and industry excellence through the Digikhyber initiative."
-                image="/images/About Us.jpg"
+                rightImage="/images/About Us.jpg"
             />
 
             <Instructors />

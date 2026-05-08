@@ -1,0 +1,139 @@
+/* Ultimate Simple & Clean Institutional Test Design */
+.admission-test-page {
+  min-height: 100vh;
+  background-color: #f8fafc;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 20px;
+  font-family: 'Inter', sans-serif;
+}
+
+.test-container-simple {
+  width: 100%;
+  max-width: 700px;
+  background: white;
+  padding: 40px;
+  border-radius: 12px;
+  box-shadow: 0 4px 20px rgba(0,0,0,0.05);
+}
+
+.test-header-simple {
+  border-bottom: 2px solid #f1f5f9;
+  padding-bottom: 20px;
+  margin-bottom: 30px;
+}
+
+.test-header-simple h2 {
+  font-size: 1.5rem;
+  font-weight: 800;
+  color: #0b5d3b;
+  margin: 0;
+  text-transform: uppercase;
+  letter-spacing: 1px;
+}
+
+.question-status-simple {
+  font-size: 0.85rem;
+  font-weight: 700;
+  color: #94a3b8;
+  margin-top: 5px;
+  display: block;
+}
+
+.question-text-simple {
+  font-size: 1.2rem;
+  font-weight: 700;
+  color: #1e293b;
+  line-height: 1.5;
+  margin-bottom: 25px;
+}
+
+.options-list-simple {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+}
+
+.option-button-simple {
+  width: 100%;
+  padding: 16px 20px;
+  background: #f8fafc;
+  border: 1px solid #e2e8f0;
+  border-radius: 8px;
+  text-align: left;
+  font-size: 1rem;
+  font-weight: 600;
+  color: #475569;
+  cursor: pointer;
+  transition: all 0.2s;
+  display: flex;
+  align-items: center;
+  gap: 15px;
+}
+
+.option-button-simple:hover {
+  background: #f1f5f9;
+  border-color: #cbd5e1;
+}
+
+.option-button-simple.selected {
+  background: #dcfce7;
+  border-color: #0b5d3b;
+  color: #0b5d3b;
+}
+
+.radio-dot-simple {
+  width: 18px;
+  height: 18px;
+  border: 2px solid #cbd5e1;
+  border-radius: 50%;
+  position: relative;
+}
+
+.option-button-simple.selected .radio-dot-simple {
+  border-color: #0b5d3b;
+}
+
+.option-button-simple.selected .radio-dot-simple::after {
+  content: '';
+  position: absolute;
+  top: 50%; left: 50%;
+  transform: translate(-50%, -50%);
+  width: 10px; height: 10px;
+  background: #0b5d3b;
+  border-radius: 50%;
+}
+
+.test-footer-simple {
+  margin-top: 40px;
+  display: flex;
+  justify-content: flex-end;
+}
+
+.btn-submit-simple {
+  background: #0b5d3b;
+  color: white;
+  border: none;
+  padding: 12px 40px;
+  border-radius: 6px;
+  font-weight: 700;
+  font-size: 1rem;
+  cursor: pointer;
+  transition: background 0.2s;
+}
+
+.btn-submit-simple:hover {
+  background: #084a2f;
+}
+
+.btn-submit-simple:disabled {
+  background: #cbd5e1;
+  cursor: not-allowed;
+}
+
+@media (max-width: 600px) {
+  .test-container-simple { padding: 25px; }
+  .test-header-simple h2 { font-size: 1.2rem; }
+  .question-text-simple { font-size: 1.1rem; }
+}

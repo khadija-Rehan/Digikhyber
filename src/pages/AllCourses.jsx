@@ -59,9 +59,10 @@ const AllCourses = () => {
             <PageBanner 
                 title="Courses"
                 description="Digikhyber courses are not just different — they are revolutionary. Designed with hands-on practice, live projects, and international standards, we prepare you to lead in today's global digital economy."
-                image="/images/courses-img.jpeg"
+                 rightImage="/images/courses-img.jpeg"
             />
 
+ 
             <div className="all-courses py-5">
                 <div className="container">
                     <div className="well-courses-grid">

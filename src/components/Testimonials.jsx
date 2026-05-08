@@ -41,7 +41,7 @@ const Testimonials = () => {
                     <div className={`col-lg-6 ${isVisible ? 'fade-in-left' : 'opacity-0'}`}>
                         <div className="mission-image-container">
                             <img
-                                src="/images/illustrations.jpeg"
+                                src="/images/Laptop Scheme Page Image (3).jpg"
                                 alt="Digikhyber Impact"
                                 className="img-fluid rounded-4 shadow-lg w-100"
                                 style={{ border: '1px solid rgba(11, 93, 59, 0.1)' }}

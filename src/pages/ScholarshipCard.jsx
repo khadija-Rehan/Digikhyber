@@ -46,6 +46,7 @@ const ScholarshipCard = () => {
       <PageBanner 
         title="Scholarship Cards"
         description="The Scholarship Card is your all-in-one pass to unlock a world of digital learning and career-building opportunities. Digikhyber is the biggest E-Learning Platform launched by Minister of School & Higher Education Rana Sikandar Hayat, this initiative is designed to empower youth with access to high-quality training programs, hands-on practical learning, and an internationally recognized curriculum."
+        rightImage="/images/scholarship-card-main.jpg"
       />
       
       <div className="scholarship-main-section">
@@ -90,7 +91,7 @@ const ScholarshipCard = () => {
             </div>
             <div className="col-lg-6 p-4 text-center">
               <img 
-                src="/images/scholarship-card-main.png" 
+                src="/images/scholarship-card.jpg" 
                 alt="Digikhyber Scholarship Card" 
                 className="img-fluid premium-image-card" 
                 style={{ width: "100%", maxWidth: "750px", display: "block", margin: "0 auto" }} 

@@ -13,7 +13,7 @@ function walkSync(dir, filelist = []) {
   return filelist;
 }
 
-const files = walkSync('d:/Desktop/hunarmand-punjab/src').filter(f => f.match(/\.(jsx|js|css)$/));
+const files = walkSync('d:/Desktop/digikhyber/src').filter(f => f.match(/\.(jsx|js|css)$/));
 
 let count = 0;
 files.forEach(file => {
@@ -21,19 +21,19 @@ files.forEach(file => {
   let originalContent = content;
   
   // Replace full phrase first
-  content = content.replace(/Hunarmand Punjab/g, 'Digikhyber');
-  content = content.replace(/hunarmand punjab/gi, 'digikhyber');
+  content = content.replace(/Digikhyber/g, 'Digikhyber');
+  content = content.replace(/digikhyber punjab/gi, 'digikhyber');
   
   // Replace domains / concatenated words
-  content = content.replace(/hunarmandpunjab/gi, 'digikhyber');
+  content = content.replace(/digikhyber/gi, 'digikhyber');
   
-  // Replace standalone words (which covers CSS classes like .hunarmand-heading)
-  content = content.replace(/Hunarmand/g, 'Digikhyber');
-  content = content.replace(/hunarmand/gi, 'digikhyber');
+  // Replace standalone words (which covers CSS classes like .digikhyber-heading)
+  content = content.replace(/Digikhyber/g, 'Digikhyber');
+  content = content.replace(/digikhyber/gi, 'digikhyber');
 
   // Replace typo
-  content = content.replace(/DigiKhaber/gi, 'Digikhyber');
-  content = content.replace(/digikhaber/gi, 'digikhyber');
+  content = content.replace(/Digikhyber/gi, 'Digikhyber');
+  content = content.replace(/Digikhyber/gi, 'digikhyber');
 
   if (content !== originalContent) {
     fs.writeFileSync(file, content, 'utf8');

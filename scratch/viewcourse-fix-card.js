@@ -1,5 +1,5 @@
 const fs = require('fs');
-const path = 'd:/Desktop/hunarmand-punjab/src/pages/ViewCourse.jsx';
+const path = 'd:/Desktop/digikhyber/src/pages/ViewCourse.jsx';
 let content = fs.readFileSync(path, 'utf8');
 
 const returnIndex = content.indexOf('  return (');
@@ -235,7 +235,7 @@ const newReturn = `  return (
 fs.writeFileSync(path, topPart + newReturn + bottomPart);
 
 // Add custom scrollbar CSS if it doesn't exist
-const globalCssPath = 'd:/Desktop/hunarmand-punjab/src/global.css';
+const globalCssPath = 'd:/Desktop/digikhyber/src/global.css';
 let globalCss = fs.readFileSync(globalCssPath, 'utf8');
 if (!globalCss.includes('.custom-scrollbar')) {
   globalCss += `

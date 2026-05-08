@@ -81,7 +81,7 @@ const Awairness = () => {
                             
                             <img 
                                 className='w-100 rounded-4 shadow-lg position-relative z-2' 
-                                src="/3.webp" 
+                                src="./images/team.jpeg" 
                                 alt="Build your future" 
                                 style={{ border: '8px solid white' }}
                             />

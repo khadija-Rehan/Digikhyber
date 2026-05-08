@@ -97,7 +97,7 @@ const TaleemFinance = () => {
                         </div>
                     </div>
                     <div className="col-lg-6" data-aos="fade-right">
-                        <img className="w-100 rounded-4" src="/images/Taleem Finance Page Image (1).jpeg" alt="" />
+                        <img className="w-100 rounded-4" src="/images/Taleem Finance Page Image (1).jpg" alt="" />
                     </div>
                 </div>
             </div>
