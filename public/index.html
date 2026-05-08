@@ -34,6 +34,24 @@
     <link rel="manifest" href="%PUBLIC_URL%/manifest.json" />
     <!-- QuantumBases Attribution -->
     <link rel="author" href="https://quantumbases.com/" />
+    <!-- Suppress cross-origin CDN script errors (Vanta, p5.js) from React dev overlay -->
+    <script>
+      // Capture phase fires BEFORE React's error listener — stopImmediatePropagation blocks React overlay
+      window.addEventListener('error', function(event) {
+        var msg = event.message || '';
+        if (msg === 'Script error.' || msg === 'Script error' || msg === '') {
+          event.stopImmediatePropagation();
+          event.preventDefault();
+        }
+      }, true);
+      window.addEventListener('unhandledrejection', function(event) {
+        var reason = event.reason;
+        if (!reason || (reason && !reason.stack)) {
+          event.stopImmediatePropagation();
+          event.preventDefault();
+        }
+      }, true);
+    </script>
     <!-- Meta Pixel Code -->
     <script>
       !(function (f, b, e, v, n, t, s) {

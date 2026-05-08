@@ -108,7 +108,7 @@ const DigitalPunjab = () => {
                             <span className="fw-bold">Digikhyber</span> initiative with
                             the appreciation of our Honourable Minister of School & Higher
                             Education, Punjab{" "}
-                            <span className="fw-bold">Rana Sikandar Hayat</span>, aimed at
+                            <span className="fw-bold">Faisal Karim Kundi,Governor of Khyber Pakhtunkhwa</span>, aimed at
                             providing IT-Skills to youth enrolled in the training program.
                             Digikhyber Scholarship Card enables eligible trainees to
                             access free advanced IT Trainings, laptop scheme, solar scheme,

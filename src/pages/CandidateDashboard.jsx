@@ -27,7 +27,15 @@ const CandidateDashboard = () => {
     const correctAnswers = Math.round((testScore / 100) * totalMcqs);
     const percentage = `${testScore}%`;
 
-    const enrolledCourses = userData.enrolledCourses || ['Web & Mobile App Development'];
+    const enrolledCourses = userData.courses || [];
+    const secondCourses = userData.secondEnrolledCourses || [];
+    const physicalCourses = userData.physicalCourses || [];
+    const allCourses = [
+        ...enrolledCourses.map(c => ({ name: c, type: 'Online', session: 'Spring 2026' })),
+        ...secondCourses.map(c => ({ name: c, type: 'Online (2nd)', session: 'Spring 2026' })),
+        ...physicalCourses.map(c => ({ name: c, type: 'Physical', session: 'Spring 2026' })),
+    ];
+    const hasCourses = allCourses.length > 0;
 
     return (
         <div className="compact-dashboard">
@@ -74,14 +82,27 @@ const CandidateDashboard = () => {
                                 
                                 <div className="enrollment-status-box">
                                     <h3><i className="fas fa-graduation-cap me-2"></i> Academic Enrollment</h3>
-                                    <div className="enrolled-program-pill">
-                                        <div className="program-icon"><i className="fas fa-laptop-code"></i></div>
-                                        <div className="program-details">
-                                            <h4>{enrolledCourses[0]}</h4>
-                                            <p>Session: Spring 2026 | Enrollment ID: {rollNumber}</p>
+                                    {hasCourses ? (
+                                        <div className="enrolled-courses-list">
+                                            {allCourses.map((course, idx) => (
+                                                <div className="enrolled-program-pill" key={idx}>
+                                                    <div className="program-icon">
+                                                        <i className={course.type === 'Physical' ? 'fas fa-school' : 'fas fa-laptop-code'}></i>
+                                                    </div>
+                                                    <div className="program-details">
+                                                        <h4>{course.name}</h4>
+                                                        <p>Session: {course.session} &nbsp;|&nbsp; ID: {rollNumber} &nbsp;|&nbsp; <span style={{color: '#c9a227', fontWeight: 700}}>{course.type}</span></p>
+                                                    </div>
+                                                    <span className="badge-confirmed">CONFIRMED</span>
+                                                </div>
+                                            ))}
                                         </div>
-                                        <span className="badge-confirmed">CONFIRMED</span>
-                                    </div>
+                                    ) : (
+                                        <div className="no-courses-notice">
+                                            <i className="fas fa-info-circle"></i>
+                                            <span>No courses enrolled yet. Please complete registration to see your enrolled courses.</span>
+                                        </div>
+                                    )}
                                 </div>
 
                                 <div className="next-steps-compact">

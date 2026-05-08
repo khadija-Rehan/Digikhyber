@@ -1,13 +1,11 @@
 import React, { useEffect, useRef } from "react";
-import AOS from "aos";
-import "aos/dist/aos.css";
 
 /**
- * PageBanner Component
- * Globally updated to a centered, typography-focused layout (No image cards)
- * @param {string} title - The heading for the banner
- * @param {string} description - The subtext/description
- * @param {React.ReactNode} children - Extra content like badges or bars (optional)
+ * PageBanner Component — Vanta Topology animated banner with glassmorphism image card.
+ * @param {string} title       - Banner heading
+ * @param {string} description - Subtext
+ * @param {string} rightImage  - Optional right-side image
+ * @param {React.ReactNode} children - Extra content (optional)
  */
 const PageBanner = ({ title, description, rightImage, children }) => {
     const vantaRef = useRef(null);
@@ -15,16 +13,18 @@ const PageBanner = ({ title, description, rightImage, children }) => {
     useEffect(() => {
         let vantaEffect = null;
         let tries = 0;
-        
+        let timerId = null;
+
         const initVanta = () => {
-            if (vantaRef.current && window.VANTA && window.VANTA.TOPOLOGY && window.p5) {
+            if (!vantaRef.current) return;
+            if (window.VANTA && window.VANTA.TOPOLOGY && window.p5) {
                 try {
                     vantaEffect = window.VANTA.TOPOLOGY({
                         el: vantaRef.current,
                         mouseControls: true,
                         touchControls: true,
                         gyroControls: false,
-                        minHeight: 350.00,
+                        minHeight: 280.00,
                         minWidth: 200.00,
                         scale: 1.00,
                         scaleMobile: 1.00,
@@ -32,37 +32,36 @@ const PageBanner = ({ title, description, rightImage, children }) => {
                         backgroundColor: 0x0b5d3b,
                     });
                 } catch (err) {
-                    console.error("Vanta initialization failed:", err);
+                    // Vanta failed silently — banner shows with CSS fallback
                 }
-            } else if (tries < 30) {
+            } else if (tries < 25) {
                 tries++;
-                setTimeout(initVanta, 100);
+                timerId = setTimeout(initVanta, 200);
             }
         };
 
         initVanta();
 
         return () => {
-            if (vantaEffect) vantaEffect.destroy();
+            if (timerId) clearTimeout(timerId);
+            try { if (vantaEffect) vantaEffect.destroy(); } catch (e) {}
         };
     }, []);
 
     return (
         <div className="simple-page-banner" ref={vantaRef}>
-            <div className="banner-overlay"></div>
+            <div className="banner-css-fallback"></div>
             <div className="container position-relative z-1">
                 <div className="row align-items-center">
-                    <div className={rightImage ? "col-lg-7 banner-reveal text-start" : "col-lg-10 text-center mx-auto banner-reveal"}>
+                    <div className={rightImage ? "col-lg-7 banner-reveal" : "col-lg-10 text-center mx-auto banner-reveal"}>
                         <h1 className="banner-title">{title}</h1>
                         {description && (
-                            <p className="banner-desc">
-                                {description}
-                            </p>
+                            <p className="banner-desc">{description}</p>
                         )}
                         {children}
                     </div>
                     {rightImage && (
-                        <div className="col-lg-5 text-center banner-reveal" style={{ animationDelay: '0.2s' }}>
+                        <div className="col-lg-5 text-center banner-reveal" style={{ animationDelay: '0.25s' }}>
                             <div className="banner-image-wrapper">
                                 <img src={rightImage} alt={title} className="banner-right-img" />
                             </div>
@@ -70,100 +69,94 @@ const PageBanner = ({ title, description, rightImage, children }) => {
                     )}
                 </div>
             </div>
-            
+
             <style>{`
-                .banner-reveal {
-                    animation: bannerRevealAnim 0.3s cubic-bezier(0.19, 1, 0.22, 1) forwards;
-                    opacity: 0;
-                }
-
-                @keyframes bannerRevealAnim {
-                    from { opacity: 0; transform: translateY(20px); }
-                    to { opacity: 1; transform: translateY(0); }
-                }
-
                 .simple-page-banner {
-                    min-height: 280px; 
+                    min-height: 280px;
                     display: flex;
                     align-items: center;
                     padding: 50px 0;
                     position: relative;
                     overflow: hidden;
-                    background-color: #0B5D3B; 
+                    background-color: #0B5D3B;
                 }
 
-                .banner-overlay {
+                /* CSS fallback in case Vanta doesn't load */
+                .banner-css-fallback {
                     position: absolute;
                     inset: 0;
-                    background: radial-gradient(circle at center, rgba(11, 93, 59, 0.05) 0%, rgba(6, 61, 39, 0.3) 100%);
+                    background:
+                        radial-gradient(ellipse at 15% 60%, rgba(201,162,39,0.12) 0%, transparent 55%),
+                        linear-gradient(135deg, #052e1c 0%, #0B5D3B 55%, #0d6b45 100%);
+                    background-image:
+                        linear-gradient(rgba(255,255,255,0.03) 1px, transparent 1px),
+                        linear-gradient(90deg, rgba(255,255,255,0.03) 1px, transparent 1px);
+                    background-size: 40px 40px;
                     z-index: 0;
                     pointer-events: none;
+                }
+
+                .banner-reveal {
+                    animation: bannerFadeUp 0.5s ease forwards;
+                    opacity: 0;
+                }
+                @keyframes bannerFadeUp {
+                    from { opacity: 0; transform: translateY(18px); }
+                    to   { opacity: 1; transform: translateY(0); }
                 }
 
                 .banner-title {
                     color: #ffffff !important;
                     font-size: 3rem;
                     font-weight: 800;
-                    margin-bottom: 20px;
+                    margin-bottom: 16px;
                     line-height: 1.2;
                     text-shadow: 0 4px 15px rgba(0,0,0,0.5);
-                    position: relative;
                     font-family: 'Raleway', sans-serif !important;
                     letter-spacing: -1px;
                 }
 
                 .banner-desc {
-                    color: rgba(255, 255, 255, 0.9) !important;
-                    font-size: 1.15rem !important;
-                    line-height: 1.7;
-                    max-width: 850px;
-                    margin-bottom: 25px;
-                    text-shadow: 0 3px 8px rgba(0,0,0,0.4);
-                    position: relative;
+                    color: rgba(255,255,255,0.88) !important;
+                    font-size: 1.05rem !important;
+                    line-height: 1.75;
+                    max-width: 820px;
+                    margin-bottom: 20px;
+                    text-shadow: 0 2px 8px rgba(0,0,0,0.35);
                     font-weight: 400;
                     font-family: 'Raleway', sans-serif !important;
                 }
 
                 .banner-image-wrapper {
-                    background: rgba(255, 255, 255, 0.15);
-                    backdrop-filter: blur(15px);
+                    background: rgba(255,255,255,0.14);
+                    backdrop-filter: blur(14px);
+                    -webkit-backdrop-filter: blur(14px);
                     padding: 10px;
-                    border-radius: 30px;
-                    border: 2px solid rgba(255, 255, 255, 0.3);
+                    border-radius: 28px;
+                    border: 2px solid rgba(255,255,255,0.28);
                     display: inline-block;
-                    box-shadow: 0 25px 60px rgba(0,0,0,0.4);
-                    transition: transform 0.3s ease;
+                    box-shadow: 0 24px 55px rgba(0,0,0,0.38);
+                    transition: transform 0.3s ease, box-shadow 0.3s ease;
                 }
-
                 .banner-image-wrapper:hover {
-                    transform: scale(1.02);
+                    transform: scale(1.025);
+                    box-shadow: 0 30px 65px rgba(0,0,0,0.45);
                 }
 
                 .banner-right-img {
                     max-width: 100%;
                     height: auto;
-                    border-radius: 22px;
+                    max-height: 240px;
+                    border-radius: 20px;
                     object-fit: contain;
                     display: block;
-                    box-shadow: 0 10px 30px rgba(0,0,0,0.2);
                 }
 
                 @media (max-width: 991px) {
-                    .simple-page-banner {
-                        padding: 60px 0;
-                        min-height: 280px;
-                        text-align: center !important;
-                    }
-                    .banner-title {
-                        font-size: 2.4rem;
-                    }
-                    .banner-desc {
-                        font-size: 1.05rem !important;
-                    }
-                    .banner-image-wrapper {
-                        margin-top: 40px;
-                        max-width: 320px;
-                    }
+                    .simple-page-banner { padding: 45px 0; min-height: auto; }
+                    .banner-title { font-size: 2.1rem; text-align: center; }
+                    .banner-desc  { font-size: 0.95rem !important; text-align: center; }
+                    .banner-image-wrapper { margin-top: 28px; max-width: 280px; }
                 }
             `}</style>
         </div>

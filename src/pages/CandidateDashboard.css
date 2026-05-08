@@ -105,33 +105,71 @@
   border-radius: 12px;
   padding: 20px;
   margin-bottom: 20px;
+  border: 1px solid #e8f4ee;
+  border-left: 4px solid #0b5d3b;
 }
 
-.enrollment-status-box h3 { font-size: 0.85rem; font-weight: 700; color: #475569; margin-bottom: 12px; text-transform: uppercase; }
+.enrollment-status-box h3 { font-size: 0.85rem; font-weight: 700; color: #0b5d3b; margin-bottom: 14px; text-transform: uppercase; letter-spacing: 0.5px; }
+
+.enrolled-courses-list {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
 
 .enrolled-program-pill {
   display: flex;
   align-items: center;
   gap: 15px;
   background: white;
-  padding: 15px;
+  padding: 14px 16px;
   border-radius: 10px;
   border: 1px solid #e2e8f0;
+  transition: box-shadow 0.2s;
+}
+.enrolled-program-pill:hover {
+  box-shadow: 0 4px 12px rgba(11, 93, 59, 0.08);
 }
 
-.program-icon { font-size: 1.5rem; color: #0b5d3b; }
-.program-details h4 { margin: 0; font-size: 1rem; font-weight: 700; color: #1e293b; }
-.program-details p { margin: 2px 0 0; font-size: 0.75rem; color: #94a3b8; }
+.program-icon { 
+  font-size: 1.4rem; 
+  color: #0b5d3b; 
+  width: 38px; 
+  height: 38px; 
+  background: #e8f4ee; 
+  border-radius: 8px; 
+  display: flex; 
+  align-items: center; 
+  justify-content: center;
+  flex-shrink: 0;
+}
+.program-details h4 { margin: 0; font-size: 0.95rem; font-weight: 700; color: #1e293b; }
+.program-details p { margin: 3px 0 0; font-size: 0.72rem; color: #94a3b8; }
 
 .badge-confirmed {
   margin-left: auto;
-  font-size: 0.65rem;
+  flex-shrink: 0;
+  font-size: 0.62rem;
   font-weight: 800;
   color: white;
   background: #0b5d3b;
-  padding: 4px 8px;
-  border-radius: 4px;
+  padding: 5px 10px;
+  border-radius: 5px;
+  letter-spacing: 0.5px;
 }
+
+.no-courses-notice {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  background: #fff9e6;
+  border: 1px solid #fde68a;
+  border-radius: 8px;
+  padding: 14px 16px;
+  font-size: 0.85rem;
+  color: #92400e;
+}
+.no-courses-notice i { color: #d97706; font-size: 1rem; flex-shrink: 0; }
 
 .next-steps-compact { display: flex; align-items: center; justify-content: space-between; gap: 20px; }
 .info-tip-simple { display: flex; align-items: center; gap: 10px; color: #64748b; font-size: 0.85rem; flex: 1; }
