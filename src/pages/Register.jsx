@@ -42,7 +42,13 @@ const Register = () => {
     cnicBack: null,
   });
 
+  const [previews, setPreviews] = useState({
+    cnicFront: null,
+    cnicBack: null,
+  });
+
   const [errors, setErrors] = useState({});
+  const [serverError, setServerError] = useState("");
 
   useEffect(() => {
     const referralCode = searchParams.get('ref') || searchParams.get('referral') || searchParams.get('code');
@@ -55,6 +61,7 @@ const Register = () => {
     if (errors[fieldName]) {
       setErrors(prev => ({ ...prev, [fieldName]: "" }));
     }
+    if (serverError) setServerError("");
   };
 
   const validatePassword = (password) => {
@@ -110,8 +117,20 @@ const Register = () => {
 
   const handleFileChange = (e, type) => {
     const file = e.target.files[0];
-    setDocuments(prev => ({ ...prev, [type]: file }));
-    clearError(type);
+    if (file) {
+      setDocuments(prev => ({ ...prev, [type]: file }));
+      // Create preview for images
+      if (file.type.startsWith("image/")) {
+        const reader = new FileReader();
+        reader.onloadend = () => {
+          setPreviews(prev => ({ ...prev, [type]: reader.result }));
+        };
+        reader.readAsDataURL(file);
+      } else {
+        setPreviews(prev => ({ ...prev, [type]: null }));
+      }
+      clearError(type);
+    }
   };
 
   const handleChange = (e) => {
@@ -124,6 +143,7 @@ const Register = () => {
 
   const handleSubmit = async (e) => {
     e.preventDefault();
+    setServerError("");
     if (!validateForm()) {
       showError("Please fix errors.");
       return;
@@ -139,7 +159,17 @@ const Register = () => {
       showSuccess("Registration successful!");
       navigate("/admission-test");
     } catch (error) {
-      showError(error.response?.data?.message || "Registration failed.");
+      const msg = error.response?.data?.message || "Registration failed.";
+      setServerError(msg);
+      
+      // If error is about a specific field, highlight it
+      if (msg.toLowerCase().includes("cnic")) {
+        setErrors(prev => ({ ...prev, cnic: msg }));
+      } else if (msg.toLowerCase().includes("email")) {
+        setErrors(prev => ({ ...prev, email: msg }));
+      }
+      
+      showError(msg);
     } finally {
       setLoading(false);
     }
@@ -170,6 +200,15 @@ const Register = () => {
 
         <h2 className="auth-title">Admission Form</h2>
         <p className="auth-subtitle">Fill in your details to create an account</p>
+
+        {serverError && (
+          <div className="alert alert-danger d-flex align-items-center mb-4" style={{ borderRadius: '12px', border: 'none', backgroundColor: '#fff5f5', color: '#e53e3e' }}>
+            <i className="fas fa-exclamation-circle me-3" style={{ fontSize: '1.2rem' }}></i>
+            <div>
+              <strong>Submission Error:</strong> {serverError}
+            </div>
+          </div>
+        )}
 
         <div className="auth-notice">
           <strong>Notice:</strong> To become eligible for scholarship card (free laptops, Solar scheme, 
@@ -304,24 +343,46 @@ const Register = () => {
 
           <div className="mb-3">
             <label className="mb-2">Upload CNIC (Front Side) <span className="text-danger">*</span></label>
-            <div className="drop_box" onClick={() => document.getElementById("cnicFront").click()}>
-              <i className="fas fa-cloud-upload-alt fa-2x mb-2 text-muted"></i>
-              <header><h4>Click to choose or drop your file here</h4></header>
-              <p className="small mb-0">Accepted formats: jpg, jpeg, png, pdf (Max 5MB)</p>
+            <div className="drop_box" onClick={() => document.getElementById("cnicFront").click()} style={{ position: 'relative', overflow: 'hidden' }}>
+              {previews.cnicFront ? (
+                <div className="preview-container" style={{ width: '100%', height: '150px', display: 'flex', justifyContent: 'center', alignItems: 'center' }}>
+                  <img src={previews.cnicFront} alt="CNIC Front Preview" style={{ maxHeight: '100%', maxWidth: '100%', borderRadius: '8px', objectFit: 'contain' }} />
+                  <div className="preview-overlay" style={{ position: 'absolute', top: 0, left: 0, width: '100%', height: '100%', background: 'rgba(0,0,0,0.1)', display: 'flex', justifyContent: 'center', alignItems: 'center', opacity: 0, transition: '0.3s' }}>
+                    <span className="text-white fw-bold">Change Image</span>
+                  </div>
+                </div>
+              ) : (
+                <>
+                  <i className="fas fa-cloud-upload-alt fa-2x mb-2 text-muted"></i>
+                  <header><h4>Click to choose or drop your file here</h4></header>
+                  <p className="small mb-0">Accepted formats: jpg, jpeg, png, pdf (Max 5MB)</p>
+                </>
+              )}
               <input type="file" id="cnicFront" hidden accept="image/*,.pdf" onChange={(e) => handleFileChange(e, "cnicFront")} />
-              {documents.cnicFront && <p className="text-success small mt-2">Selected: {documents.cnicFront.name}</p>}
+              {documents.cnicFront && !previews.cnicFront && <p className="text-success small mt-2">Selected: {documents.cnicFront.name}</p>}
             </div>
             {errors.cnicFront && <div className="text-danger small mt-1">{errors.cnicFront}</div>}
           </div>
 
           <div className="mb-3">
             <label className="mb-2">Upload CNIC (Back Side) <span className="text-danger">*</span></label>
-            <div className="drop_box" onClick={() => document.getElementById("cnicBack").click()}>
-              <i className="fas fa-cloud-upload-alt fa-2x mb-2 text-muted"></i>
-              <header><h4>Click to choose or drop your file here</h4></header>
-              <p className="small mb-0">Accepted formats: jpg, jpeg, png, pdf (Max 5MB)</p>
+            <div className="drop_box" onClick={() => document.getElementById("cnicBack").click()} style={{ position: 'relative', overflow: 'hidden' }}>
+              {previews.cnicBack ? (
+                <div className="preview-container" style={{ width: '100%', height: '150px', display: 'flex', justifyContent: 'center', alignItems: 'center' }}>
+                  <img src={previews.cnicBack} alt="CNIC Back Preview" style={{ maxHeight: '100%', maxWidth: '100%', borderRadius: '8px', objectFit: 'contain' }} />
+                  <div className="preview-overlay" style={{ position: 'absolute', top: 0, left: 0, width: '100%', height: '100%', background: 'rgba(0,0,0,0.1)', display: 'flex', justifyContent: 'center', alignItems: 'center', opacity: 0, transition: '0.3s' }}>
+                    <span className="text-white fw-bold">Change Image</span>
+                  </div>
+                </div>
+              ) : (
+                <>
+                  <i className="fas fa-cloud-upload-alt fa-2x mb-2 text-muted"></i>
+                  <header><h4>Click to choose or drop your file here</h4></header>
+                  <p className="small mb-0">Accepted formats: jpg, jpeg, png, pdf (Max 5MB)</p>
+                </>
+              )}
               <input type="file" id="cnicBack" hidden accept="image/*,.pdf" onChange={(e) => handleFileChange(e, "cnicBack")} />
-              {documents.cnicBack && <p className="text-success small mt-2">Selected: {documents.cnicBack.name}</p>}
+              {documents.cnicBack && !previews.cnicBack && <p className="text-success small mt-2">Selected: {documents.cnicBack.name}</p>}
             </div>
             {errors.cnicBack && <div className="text-danger small mt-1">{errors.cnicBack}</div>}
           </div>
