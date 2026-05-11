@@ -257,7 +257,6 @@ const AdmissionResult = () => {
       }
 
       const fileUrl = `https://digikhyber-backend-production.up.railway.app/uploads/${fileName}`;
-      const fileUrl = `https://backend.digikhyber.org.pk/uploads/${fileName}`;
       const a = document.createElement("a");
       a.href = fileUrl;
       a.download = fileName;
@@ -644,7 +643,7 @@ const AdmissionResult = () => {
         return;
       }
 
-      const fileUrl = `https://backend.digikhyber.org.pk/uploads/${fileName}`;
+      const fileUrl = `https://digikhyber-backend-production.up.railway.app/uploads/${fileName}`;
       const a = document.createElement("a");
       a.href = fileUrl;
       a.download = fileName;
