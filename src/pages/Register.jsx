@@ -155,8 +155,9 @@ const Register = () => {
       const courses = [formData.firstCourse, formData.secondCourse].filter(Boolean);
       data.append("courses", JSON.stringify(courses));
       Object.entries(documents).forEach(([k, v]) => { if (v) data.append(k, v); });
-      await signUp(data);
-      showSuccess("Registration successful!");
+      const response = await signUp(data);
+      const rollNumber = response.data?.user?.rollNumber;
+      showSuccess(`Registration successful! Your Roll Number is: ${rollNumber || "Generated"}. Please save it for your records.`);
       navigate("/admission-test");
     } catch (error) {
       const msg = error.response?.data?.message || "Registration failed.";

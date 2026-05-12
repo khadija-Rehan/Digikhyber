@@ -282,9 +282,10 @@ const PhysicalAdmission = () => {
         }
       });
 
-      const { data } = await submitPhysicalAdmission(formDataToSubmit);
-      console.log("Physical admission successful:", data);
-      showSuccess("Physical admission application submitted successfully!");
+      const response = await submitPhysicalAdmission(formDataToSubmit);
+      const rollNumber = response.data?.user?.rollNumber;
+      console.log("Physical admission successful:", response.data);
+      showSuccess(`Physical admission application submitted successfully! Your Roll Number is: ${rollNumber || "Generated"}. Please save it for your records.`);
       navigate("/login");
     } catch (error) {
       console.error("Physical admission failed:", error);
