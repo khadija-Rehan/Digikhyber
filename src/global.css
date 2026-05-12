@@ -3777,3 +3777,18 @@ ul li {
   box-shadow: 0 30px 60px -12px rgba(11, 93, 59, 0.25) !important;
 }
 
+
+/* --- Premium Institutional UI Classes --- */
+.input-group-premium { position: relative; display: flex; align-items: center; background: #fff; border: 1px solid #e2e8f0; border-radius: 12px; transition: all 0.3s ease; overflow: hidden; }
+.input-group-premium:focus-within { border-color: #0B5D3B; box-shadow: 0 0 0 3px rgba(11, 93, 59, 0.1); }
+.input-icon { padding: 0 15px; color: #94a3b8; font-size: 1.1rem; }
+.form-control-premium { border: none; padding: 14px 15px 14px 0; width: 100%; font-size: 0.95rem; outline: none; background: transparent; }
+.password-toggle { background: none; border: none; padding: 0 15px; color: #64748b; cursor: pointer; transition: color 0.2s; }
+.password-toggle:hover { color: #0B5D3B; }
+.btn-premium-submit { background: linear-gradient(135deg, #0B5D3B 0%, #084a2f 100%); color: white; border: none; border-radius: 12px; font-weight: 700; letter-spacing: 1px; transition: all 0.3s ease; box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1), 0 2px 4px -1px rgba(0, 0, 0, 0.06); }
+.btn-premium-submit:hover:not(:disabled) { transform: translateY(-2px); box-shadow: 0 10px 15px -3px rgba(11, 93, 59, 0.2); filter: brightness(1.1); }
+.btn-premium-submit:active { transform: translateY(0); }
+.btn-premium-submit:disabled { opacity: 0.7; cursor: not-allowed; }
+.animate-shake { animation: shake 0.5s cubic-bezier(.36,.07,.19,.97) both; }
+@keyframes shake { 10%, 90% { transform: translate3d(-1px, 0, 0); } 20%, 80% { transform: translate3d(2px, 0, 0); } 30%, 50%, 70% { transform: translate3d(-4px, 0, 0); } 40%, 60% { transform: translate3d(4px, 0, 0); } }
+.auth-prompt-footer a:hover { text-decoration: underline !important; }

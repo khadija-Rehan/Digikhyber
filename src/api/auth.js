@@ -48,3 +48,22 @@ export const submitPhysicalAdmission = async (admissionData) => {
   });
   return data;
 };
+
+export const generateOnlineChallan = async (challanData) => {
+  const data = await invoke({
+    url: `/auth/generate-psid`,
+    method: "POST",
+    data: challanData,
+  });
+  return data;
+};
+
+export const generatePhysicalChallan = async (challanData) => {
+  const data = await invoke({
+    url: `/auth/generate-physical-challan`,
+    method: "POST",
+    data: challanData,
+  });
+  return data;
+};
+
