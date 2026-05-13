@@ -243,7 +243,7 @@ const Register = () => {
           </div>
 
           <div className="row">
-            <div className="col-md-6">
+            <div className="col-12">
               <ScrollingPlaceholderInput 
                 label="CNIC/B-Form Number" 
                 required 
@@ -255,7 +255,7 @@ const Register = () => {
                 error={errors.cnic} 
               />
             </div>
-            <div className="col-md-6 mb-3">
+            <div className="col-12 mb-3">
               <label className="mb-2">Email Address <span className="text-danger">*</span></label>
               <input className={`form-control p-3 ${errors.email ? "is-invalid" : ""}`} type="email" name="email" value={formData.email} onChange={handleChange} placeholder="Provide your active email address." />
               {errors.email && <div className="invalid-feedback">{errors.email}</div>}
@@ -270,7 +270,7 @@ const Register = () => {
                 name="mobile" 
                 value={formData.mobile} 
                 onChange={handleChange} 
-                placeholder="Enter your mobile number in the format e.g 03001234567" 
+                placeholder="03001234567" 
                 maxLength="11" 
                 error={errors.mobile} 
               />
@@ -331,12 +331,12 @@ const Register = () => {
           <div className="row">
             <div className="col-md-6 mb-3">
               <label className="mb-2">City <span className="text-danger">*</span></label>
-              <input className={`form-control p-3 ${errors.city ? "is-invalid" : ""}`} type="text" name="city" value={formData.city} onChange={handleChange} placeholder="Enter your city of residence." />
+              <input className={`form-control p-3 ${errors.city ? "is-invalid" : ""}`} type="text" name="city" value={formData.city} onChange={handleChange} placeholder="Enter your city" />
               {errors.city && <div className="invalid-feedback">{errors.city}</div>}
             </div>
-            <div className="col-md-12 mb-3">
-              <label className="mb-2">Address <span className="text-danger">*</span></label>
-              <textarea className={`form-control p-3 ${errors.permanentAddress ? "is-invalid" : ""}`} name="permanentAddress" value={formData.permanentAddress} onChange={handleChange} rows="2" placeholder="Enter your complete address."></textarea>
+            <div className="col-12 mb-3">
+              <label className="mb-2">Permanent Address <span className="text-danger">*</span></label>
+              <textarea className={`form-control p-3 ${errors.permanentAddress ? "is-invalid" : ""}`} name="permanentAddress" value={formData.permanentAddress} onChange={handleChange} rows="2" placeholder="Enter your complete permanent address"></textarea>
               {errors.permanentAddress && <div className="invalid-feedback">{errors.permanentAddress}</div>}
             </div>
           </div>

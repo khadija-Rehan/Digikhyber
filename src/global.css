@@ -3048,12 +3048,12 @@ ul li {
 .auth-content-container {
   flex: 1;
   display: flex;
-  align-items: center;
+  align-items: flex-start; /* Don't center vertically — let page scroll naturally */
   justify-content: center;
   padding: 20px;
   position: relative;
   z-index: 10;
-  margin-top: 60px; /* Offset to clear the transparent header */
+  margin-top: 60px;
 }
 
 .auth-card {
@@ -3075,13 +3075,12 @@ ul li {
   background: linear-gradient(135deg, #0B5D3B 0%, #063d27 100%);
   position: relative;
   display: flex;
-  flex-direction: row;
+  flex-direction: column;
   justify-content: center;
   align-items: center;
-  gap: 20px;
-  padding: 20px 30px;
+  padding: 30px 20px;
   color: #fff;
-  text-align: left;
+  text-align: center;
 }
 
 .auth-card-left-overlay {
@@ -3139,7 +3138,7 @@ ul li {
 }
 
 .auth-card-right.scrollable {
-  overflow-y: auto;
+  overflow-y: visible; /* Page scrolls, not the card */
 }
 
 .auth-card-right.scrollable::-webkit-scrollbar {
@@ -3218,13 +3217,20 @@ ul li {
   text-decoration: underline;
 }
 
+.auth-form-box {
+  overflow-x: hidden; /* Prevent horizontal scroll */
+  width: 100%;
+}
+
 .auth-form-box .form-control,
 .auth-form-box .form-select {
   border: 1.5px solid #e0e0e0;
-  border-radius: 8px;
+  border-radius: 12px;
   font-size: 0.9rem;
   transition: border-color 0.25s, box-shadow 0.25s;
   background: #fafafa;
+  width: 100%;
+  box-sizing: border-box;
 }
 
 .auth-form-box .form-control:focus,
