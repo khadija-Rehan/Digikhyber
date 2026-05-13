@@ -8,8 +8,8 @@ const AdmissionResult = () => {
     const { user } = useAuth();
     const [onlinePsid, setOnlinePsid] = useState("");
     const [isGenerating, setIsGenerating] = useState(false);
-    const [activePaymentMethod, setActivePaymentMethod] = useState("psid"); // 'psid' or 'challan'
-    const [activeSubTab, setActiveSubTab] = useState("banking"); // 'banking', 'jazzcash', 'easypaisa'
+    const [activePaymentMethod, setActivePaymentMethod] = useState("psid");
+    const [activeSubTab, setActiveSubTab] = useState("banking");
 
     const userData = user?.user?.data?.user || user?.user || user;
     const testScore = userData?.testScore || 0;
@@ -19,7 +19,6 @@ const AdmissionResult = () => {
     const testId = userData?.rollNumber || `DK-${userData?._id?.substring(0, 6).toUpperCase()}`;
     const testPassed = userData?.testPassed;
 
-    // Load existing PSID if any
     useEffect(() => {
         if (userData?.psid) {
             setOnlinePsid(userData.psid);
@@ -33,19 +32,15 @@ const AdmissionResult = () => {
                 const res = await generateOnlineChallan();
                 if (res.data?.psid) {
                     setOnlinePsid(res.data.psid);
-                    alert(`PSID Generated: ${res.data.psid}`);
                 }
             } else {
                 const res = await generatePhysicalChallan();
                 if (res.data?.fileUrl) {
                     window.open(res.data.fileUrl, "_blank");
-                } else if (res.data?.fileName) {
-                    window.open(`http://localhost:5000/uploads/${res.data.fileName}`, "_blank");
                 }
             }
         } catch (error) {
             console.error("Payment generation error:", error);
-            alert("Something went wrong. Please try again.");
         } finally {
             setIsGenerating(false);
         }
@@ -54,195 +49,164 @@ const AdmissionResult = () => {
     if (!testPassed) {
         return (
             <div className="container py-5 text-center">
-                <div className="card shadow-sm border-0 p-5" style={{ borderRadius: '20px' }}>
-                    <i className="fas fa-lock fa-4x text-muted mb-4"></i>
+                <div className="card shadow-sm border-0 p-5" style={{ borderRadius: '24px' }}>
+                    <div className="mb-4">
+                        <i className="fas fa-hourglass-half fa-4x text-muted opacity-50"></i>
+                    </div>
                     <h2 className="fw-bold">Evaluation in Progress</h2>
                     <p className="text-muted">Please complete your admission test first to view your official results.</p>
+                    <div className="mt-4">
+                        <Link to="/admission-test" className="btn btn-success px-4 rounded-pill">Start Test Now</Link>
+                    </div>
                 </div>
             </div>
         );
     }
 
     return (
-        <div className="admission-result-page py-5" style={{ backgroundColor: '#fff', minHeight: '100vh', fontFamily: "'Outfit', sans-serif" }}>
-            <div className="container" style={{ maxWidth: '1000px' }}>
+        <div className="admission-result-page py-5" style={{ backgroundColor: '#f0f4f8', minHeight: '100vh', fontFamily: "'Outfit', sans-serif" }}>
+            <div className="container" style={{ maxWidth: '900px' }}>
                 
-                {/* 1. Header */}
-                <div className="text-center mb-4 animate-in">
-                    <div className="mb-3">
-                        <i className="fas fa-award text-success" style={{ fontSize: '4rem' }}></i>
-                    </div>
-                    <h1 className="fw-bold h2 text-success">Admission Test Result Card</h1>
-                    <p className="text-muted small">Official Statement of Marks - Batch 2026</p>
-                </div>
-
-                {/* 2. Success Alert Box (Hunarmand Style) */}
-                <div className="alert-custom-green p-4 mb-4 shadow-sm">
-                    <div className="d-flex gap-3">
-                        <i className="fas fa-check-circle mt-1 fs-5"></i>
-                        <div>
-                            <h5 className="fw-bold mb-2">Congratulations! You've Successfully Passed.</h5>
-                            <p className="mb-3 small opacity-90">
-                                You are officially eligible for the <strong>Digikhyber Scholarship Card</strong>. 
-                                Secure your enrollment by submitting the processing fee.
-                            </p>
-                            <div className="benefits-grid row g-2 mt-2">
-                                <div className="col-md-6 small"><i className="fas fa-laptop me-2"></i> Free Laptop Scheme</div>
-                                <div className="col-md-6 small"><i className="fas fa-solar-panel me-2"></i> Solar Financing</div>
-                                <div className="col-md-6 small"><i className="fas fa-certificate me-2"></i> Global Certifications</div>
-                                <div className="col-md-6 small"><i className="fas fa-briefcase me-2"></i> Job Placement Help</div>
+                {/* Unified Result Card */}
+                <div className="card border-0 shadow-lg overflow-hidden animate-in" style={{ borderRadius: '28px' }}>
+                    
+                    {/* Top Section: Celebration Banner */}
+                    <div className="p-5 text-center text-white" style={{ background: 'linear-gradient(135deg, #0B5D3B 0%, #063d27 100%)', position: 'relative' }}>
+                        <div className="mb-3">
+                            <div className="icon-circle shadow-sm">
+                                <i className="fas fa-graduation-cap"></i>
                             </div>
                         </div>
-                    </div>
-                </div>
-
-                {/* 3. Transcript Table */}
-                <div className="result-table-container mb-5 shadow-sm rounded-4 overflow-hidden">
-                    <table className="table table-bordered mb-0">
-                        <thead>
-                            <tr>
-                                <th colSpan="2" className="text-center text-white py-3" style={{ backgroundColor: '#0B5D3B', fontSize: '1.1rem' }}>Transcript Details</th>
-                            </tr>
-                        </thead>
-                        <tbody>
-                            <tr><td className="bg-light-green fw-bold w-40">Candidate Name</td><td>{userData?.fullName}</td></tr>
-                            <tr><td>Roll Number</td><td>{testId}</td></tr>
-                            <tr><td className="bg-light-green">Total Marks</td><td className="bg-light-green">{totalMcqs}</td></tr>
-                            <tr><td>Marks Obtained</td><td>{correctAnswers}</td></tr>
-                            <tr><td className="bg-light-green">Percentage</td><td className="bg-light-green">{percentage}</td></tr>
-                            <tr><td>Result Status</td><td><span className="badge bg-success px-3">Qualified</span></td></tr>
-                        </tbody>
-                    </table>
-                </div>
-
-                {/* 4. Payment Section (The Logic Fix) */}
-                <div className="payment-box border rounded-4 shadow-sm overflow-hidden mb-5">
-                    <div className="p-4 text-center border-bottom bg-light">
-                        <h4 className="fw-bold mb-1">Pay Application Processing Fee!</h4>
-                        <p className="text-muted small mb-0">Select your preferred payment method below</p>
+                        <h1 className="fw-bold h2 mb-2">Admission Test Qualified!</h1>
+                        <p className="opacity-75 mb-0">Congratulations <strong>{userData?.fullName}</strong>, you have successfully cleared the entrance criteria.</p>
+                        
+                        {/* Score Floating Badge */}
+                        <div className="score-badge shadow-lg">
+                            <span className="small d-block opacity-75">SCORE</span>
+                            <span className="h4 fw-bold mb-0">{percentage}</span>
+                        </div>
                     </div>
 
-                    <div className="payment-tabs-row d-flex flex-column flex-md-row p-3 gap-3">
-                        <div 
-                            className={`payment-tab-btn ${activePaymentMethod === 'psid' ? 'active' : ''}`}
-                            onClick={() => setActivePaymentMethod('psid')}
-                        >
-                            <div className="d-flex align-items-center gap-3">
-                                <div className="tab-icon"><i className="fas fa-mobile-alt"></i></div>
-                                <div className="text-start">
-                                    <h6 className="mb-0 fw-bold">CONSUMER NUMBER / PSID</h6>
-                                    <small>MOBILE BANKING / JAZZCASH / EASYPAISA</small>
+                    <div className="p-4 p-md-5">
+                        <div className="row g-4 mb-5">
+                            {/* Candidate Info Columns */}
+                            <div className="col-6 col-md-3">
+                                <div className="info-stat">
+                                    <label>ROLL NUMBER</label>
+                                    <h6>{testId}</h6>
+                                </div>
+                            </div>
+                            <div className="col-6 col-md-3">
+                                <div className="info-stat">
+                                    <label>MARKS</label>
+                                    <h6>{correctAnswers} / {totalMcqs}</h6>
+                                </div>
+                            </div>
+                            <div className="col-6 col-md-3">
+                                <div className="info-stat">
+                                    <label>STATUS</label>
+                                    <h6 className="text-success">QUALIFIED</h6>
+                                </div>
+                            </div>
+                            <div className="col-6 col-md-3">
+                                <div className="info-stat">
+                                    <label>BATCH</label>
+                                    <h6>2026-B2</h6>
                                 </div>
                             </div>
                         </div>
 
-                        <div 
-                            className={`payment-tab-btn ${activePaymentMethod === 'challan' ? 'active' : ''}`}
-                            onClick={() => setActivePaymentMethod('challan')}
-                        >
-                            <div className="d-flex align-items-center gap-3">
-                                <div className="tab-icon"><i className="fas fa-university"></i></div>
-                                <div className="text-start">
-                                    <h6 className="mb-0 fw-bold">BANK CHALLAN</h6>
-                                    <small>PRINT CHALLAN & PAY AT ANY BANK</small>
+                        {/* Payment Section - Integrated */}
+                        <div className="payment-unified-section p-4 rounded-4" style={{ backgroundColor: '#f8fafc', border: '1px solid #e2e8f0' }}>
+                            <div className="text-center mb-4">
+                                <h5 className="fw-bold mb-1">Claim Your Scholarship Card</h5>
+                                <p className="text-muted small">Submit your processing fee to finalize your enrollment.</p>
+                            </div>
+
+                            <div className="payment-options-grid d-flex flex-column flex-md-row gap-3 mb-4">
+                                <div className={`pay-opt ${activePaymentMethod === 'psid' ? 'active' : ''}`} onClick={() => setActivePaymentMethod('psid')}>
+                                    <div className="opt-icon"><i className="fas fa-mobile-alt"></i></div>
+                                    <div className="opt-text">
+                                        <strong>PSID / Consumer ID</strong>
+                                        <span>Mobile Apps & ATM</span>
+                                    </div>
+                                    <div className="check-mark"><i className="fas fa-check-circle"></i></div>
                                 </div>
+                                <div className={`pay-opt ${activePaymentMethod === 'challan' ? 'active' : ''}`} onClick={() => setActivePaymentMethod('challan')}>
+                                    <div className="opt-icon"><i className="fas fa-file-invoice-dollar"></i></div>
+                                    <div className="opt-text">
+                                        <strong>Bank Challan</strong>
+                                        <span>Print & Pay at Bank</span>
+                                    </div>
+                                    <div className="check-mark"><i className="fas fa-check-circle"></i></div>
+                                </div>
+                            </div>
+
+                            {activePaymentMethod === 'psid' && (
+                                <div className="psid-details-box text-center p-3 mb-4 rounded-3" style={{ background: '#ecfdf5', border: '1px dashed #0B5D3B' }}>
+                                    {onlinePsid ? (
+                                        <>
+                                            <span className="text-muted small">YOUR UNIQUE PSID NUMBER</span>
+                                            <div className="h2 fw-bold text-success mb-1" style={{ letterSpacing: '2px' }}>{onlinePsid}</div>
+                                            <div className="text-dark small fw-bold">AMOUNT: PKR 3250</div>
+                                        </>
+                                    ) : (
+                                        <p className="mb-0 text-muted small">Click the button below to generate your unique PSID.</p>
+                                    )}
+                                </div>
+                            )}
+
+                            <div className="text-center">
+                                <button 
+                                    className="btn btn-success rounded-pill px-5 py-3 fw-bold shadow-sm"
+                                    style={{ backgroundColor: '#0B5D3B', minWidth: '280px' }}
+                                    onClick={handleGeneratePayment}
+                                    disabled={isGenerating}
+                                >
+                                    {isGenerating ? (
+                                        <><span className="spinner-border spinner-border-sm me-2"></span> Processing...</>
+                                    ) : (
+                                        <>{activePaymentMethod === 'psid' ? (onlinePsid ? 'RE-GENERATE PSID' : 'GENERATE PSID') : 'DOWNLOAD BANK CHALLAN'}</>
+                                    )}
+                                </button>
                             </div>
                         </div>
-                    </div>
 
-                    <div className="instructions-area p-4">
-                        {activePaymentMethod === 'psid' ? (
-                            <div className="psid-flow animate-in">
-                                <h6 className="fw-bold mb-4">Instructions How to Pay:</h6>
-                                <div className="sub-tabs d-flex gap-4 mb-4 border-bottom pb-2">
-                                    <div className={`sub-tab-item ${activeSubTab === 'banking' ? 'active' : ''}`} onClick={() => setActiveSubTab('banking')}>
-                                        <i className="fas fa-university me-2"></i> BANKING APP
-                                    </div>
-                                    <div className={`sub-tab-item ${activeSubTab === 'jazzcash' ? 'active' : ''}`} onClick={() => setActiveSubTab('jazzcash')}>
-                                        <i className="fas fa-mobile me-2"></i> JAZZCASH
-                                    </div>
-                                    <div className={`sub-tab-item ${activeSubTab === 'easypaisa' ? 'active' : ''}`} onClick={() => setActiveSubTab('easypaisa')}>
-                                        <i className="fas fa-wallet me-2"></i> EASYPAISA
-                                    </div>
-                                </div>
-
-                                <div className="instruction-content">
-                                    {activeSubTab === 'banking' && (
-                                        <ol className="small text-muted">
-                                            <li>Login to your Banking App.</li>
-                                            <li>Go to "Bill Payments" and select "1Bill".</li>
-                                            <li>Choose "Invoice/Consumer Payment".</li>
-                                            <li>Enter your unique PSID number.</li>
-                                            <li>Verify the amount (PKR 3250) and Pay.</li>
-                                        </ol>
-                                    )}
-                                    {activeSubTab === 'jazzcash' && (
-                                        <ol className="small text-muted">
-                                            <li>Open JazzCash App.</li>
-                                            <li>Tap on "Pay Bills".</li>
-                                            <li>Search for "1Bill" and select "Invoice Payment".</li>
-                                            <li>Enter your PSID and confirm.</li>
-                                            <li>Enter MPIN to complete payment.</li>
-                                        </ol>
-                                    )}
-                                    {activeSubTab === 'easypaisa' && (
-                                        <ol className="small text-muted">
-                                            <li>Open Easypaisa App.</li>
-                                            <li>Tap on "Bill Payment".</li>
-                                            <li>Search "1Bill" in category.</li>
-                                            <li>Enter PSID and tap next.</li>
-                                            <li>Confirm payment of PKR 3250.</li>
-                                        </ol>
-                                    )}
-                                </div>
-                                {onlinePsid && (
-                                    <div className="mt-4 p-3 border rounded bg-light text-center">
-                                        <span className="text-muted small d-block">YOUR CONSUMER ID / PSID:</span>
-                                        <h3 className="fw-bold text-success mb-0">{onlinePsid}</h3>
-                                    </div>
-                                )}
-                            </div>
-                        ) : (
-                            <div className="challan-flow animate-in">
-                                <h6 className="fw-bold mb-3">Bank Challan Payment Steps:</h6>
-                                <ol className="small text-muted">
-                                    <li>Click on "Generate Challan" to generate your unique Bank Challan.</li>
-                                    <li>Download the generated challan by clicking the download button.</li>
-                                    <li>Pay the challan at any nearest bank branch to confirm your seat.</li>
-                                </ol>
-                            </div>
-                        )}
-
-                        <div className="mt-4 pt-3 text-center border-top">
-                            <button 
-                                className="btn btn-success px-5 py-2 fw-bold rounded-pill" 
-                                style={{ backgroundColor: '#0B5D3B' }}
-                                onClick={handleGeneratePayment}
-                                disabled={isGenerating}
-                            >
-                                <i className={`fas ${activePaymentMethod === 'psid' ? 'fa-bolt' : 'fa-download'} me-2`}></i>
-                                {isGenerating ? 'Processing...' : (activePaymentMethod === 'psid' ? 'GENERATE PSID' : 'GENERATE CHALLAN')}
-                            </button>
+                        {/* Help Link */}
+                        <div className="text-center mt-4">
+                            <p className="text-muted small mb-0">Need help with payment? <Link to="/help" className="text-success fw-bold">Contact Support</Link></p>
                         </div>
                     </div>
                 </div>
             </div>
 
             <style>{`
-                .alert-custom-green { background-color: #ecfdf5; border: 1px solid #d1fae5; border-radius: 12px; color: #0B5D3B; }
-                .bg-light-green { background-color: #f8fafc !important; }
-                .w-40 { width: 40%; }
+                .icon-circle { width: 80px; height: 80px; background: rgba(255,255,255,0.2); border-radius: 50%; display: flex; align-items: center; justify-content: center; font-size: 2rem; margin: 0 auto; backdrop-filter: blur(5px); }
+                .score-badge { position: absolute; bottom: -30px; right: 50px; background: #c9a227; color: #fff; padding: 15px 25px; border-radius: 20px; text-align: center; z-index: 5; }
                 
-                .payment-tab-btn { flex: 1; border: 1px solid #e2e8f0; padding: 15px; border-radius: 12px; cursor: pointer; transition: all 0.2s; }
-                .payment-tab-btn.active { background-color: #ecfdf5; border-color: #0B5D3B; }
-                .tab-icon { width: 40px; height: 40px; background: #f1f5f9; border-radius: 10px; display: flex; align-items: center; justify-content: center; color: #0B5D3B; font-size: 1.2rem; }
-                .payment-tab-btn.active .tab-icon { background: #0B5D3B; color: #fff; }
+                .info-stat label { display: block; font-size: 10px; font-weight: 800; color: #94a3b8; letter-spacing: 1px; margin-bottom: 5px; }
+                .info-stat h6 { margin: 0; font-weight: 700; color: #1e293b; font-size: 1rem; }
                 
-                .sub-tab-item { font-size: 0.8rem; font-weight: 700; color: #94a3b8; cursor: pointer; padding-bottom: 5px; }
-                .sub-tab-item.active { color: #0B5D3B; border-bottom: 2px solid #0B5D3B; }
+                .pay-opt { flex: 1; display: flex; align-items: center; gap: 15px; padding: 20px; background: #fff; border: 2.5px solid transparent; border-radius: 16px; cursor: pointer; transition: all 0.3s; position: relative; }
+                .pay-opt:hover { border-color: #e2e8f0; }
+                .pay-opt.active { border-color: #0B5D3B; background: #fff; }
                 
-                .animate-in { animation: fadeIn 0.4s ease-out; }
-                @keyframes fadeIn { from { opacity: 0; transform: translateY(10px); } to { opacity: 1; transform: translateY(0); } }
+                .opt-icon { width: 45px; height: 45px; background: #f1f5f9; border-radius: 12px; display: flex; align-items: center; justify-content: center; font-size: 1.2rem; color: #0B5D3B; }
+                .pay-opt.active .opt-icon { background: #0B5D3B; color: #fff; }
+                
+                .opt-text strong { display: block; font-size: 14px; color: #1e293b; }
+                .opt-text span { font-size: 11px; color: #64748b; }
+                
+                .check-mark { position: absolute; top: 10px; right: 10px; color: #0B5D3B; opacity: 0; transform: scale(0); transition: 0.3s; }
+                .pay-opt.active .check-mark { opacity: 1; transform: scale(1); }
+                
+                .animate-in { animation: slideUp 0.6s cubic-bezier(0.16, 1, 0.3, 1); }
+                @keyframes slideUp { from { opacity: 0; transform: translateY(30px); } to { opacity: 1; transform: translateY(0); } }
+                
+                @media (max-width: 768px) {
+                    .score-badge { right: 50%; transform: translateX(50%); bottom: -25px; padding: 10px 20px; }
+                    .admission-result-page { padding-top: 20px !important; }
+                }
             `}</style>
         </div>
     );
