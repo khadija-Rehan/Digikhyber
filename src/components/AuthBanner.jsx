@@ -1,7 +1,7 @@
 import React, { useEffect, useRef } from "react";
 import Logo from "../assets/logo.png";
 
-const AuthBanner = ({ children, title, description, isRegister = false }) => {
+const AuthBanner = ({ children, title, description, isRegister = false, isLogin = false, isHorizontal = false }) => {
   const vantaRef = useRef(null);
 
   useEffect(() => {
@@ -45,7 +45,7 @@ const AuthBanner = ({ children, title, description, isRegister = false }) => {
       <div className="auth-vanta-bg" ref={vantaRef}></div>
 
       <div className="auth-content-container">
-        <div className="auth-card">
+        <div className={`auth-card ${isLogin ? 'compact-card' : ''} ${isHorizontal ? 'horizontal-card' : ''}`}>
           <div className="auth-card-left">
             <div className="auth-card-left-overlay"></div>
             <img src={Logo} alt="Digikhyber" className="auth-card-logo" />

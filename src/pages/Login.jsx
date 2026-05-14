@@ -37,7 +37,8 @@ const Login = () => {
   return (
     <AuthBanner 
       title="Welcome Back" 
-      description="Log in to continue your journey with Digikhyber — unlocking IT training and premium scholarship opportunities."
+      description="Log in to continue your journey with Digikhyber."
+      isLogin={true}
     >
       <div className="auth-form-box">
         <h2 className="auth-title">Candidate Login</h2>
@@ -93,7 +94,12 @@ const Login = () => {
           {error && <div className="alert alert-danger py-2">{error}</div>}
 
           <div className="text-end mb-3">
-            <Link to="/forgot-password" style={{ fontSize: "0.85rem", color: "#0B5D3B", fontWeight: 600 }}>
+            <Link 
+              to="/forgot-password" 
+              style={{ fontSize: "0.85rem", color: "#0B5D3B", fontWeight: 600, transition: "color 0.2s" }}
+              onMouseEnter={e => e.target.style.color = "#C9A227"}
+              onMouseLeave={e => e.target.style.color = "#0B5D3B"}
+            >
               Forgot Password?
             </Link>
           </div>
@@ -113,7 +119,7 @@ const Login = () => {
             )}
           </button>
 
-          <div className="text-center mt-4 auth-prompt">
+          <div className="text-center mt-3 auth-prompt">
             <span className="text-muted">Don't have an account? </span>
             <Link to="/register">New Registration</Link>
           </div>

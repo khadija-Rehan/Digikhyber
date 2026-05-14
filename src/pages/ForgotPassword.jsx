@@ -35,8 +35,9 @@ const ForgotPassword = () => {
 
   return (
     <AuthBanner 
-      title="Reset Your Password" 
-      description="Don't worry — enter your registered email and we'll send you a secure link right away."
+      title=""
+      description="Enter your email and we'll send you a reset link."
+      isLogin={true}
     >
       <div className="auth-form-box">
         <h2 className="auth-title">Forgot Password?</h2>

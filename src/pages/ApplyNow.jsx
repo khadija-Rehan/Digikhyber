@@ -7,6 +7,7 @@ const ApplyNow = () => {
         <AuthBanner 
             title="Admission Portal" 
             description="Welcome to Digikhyber. Select your path to begin your professional journey."
+            isHorizontal={true}
         >
             <div className="auth-form-box px-3">
                 <div className="text-center mb-5">

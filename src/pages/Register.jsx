@@ -201,14 +201,6 @@ const Register = () => {
         <h2 className="auth-title">Admission Form</h2>
         <p className="auth-subtitle">Fill in your details to create an account</p>
 
-        {serverError && (
-          <div className="alert alert-danger d-flex align-items-center mb-4" style={{ borderRadius: '12px', border: 'none', backgroundColor: '#fff5f5', color: '#e53e3e' }}>
-            <i className="fas fa-exclamation-circle me-3" style={{ fontSize: '1.2rem' }}></i>
-            <div>
-              <strong>Submission Error:</strong> {serverError}
-            </div>
-          </div>
-        )}
 
         <div className="auth-notice">
           <strong>Notice:</strong> To become eligible for scholarship card (free laptops, Solar scheme, 
@@ -407,6 +399,15 @@ const Register = () => {
             </div>
             {errors.agreement && <div className="text-danger small mt-1">{errors.agreement}</div>}
           </div>
+
+          {serverError && (
+            <div className="alert alert-danger d-flex align-items-center mb-4" style={{ borderRadius: '12px', border: 'none', backgroundColor: '#fff5f5', color: '#e53e3e' }}>
+              <i className="fas fa-exclamation-circle me-3" style={{ fontSize: '1.2rem' }}></i>
+              <div>
+                <strong>Submission Error:</strong> {serverError}
+              </div>
+            </div>
+          )}
 
           <button type="submit" className="auth-submit-btn" disabled={loading}>
             {loading ? "Submitting..." : "Submit Application"}
