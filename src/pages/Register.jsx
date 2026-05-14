@@ -156,8 +156,11 @@ const Register = () => {
       data.append("courses", JSON.stringify(courses));
       Object.entries(documents).forEach(([k, v]) => { if (v) data.append(k, v); });
       await signUp(data);
-      showSuccess("Registration successful!");
-      navigate("/admission-test");
+      showSuccess(
+        "🎉 Welcome to Digikhyber! Your registration is complete. Please proceed to take the Admission Test to unlock your Scholarship Card.",
+        "Registration Successful!"
+      );
+      setTimeout(() => navigate("/admission-test"), 3000);
     } catch (error) {
       const msg = error.response?.data?.message || "Registration failed.";
       setServerError(msg);
