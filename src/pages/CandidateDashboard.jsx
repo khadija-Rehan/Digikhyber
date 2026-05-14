@@ -27,7 +27,7 @@ const CandidateDashboard = () => {
     }, [user]);
 
     if (!userData) return (
-        <div className="loading-screen-professional">
+        <div style={{ height: '100vh', display: 'flex', flexDirection: 'column', alignItems: 'center', justifyContent: 'center', background: '#fff', color: '#0B5D3B', fontWeight: 700 }}>
             <div className="spinner-border text-success" role="status"></div>
             <p className="mt-3">VERIFYING PORTAL ACCESS...</p>
         </div>
@@ -39,7 +39,6 @@ const CandidateDashboard = () => {
     const percentage = `${testScore}%`;
     const totalMcqs = 20;
     const correctAnswers = Math.round((testScore / 100) * totalMcqs);
-
     const enrolledCourses = userData.courses || [];
     const secondCourses = userData.secondEnrolledCourses || [];
     const physicalCourses = userData.physicalCourses || [];
@@ -48,7 +47,6 @@ const CandidateDashboard = () => {
         ...secondCourses.map(c => ({ name: c, type: 'Online (2nd)', session: 'Spring 2026' })),
         ...physicalCourses.map(c => ({ name: c, type: 'Physical', session: 'Spring 2026' })),
     ];
-    const hasCourses = allCourses.length > 0;
 
     const handleGeneratePayment = async () => {
         setIsGenerating(true);
@@ -73,143 +71,153 @@ const CandidateDashboard = () => {
         setTimeout(() => setCopied(false), 2000);
     };
 
-    return (
-        <div className="professional-dashboard-page">
+    const DK_GREEN = '#0B5D3B';
+    const DK_LIGHT = '#e8f5ee';
+    const DK_BORDER = '#b2dfcc';
+    const DK_ROW = '#d4edda';
 
-            {/* ── Header ── */}
-            <header className="portal-top-header">
-                <div className="container d-flex justify-content-between align-items-center h-100">
-                    <div className="d-flex align-items-center gap-3">
-                        <img src={Logo} alt="Logo" className="portal-logo" />
-                        <div className="portal-brand">
-                            <h5 className="mb-0 fw-bold">DIGIKHYBER</h5>
-                            <p className="mb-0">CANDIDATE PORTAL (BATCH-2026)</p>
-                        </div>
+    return (
+        <div style={{ background: '#f4f6f8', minHeight: '100vh', fontFamily: "'Outfit', sans-serif", display: 'flex', flexDirection: 'column' }}>
+
+            {/* ══════════ HEADER ══════════ */}
+            <header style={{ background: '#fff', borderBottom: '1px solid #e8f0ea', padding: '0 24px', height: 72, display: 'flex', alignItems: 'center', justifyContent: 'space-between', boxShadow: '0 2px 8px rgba(0,0,0,0.04)', position: 'sticky', top: 0, zIndex: 100 }}>
+                <div style={{ display: 'flex', alignItems: 'center', gap: 14 }}>
+                    <img src={Logo} alt="Logo" style={{ height: 46 }} />
+                    <div>
+                        <div style={{ fontWeight: 800, fontSize: 16, color: DK_GREEN, letterSpacing: 0.5 }}>DIGIKHYBER</div>
+                        <div style={{ fontSize: 11, color: '#94a3b8', fontWeight: 700, letterSpacing: 1 }}>CANDIDATE PORTAL (BATCH-2026)</div>
                     </div>
-                    <div className="d-flex align-items-center gap-4">
-                        <div className="portal-user-pill d-none d-md-flex align-items-center gap-2">
-                            <i className="fas fa-user-circle"></i>
-                            <span>{userData.fullName}</span>
-                        </div>
-                        <button onClick={logout} className="portal-logout-btn">
-                            <i className="fas fa-sign-out-alt me-1"></i> Logout
-                        </button>
+                </div>
+                <div style={{ display: 'flex', alignItems: 'center', gap: 16 }}>
+                    <div style={{ background: '#f0faf4', border: '1px solid #d1fae5', borderRadius: 100, padding: '6px 16px', fontSize: 14, fontWeight: 700, color: '#334155', display: 'flex', alignItems: 'center', gap: 8 }}>
+                        <i className="fas fa-user-circle" style={{ color: DK_GREEN }}></i> {userData.fullName}
                     </div>
+                    <button onClick={logout} style={{ background: 'none', border: '1px solid #e2e8f0', borderRadius: 8, padding: '7px 16px', color: '#64748b', fontWeight: 700, fontSize: 13, cursor: 'pointer', display: 'flex', alignItems: 'center', gap: 6 }}>
+                        <i className="fas fa-sign-out-alt"></i> Logout
+                    </button>
                 </div>
             </header>
 
-            <main className="container py-4">
+            <main style={{ flex: 1 }}>
+                <div className="container py-4" style={{ maxWidth: 1100 }}>
 
-                {/* ── Welcome Banner ── */}
-                <div className="portal-status-alert mb-4 p-4 animate-in">
-                    <div className="row align-items-center">
-                        <div className="col-md-9">
-                            <div className="d-flex gap-3">
-                                <i className="fas fa-check-circle text-success fs-4 mt-1"></i>
-                                <div>
-                                    <h4 className="fw-bold mb-1 text-success">Welcome Back, {userData.fullName}!</h4>
-                                    <p className="mb-0 text-muted small fw-medium">
-                                        Your candidate portal is active. You can manage your academic profile, view test results,
-                                        and access scholarship benefits below. Please ensure your processing fee is locked to confirm your seat.
-                                    </p>
-                                </div>
+                    {/* ══════════ WELCOME BANNER ══════════ */}
+                    <div style={{ background: DK_LIGHT, border: `1px solid ${DK_BORDER}`, borderRadius: 16, padding: '20px 28px', marginBottom: 24, display: 'flex', justifyContent: 'space-between', alignItems: 'center', flexWrap: 'wrap', gap: 16 }}>
+                        <div style={{ display: 'flex', gap: 14, alignItems: 'flex-start' }}>
+                            <i className="fas fa-check-circle" style={{ color: DK_GREEN, fontSize: 22, marginTop: 2 }}></i>
+                            <div>
+                                <h4 style={{ fontWeight: 800, color: DK_GREEN, marginBottom: 4 }}>Welcome Back, {userData.fullName}!</h4>
+                                <p style={{ color: '#475569', fontSize: 14, marginBottom: 0 }}>
+                                    Your candidate portal is active. Manage your academic profile, view test results and access scholarship benefits.
+                                    Please ensure your processing fee is paid to confirm your seat.
+                                </p>
                             </div>
                         </div>
-                        <div className="col-md-3 text-md-end mt-3 mt-md-0">
-                            <div className="portal-roll-box">
-                                <small>ROLL NUMBER</small>
-                                <strong>{rollNumber}</strong>
-                            </div>
+                        <div style={{ background: '#fff', border: `1px solid ${DK_BORDER}`, borderRadius: 12, padding: '12px 24px', textAlign: 'center', minWidth: 180 }}>
+                            <div style={{ fontSize: 10, fontWeight: 800, color: '#94a3b8', letterSpacing: 1 }}>ROLL NUMBER</div>
+                            <div style={{ fontSize: 18, fontWeight: 800, color: DK_GREEN, marginTop: 4 }}>{rollNumber}</div>
                         </div>
                     </div>
-                </div>
 
-                <div className="row g-4">
+                    <div className="row g-4">
 
-                    {/* ── LEFT / MAIN COLUMN ── */}
-                    <div className="col-lg-8">
+                        {/* ══════════ LEFT COLUMN ══════════ */}
+                        <div className="col-lg-8">
 
-                        {/* Test not passed — show lock */}
-                        {!testPassed && (
-                            <div className="portal-card mb-4 shadow-sm">
-                                <div className="card-header-bar">
-                                    <h6 className="mb-0 fw-bold"><i className="fas fa-graduation-cap me-2 text-success"></i> ADMISSION EVALUATION STATUS</h6>
-                                </div>
-                                <div className="p-4 text-center py-5">
-                                    <i className="fas fa-lock fa-3x text-muted mb-3"></i>
-                                    <h5 className="fw-bold">Test Evaluation Pending</h5>
-                                    <p className="text-muted small mb-4">Complete your test to unlock your result card.</p>
-                                    <Link to="/admission-test" className="btn-portal-dark">Take Test Now</Link>
-                                </div>
-                            </div>
-                        )}
-
-                        {/* ── TEST PASSED — show everything inline ── */}
-                        {testPassed && (
-                            <>
-                                {/* Passed Status Card */}
-                                <div className="portal-card mb-4 shadow-sm">
-                                    <div className="card-header-bar">
-                                        <h6 className="mb-0 fw-bold"><i className="fas fa-graduation-cap me-2 text-success"></i> ADMISSION EVALUATION STATUS</h6>
+                            {/* Test NOT passed */}
+                            {!testPassed && (
+                                <div style={{ background: '#fff', borderRadius: 16, border: '1px solid #e8f0ea', overflow: 'hidden', marginBottom: 24, boxShadow: '0 2px 12px rgba(0,0,0,0.04)' }}>
+                                    <div style={{ background: '#f8fafb', borderBottom: '1px solid #e8f0ea', padding: '14px 24px' }}>
+                                        <h6 style={{ margin: 0, fontWeight: 700, color: DK_GREEN, fontSize: 13, letterSpacing: 0.5 }}>
+                                            <i className="fas fa-graduation-cap me-2"></i> ADMISSION EVALUATION STATUS
+                                        </h6>
                                     </div>
-                                    <div className="p-4 d-flex flex-column flex-md-row align-items-center gap-4">
-                                        <img src={GIF} alt="Passed" width="70" />
-                                        <div className="text-center text-md-start">
-                                            <span className="badge-qualified mb-2">OFFICIALLY QUALIFIED</span>
-                                            <h5 className="fw-bold mb-1">Congratulations! You have passed the test.</h5>
-                                            <p className="text-muted small mb-0">You scored <strong>{percentage}</strong> in the admission test. Your provisional enrollment is confirmed.</p>
+                                    <div style={{ padding: '48px 24px', textAlign: 'center' }}>
+                                        <i className="fas fa-lock fa-3x mb-3" style={{ color: '#cbd5e1' }}></i>
+                                        <h5 style={{ fontWeight: 700 }}>Test Evaluation Pending</h5>
+                                        <p style={{ color: '#94a3b8', fontSize: 14, marginBottom: 24 }}>Complete your admission test to unlock your result card.</p>
+                                        <Link to="/admission-test" style={{ background: DK_GREEN, color: '#fff', padding: '11px 28px', borderRadius: 8, fontWeight: 700, textDecoration: 'none', fontSize: 14 }}>
+                                            Take Test Now
+                                        </Link>
+                                    </div>
+                                </div>
+                            )}
+
+                            {/* ══════════ TEST PASSED — INLINE RESULT ══════════ */}
+                            {testPassed && (<>
+
+                                {/* Qualified Card */}
+                                <div style={{ background: '#fff', borderRadius: 16, border: '1px solid #e8f0ea', overflow: 'hidden', marginBottom: 20, boxShadow: '0 2px 12px rgba(0,0,0,0.04)' }}>
+                                    <div style={{ background: '#f8fafb', borderBottom: '1px solid #e8f0ea', padding: '14px 24px' }}>
+                                        <h6 style={{ margin: 0, fontWeight: 700, color: DK_GREEN, fontSize: 13, letterSpacing: 0.5 }}>
+                                            <i className="fas fa-graduation-cap me-2"></i> ADMISSION EVALUATION STATUS
+                                        </h6>
+                                    </div>
+                                    <div style={{ padding: '24px', display: 'flex', alignItems: 'center', gap: 20, flexWrap: 'wrap' }}>
+                                        <img src={GIF} alt="Passed" style={{ width: 70 }} />
+                                        <div>
+                                            <span style={{ background: DK_GREEN, color: '#fff', fontSize: 11, fontWeight: 800, padding: '4px 14px', borderRadius: 100, display: 'inline-block', marginBottom: 8, letterSpacing: 0.5 }}>OFFICIALLY QUALIFIED</span>
+                                            <h5 style={{ fontWeight: 800, marginBottom: 4 }}>Congratulations! You have passed the test.</h5>
+                                            <p style={{ color: '#64748b', fontSize: 14, marginBottom: 0 }}>
+                                                You scored <strong style={{ color: DK_GREEN }}>{percentage}</strong> in the admission test. Your provisional enrollment is confirmed.
+                                            </p>
                                         </div>
                                     </div>
                                 </div>
 
-                                {/* ── Congratulations Info Box ── */}
-                                <div style={{ background: "#e8f5ee", border: "1px solid #b2dfcc", borderRadius: 10, padding: "20px 24px", marginBottom: 20 }}>
-                                    <p style={{ color: "#1a1a1a", marginBottom: 10, lineHeight: 1.75 }}>
-                                        <span style={{ color: "#0B5D3B", fontWeight: 700 }}>Congratulations! You've Successfully Passed the Admission Test. </span>
+                                {/* Congratulations Info Box */}
+                                <div style={{ background: DK_LIGHT, border: `1px solid ${DK_BORDER}`, borderRadius: 12, padding: '20px 24px', marginBottom: 20 }}>
+                                    <p style={{ lineHeight: 1.8, marginBottom: 12, fontSize: 15 }}>
+                                        <span style={{ color: DK_GREEN, fontWeight: 700 }}>Congratulations! You have Successfully Passed the Admission Test. </span>
                                         We are thrilled to inform you that you have successfully cleared the Digikhyber Admission Test.
-                                        Now you are eligible for a Scholarship Card. To confirm your seat &amp; proceed with your enrolled course,
-                                        all courses under the Digikhyber scholarship card are 100% free, but the application processing
-                                        fee is necessary to complete your application. Your processing fee will be reimbursed if you achieve
-                                        above 85% Marks in the final evaluation test under the policy of Digikhyber.
+                                        Now you are eligible for a Scholarship Card. To confirm your seat, all courses under the
+                                        Digikhyber scholarship card are 100% free, but the application processing fee is necessary
+                                        to complete your application. Your processing fee will be reimbursed if you achieve above
+                                        85% Marks in the final evaluation test under the policy of Digikhyber.
                                     </p>
-                                    <p style={{ color: "#0B5D3B", fontWeight: 600, marginBottom: 14 }}>
-                                        You're just one step away from receiving your Scholarship Card!
+                                    <p style={{ color: DK_GREEN, fontWeight: 700, marginBottom: 12 }}>
+                                        You are just one step away from receiving your Scholarship Card!
                                     </p>
                                     <p style={{ fontWeight: 700, marginBottom: 8 }}>⚡ Benefits of the Scholarship Card:</p>
-                                    <ul style={{ paddingLeft: 20, marginBottom: 0 }}>
-                                        {["Access to Advanced IT Courses","Laptop Scheme","Solar Scheme","Access to Taleem Finance","Access to Study Abroad Free Consultancy","Hands-On Learning with Global Curriculum","Career Guidance & Freelancing Support"].map((b, i) => (
-                                            <li key={i} style={{ marginBottom: 4 }}>{b}</li>
+                                    <ul style={{ paddingLeft: 20, marginBottom: 0, lineHeight: 2 }}>
+                                        {['Access to Advanced IT Courses', 'Laptop Scheme', 'Solar Scheme', 'Access to Taleem Finance', 'Access to Study Abroad Free Consultancy', 'Hands-On Learning with Global Curriculum', 'Career Guidance & Freelancing Support'].map((b, i) => (
+                                            <li key={i}>{b}</li>
                                         ))}
                                     </ul>
                                 </div>
 
                                 {/* ── Student Result Card Table ── */}
-                                <div style={{ border: "1px solid #ccc", borderRadius: 8, overflow: "hidden", marginBottom: 20 }}>
-                                    <table style={{ width: "100%", borderCollapse: "collapse" }}>
+                                <div style={{ borderRadius: 12, overflow: 'hidden', border: `1px solid ${DK_BORDER}`, marginBottom: 20, boxShadow: '0 2px 8px rgba(11,93,59,0.08)' }}>
+                                    <table style={{ width: '100%', borderCollapse: 'collapse' }}>
                                         <thead>
-                                            <tr style={{ background: "#0B5D3B", color: "white" }}>
-                                                <th colSpan={2} style={{ padding: "13px 20px", textAlign: "center", fontWeight: 700 }}>Student Result Card</th>
+                                            <tr style={{ background: DK_GREEN }}>
+                                                <th colSpan={2} style={{ padding: '15px 24px', textAlign: 'center', color: '#fff', fontWeight: 800, fontSize: 15, letterSpacing: 0.5 }}>
+                                                    Student Result Card
+                                                </th>
+                                            </tr>
+                                            <tr style={{ background: '#145e3c' }}>
+                                                <th style={{ padding: '11px 24px', color: '#fff', fontWeight: 700, fontSize: 14, width: '45%' }}>Field</th>
+                                                <th style={{ padding: '11px 24px', color: '#fff', fontWeight: 700, fontSize: 14 }}>Details</th>
                                             </tr>
                                         </thead>
                                         <tbody>
                                             {[
-                                                { label: "Field", value: "Details", header: true },
-                                                { label: "Student Name", value: userData.fullName },
-                                                { label: "Roll Number", value: rollNumber },
-                                                { label: "Total MCQs", value: totalMcqs },
-                                                { label: "Total Marks", value: totalMcqs },
-                                                { label: "Marks Obtained", value: correctAnswers },
-                                                { label: "Percentage", value: percentage },
+                                                { label: 'Student Name', value: userData.fullName },
+                                                { label: 'Roll Number', value: rollNumber },
+                                                { label: 'Total MCQs', value: totalMcqs },
+                                                { label: 'Total Marks', value: totalMcqs },
+                                                { label: 'Marks Obtained', value: correctAnswers },
+                                                { label: 'Percentage', value: percentage },
                                             ].map((row, i) => (
-                                                <tr key={i} style={{ background: i % 2 === 0 ? "#c8e6c9" : "#fff" }}>
-                                                    <td style={{ padding: "11px 20px", fontWeight: row.header ? 700 : 500, width: "45%", borderBottom: "1px solid #ddd" }}>{row.label}</td>
-                                                    <td style={{ padding: "11px 20px", borderBottom: "1px solid #ddd" }}>{row.value}</td>
+                                                <tr key={i} style={{ background: i % 2 === 0 ? '#f0faf4' : '#fff' }}>
+                                                    <td style={{ padding: '13px 24px', fontWeight: 600, borderBottom: '1px solid #e0f0e8', color: '#1e293b' }}>{row.label}</td>
+                                                    <td style={{ padding: '13px 24px', borderBottom: '1px solid #e0f0e8', color: '#334155', fontWeight: 500 }}>{row.value}</td>
                                                 </tr>
                                             ))}
-                                            <tr style={{ background: "#fff" }}>
-                                                <td style={{ padding: "11px 20px", fontWeight: 500, borderBottom: "1px solid #ddd" }}>Result Status</td>
-                                                <td style={{ padding: "11px 20px", borderBottom: "1px solid #ddd" }}>
-                                                    <span style={{ background: "#0B5D3B", color: "white", padding: "3px 14px", borderRadius: 20, fontWeight: 600, fontSize: 13 }}>Pass</span>
+                                            <tr style={{ background: '#f0faf4' }}>
+                                                <td style={{ padding: '13px 24px', fontWeight: 600, color: '#1e293b' }}>Result Status</td>
+                                                <td style={{ padding: '13px 24px' }}>
+                                                    <span style={{ background: DK_GREEN, color: '#fff', padding: '4px 18px', borderRadius: 100, fontWeight: 700, fontSize: 13 }}>Pass</span>
                                                 </td>
                                             </tr>
                                         </tbody>
@@ -217,29 +225,30 @@ const CandidateDashboard = () => {
                                 </div>
 
                                 {/* ── Selected Study Programs ── */}
-                                <div style={{ marginBottom: 20 }}>
-                                    <h6 style={{ fontWeight: 700, marginBottom: 8 }}>☑ Selected Study Programs</h6>
-                                    <p style={{ color: "#555", fontSize: 14, marginBottom: 10 }}>
-                                        You can enroll in up to 2 courses. All courses are free but a one-time processing fee of <strong>{FEE_AMOUNT}</strong> is required.
+                                <div style={{ background: '#fff', borderRadius: 12, border: '1px solid #e8f0ea', padding: '20px 24px', marginBottom: 20, boxShadow: '0 2px 8px rgba(0,0,0,0.04)' }}>
+                                    <h6 style={{ fontWeight: 800, marginBottom: 6, fontSize: 15 }}>☑ Selected Study Programs</h6>
+                                    <p style={{ color: '#64748b', fontSize: 14, marginBottom: 14 }}>
+                                        You can enroll in up to 2 courses. All courses are completely free, but a one-time processing
+                                        fee of <strong style={{ color: DK_GREEN }}>{FEE_AMOUNT}</strong> is required regardless of the number of courses.
                                     </p>
-                                    <table style={{ width: "100%", borderCollapse: "collapse", border: "1px solid #ccc", borderRadius: 8 }}>
+                                    <table style={{ width: '100%', borderCollapse: 'collapse', border: '1px solid #e0f0e8', borderRadius: 8, overflow: 'hidden' }}>
                                         <thead>
-                                            <tr style={{ background: "#f0f0f0" }}>
-                                                <th style={{ padding: "10px 16px", fontWeight: 700, borderBottom: "1px solid #ccc", width: "30%" }}>Form #</th>
-                                                <th style={{ padding: "10px 16px", fontWeight: 700, borderBottom: "1px solid #ccc" }}>Applied Courses</th>
+                                            <tr style={{ background: '#f0faf4' }}>
+                                                <th style={{ padding: '11px 18px', fontWeight: 700, borderBottom: '1px solid #e0f0e8', width: '28%', textAlign: 'left' }}>Form #</th>
+                                                <th style={{ padding: '11px 18px', fontWeight: 700, borderBottom: '1px solid #e0f0e8', textAlign: 'left' }}>Applied Courses</th>
                                             </tr>
                                         </thead>
                                         <tbody>
                                             <tr>
-                                                <td style={{ padding: "12px 16px", borderBottom: "1px solid #eee", verticalAlign: "top" }}>
-                                                    {userData._id?.substring(0, 5).toUpperCase() || "N/A"}
+                                                <td style={{ padding: '12px 18px', verticalAlign: 'top', color: '#334155', fontWeight: 600 }}>
+                                                    {userData._id?.substring(0, 5).toUpperCase() || 'N/A'}
                                                 </td>
-                                                <td style={{ padding: "12px 16px", borderBottom: "1px solid #eee" }}>
+                                                <td style={{ padding: '12px 18px' }}>
                                                     {enrolledCourses.length > 0 ? (
-                                                        <ul style={{ margin: 0, paddingLeft: 18 }}>
-                                                            {enrolledCourses.map((c, i) => <li key={i}>{c}</li>)}
+                                                        <ul style={{ margin: 0, paddingLeft: 18, lineHeight: 2 }}>
+                                                            {enrolledCourses.map((c, i) => <li key={i} style={{ color: '#334155' }}>{c}</li>)}
                                                         </ul>
-                                                    ) : <span className="text-muted">No courses</span>}
+                                                    ) : <span style={{ color: '#94a3b8' }}>No courses selected</span>}
                                                 </td>
                                             </tr>
                                         </tbody>
@@ -247,188 +256,229 @@ const CandidateDashboard = () => {
                                 </div>
 
                                 {/* ── Fee Deadline ── */}
-                                <div style={{ background: "#fff8e8", border: "1px solid #f0c040", borderRadius: 8, padding: "13px 20px", marginBottom: 20, display: "flex", alignItems: "center", gap: 10, flexWrap: "wrap" }}>
-                                    <span style={{ fontWeight: 700 }}>Last Date to pay Application Processing Fee:</span>
-                                    <span style={{ fontWeight: 600 }}>{PAYMENT_DEADLINE}</span>
-                                    <span style={{ background: "#f0c040", color: "#5a3e00", padding: "3px 14px", borderRadius: 20, fontWeight: 600, fontSize: 13 }}>Pending</span>
+                                <div style={{ background: '#fffbeb', border: '1px solid #fcd34d', borderRadius: 10, padding: '14px 22px', marginBottom: 20, display: 'flex', alignItems: 'center', gap: 10, flexWrap: 'wrap' }}>
+                                    <i className="fas fa-calendar-alt" style={{ color: '#d97706' }}></i>
+                                    <span style={{ fontWeight: 700, color: '#1e293b' }}>Last Date to pay Application Processing Fee:</span>
+                                    <span style={{ fontWeight: 700, color: '#d97706' }}>{PAYMENT_DEADLINE}</span>
+                                    <span style={{ background: '#fbbf24', color: '#78350f', padding: '3px 14px', borderRadius: 100, fontWeight: 700, fontSize: 12 }}>Pending</span>
                                 </div>
 
-                                {/* ── Payment Section ── */}
-                                <div style={{ background: "#fff", border: "1px solid #ddd", borderRadius: 10, overflow: "hidden", marginBottom: 20 }}>
-                                    <div style={{ textAlign: "center", padding: "22px 20px 14px" }}>
-                                        <h5 style={{ fontWeight: 800, marginBottom: 6 }}>Pay Application Processing Fee!</h5>
-                                        <p style={{ color: "#555", fontSize: 14, marginBottom: 0 }}>
-                                            Submit your processing fee through the options below to confirm your Scholarship Card.
+                                {/* ══════════ PAYMENT SECTION ══════════ */}
+                                <div style={{ background: '#fff', borderRadius: 16, border: '1px solid #e8f0ea', overflow: 'hidden', marginBottom: 20, boxShadow: '0 2px 12px rgba(0,0,0,0.05)' }}>
+                                    <div style={{ textAlign: 'center', padding: '28px 24px 16px' }}>
+                                        <h4 style={{ fontWeight: 800, color: '#1e293b', marginBottom: 8 }}>Pay Application Processing Fee!</h4>
+                                        <p style={{ color: '#64748b', fontSize: 14, maxWidth: 560, margin: '0 auto' }}>
+                                            You are just one step away from confirming your Scholarship Card. Please follow the
+                                            instructions below to submit the processing fee through the given payment methods.
                                         </p>
                                     </div>
-                                    <div style={{ background: "#0B5D3B", color: "white", textAlign: "center", padding: "11px", fontWeight: 700 }}>
+
+                                    {/* Green Header */}
+                                    <div style={{ background: DK_GREEN, color: '#fff', textAlign: 'center', padding: '13px', fontWeight: 700, fontSize: 15, letterSpacing: 0.5 }}>
                                         Payment Options
                                     </div>
 
-                                    {/* PSID / Challan Cards */}
-                                    <div style={{ display: "flex", gap: 14, padding: "18px", flexWrap: "wrap" }}>
+                                    {/* PSID / Challan Toggle */}
+                                    <div style={{ display: 'flex', gap: 16, padding: '20px', flexWrap: 'wrap' }}>
                                         {[
-                                            { key: "psid", icon: "fas fa-wallet", title: "CONSUMER NUMBER / PSID", sub: "Pay using online mobile banking or wallet via 1 Biller" },
-                                            { key: "challan", icon: "fas fa-university", title: "CLICK HERE FOR BANK CHALLAN", sub: "Pay at any BOP branch using Digikhyber Challan" },
+                                            { key: 'psid', icon: 'fas fa-wallet', title: 'CONSUMER NUMBER / PSID', sub: 'PAY USING ONLINE MOBILE BANKING OR MOBILE WALLET USING 1 BILLER' },
+                                            { key: 'challan', icon: 'fas fa-university', title: 'CLICK HERE FOR BANK CHALLAN', sub: 'PAY AT ANY BOP BRANCH USING DIGIKHYBER CHALLAN' },
                                         ].map(opt => (
                                             <div key={opt.key} onClick={() => setActivePaymentMethod(opt.key)}
-                                                style={{ flex: 1, minWidth: 200, border: `2px solid ${activePaymentMethod === opt.key ? "#0B5D3B" : "#ddd"}`, borderRadius: 10, padding: "14px 16px", cursor: "pointer", background: activePaymentMethod === opt.key ? "#f0fff8" : "#fff", display: "flex", alignItems: "center", gap: 12, transition: "all 0.2s" }}>
-                                                <div style={{ width: 42, height: 42, background: activePaymentMethod === opt.key ? "#0B5D3B" : "#f1f5f9", borderRadius: 10, display: "flex", alignItems: "center", justifyContent: "center", flexShrink: 0 }}>
-                                                    <i className={opt.icon} style={{ color: activePaymentMethod === opt.key ? "#fff" : "#0B5D3B", fontSize: 16 }}></i>
+                                                style={{ flex: 1, minWidth: 210, border: `2px solid ${activePaymentMethod === opt.key ? DK_GREEN : '#e2e8f0'}`, borderRadius: 12, padding: '16px 18px', cursor: 'pointer', background: activePaymentMethod === opt.key ? '#f0fff8' : '#fafafa', display: 'flex', alignItems: 'center', gap: 14, transition: 'all 0.2s' }}>
+                                                <div style={{ width: 46, height: 46, background: activePaymentMethod === opt.key ? DK_GREEN : '#f1f5f9', borderRadius: 10, display: 'flex', alignItems: 'center', justifyContent: 'center', flexShrink: 0 }}>
+                                                    <i className={opt.icon} style={{ color: activePaymentMethod === opt.key ? '#fff' : DK_GREEN, fontSize: 18 }}></i>
                                                 </div>
                                                 <div>
-                                                    <div style={{ fontWeight: 700, fontSize: 13 }}>{opt.title}</div>
-                                                    <div style={{ fontSize: 11, color: "#666" }}>{opt.sub}</div>
+                                                    <div style={{ fontWeight: 700, fontSize: 13, color: '#1e293b' }}>{opt.title}</div>
+                                                    <div style={{ fontSize: 10, color: '#94a3b8', letterSpacing: 0.3, marginTop: 3 }}>{opt.sub}</div>
                                                 </div>
                                             </div>
                                         ))}
                                     </div>
 
-                                    {/* Instructions */}
-                                    <div style={{ padding: "0 18px 20px" }}>
-                                        <p style={{ fontWeight: 700, marginBottom: 10 }}>Instructions How to Pay:</p>
-                                        <div style={{ display: "flex", gap: 8, marginBottom: 14, flexWrap: "wrap" }}>
-                                            {[
-                                                { key: "banking", label: "Banking App" },
-                                                { key: "jazzcash", label: "JazzCash" },
-                                                { key: "easypaisa", label: "EasyPaisa" },
-                                            ].map(tab => (
-                                                <button key={tab.key} onClick={() => setActiveSubTab(tab.key)}
-                                                    style={{ padding: "7px 16px", border: `1px solid ${activeSubTab === tab.key ? "#0B5D3B" : "#ccc"}`, borderRadius: 6, background: activeSubTab === tab.key ? "#0B5D3B" : "#fff", color: activeSubTab === tab.key ? "#fff" : "#333", fontWeight: 600, fontSize: 13, cursor: "pointer" }}>
-                                                    {tab.label}
-                                                </button>
+                                    {/* ── PSID Section ── */}
+                                    {activePaymentMethod === 'psid' && (
+                                        <div style={{ padding: '0 20px 24px' }}>
+                                            <p style={{ fontWeight: 700, fontSize: 15, marginBottom: 14, color: '#1e293b' }}>Instructions How to Pay:</p>
+                                            <div style={{ display: 'flex', gap: 8, marginBottom: 14, flexWrap: 'wrap' }}>
+                                                {[
+                                                    { key: 'banking', label: 'Banking App', icon: 'fas fa-university' },
+                                                    { key: 'jazzcash', label: 'JazzCash', icon: 'fas fa-mobile-alt' },
+                                                    { key: 'easypaisa', label: 'EasyPaisa', icon: 'fas fa-mobile-alt' },
+                                                ].map(tab => (
+                                                    <button key={tab.key} onClick={() => setActiveSubTab(tab.key)}
+                                                        style={{ padding: '8px 18px', border: `1px solid ${activeSubTab === tab.key ? DK_GREEN : '#e2e8f0'}`, borderRadius: 8, background: activeSubTab === tab.key ? DK_GREEN : '#fff', color: activeSubTab === tab.key ? '#fff' : '#475569', fontWeight: 600, fontSize: 13, cursor: 'pointer', display: 'flex', alignItems: 'center', gap: 6 }}>
+                                                        <i className={tab.icon}></i> {tab.label}
+                                                    </button>
+                                                ))}
+                                            </div>
+
+                                            <div style={{ background: '#f8fafc', borderRadius: 10, padding: '16px 20px', marginBottom: 18, border: '1px solid #e8f0ea' }}>
+                                                <p style={{ fontWeight: 700, marginBottom: 10, color: '#1e293b' }}>
+                                                    {activeSubTab === 'banking' && '🏦 Banking App Payment (HBL, Meezan, UBL, Bank Alfalah, etc.)'}
+                                                    {activeSubTab === 'jazzcash' && '📱 JazzCash Payment'}
+                                                    {activeSubTab === 'easypaisa' && '📱 EasyPaisa Payment'}
+                                                </p>
+                                                <ol style={{ paddingLeft: 20, fontSize: 14, lineHeight: 2.1, margin: 0, color: '#334155' }}>
+                                                    {activeSubTab === 'banking' && ['Open your bank mobile app', 'Log in with your credentials (MPIN, fingerprint, or face ID)', 'Go to Bill Payments or Payments', 'Select 1Bill from the biller list', 'Enter the Consumer/Invoice Number (12-15 digits)', 'System will fetch and display bill details', 'Verify the name, amount, and service', 'Tap Pay or Confirm', 'Enter your PIN/OTP to authorize', 'Receive confirmation receipt/SMS'].map((s, i) => <li key={i}>{s}</li>)}
+                                                    {activeSubTab === 'jazzcash' && ['Open the JazzCash mobile app', 'Log in with your JazzCash credentials', 'Tap Pay Bills from the home screen', 'Select 1Bill from the biller list', 'Enter your Consumer Number / PSID', 'Verify the bill details', 'Enter your MPIN to confirm payment', 'Receive SMS confirmation'].map((s, i) => <li key={i}>{s}</li>)}
+                                                    {activeSubTab === 'easypaisa' && ['Open the EasyPaisa mobile app', 'Log in with your EasyPaisa account', 'Tap Bill Payments from the main menu', 'Select 1Bill as the biller', 'Enter your Consumer Number / PSID', 'Review the amount and details', 'Confirm payment with MPIN or OTP', 'Screenshot confirmation for your records'].map((s, i) => <li key={i}>{s}</li>)}
+                                                </ol>
+                                            </div>
+
+                                            {onlinePsid && (
+                                                <div style={{ background: DK_LIGHT, border: `1px solid ${DK_GREEN}`, borderRadius: 10, padding: '13px 18px', display: 'flex', alignItems: 'center', justifyContent: 'space-between', marginBottom: 16, flexWrap: 'wrap', gap: 8 }}>
+                                                    <span style={{ fontWeight: 700, color: DK_GREEN, fontSize: 15 }}>
+                                                        Your PSID: <span style={{ letterSpacing: 2 }}>{onlinePsid}</span>
+                                                    </span>
+                                                    <button onClick={handleCopy} style={{ background: '#fff', border: `1px solid ${DK_GREEN}`, borderRadius: 7, padding: '5px 14px', cursor: 'pointer', color: DK_GREEN, fontWeight: 700, fontSize: 13 }}>
+                                                        {copied ? '✓ Copied!' : <><i className="fas fa-copy me-1"></i>Copy</>}
+                                                    </button>
+                                                </div>
+                                            )}
+
+                                            <button onClick={handleGeneratePayment} disabled={isGenerating}
+                                                style={{ background: DK_GREEN, color: '#fff', border: 'none', borderRadius: 9, padding: '12px 26px', fontWeight: 700, fontSize: 14, cursor: 'pointer', display: 'flex', alignItems: 'center', gap: 8, opacity: isGenerating ? 0.75 : 1 }}>
+                                                {isGenerating ? <><span className="spinner-border spinner-border-sm"></span> Generating...</> : <><i className="fas fa-download"></i> {onlinePsid ? 'PSID Already Generated' : 'Generate PSID'}</>}
+                                            </button>
+                                        </div>
+                                    )}
+
+                                    {/* ── Bank Challan Section ── */}
+                                    {activePaymentMethod === 'challan' && (
+                                        <div style={{ padding: '0 20px 24px' }}>
+                                            <p style={{ fontWeight: 700, fontSize: 15, marginBottom: 6, color: '#1e293b' }}>Follow these steps to complete your payment:</p>
+                                            <p style={{ fontWeight: 700, marginBottom: 10, color: '#334155' }}>For Bank Challan Payment:</p>
+                                            <div style={{ background: '#f8fafc', borderRadius: 10, padding: '16px 20px', marginBottom: 18, border: '1px solid #e8f0ea' }}>
+                                                <ol style={{ paddingLeft: 20, fontSize: 14, lineHeight: 2.1, margin: 0, color: '#334155' }}>
+                                                    <li>Click on <strong style={{ color: DK_GREEN }}>"Generate Challan"</strong> to generate your unique Bank Challan.</li>
+                                                    <li><strong>Download the generated challan</strong> by clicking the download button.</li>
+                                                    <li><strong>Pay the challan at any nearest BOP Bank Branch</strong> to complete your payment, confirm your Enrollment &amp; get a chance to avail Scholarship Card.</li>
+                                                </ol>
+                                            </div>
+                                            <button onClick={handleGeneratePayment} disabled={isGenerating}
+                                                style={{ background: DK_GREEN, color: '#fff', border: 'none', borderRadius: 9, padding: '12px 26px', fontWeight: 700, fontSize: 14, cursor: 'pointer', display: 'flex', alignItems: 'center', gap: 8, opacity: isGenerating ? 0.75 : 1 }}>
+                                                {isGenerating ? <><span className="spinner-border spinner-border-sm"></span> Generating...</> : <><i className="fas fa-file-download"></i> Challan Already Submitted</>}
+                                            </button>
+                                        </div>
+                                    )}
+                                </div>
+                            </>)}
+
+                            {/* ── Enrolled Programs ── */}
+                            <div style={{ background: '#fff', borderRadius: 16, border: '1px solid #e8f0ea', overflow: 'hidden', boxShadow: '0 2px 12px rgba(0,0,0,0.04)' }}>
+                                <div style={{ background: '#f8fafb', borderBottom: '1px solid #e8f0ea', padding: '14px 24px' }}>
+                                    <h6 style={{ margin: 0, fontWeight: 700, color: DK_GREEN, fontSize: 13, letterSpacing: 0.5 }}>
+                                        <i className="fas fa-book-open me-2"></i> ENROLLED ACADEMIC PROGRAMS
+                                    </h6>
+                                </div>
+                                <div style={{ padding: 24 }}>
+                                    {allCourses.length > 0 ? (
+                                        <div className="row g-3">
+                                            {allCourses.map((course, idx) => (
+                                                <div key={idx} className="col-md-6">
+                                                    <div style={{ background: '#f8fafb', border: '1px solid #e8f0ea', borderRadius: 10, padding: '14px 16px', display: 'flex', alignItems: 'center', justifyContent: 'space-between', transition: 'border-color 0.2s' }}>
+                                                        <div>
+                                                            <div style={{ fontWeight: 700, color: '#1e293b', fontSize: 14 }}>{course.name}</div>
+                                                            <div style={{ fontSize: 12, color: '#94a3b8', marginTop: 2 }}>{course.type} | {course.session}</div>
+                                                        </div>
+                                                        <i className="fas fa-check-circle" style={{ color: DK_GREEN, fontSize: 18 }}></i>
+                                                    </div>
+                                                </div>
                                             ))}
                                         </div>
-
-                                        <div style={{ background: "#f9f9f9", borderRadius: 8, padding: "14px 18px", marginBottom: 16 }}>
-                                            <p style={{ fontWeight: 700, marginBottom: 8 }}>
-                                                {activeSubTab === "banking" && "🏦 Banking App Payment (HBL, Meezan, UBL, Bank Alfalah, etc.)"}
-                                                {activeSubTab === "jazzcash" && "📱 JazzCash Payment"}
-                                                {activeSubTab === "easypaisa" && "📱 EasyPaisa Payment"}
-                                            </p>
-                                            <ol style={{ paddingLeft: 20, fontSize: 14, lineHeight: 2, margin: 0 }}>
-                                                {activeSubTab === "banking" && ["Open your bank's mobile app","Log in with your credentials (MPIN, fingerprint, or face ID)","Go to Bill Payments or Payments","Select 1Bill from the biller list","Enter the Consumer/Invoice Number (12-15 digits)","System will fetch and display bill details","Verify the name, amount, and service","Tap Pay or Confirm","Enter your PIN/OTP to authorize","Receive confirmation receipt/SMS"].map((s, i) => <li key={i}>{s}</li>)}
-                                                {activeSubTab === "jazzcash" && ["Open the JazzCash mobile app","Log in with your JazzCash credentials","Tap Pay Bills from the home screen","Select 1Bill from the biller list","Enter your Consumer Number / PSID","Verify the bill details","Enter your MPIN to confirm payment","Receive SMS confirmation"].map((s, i) => <li key={i}>{s}</li>)}
-                                                {activeSubTab === "easypaisa" && ["Open the EasyPaisa mobile app","Log in with your EasyPaisa account","Tap Bill Payments from the main menu","Select 1Bill as the biller","Enter your Consumer Number / PSID","Review the amount and details","Confirm payment with MPIN or OTP","Screenshot confirmation for your records"].map((s, i) => <li key={i}>{s}</li>)}
-                                            </ol>
+                                    ) : (
+                                        <div style={{ textAlign: 'center', padding: '24px 0' }}>
+                                            <i className="fas fa-inbox fa-2x mb-2" style={{ color: '#cbd5e1' }}></i>
+                                            <p style={{ color: '#94a3b8', fontSize: 14, margin: 0 }}>No courses found in your enrollment history.</p>
                                         </div>
-
-                                        {/* PSID Box */}
-                                        {activePaymentMethod === "psid" && onlinePsid && (
-                                            <div style={{ background: "#e8f5ee", border: "1px solid #0B5D3B", borderRadius: 8, padding: "12px 18px", display: "flex", alignItems: "center", justifyContent: "space-between", marginBottom: 14, flexWrap: "wrap", gap: 8 }}>
-                                                <span style={{ fontWeight: 700, color: "#0B5D3B" }}>Your PSID: <span style={{ letterSpacing: 1 }}>{onlinePsid}</span></span>
-                                                <button onClick={handleCopy} style={{ background: "transparent", border: "1px solid #0B5D3B", borderRadius: 6, padding: "4px 12px", cursor: "pointer", color: "#0B5D3B", fontWeight: 600, fontSize: 13 }}>
-                                                    {copied ? "Copied!" : <><i className="fas fa-copy me-1"></i>Copy</>}
-                                                </button>
-                                            </div>
-                                        )}
-
-                                        <button onClick={handleGeneratePayment} disabled={isGenerating}
-                                            style={{ background: "#0B5D3B", color: "white", border: "none", borderRadius: 8, padding: "11px 24px", fontWeight: 700, fontSize: 14, cursor: "pointer", display: "flex", alignItems: "center", gap: 8, opacity: isGenerating ? 0.7 : 1 }}>
-                                            {isGenerating ? <><span className="spinner-border spinner-border-sm"></span> Generating...</> :
-                                                activePaymentMethod === "psid"
-                                                    ? <><i className="fas fa-download"></i> {onlinePsid ? "Re-Generate PSID" : "Generate PSID"}</>
-                                                    : <><i className="fas fa-file-download"></i> Download Bank Challan</>
-                                            }
-                                        </button>
-                                    </div>
+                                    )}
                                 </div>
-                            </>
-                        )}
-
-                        {/* ── Enrolled Programs ── */}
-                        <div className="portal-card shadow-sm">
-                            <div className="card-header-bar">
-                                <h6 className="mb-0 fw-bold"><i className="fas fa-book-open me-2 text-success"></i> ENROLLED ACADEMIC PROGRAMS</h6>
-                            </div>
-                            <div className="p-4">
-                                {hasCourses ? (
-                                    <div className="row g-3">
-                                        {allCourses.map((course, idx) => (
-                                            <div key={idx} className="col-md-6">
-                                                <div className="course-item-lite p-3 rounded-3 d-flex align-items-center justify-content-between">
-                                                    <div>
-                                                        <h6 className="mb-0 fw-bold">{course.name}</h6>
-                                                        <small className="text-muted">{course.type} | {course.session}</small>
-                                                    </div>
-                                                    <i className="fas fa-check-circle text-success"></i>
-                                                </div>
-                                            </div>
-                                        ))}
-                                    </div>
-                                ) : (
-                                    <div className="text-center py-3">
-                                        <i className="fas fa-inbox fa-2x text-muted mb-2"></i>
-                                        <p className="text-muted small mb-0">No courses found in your enrollment history.</p>
-                                    </div>
-                                )}
-                            </div>
-                        </div>
-                    </div>
-
-                    {/* ── RIGHT COLUMN ── */}
-                    <div className="col-lg-4">
-                        <div className="portal-card mb-4 shadow-sm">
-                            <div className="card-header-bar">
-                                <h6 className="mb-0 fw-bold"><i className="fas fa-user-tag me-2 text-success"></i> CANDIDATE PROFILE</h6>
-                            </div>
-                            <div className="p-4">
-                                {[
-                                    { label: "FULL NAME", value: userData.fullName },
-                                    { label: "FATHER NAME", value: userData.fatherName || 'N/A' },
-                                    { label: "CNIC NUMBER", value: userData.cnic },
-                                    { label: "MOBILE NUMBER", value: userData.mobile },
-                                ].map((row, i) => (
-                                    <div key={i} className={`profile-row-lite ${i < 3 ? "mb-3" : ""}`}>
-                                        <label>{row.label}</label>
-                                        <span>{row.value}</span>
-                                    </div>
-                                ))}
                             </div>
                         </div>
 
-                        <div className="scholarship-lite-card p-4 rounded-4 shadow-sm text-center mb-4">
-                            <h6 className="fw-bold text-white mb-2">SCHOLARSHIP STATUS</h6>
-                            <p className="text-white opacity-90 small mb-3">Activate your scholarship card to unlock laptop and finance schemes.</p>
-                            <Link to="/apply-scholarshipcard" className="btn btn-light btn-sm w-100 fw-bold py-2" style={{ borderRadius: '8px', color: '#0B5D3B' }}>
-                                APPLY FOR CARD <i className="fas fa-id-badge ms-1"></i>
-                            </Link>
-                        </div>
+                        {/* ══════════ RIGHT COLUMN ══════════ */}
+                        <div className="col-lg-4">
 
-                        <div className="support-box-lite p-3 border rounded-4 bg-white text-center">
-                            <h6 className="fw-bold mb-1 small text-success">Student Support Helpdesk</h6>
-                            <p className="text-muted mb-0 fw-bold" style={{ fontSize: '0.9rem' }}>+92 300 1234567</p>
+                            {/* Profile Card */}
+                            <div style={{ background: '#fff', borderRadius: 16, border: '1px solid #e8f0ea', overflow: 'hidden', marginBottom: 20, boxShadow: '0 2px 12px rgba(0,0,0,0.04)' }}>
+                                <div style={{ background: '#f8fafb', borderBottom: '1px solid #e8f0ea', padding: '14px 24px' }}>
+                                    <h6 style={{ margin: 0, fontWeight: 700, color: DK_GREEN, fontSize: 13, letterSpacing: 0.5 }}>
+                                        <i className="fas fa-user-tag me-2"></i> CANDIDATE PROFILE
+                                    </h6>
+                                </div>
+                                <div style={{ padding: 24 }}>
+                                    {[
+                                        { label: 'FULL NAME', value: userData.fullName },
+                                        { label: 'FATHER NAME', value: userData.fatherName || 'N/A' },
+                                        { label: 'CNIC NUMBER', value: userData.cnic },
+                                        { label: 'MOBILE NUMBER', value: userData.mobile },
+                                    ].map((row, i) => (
+                                        <div key={i} style={{ marginBottom: i < 3 ? 18 : 0 }}>
+                                            <div style={{ fontSize: 10, fontWeight: 800, color: '#94a3b8', letterSpacing: 1, marginBottom: 3 }}>{row.label}</div>
+                                            <div style={{ fontWeight: 700, color: '#1e293b', fontSize: 15 }}>{row.value}</div>
+                                        </div>
+                                    ))}
+                                </div>
+                            </div>
+
+                            {/* Scholarship Card */}
+                            <div style={{ background: `linear-gradient(135deg, ${DK_GREEN}, #15803d)`, borderRadius: 16, padding: '24px 20px', textAlign: 'center', marginBottom: 20, boxShadow: '0 4px 16px rgba(11,93,59,0.25)' }}>
+                                <i className="fas fa-id-card fa-2x mb-3" style={{ color: 'rgba(255,255,255,0.85)' }}></i>
+                                <h6 style={{ color: '#fff', fontWeight: 800, marginBottom: 8, letterSpacing: 0.5 }}>SCHOLARSHIP STATUS</h6>
+                                <p style={{ color: 'rgba(255,255,255,0.85)', fontSize: 13, marginBottom: 16 }}>
+                                    Activate your scholarship card to unlock laptop and finance schemes.
+                                </p>
+                                <Link to="/apply-scholarshipcard" style={{ background: '#fff', color: DK_GREEN, fontWeight: 700, fontSize: 13, padding: '10px 20px', borderRadius: 9, textDecoration: 'none', display: 'block' }}>
+                                    APPLY FOR CARD <i className="fas fa-id-badge ms-1"></i>
+                                </Link>
+                            </div>
+
+                            {/* Support */}
+                            <div style={{ background: '#fff', border: '1px solid #e8f0ea', borderRadius: 14, padding: '18px 20px', textAlign: 'center', boxShadow: '0 2px 8px rgba(0,0,0,0.04)' }}>
+                                <i className="fas fa-headset mb-2" style={{ color: DK_GREEN, fontSize: 22 }}></i>
+                                <h6 style={{ fontWeight: 700, color: '#1e293b', marginBottom: 6, fontSize: 14 }}>Student Support Helpdesk</h6>
+                                <p style={{ color: '#64748b', marginBottom: 0, fontWeight: 700 }}>+92 300 1234567</p>
+                            </div>
                         </div>
                     </div>
                 </div>
             </main>
 
-            <style>{`
-                .professional-dashboard-page { background-color: #f5f5f5; min-height: 100vh; font-family: 'Outfit', sans-serif; }
-                .portal-top-header { background: #fff; height: 75px; border-bottom: 1px solid #f1f5f9; box-shadow: 0 2px 10px rgba(0,0,0,0.02); }
-                .portal-logo { height: 45px; }
-                .portal-brand h5 { font-size: 1.05rem; color: #0B5D3B; letter-spacing: 0.5px; }
-                .portal-brand p { font-size: 0.65rem; color: #94a3b8; font-weight: 700; }
-                .portal-user-pill { background: #f8fafc; padding: 6px 15px; border-radius: 100px; border: 1px solid #e2e8f0; font-size: 0.85rem; font-weight: 700; color: #475569; }
-                .portal-logout-btn { background: none; border: none; color: #94a3b8; font-weight: 700; font-size: 0.85rem; transition: all 0.2s; }
-                .portal-logout-btn:hover { color: #ef4444; }
-                .portal-status-alert { background: #ecfdf5; border: 1px solid #d1fae5; border-radius: 16px; }
-                .portal-roll-box { background: #fff; padding: 12px 20px; border-radius: 12px; border: 1px solid #d1fae5; text-align: center; }
-                .portal-roll-box small { display: block; font-size: 0.6rem; color: #94a3b8; font-weight: 800; letter-spacing: 1px; }
-                .portal-roll-box strong { font-size: 1.2rem; color: #0B5D3B; }
-                .portal-card { background: #fff; border-radius: 16px; overflow: hidden; border: 1px solid #f1f5f9; }
-                .card-header-bar { background: #fcfdfe; padding: 15px 25px; border-bottom: 1px solid #f1f5f9; }
-                .card-header-bar h6 { font-size: 0.85rem; color: #0B5D3B; letter-spacing: 0.5px; }
-                .badge-qualified { background: #0B5D3B; color: #fff; font-size: 0.65rem; font-weight: 800; padding: 4px 12px; border-radius: 100px; display: inline-block; margin-bottom: 8px; }
-                .course-item-lite { background: #fcfdfe; border: 1px solid #f1f5f9; transition: all 0.2s; }
-                .course-item-lite:hover { border-color: #0B5D3B; background: #fff; }
-                .profile-row-lite label { display: block; font-size: 0.65rem; color: #94a3b8; font-weight: 800; letter-spacing: 0.5px; margin-bottom: 2px; }
-                .profile-row-lite span { font-weight: 700; color: #1e293b; font-size: 1rem; }
-                .scholarship-lite-card { background: linear-gradient(135deg, #0B5D3B, #15803d); }
-                .loading-screen-professional { height: 100vh; display: flex; flex-direction: column; align-items: center; justify-content: center; background: #fff; color: #0B5D3B; font-weight: 700; }
-                .animate-in { animation: fadeInUp 0.5s ease-out both; }
-                @keyframes fadeInUp { from { opacity: 0; transform: translateY(15px); } to { opacity: 1; transform: translateY(0); } }
-            `}</style>
+            {/* ══════════ FOOTER ══════════ */}
+            <footer style={{ background: DK_GREEN, color: '#fff', marginTop: 48 }}>
+                <div className="container py-4" style={{ maxWidth: 1100 }}>
+                    <div className="row g-4 align-items-center">
+                        <div className="col-md-4 text-center text-md-start">
+                            <div style={{ display: 'flex', alignItems: 'center', gap: 12, justifyContent: 'center' }} className="justify-content-md-start">
+                                <img src={Logo} alt="Logo" style={{ height: 40, filter: 'brightness(0) invert(1)' }} />
+                                <div>
+                                    <div style={{ fontWeight: 800, fontSize: 15, letterSpacing: 0.5 }}>DIGIKHYBER</div>
+                                    <div style={{ fontSize: 11, opacity: 0.75 }}>Candidate Portal (Batch-2026)</div>
+                                </div>
+                            </div>
+                        </div>
+                        <div className="col-md-4 text-center">
+                            <p style={{ fontSize: 13, opacity: 0.85, marginBottom: 4 }}>
+                                <i className="fas fa-envelope me-2"></i>support@digikhyber.org.pk
+                            </p>
+                            <p style={{ fontSize: 13, opacity: 0.85, marginBottom: 0 }}>
+                                <i className="fas fa-phone me-2"></i>+92 300 1234567
+                            </p>
+                        </div>
+                        <div className="col-md-4 text-center text-md-end">
+                            <p style={{ fontSize: 12, opacity: 0.7, marginBottom: 0 }}>
+                                &copy; 2026 Digikhyber. All rights reserved.<br />
+                                Government of Khyber Pakhtunkhwa Initiative
+                            </p>
+                        </div>
+                    </div>
+                </div>
+                <div style={{ background: 'rgba(0,0,0,0.15)', textAlign: 'center', padding: '10px', fontSize: 12, opacity: 0.8 }}>
+                    Empowering Youth Through Digital Skills
+                </div>
+            </footer>
         </div>
     );
 };
