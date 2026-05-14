@@ -3080,7 +3080,6 @@ ul li {
 /* Compact card for Login / ForgotPassword pages */
 .auth-card.compact-card {
   max-width: 480px;
-  max-height: calc(100vh - 100px); /* Fit in viewport, no scroll */
   overflow: hidden;
   margin-top: auto;
   margin-bottom: auto;
@@ -3106,7 +3105,9 @@ ul li {
 }
 
 .auth-card.compact-card .auth-card-right {
-  padding: 18px 35px 28px; /* More bottom padding */
+  padding: 18px 35px 28px;
+  overflow-y: auto;
+  max-height: calc(100vh - 160px);
 }
 
 .auth-card.compact-card .auth-title {
