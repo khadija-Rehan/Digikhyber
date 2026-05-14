@@ -1806,8 +1806,8 @@ p {
   padding: 15px;
 }
 
-table tr {
-  background-color: #f7e7c3 !important;
+.rwd-table tr {
+  background-color: #f7e7c3;
   font-family: "Poppins";
 }
 

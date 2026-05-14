@@ -18,6 +18,9 @@ const CandidateDashboard = () => {
     const [activePaymentMethod, setActivePaymentMethod] = useState("psid");
     const [activeSubTab, setActiveSubTab] = useState("banking");
     const [copied, setCopied] = useState(false);
+    const [testBtnHover, setTestBtnHover] = useState(false);
+    const [cardBtnHover, setCardBtnHover] = useState(false);
+    const [logoutHover, setLogoutHover] = useState(false);
 
     useEffect(() => {
         if (user) {
@@ -73,50 +76,58 @@ const CandidateDashboard = () => {
     };
 
     const DK_GREEN = '#0B5D3B';
+    const DK_GOLD = '#C9A227';
     const DK_LIGHT = '#e8f5ee';
     const DK_BORDER = '#b2dfcc';
-    const DK_ROW = '#d4edda';
 
     return (
-        <div style={{ background: '#f4f6f8', minHeight: '100vh', fontFamily: "'Outfit', sans-serif", display: 'flex', flexDirection: 'column' }}>
+        <div className="professional-dashboard-page" style={{ background: '#f4f6f8', minHeight: '100vh', fontFamily: "'Jost', sans-serif", fontSize: 15, display: 'flex', flexDirection: 'column' }}>
 
             {/* ══════════ HEADER ══════════ */}
-            <header style={{ background: '#fff', borderBottom: '1px solid #e8f0ea', padding: '0 24px', height: 72, display: 'flex', alignItems: 'center', justifyContent: 'space-between', boxShadow: '0 2px 8px rgba(0,0,0,0.04)', position: 'sticky', top: 0, zIndex: 100 }}>
-                <div style={{ display: 'flex', alignItems: 'center', gap: 14 }}>
-                    <img src={Logo} alt="Logo" style={{ height: 46 }} />
+            <header className="dash-header" style={{ background: '#fff', borderBottom: '1px solid #e8f0ea', padding: '0 20px', height: 64, display: 'flex', alignItems: 'center', justifyContent: 'space-between', boxShadow: '0 2px 8px rgba(0,0,0,0.04)', position: 'sticky', top: 0, zIndex: 100 }}>
+                <div style={{ display: 'flex', alignItems: 'center', gap: 10 }}>
+                    <img src={Logo} alt="Logo" className="dash-logo" style={{ height: 42 }} />
                     <div>
-                        <div style={{ fontWeight: 800, fontSize: 16, color: DK_GREEN, letterSpacing: 0.5 }}>DIGIKHYBER</div>
-                        <div style={{ fontSize: 11, color: '#94a3b8', fontWeight: 700, letterSpacing: 1 }}>CANDIDATE PORTAL (BATCH-2026)</div>
+                        <div style={{ fontWeight: 800, fontSize: 15, color: DK_GREEN, letterSpacing: 0.5 }}>DIGIKHYBER</div>
+                        <div className="dash-subtitle" style={{ fontSize: 10, color: '#94a3b8', fontWeight: 700, letterSpacing: 0.5 }}>CANDIDATE PORTAL (BATCH-2026)</div>
                     </div>
                 </div>
-                <div style={{ display: 'flex', alignItems: 'center', gap: 16 }}>
-                    <div style={{ background: '#f0faf4', border: '1px solid #d1fae5', borderRadius: 100, padding: '6px 16px', fontSize: 14, fontWeight: 700, color: '#334155', display: 'flex', alignItems: 'center', gap: 8 }}>
-                        <i className="fas fa-user-circle" style={{ color: DK_GREEN }}></i> {userData.fullName}
+                <div style={{ display: 'flex', alignItems: 'center', gap: 8 }}>
+                    <div className="dash-user-pill" style={{ background: '#f0faf4', border: '1px solid #d1fae5', borderRadius: 100, padding: '5px 12px', fontSize: 13, fontWeight: 700, color: '#334155', display: 'flex', alignItems: 'center', gap: 6 }}>
+                        <i className="fas fa-user-circle" style={{ color: DK_GREEN }}></i>
+                        <span className="dash-username">{userData.fullName}</span>
                     </div>
-                    <button onClick={logout} style={{ background: 'none', border: '1px solid #e2e8f0', borderRadius: 8, padding: '7px 16px', color: '#64748b', fontWeight: 700, fontSize: 13, cursor: 'pointer', display: 'flex', alignItems: 'center', gap: 6 }}>
-                        <i className="fas fa-sign-out-alt"></i> Logout
+                    <button
+                        onClick={logout}
+                        onMouseEnter={() => setLogoutHover(true)}
+                        onMouseLeave={() => setLogoutHover(false)}
+                        className="dash-logout-btn"
+                        style={{ background: logoutHover ? '#ef4444' : 'none', border: `1px solid ${logoutHover ? '#ef4444' : '#e2e8f0'}`, borderRadius: 8, padding: '6px 12px', color: logoutHover ? '#fff' : '#64748b', fontWeight: 700, fontSize: 13, cursor: 'pointer', display: 'flex', alignItems: 'center', gap: 5, transition: 'all 0.2s', whiteSpace: 'nowrap' }}>
+                        <i className="fas fa-sign-out-alt"></i> <span className="dash-logout-text">Logout</span>
                     </button>
                 </div>
             </header>
 
             <main style={{ flex: 1 }}>
-                <div className="container py-4" style={{ maxWidth: 1100 }}>
+                <div className="container py-4 pb-5" style={{ maxWidth: 1100 }}>
 
                     {/* ══════════ WELCOME BANNER ══════════ */}
-                    <div style={{ background: DK_LIGHT, border: `1px solid ${DK_BORDER}`, borderRadius: 16, padding: '20px 28px', marginBottom: 24, display: 'flex', justifyContent: 'space-between', alignItems: 'center', flexWrap: 'wrap', gap: 16 }}>
-                        <div style={{ display: 'flex', gap: 14, alignItems: 'flex-start' }}>
-                            <i className="fas fa-check-circle" style={{ color: DK_GREEN, fontSize: 22, marginTop: 2 }}></i>
-                            <div>
-                                <h4 style={{ fontWeight: 800, color: DK_GREEN, marginBottom: 4 }}>Welcome Back, {userData.fullName}!</h4>
-                                <p style={{ color: '#475569', fontSize: 14, marginBottom: 0 }}>
-                                    Your candidate portal is active. Manage your academic profile, view test results and access scholarship benefits.
-                                    Please ensure your processing fee is paid to confirm your seat.
-                                </p>
+                    <div className="portal-welcome-banner" style={{ background: DK_LIGHT, border: `1px solid ${DK_BORDER}`, borderRadius: 16, padding: '20px 24px', marginBottom: 24 }}>
+                        <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', gap: 12, flexWrap: 'wrap' }}>
+                            <div style={{ display: 'flex', gap: 12, alignItems: 'flex-start', flex: 1, minWidth: 200 }}>
+                                <i className="fas fa-check-circle" style={{ color: DK_GREEN, fontSize: 20, marginTop: 3, flexShrink: 0 }}></i>
+                                <div>
+                                    <h5 style={{ fontWeight: 700, color: DK_GREEN, marginBottom: 4, fontSize: 18 }}>Welcome Back, {userData.fullName}!</h5>
+                                    <p style={{ color: '#64748b', fontSize: 13, marginBottom: 0, lineHeight: 1.6 }}>
+                                        Your candidate portal is active. Manage your academic profile, view test results and access scholarship benefits.
+                                        Please ensure your processing fee is paid to confirm your seat.
+                                    </p>
+                                </div>
                             </div>
-                        </div>
-                        <div style={{ background: '#fff', border: `1px solid ${DK_BORDER}`, borderRadius: 12, padding: '12px 24px', textAlign: 'center', minWidth: 180 }}>
-                            <div style={{ fontSize: 10, fontWeight: 800, color: '#94a3b8', letterSpacing: 1 }}>ROLL NUMBER</div>
-                            <div style={{ fontSize: 18, fontWeight: 800, color: DK_GREEN, marginTop: 4 }}>{rollNumber}</div>
+                            <div style={{ background: '#fff', border: `1px solid ${DK_BORDER}`, borderRadius: 12, padding: '10px 20px', textAlign: 'center', flexShrink: 0 }}>
+                                <div style={{ fontSize: 10, fontWeight: 600, color: '#94a3b8', letterSpacing: 1 }}>ROLL NUMBER</div>
+                                <div style={{ fontSize: 15, fontWeight: 700, color: DK_GREEN, marginTop: 4 }}>{rollNumber}</div>
+                            </div>
                         </div>
                     </div>
 
@@ -135,9 +146,13 @@ const CandidateDashboard = () => {
                                     </div>
                                     <div style={{ padding: '48px 24px', textAlign: 'center' }}>
                                         <i className="fas fa-lock fa-3x mb-3" style={{ color: '#cbd5e1' }}></i>
-                                        <h5 style={{ fontWeight: 700 }}>Test Evaluation Pending</h5>
-                                        <p style={{ color: '#94a3b8', fontSize: 14, marginBottom: 24 }}>Complete your admission test to unlock your result card.</p>
-                                        <Link to="/admission-test" style={{ background: DK_GREEN, color: '#fff', padding: '11px 28px', borderRadius: 8, fontWeight: 700, textDecoration: 'none', fontSize: 14 }}>
+                                        <h5 style={{ fontWeight: 600, fontSize: 18 }}>Test Evaluation Pending</h5>
+                                        <p style={{ color: '#94a3b8', fontSize: 13, marginBottom: 24 }}>Complete your admission test to unlock your result card.</p>
+                                        <Link
+                                            to="/admission-test"
+                                            onMouseEnter={() => setTestBtnHover(true)}
+                                            onMouseLeave={() => setTestBtnHover(false)}
+                                            style={{ background: testBtnHover ? DK_GOLD : DK_GREEN, color: '#fff', padding: '11px 28px', borderRadius: 8, fontWeight: 600, textDecoration: 'none', fontSize: 14, transition: 'background 0.25s', display: 'inline-block' }}>
                                             Take Test Now
                                         </Link>
                                     </div>
@@ -167,38 +182,93 @@ const CandidateDashboard = () => {
                                 </div>
 
                                 {/* Congratulations Info Box */}
-                                <div style={{ background: DK_LIGHT, border: `1px solid ${DK_BORDER}`, borderRadius: 12, padding: '20px 24px', marginBottom: 20 }}>
-                                    <p style={{ lineHeight: 1.8, marginBottom: 12, fontSize: 15 }}>
-                                        <span style={{ color: DK_GREEN, fontWeight: 700 }}>Congratulations! You have Successfully Passed the Admission Test. </span>
+                                <div style={{ background: '#f0fdf4', border: '1px solid #bbf7d0', borderRadius: 12, padding: '20px 24px', marginBottom: 20 }}>
+                                    <p style={{ lineHeight: 1.8, marginBottom: 10, fontSize: 14, color: '#334155' }}>
+                                        <span style={{ color: '#0B5D3B', fontWeight: 600 }}>Congratulations! You have Successfully Passed the Admission Test. </span>
                                         We are thrilled to inform you that you have successfully cleared the Digikhyber Admission Test.
                                         Now you are eligible for a Scholarship Card. To confirm your seat, all courses under the
                                         Digikhyber scholarship card are 100% free, but the application processing fee is necessary
                                         to complete your application. Your processing fee will be reimbursed if you achieve above
                                         85% Marks in the final evaluation test under the policy of Digikhyber.
                                     </p>
-                                    <p style={{ color: DK_GREEN, fontWeight: 700, marginBottom: 12 }}>
+                                    <p style={{ color: DK_GREEN, fontWeight: 600, marginBottom: 12, fontSize: 14 }}>
                                         You are just one step away from receiving your Scholarship Card!
                                     </p>
-                                    <p style={{ fontWeight: 700, marginBottom: 8 }}>⚡ Benefits of the Scholarship Card:</p>
-                                    <ul style={{ paddingLeft: 20, marginBottom: 0, lineHeight: 2 }}>
+                                    <p style={{ fontWeight: 600, marginBottom: 8, fontSize: 14 }}>⚡ Benefits of the Scholarship Card:</p>
+                                    <ul style={{ paddingLeft: 20, marginBottom: 0, lineHeight: 2, fontSize: 14, color: '#334155' }}>
                                         {['Access to Advanced IT Courses', 'Laptop Scheme', 'Solar Scheme', 'Access to Taleem Finance', 'Access to Study Abroad Free Consultancy', 'Hands-On Learning with Global Curriculum', 'Career Guidance & Freelancing Support'].map((b, i) => (
                                             <li key={i}>{b}</li>
                                         ))}
                                     </ul>
                                 </div>
 
+                            </>)}
+                        </div>
+
+                        {/* ══════════ RIGHT COLUMN ══════════ */}
+                        <div className="col-lg-4">
+
+
+                            {/* Profile Card */}
+                            <div style={{ background: '#fff', borderRadius: 16, border: '1px solid #e8f0ea', overflow: 'hidden', marginBottom: 20, boxShadow: '0 2px 12px rgba(0,0,0,0.04)' }}>
+                                <div style={{ background: '#f8fafb', borderBottom: '1px solid #e8f0ea', padding: '14px 24px' }}>
+                                    <h6 style={{ margin: 0, fontWeight: 700, color: DK_GREEN, fontSize: 13, letterSpacing: 0.5 }}>
+                                        <i className="fas fa-user-tag me-2"></i> CANDIDATE PROFILE
+                                    </h6>
+                                </div>
+                                <div style={{ padding: 24 }}>
+                                    {[
+                                        { label: 'FULL NAME', value: userData.fullName },
+                                        { label: 'FATHER NAME', value: userData.fatherName || 'N/A' },
+                                        { label: 'CNIC NUMBER', value: userData.cnic },
+                                        { label: 'MOBILE NUMBER', value: userData.mobile },
+                                    ].map((row, i) => (
+                                        <div key={i} style={{ marginBottom: i < 3 ? 16 : 0 }}>
+                                            <div style={{ fontSize: 11, fontWeight: 600, color: '#6b7280', letterSpacing: 0.8, marginBottom: 3, fontFamily: "'Jost', sans-serif" }}>{row.label}</div>
+                                            <div style={{ fontWeight: 600, color: '#000000', fontSize: 15, fontFamily: "'Jost', sans-serif" }}>{row.value}</div>
+                                        </div>
+                                    ))}
+                                </div>
+                            </div>
+
+                            {/* Scholarship Card */}
+                            <div style={{ background: `linear-gradient(135deg, ${DK_GREEN}, #15803d)`, borderRadius: 16, padding: '22px 20px', textAlign: 'center', marginBottom: 20, boxShadow: '0 4px 16px rgba(11,93,59,0.2)' }}>
+                                <i className="fas fa-id-card fa-2x mb-3" style={{ color: 'rgba(255,255,255,0.8)' }}></i>
+                                <h6 style={{ color: '#fff', fontWeight: 600, marginBottom: 6, fontSize: 14 }}>SCHOLARSHIP STATUS</h6>
+                                <p style={{ color: '#ffffff', fontSize: 13, marginBottom: 16, fontWeight: 400, lineHeight: 1.6, opacity: 1 }}>
+                                    <span style={{ color: '#ffffff' }}>Activate your scholarship card to unlock laptop and finance schemes.</span>
+                                </p>
+                                <Link
+                                    to="/apply-scholarshipcard"
+                                    onMouseEnter={() => setCardBtnHover(true)}
+                                    onMouseLeave={() => setCardBtnHover(false)}
+                                    style={{ background: cardBtnHover ? DK_GOLD : '#fff', color: cardBtnHover ? '#fff' : DK_GREEN, fontWeight: 600, fontSize: 13, padding: '10px 20px', borderRadius: 9, textDecoration: 'none', display: 'block', transition: 'all 0.25s' }}>
+                                    Apply for Card <i className="fas fa-id-badge ms-1"></i>
+                                </Link>
+                            </div>
+
+                            {/* Support */}
+                            <div style={{ background: '#fff', border: '1px solid #e8f0ea', borderRadius: 14, padding: '16px 20px', textAlign: 'center', boxShadow: '0 2px 8px rgba(0,0,0,0.04)', marginTop: 4 }}>
+                                <i className="fas fa-headset" style={{ color: DK_GREEN, fontSize: 20 }}></i>
+                                <h6 style={{ fontWeight: 700, color: '#1e293b', marginBottom: 4, fontSize: 14, marginTop: 8 }}>Student Support Helpdesk</h6>
+                                <p style={{ color: '#64748b', marginBottom: 0, fontWeight: 600, fontSize: 14 }}>+92 300 1234567</p>
+                            </div>
+                        </div>
+                    </div>
+
+                    {/* ══════════ FULL WIDTH BELOW ROW ══════════ */}
+                    {testPassed && (<>
+
                                 {/* ── Student Result Card Table ── */}
-                                <div style={{ borderRadius: 12, overflow: 'hidden', border: `1px solid ${DK_BORDER}`, marginBottom: 20, boxShadow: '0 2px 8px rgba(11,93,59,0.08)' }}>
-                                    <table style={{ width: '100%', borderCollapse: 'collapse' }}>
+                                <div style={{ borderRadius: 12, overflow: 'hidden', border: '1px solid #0B5D3B', marginBottom: 20, boxShadow: '0 2px 8px rgba(11,93,59,0.1)' }}>
+                                    <table className="result-table" style={{ width: '100%', borderCollapse: 'collapse', fontFamily: "'Jost', sans-serif" }}>
                                         <thead>
-                                            <tr style={{ background: DK_GREEN }}>
-                                                <th colSpan={2} style={{ padding: '15px 24px', textAlign: 'center', color: '#fff', fontWeight: 800, fontSize: 15, letterSpacing: 0.5 }}>
-                                                    Student Result Card
-                                                </th>
+                                            <tr style={{ background: '#0B5D3B' }}>
+                                                <th colSpan={2} style={{ padding: '14px 24px', textAlign: 'center', color: '#fff', fontWeight: 600, fontSize: 15 }}>Student Result Card</th>
                                             </tr>
                                             <tr style={{ background: '#145e3c' }}>
-                                                <th style={{ padding: '11px 24px', color: '#fff', fontWeight: 700, fontSize: 14, width: '45%' }}>Field</th>
-                                                <th style={{ padding: '11px 24px', color: '#fff', fontWeight: 700, fontSize: 14 }}>Details</th>
+                                                <th style={{ padding: '10px 24px', color: '#e2f5ea', fontWeight: 500, fontSize: 13, width: '45%', textAlign: 'left' }}>Field</th>
+                                                <th style={{ padding: '10px 24px', color: '#e2f5ea', fontWeight: 500, fontSize: 13, textAlign: 'left' }}>Details</th>
                                             </tr>
                                         </thead>
                                         <tbody>
@@ -210,15 +280,15 @@ const CandidateDashboard = () => {
                                                 { label: 'Marks Obtained', value: correctAnswers },
                                                 { label: 'Percentage', value: percentage },
                                             ].map((row, i) => (
-                                                <tr key={i} style={{ background: i % 2 === 0 ? '#f0faf4' : '#fff' }}>
-                                                    <td style={{ padding: '13px 24px', fontWeight: 600, borderBottom: '1px solid #e0f0e8', color: '#1e293b' }}>{row.label}</td>
-                                                    <td style={{ padding: '13px 24px', borderBottom: '1px solid #e0f0e8', color: '#334155', fontWeight: 500 }}>{row.value}</td>
+                                                <tr key={i} style={{ background: i % 2 === 0 ? '#f8fafb' : '#ffffff' }}>
+                                                    <td style={{ padding: '12px 24px', fontWeight: 500, borderBottom: '1px solid rgba(11,93,59,0.12)', color: '#1e293b', fontSize: 14 }}>{row.label}</td>
+                                                    <td style={{ padding: '12px 24px', borderBottom: '1px solid rgba(11,93,59,0.12)', color: '#334155', fontSize: 14 }}>{row.value}</td>
                                                 </tr>
                                             ))}
-                                            <tr style={{ background: '#f0faf4' }}>
-                                                <td style={{ padding: '13px 24px', fontWeight: 600, color: '#1e293b' }}>Result Status</td>
-                                                <td style={{ padding: '13px 24px' }}>
-                                                    <span style={{ background: DK_GREEN, color: '#fff', padding: '4px 18px', borderRadius: 100, fontWeight: 700, fontSize: 13 }}>Pass</span>
+                                            <tr style={{ background: '#f8fafb' }}>
+                                                <td style={{ padding: '12px 24px', fontWeight: 500, color: '#1e293b', fontSize: 14 }}>Result Status</td>
+                                                <td style={{ padding: '12px 24px' }}>
+                                                    <span style={{ background: '#0B5D3B', color: '#fff', padding: '4px 16px', borderRadius: 100, fontWeight: 600, fontSize: 13 }}>Pass</span>
                                                 </td>
                                             </tr>
                                         </tbody>
@@ -227,16 +297,16 @@ const CandidateDashboard = () => {
 
                                 {/* ── Selected Study Programs ── */}
                                 <div style={{ background: '#fff', borderRadius: 12, border: '1px solid #e8f0ea', padding: '20px 24px', marginBottom: 20, boxShadow: '0 2px 8px rgba(0,0,0,0.04)' }}>
-                                    <h6 style={{ fontWeight: 800, marginBottom: 6, fontSize: 15 }}>☑ Selected Study Programs</h6>
+                                    <h6 style={{ fontWeight: 700, marginBottom: 6, fontSize: 15 }}>☑ Selected Study Programs</h6>
                                     <p style={{ color: '#64748b', fontSize: 14, marginBottom: 14 }}>
                                         You can enroll in up to 2 courses. All courses are completely free, but a one-time processing
                                         fee of <strong style={{ color: DK_GREEN }}>{FEE_AMOUNT}</strong> is required regardless of the number of courses.
                                     </p>
-                                    <table style={{ width: '100%', borderCollapse: 'collapse', border: '1px solid #e0f0e8', borderRadius: 8, overflow: 'hidden' }}>
+                                    <table style={{ width: '100%', borderCollapse: 'collapse', border: '1px solid #d1fae5', borderRadius: 8 }}>
                                         <thead>
-                                            <tr style={{ background: '#f0faf4' }}>
-                                                <th style={{ padding: '11px 18px', fontWeight: 700, borderBottom: '1px solid #e0f0e8', width: '28%', textAlign: 'left' }}>Form #</th>
-                                                <th style={{ padding: '11px 18px', fontWeight: 700, borderBottom: '1px solid #e0f0e8', textAlign: 'left' }}>Applied Courses</th>
+                                            <tr style={{ background: '#f0fdf4' }}>
+                                                <th style={{ padding: '11px 18px', fontWeight: 600, borderBottom: '1px solid #d1fae5', width: '28%', textAlign: 'left', color: '#1e293b' }}>Form #</th>
+                                                <th style={{ padding: '11px 18px', fontWeight: 600, borderBottom: '1px solid #d1fae5', textAlign: 'left', color: '#1e293b' }}>Applied Courses</th>
                                             </tr>
                                         </thead>
                                         <tbody>
@@ -257,11 +327,11 @@ const CandidateDashboard = () => {
                                 </div>
 
                                 {/* ── Fee Deadline ── */}
-                                <div style={{ background: '#fffbeb', border: '1px solid #fcd34d', borderRadius: 10, padding: '14px 22px', marginBottom: 20, display: 'flex', alignItems: 'center', gap: 10, flexWrap: 'wrap' }}>
-                                    <i className="fas fa-calendar-alt" style={{ color: '#d97706' }}></i>
+                                <div style={{ background: '#f0fdf4', border: `1px solid ${DK_BORDER}`, borderRadius: 10, padding: '14px 22px', marginBottom: 20, display: 'flex', alignItems: 'center', gap: 10, flexWrap: 'wrap' }}>
+                                    <i className="fas fa-calendar-alt" style={{ color: DK_GREEN }}></i>
                                     <span style={{ fontWeight: 700, color: '#1e293b' }}>Last Date to pay Application Processing Fee:</span>
-                                    <span style={{ fontWeight: 700, color: '#d97706' }}>{PAYMENT_DEADLINE}</span>
-                                    <span style={{ background: '#fbbf24', color: '#78350f', padding: '3px 14px', borderRadius: 100, fontWeight: 700, fontSize: 12 }}>Pending</span>
+                                    <span style={{ fontWeight: 700, color: DK_GREEN }}>{PAYMENT_DEADLINE}</span>
+                                    <span style={{ background: DK_GREEN, color: '#fff', padding: '3px 14px', borderRadius: 100, fontWeight: 600, fontSize: 12 }}>Pending</span>
                                 </div>
 
                                 {/* ══════════ PAYMENT SECTION ══════════ */}
@@ -366,87 +436,10 @@ const CandidateDashboard = () => {
                                     )}
                                 </div>
                             </>)}
-
-                            {/* ── Enrolled Programs ── */}
-                            <div style={{ background: '#fff', borderRadius: 16, border: '1px solid #e8f0ea', overflow: 'hidden', boxShadow: '0 2px 12px rgba(0,0,0,0.04)' }}>
-                                <div style={{ background: '#f8fafb', borderBottom: '1px solid #e8f0ea', padding: '14px 24px' }}>
-                                    <h6 style={{ margin: 0, fontWeight: 700, color: DK_GREEN, fontSize: 13, letterSpacing: 0.5 }}>
-                                        <i className="fas fa-book-open me-2"></i> ENROLLED ACADEMIC PROGRAMS
-                                    </h6>
-                                </div>
-                                <div style={{ padding: 24 }}>
-                                    {allCourses.length > 0 ? (
-                                        <div className="row g-3">
-                                            {allCourses.map((course, idx) => (
-                                                <div key={idx} className="col-md-6">
-                                                    <div style={{ background: '#f8fafb', border: '1px solid #e8f0ea', borderRadius: 10, padding: '14px 16px', display: 'flex', alignItems: 'center', justifyContent: 'space-between', transition: 'border-color 0.2s' }}>
-                                                        <div>
-                                                            <div style={{ fontWeight: 700, color: '#1e293b', fontSize: 14 }}>{course.name}</div>
-                                                            <div style={{ fontSize: 12, color: '#94a3b8', marginTop: 2 }}>{course.type} | {course.session}</div>
-                                                        </div>
-                                                        <i className="fas fa-check-circle" style={{ color: DK_GREEN, fontSize: 18 }}></i>
-                                                    </div>
-                                                </div>
-                                            ))}
-                                        </div>
-                                    ) : (
-                                        <div style={{ textAlign: 'center', padding: '24px 0' }}>
-                                            <i className="fas fa-inbox fa-2x mb-2" style={{ color: '#cbd5e1' }}></i>
-                                            <p style={{ color: '#94a3b8', fontSize: 14, margin: 0 }}>No courses found in your enrollment history.</p>
-                                        </div>
-                                    )}
-                                </div>
-                            </div>
-                        </div>
-
-                        {/* ══════════ RIGHT COLUMN ══════════ */}
-                        <div className="col-lg-4">
-
-                            {/* Profile Card */}
-                            <div style={{ background: '#fff', borderRadius: 16, border: '1px solid #e8f0ea', overflow: 'hidden', marginBottom: 20, boxShadow: '0 2px 12px rgba(0,0,0,0.04)' }}>
-                                <div style={{ background: '#f8fafb', borderBottom: '1px solid #e8f0ea', padding: '14px 24px' }}>
-                                    <h6 style={{ margin: 0, fontWeight: 700, color: DK_GREEN, fontSize: 13, letterSpacing: 0.5 }}>
-                                        <i className="fas fa-user-tag me-2"></i> CANDIDATE PROFILE
-                                    </h6>
-                                </div>
-                                <div style={{ padding: 24 }}>
-                                    {[
-                                        { label: 'FULL NAME', value: userData.fullName },
-                                        { label: 'FATHER NAME', value: userData.fatherName || 'N/A' },
-                                        { label: 'CNIC NUMBER', value: userData.cnic },
-                                        { label: 'MOBILE NUMBER', value: userData.mobile },
-                                    ].map((row, i) => (
-                                        <div key={i} style={{ marginBottom: i < 3 ? 18 : 0 }}>
-                                            <div style={{ fontSize: 10, fontWeight: 800, color: '#94a3b8', letterSpacing: 1, marginBottom: 3 }}>{row.label}</div>
-                                            <div style={{ fontWeight: 700, color: '#1e293b', fontSize: 15 }}>{row.value}</div>
-                                        </div>
-                                    ))}
-                                </div>
-                            </div>
-
-                            {/* Scholarship Card */}
-                            <div style={{ background: `linear-gradient(135deg, ${DK_GREEN}, #15803d)`, borderRadius: 16, padding: '24px 20px', textAlign: 'center', marginBottom: 20, boxShadow: '0 4px 16px rgba(11,93,59,0.25)' }}>
-                                <i className="fas fa-id-card fa-2x mb-3" style={{ color: 'rgba(255,255,255,0.85)' }}></i>
-                                <h6 style={{ color: '#fff', fontWeight: 800, marginBottom: 8, letterSpacing: 0.5 }}>SCHOLARSHIP STATUS</h6>
-                                <p style={{ color: 'rgba(255,255,255,0.85)', fontSize: 13, marginBottom: 16 }}>
-                                    Activate your scholarship card to unlock laptop and finance schemes.
-                                </p>
-                                <Link to="/apply-scholarshipcard" style={{ background: '#fff', color: DK_GREEN, fontWeight: 700, fontSize: 13, padding: '10px 20px', borderRadius: 9, textDecoration: 'none', display: 'block' }}>
-                                    APPLY FOR CARD <i className="fas fa-id-badge ms-1"></i>
-                                </Link>
-                            </div>
-
-                            {/* Support */}
-                            <div style={{ background: '#fff', border: '1px solid #e8f0ea', borderRadius: 14, padding: '18px 20px', textAlign: 'center', boxShadow: '0 2px 8px rgba(0,0,0,0.04)' }}>
-                                <i className="fas fa-headset mb-2" style={{ color: DK_GREEN, fontSize: 22 }}></i>
-                                <h6 style={{ fontWeight: 700, color: '#1e293b', marginBottom: 6, fontSize: 14 }}>Student Support Helpdesk</h6>
-                                <p style={{ color: '#64748b', marginBottom: 0, fontWeight: 700 }}>+92 300 1234567</p>
-                            </div>
-                        </div>
-                    </div>
                 </div>
             </main>
 
+            <div style={{ marginTop: 40 }}></div>
             <Footer />
         </div>
     );

@@ -27,9 +27,117 @@
     color: #0B5D3B !important;
 }
 
+/* Override global beige for ALL tables in dashboard */
+.professional-dashboard-page table tr {
+    background-color: #ffffff !important;
+    font-family: 'Jost', sans-serif !important;
+}
+
+/* Result table — override global beige color */
+.result-table tr {
+    background-color: #ffffff !important;
+    font-family: 'Jost', sans-serif !important;
+}
+.result-table thead tr:first-child {
+    background-color: #0B5D3B !important;
+}
+.result-table thead tr:nth-child(2) {
+    background-color: #0d6e45 !important;
+}
+.result-table tbody tr:nth-child(odd) {
+    background-color: #f0fdf4 !important;
+}
+.result-table td, .result-table th {
+    color: #000000 !important;
+}
+.result-table thead th {
+    color: #ffffff !important;
+}
+
+@media (max-width: 576px) {
+
+    /* Header compact on mobile */
+    .dash-header {
+        padding: 0 12px !important;
+        height: 56px !important;
+    }
+    .dash-logo {
+        height: 34px !important;
+    }
+    .dash-subtitle {
+        display: none !important;
+    }
+    .dash-username {
+        max-width: 70px;
+        overflow: hidden;
+        text-overflow: ellipsis;
+        white-space: nowrap;
+        display: inline-block;
+    }
+    .dash-user-pill {
+        padding: 4px 8px !important;
+        font-size: 12px !important;
+    }
+    .dash-logout-text {
+        display: none;
+    }
+    .dash-logout-btn {
+        border: none !important;
+        background: none !important;
+        padding: 6px 8px !important;
+        color: #64748b !important;
+    }
+    .dash-logout-btn:hover {
+        background: #fef2f2 !important;
+        color: #ef4444 !important;
+        border-radius: 8px !important;
+    }
+    main {
+        padding-top: 16px !important;
+    }
+}
+
 @media (max-width: 768px) {
-    .welcome-banner-hunarmand {
-        text-align: center;
-        padding: 30px 20px !important;
+
+    /* Welcome banner — stack vertically */
+    .portal-welcome-banner > div {
+        flex-direction: column !important;
+        align-items: flex-start !important;
+    }
+    .portal-welcome-banner h5 {
+        font-size: 15px !important;
+    }
+    .portal-welcome-banner p {
+        font-size: 12px !important;
+    }
+
+    /* Roll number box full width */
+    .portal-welcome-banner > div > div:last-child {
+        width: 100% !important;
+        text-align: left !important;
+        padding: 8px 14px !important;
+    }
+
+    /* Container padding */
+    .container {
+        padding-left: 10px !important;
+        padding-right: 10px !important;
+    }
+
+    /* Cards padding */
+    .professional-dashboard-page .card-header-bar {
+        padding: 12px 16px !important;
+    }
+
+    /* Result table */
+    .result-table td, .result-table th {
+        padding: 10px 12px !important;
+        font-size: 13px !important;
+        word-break: break-word;
+    }
+
+    /* Payment options stack */
+    .professional-dashboard-page [style*="display: flex"][style*="gap: 16px"] {
+        flex-direction: column !important;
     }
 }
