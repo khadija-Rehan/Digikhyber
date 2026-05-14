@@ -2,6 +2,7 @@ import AOS from "aos";
 import "aos/dist/aos.css";
 import React from 'react';
 import { ModalProvider } from './context/ModalContext';
+import NotificationModal from './components/NotificationModal';
 import ScholarshipModal from './components/ScholarshipModal';
 import { AuthProvider } from './context/AuthContext';
 import { CoursesProvider } from './context/CoursesContext';
@@ -59,6 +60,7 @@ function App() {
   return (
     <>
       <ModalProvider>
+        <NotificationModal />
         <AuthProvider>
           <CoursesProvider>
             <ScrollToTop />
