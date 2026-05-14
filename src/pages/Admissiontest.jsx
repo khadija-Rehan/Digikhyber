@@ -42,13 +42,12 @@ const Admissiontest = () => {
 
         try {
             await submitTestResults({ testScore, testPassed });
-            // Update local context so dashboard reflects changes immediately
             updateUser({ testPassed: true, testScore: testScore });
-            
             navigate("/dashboard", { replace: true });
         } catch (error) {
             console.error("Error submitting test results:", error);
             setError("Failed to submit results. Please try again.");
+        } finally {
             setLoading(false);
         }
     };

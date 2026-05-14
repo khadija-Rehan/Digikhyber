@@ -2700,6 +2700,27 @@ ul li {
   transform: translateX(5px);
 }
 
+.btn-portal-dark {
+  display: inline-block;
+  background: #0B5D3B;
+  color: white !important;
+  font-size: 14px;
+  font-weight: 600;
+  padding: 10px 28px;
+  border-radius: 8px;
+  border: none;
+  text-decoration: none !important;
+  cursor: pointer;
+  transition: background 0.2s, transform 0.2s;
+  margin-top: 8px;
+}
+
+.btn-portal-dark:hover {
+  background: #084a2f;
+  color: white !important;
+  transform: translateY(-2px);
+}
+
 .govt-section-tag {
   color: #0B5D3B;
   font-weight: 800;
