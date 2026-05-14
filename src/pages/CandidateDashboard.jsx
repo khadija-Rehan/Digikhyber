@@ -4,6 +4,7 @@ import { Link } from 'react-router-dom';
 import './CandidateDashboard.css';
 import Logo from '../assets/logo.png';
 import GIF from '../assets/approved.gif';
+import Footer from '../components/Footer';
 import { generateOnlineChallan, generatePhysicalChallan } from '../api/auth';
 
 const PAYMENT_DEADLINE = "May 31, 2026";
@@ -446,39 +447,7 @@ const CandidateDashboard = () => {
                 </div>
             </main>
 
-            {/* ══════════ FOOTER ══════════ */}
-            <footer style={{ background: DK_GREEN, color: '#fff', marginTop: 48 }}>
-                <div className="container py-4" style={{ maxWidth: 1100 }}>
-                    <div className="row g-4 align-items-center">
-                        <div className="col-md-4 text-center text-md-start">
-                            <div style={{ display: 'flex', alignItems: 'center', gap: 12, justifyContent: 'center' }} className="justify-content-md-start">
-                                <img src={Logo} alt="Logo" style={{ height: 40, filter: 'brightness(0) invert(1)' }} />
-                                <div>
-                                    <div style={{ fontWeight: 800, fontSize: 15, letterSpacing: 0.5 }}>DIGIKHYBER</div>
-                                    <div style={{ fontSize: 11, opacity: 0.75 }}>Candidate Portal (Batch-2026)</div>
-                                </div>
-                            </div>
-                        </div>
-                        <div className="col-md-4 text-center">
-                            <p style={{ fontSize: 13, opacity: 0.85, marginBottom: 4 }}>
-                                <i className="fas fa-envelope me-2"></i>support@digikhyber.org.pk
-                            </p>
-                            <p style={{ fontSize: 13, opacity: 0.85, marginBottom: 0 }}>
-                                <i className="fas fa-phone me-2"></i>+92 300 1234567
-                            </p>
-                        </div>
-                        <div className="col-md-4 text-center text-md-end">
-                            <p style={{ fontSize: 12, opacity: 0.7, marginBottom: 0 }}>
-                                &copy; 2026 Digikhyber. All rights reserved.<br />
-                                Government of Khyber Pakhtunkhwa Initiative
-                            </p>
-                        </div>
-                    </div>
-                </div>
-                <div style={{ background: 'rgba(0,0,0,0.15)', textAlign: 'center', padding: '10px', fontSize: 12, opacity: 0.8 }}>
-                    Empowering Youth Through Digital Skills
-                </div>
-            </footer>
+            <Footer />
         </div>
     );
 };
