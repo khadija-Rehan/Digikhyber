@@ -180,9 +180,9 @@ const Register = () => {
   };
 
   if (loading) return (
-    <div style={{ position: 'fixed', top: 0, left: 0, right: 0, bottom: 0, background: 'rgba(255,255,255,0.95)', display: 'flex', flexDirection: 'column', alignItems: 'center', justifyContent: 'center', zIndex: 9999 }}>
-      <div style={{ width: 44, height: 44, border: '4px solid #e2e8f0', borderTop: '4px solid #0B5D3B', borderRadius: '50%', animation: 'spin 0.8s linear infinite', marginBottom: 18 }}></div>
-      <p style={{ color: '#0B5D3B', fontSize: 16, fontWeight: 600, margin: 0 }}>Submitting your application...</p>
+    <div style={{ position: 'fixed', top: 0, left: 0, right: 0, bottom: 0, background: 'rgba(255,255,255,0.75)', backdropFilter: 'blur(4px)', display: 'flex', flexDirection: 'column', alignItems: 'center', justifyContent: 'center', zIndex: 9999 }}>
+      <div style={{ width: 40, height: 40, border: '3px solid #e2e8f0', borderTop: '3px solid #0B5D3B', borderRadius: '50%', animation: 'spin 0.8s linear infinite', marginBottom: 16 }}></div>
+      <p style={{ color: '#0B5D3B', fontSize: 15, fontWeight: 600, margin: 0 }}>Submitting your application...</p>
       <style>{`@keyframes spin { to { transform: rotate(360deg); } }`}</style>
     </div>
   );
