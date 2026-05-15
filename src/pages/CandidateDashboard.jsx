@@ -37,7 +37,9 @@ const CandidateDashboard = () => {
             try {
                 const res = await getUserProfile();
                 const challans = res?.data?.challans?.challans || [];
-                if (challans.length > 0) setChallanId(challans[0].challanId || "");
+                // 8-digit challan ID starts with a digit (not "CH-")
+                const bankChallan = challans.find(c => c.challanId && !String(c.challanId).startsWith('CH-'));
+                if (bankChallan) setChallanId(bankChallan.challanId);
             } catch (e) {}
         };
         fetchChallan();
