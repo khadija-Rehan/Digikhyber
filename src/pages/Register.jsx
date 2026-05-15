@@ -178,8 +178,18 @@ const Register = () => {
     }
   };
 
+  if (loading) return (
+    <div style={{ position: 'fixed', top: 0, left: 0, right: 0, bottom: 0, background: '#0B5D3B', display: 'flex', flexDirection: 'column', alignItems: 'center', justifyContent: 'center', zIndex: 9999 }}>
+      <img src={Logo} alt="Digikhyber" style={{ width: 90, marginBottom: 28, filter: 'brightness(0) invert(1)' }} />
+      <div style={{ width: 48, height: 48, border: '5px solid rgba(255,255,255,0.3)', borderTop: '5px solid #C9A227', borderRadius: '50%', animation: 'spin 0.9s linear infinite', marginBottom: 22 }}></div>
+      <p style={{ color: '#fff', fontSize: 18, fontWeight: 700, marginBottom: 6 }}>Registering your application...</p>
+      <p style={{ color: 'rgba(255,255,255,0.7)', fontSize: 14 }}>Please wait, do not close this page.</p>
+      <style>{`@keyframes spin { to { transform: rotate(360deg); } }`}</style>
+    </div>
+  );
+
   return (
-    <AuthBanner 
+    <AuthBanner
       title="Join Us Today" 
       description="Create an account to unlock advanced IT training and premium scholarship opportunities."
       isRegister={true}
