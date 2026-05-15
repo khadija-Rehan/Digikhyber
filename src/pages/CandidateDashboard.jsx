@@ -287,9 +287,21 @@ const CandidateDashboard = () => {
                                                 </tr>
                                             ))}
                                             <tr style={{ background: '#f8fafb' }}>
-                                                <td style={{ padding: '12px 24px', fontWeight: 500, color: '#1e293b', fontSize: 14 }}>Result Status</td>
-                                                <td style={{ padding: '12px 24px' }}>
+                                                <td style={{ padding: '12px 24px', fontWeight: 500, color: '#1e293b', fontSize: 14, borderBottom: '1px solid rgba(11,93,59,0.12)' }}>Result Status</td>
+                                                <td style={{ padding: '12px 24px', borderBottom: '1px solid rgba(11,93,59,0.12)' }}>
                                                     <span style={{ background: '#0B5D3B', color: '#fff', padding: '4px 16px', borderRadius: 100, fontWeight: 600, fontSize: 13 }}>Pass</span>
+                                                </td>
+                                            </tr>
+                                            <tr style={{ background: '#ffffff' }}>
+                                                <td style={{ padding: '12px 24px', fontWeight: 500, color: '#1e293b', fontSize: 14, borderBottom: '1px solid rgba(11,93,59,0.12)' }}>Processing Fee</td>
+                                                <td style={{ padding: '12px 24px', fontWeight: 600, color: '#0B5D3B', fontSize: 14, borderBottom: '1px solid rgba(11,93,59,0.12)' }}>PKR 3,250</td>
+                                            </tr>
+                                            <tr style={{ background: '#f8fafb' }}>
+                                                <td style={{ padding: '12px 24px', fontWeight: 500, color: '#1e293b', fontSize: 14 }}>Fee Status</td>
+                                                <td style={{ padding: '12px 24px' }}>
+                                                    <span style={{ background: userData.feeStatus === 'paid' ? '#0B5D3B' : '#fbbf24', color: userData.feeStatus === 'paid' ? '#fff' : '#78350f', padding: '4px 16px', borderRadius: 100, fontWeight: 600, fontSize: 13 }}>
+                                                        {userData.feeStatus === 'paid' ? 'Paid' : 'Pending'}
+                                                    </span>
                                                 </td>
                                             </tr>
                                         </tbody>
