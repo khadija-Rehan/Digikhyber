@@ -51,7 +51,7 @@ export const submitPhysicalAdmission = async (admissionData) => {
 
 export const generateOnlineChallan = async (challanData) => {
   const data = await invoke({
-    url: `/auth/generate-psid`,
+    url: `/users/generate-psid`,
     method: "POST",
     data: challanData,
   });
@@ -60,7 +60,7 @@ export const generateOnlineChallan = async (challanData) => {
 
 export const generatePhysicalChallan = async (challanData) => {
   const data = await invoke({
-    url: `/auth/generate-physical-challan`,
+    url: `/users/generate-pdf/false`,
     method: "POST",
     data: challanData,
   });
