@@ -57,7 +57,8 @@ const CandidateDashboard = () => {
         try {
             if (activePaymentMethod === "psid") {
                 const res = await generateOnlineChallan();
-                if (res.data?.psid) setOnlinePsid(res.data.psid);
+                const psid = res.data?.data?.psid || res.data?.psid;
+                if (psid) setOnlinePsid(psid);
             } else {
                 const res = await generatePhysicalChallan();
                 if (res.data?.fileUrl) window.open(res.data.fileUrl, "_blank");
