@@ -157,8 +157,8 @@ const Register = () => {
       Object.entries(documents).forEach(([k, v]) => { if (v) data.append(k, v); });
       await signUp(data);
       showSuccess(
-        "🎉 Welcome to Digikhyber! Your registration is complete. Please proceed to take the Admission Test to unlock your Scholarship Card.",
-        "Registration Successful!"
+        "Your registration is complete! A confirmation email has been sent to your email address. You will now be redirected to the Admission Test.",
+        "Registration Successful! 🎉"
       );
       setTimeout(() => navigate("/admission-test"), 3000);
     } catch (error) {
@@ -179,11 +179,9 @@ const Register = () => {
   };
 
   if (loading) return (
-    <div style={{ position: 'fixed', top: 0, left: 0, right: 0, bottom: 0, background: '#0B5D3B', display: 'flex', flexDirection: 'column', alignItems: 'center', justifyContent: 'center', zIndex: 9999 }}>
-      <img src={Logo} alt="Digikhyber" style={{ width: 90, marginBottom: 28, filter: 'brightness(0) invert(1)' }} />
-      <div style={{ width: 48, height: 48, border: '5px solid rgba(255,255,255,0.3)', borderTop: '5px solid #C9A227', borderRadius: '50%', animation: 'spin 0.9s linear infinite', marginBottom: 22 }}></div>
-      <p style={{ color: '#fff', fontSize: 18, fontWeight: 700, marginBottom: 6 }}>Registering your application...</p>
-      <p style={{ color: 'rgba(255,255,255,0.7)', fontSize: 14 }}>Please wait, do not close this page.</p>
+    <div style={{ position: 'fixed', top: 0, left: 0, right: 0, bottom: 0, background: 'rgba(255,255,255,0.95)', display: 'flex', flexDirection: 'column', alignItems: 'center', justifyContent: 'center', zIndex: 9999 }}>
+      <div style={{ width: 44, height: 44, border: '4px solid #e2e8f0', borderTop: '4px solid #0B5D3B', borderRadius: '50%', animation: 'spin 0.8s linear infinite', marginBottom: 18 }}></div>
+      <p style={{ color: '#0B5D3B', fontSize: 16, fontWeight: 600, margin: 0 }}>Submitting your application...</p>
       <style>{`@keyframes spin { to { transform: rotate(360deg); } }`}</style>
     </div>
   );
