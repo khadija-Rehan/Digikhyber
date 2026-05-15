@@ -409,9 +409,11 @@ const CandidateDashboard = () => {
                                                 </div>
                                             )}
 
-                                            <button onClick={handleGeneratePayment} disabled={isGenerating}
-                                                style={{ background: DK_GREEN, color: '#fff', border: 'none', borderRadius: 9, padding: '12px 26px', fontWeight: 700, fontSize: 14, cursor: 'pointer', display: 'flex', alignItems: 'center', gap: 8, opacity: isGenerating ? 0.75 : 1 }}>
-                                                {isGenerating ? <><span className="spinner-border spinner-border-sm"></span> Generating...</> : <><i className="fas fa-download"></i> {onlinePsid ? 'PSID Already Generated' : 'Generate PSID'}</>}
+                                            <button
+                                                onClick={onlinePsid ? undefined : handleGeneratePayment}
+                                                disabled={isGenerating || !!onlinePsid}
+                                                style={{ background: onlinePsid ? '#6c757d' : DK_GREEN, color: '#fff', border: 'none', borderRadius: 9, padding: '12px 26px', fontWeight: 700, fontSize: 14, cursor: onlinePsid ? 'not-allowed' : 'pointer', display: 'flex', alignItems: 'center', gap: 8, opacity: isGenerating ? 0.75 : 1 }}>
+                                                {isGenerating ? <><span className="spinner-border spinner-border-sm"></span> Generating...</> : onlinePsid ? <><i className="fas fa-check-circle"></i> PSID Already Generated</> : <><i className="fas fa-download"></i> Generate PSID</>}
                                             </button>
                                         </div>
                                     )}
