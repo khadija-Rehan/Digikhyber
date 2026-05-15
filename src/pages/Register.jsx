@@ -156,11 +156,12 @@ const Register = () => {
       data.append("courses", JSON.stringify(courses));
       Object.entries(documents).forEach(([k, v]) => { if (v) data.append(k, v); });
       await signUp(data);
+      setLoading(false);
       showSuccess(
-        "Your registration is complete! A confirmation email has been sent to your email address. You will now be redirected to the Admission Test.",
+        "Your registration is complete! A confirmation email has been sent to your email address. Please login to continue.",
         "Registration Successful! 🎉"
       );
-      setTimeout(() => navigate("/admission-test"), 3000);
+      setTimeout(() => navigate("/login"), 3000);
     } catch (error) {
       const msg = error.response?.data?.message || "Registration failed.";
       setServerError(msg);
