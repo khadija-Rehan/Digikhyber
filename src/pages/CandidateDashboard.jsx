@@ -6,6 +6,7 @@ import Logo from '../assets/logo.png';
 import GIF from '../assets/approved.gif';
 import Footer from '../components/Footer';
 import { generateOnlineChallan, generatePhysicalChallan } from '../api/auth';
+import { getUserProfile } from '../api/user';
 
 const PAYMENT_DEADLINE = "May 31, 2026";
 const FEE_AMOUNT = "PKR 3,250";
@@ -21,6 +22,7 @@ const CandidateDashboard = () => {
     const [testBtnHover, setTestBtnHover] = useState(false);
     const [cardBtnHover, setCardBtnHover] = useState(false);
     const [logoutHover, setLogoutHover] = useState(false);
+    const [challanId, setChallanId] = useState("");
 
     useEffect(() => {
         if (user) {
@@ -29,6 +31,17 @@ const CandidateDashboard = () => {
             if (data?.psid) setOnlinePsid(data.psid);
         }
     }, [user]);
+
+    useEffect(() => {
+        const fetchChallan = async () => {
+            try {
+                const res = await getUserProfile();
+                const challans = res?.data?.challans?.challans || [];
+                if (challans.length > 0) setChallanId(challans[0].challanId || "");
+            } catch (e) {}
+        };
+        fetchChallan();
+    }, []);
 
     if (!userData) return (
         <div style={{ height: '100vh', display: 'flex', flexDirection: 'column', alignItems: 'center', justifyContent: 'center', background: '#fff', color: '#0B5D3B', fontWeight: 700 }}>
@@ -292,7 +305,13 @@ const CandidateDashboard = () => {
                                                     <span style={{ background: '#0B5D3B', color: '#fff', padding: '4px 16px', borderRadius: 100, fontWeight: 600, fontSize: 13 }}>Pass</span>
                                                 </td>
                                             </tr>
+                                            {challanId && (
                                             <tr style={{ background: '#ffffff' }}>
+                                                <td style={{ padding: '12px 24px', fontWeight: 500, color: '#1e293b', fontSize: 14, borderBottom: '1px solid rgba(11,93,59,0.12)' }}>Challan ID</td>
+                                                <td style={{ padding: '12px 24px', fontWeight: 600, color: '#0B5D3B', fontSize: 14, borderBottom: '1px solid rgba(11,93,59,0.12)' }}>{challanId}</td>
+                                            </tr>
+                                            )}
+                                            <tr style={{ background: challanId ? '#f8fafb' : '#ffffff' }}>
                                                 <td style={{ padding: '12px 24px', fontWeight: 500, color: '#1e293b', fontSize: 14, borderBottom: '1px solid rgba(11,93,59,0.12)' }}>Processing Fee</td>
                                                 <td style={{ padding: '12px 24px', fontWeight: 600, color: '#0B5D3B', fontSize: 14, borderBottom: '1px solid rgba(11,93,59,0.12)' }}>PKR 3,250</td>
                                             </tr>
