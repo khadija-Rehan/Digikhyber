@@ -17,6 +17,7 @@ const invoke = async ({ url, method = "GET", data = null, headers = {} }) => {
       url: `${BASE_URL}/api${url}`,
       data,
       headers: requestHeaders,
+      timeout: 60000,
     });
 
     return response;
