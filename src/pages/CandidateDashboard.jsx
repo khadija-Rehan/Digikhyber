@@ -355,18 +355,23 @@ const CandidateDashboard = () => {
                                         {[
                                             { key: 'psid', icon: 'fas fa-wallet', title: 'CONSUMER NUMBER / PSID', sub: 'PAY USING ONLINE MOBILE BANKING OR MOBILE WALLET USING 1 BILLER' },
                                             { key: 'challan', icon: 'fas fa-university', title: 'CLICK HERE FOR BANK CHALLAN', sub: 'PAY AT ANY BOP BRANCH USING DIGIKHYBER CHALLAN' },
-                                        ].map(opt => (
-                                            <div key={opt.key} onClick={() => setActivePaymentMethod(opt.key)}
-                                                style={{ flex: 1, minWidth: 210, border: `2px solid ${activePaymentMethod === opt.key ? DK_GREEN : '#e2e8f0'}`, borderRadius: 12, padding: '16px 18px', cursor: 'pointer', background: activePaymentMethod === opt.key ? '#f0fff8' : '#fafafa', display: 'flex', alignItems: 'center', gap: 14, transition: 'all 0.2s' }}>
-                                                <div style={{ width: 46, height: 46, background: activePaymentMethod === opt.key ? DK_GREEN : '#f1f5f9', borderRadius: 10, display: 'flex', alignItems: 'center', justifyContent: 'center', flexShrink: 0 }}>
-                                                    <i className={opt.icon} style={{ color: activePaymentMethod === opt.key ? '#fff' : DK_GREEN, fontSize: 18 }}></i>
+                                        ].map(opt => {
+                                            const isLocked = onlinePsid && opt.key !== 'psid';
+                                            const isSelected = activePaymentMethod === opt.key;
+                                            return (
+                                            <div key={opt.key}
+                                                onClick={() => !onlinePsid && setActivePaymentMethod(opt.key)}
+                                                style={{ flex: 1, minWidth: 210, border: `2px solid ${isSelected ? DK_GREEN : isLocked ? '#e2e8f0' : '#e2e8f0'}`, borderRadius: 12, padding: '16px 18px', cursor: onlinePsid && opt.key !== 'psid' ? 'not-allowed' : 'pointer', background: isSelected ? '#f0fff8' : '#fafafa', display: 'flex', alignItems: 'center', gap: 14, transition: 'all 0.2s', opacity: isLocked ? 0.5 : 1 }}>
+                                                <div style={{ width: 46, height: 46, background: isSelected ? DK_GREEN : '#f1f5f9', borderRadius: 10, display: 'flex', alignItems: 'center', justifyContent: 'center', flexShrink: 0 }}>
+                                                    <i className={opt.icon} style={{ color: isSelected ? '#fff' : DK_GREEN, fontSize: 18 }}></i>
                                                 </div>
                                                 <div>
                                                     <div style={{ fontWeight: 700, fontSize: 13, color: '#1e293b' }}>{opt.title}</div>
                                                     <div style={{ fontSize: 10, color: '#94a3b8', letterSpacing: 0.3, marginTop: 3 }}>{opt.sub}</div>
                                                 </div>
                                             </div>
-                                        ))}
+                                            );
+                                        })}
                                     </div>
 
                                     {/* ── PSID Section ── */}
