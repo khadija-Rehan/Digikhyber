@@ -3516,8 +3516,15 @@ ul li {
     flex-direction: column !important;
     max-height: none !important;
     min-height: unset !important;
-    max-width: 100% !important;
-    margin: 10px !important;
+    max-width: 95% !important;
+    margin: 10px auto !important;
+    width: 100% !important;
+  }
+
+  .auth-content-container:has(.horizontal-card) {
+    justify-content: center !important;
+    align-items: center !important;
+    padding: 10px !important;
   }
 
   .auth-card.horizontal-card .auth-card-left {
